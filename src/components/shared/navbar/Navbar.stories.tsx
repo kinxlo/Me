@@ -1,4 +1,4 @@
-import { Navbar } from ".";
+import Navbar from ".";
 import { NAV_LINKS } from "@/lib/constants";
 import type { Meta, StoryObj } from "@storybook/react";
 
