@@ -1,5 +1,3 @@
-import { AppService } from "@/services/app/app.service";
-
 import { HttpAdapter } from "../http/http-adapter";
 
 const dependencies = {
@@ -13,7 +11,7 @@ interface IDependencyContainer {
 }
 
 const httpAdapter = new HttpAdapter();
-const appService = new AppService(httpAdapter);
+// const appService = new AppService(httpAdapter);
 
 class DependencyContainer implements IDependencyContainer {
   _dependencies = {};
@@ -32,6 +30,6 @@ class DependencyContainer implements IDependencyContainer {
 const container = new DependencyContainer();
 
 container.add(dependencies.HTTP_ADAPTER, httpAdapter);
-container.add(dependencies.APP_SERVICE, appService);
+// container.add(dependencies.APP_SERVICE, appService);
 
 export { container, dependencies };
