@@ -1,5 +1,5 @@
 import Navbar from ".";
-import { NAV_LINKS } from "@/lib/constants";
+import { NAV_LINKS } from "@/lib/tools/constants";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { Logo } from "../logo";
