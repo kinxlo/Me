@@ -9,7 +9,7 @@ import "../styles/theme.css";
 import "../styles/global.css";
 
 import ThemeProvider from "@/components/core/layout/ThemeToggle/theme-provider";
-import { Footer } from "@/components/shared/footer/footer";
+import { Footer } from "@/components/shared/footer";
 import Navbar from "@/components/shared/navbar";
 import { Toast } from "@/components/shared/Toast";
 import { AppProvider } from "@/context/app-provider";
