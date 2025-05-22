@@ -1,0 +1,90 @@
+/* ====================== */
+/* 3D TRANSFORM ANIMATIONS */
+/* ====================== */
+
+/**
+ * Base 3D Context Container
+ * Establishes perspective for all 3D children
+ */
+.cc-3d-container {
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
+
+/**
+ * 3D Transformation Group
+ * Applies consistent skew to all children
+ */
+
+/**
+* Individual 3D Elements
+* Ensures proper rendering in 3D space
+*/
+.cc-3d-item:hover {
+  transform: translateZ(50px);
+  z-index: 10;
+  drop-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ====================== */
+/* RESPONSIVE ADJUSTMENTS */
+/* ====================== */
+@media (min-width: 320px) {
+  .cc-3d-container {
+    perspective: 1800px;
+  }
+  .cc-3d-group {
+    /* border: 1px solid red; */
+    transform-style: preserve-3d;
+    transform-origin: left center;
+    backface-visibility: hidden;
+    transform: rotateY(10deg) rotateX(0deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .cc-3d-group {
+    transform: rotateY(20deg) rotateX(0deg);
+  }
+  /* .cc-3d-container:hover .cc-3d-group {
+    transform: rotateY(23deg) rotateX(2deg);
+  } */
+}
+
+/* ====================== */
+/* ACCESSIBILITY */
+/* ====================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .cc-3d-group,
+  .cc-3d-item {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ====================== */
+/* UTILITY CLASSES */
+/* ====================== */
+
+/**
+ * For elements that should maintain flat appearance
+ * in a 3D context (buttons, form elements, etc.)
+ */
+.cc-3d-flat {
+  transform: translateZ(0);
+  transform-style: flat;
+}
+
+/**
+ * Smooth transform transitions
+ */
+.cc-3d-transition {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-fade-out {
+  animation: fadeOut 2s forwards;
+}

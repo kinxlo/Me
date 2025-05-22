@@ -27,16 +27,16 @@ export const About = () => {
   );
 
   return (
-    <section>
+    <section className={`cc-3d-group`}>
       <Wrapper>
         <span className={`cc-border text-high-grey-III font-mono text-xl/5 font-medium tracking-wider uppercase`}>
           About me you ask?
         </span>
         <h3 className={`cc-border-down mt-4 text-4xl/9 font-black tracking-tighter`}>Allow me to Introduce myself</h3>
       </Wrapper>
-      <Wrapper className={`cc-border bg-accent/5 mt-10`}>
+      <Wrapper className={`cc-border mt-10`}>
         <div ref={aboutReference} className="w-full">
-          <DottedCard className={`bg-transparent`}>
+          <DottedCard className={`bg-accent/30`}>
             <p className={`indent-10`}>
               I&apos;m a full-stack software developer with over 3 years of experience, specializing in building
               thoughtful, scalable, and user-focused front-end solutions. My core strength lies in crafting clean,

@@ -40,12 +40,12 @@ export const ProjectCard: FC<ProjectCardProperties> = ({ project, className }) =
               width={672}
               height={492}
               alt={project?.name}
-              className={`h-full w-full object-cover`}
+              className="h-full w-full object-cover object-top"
             />
           </div>
         </a>
       </article>
-      <article className={cn(`cc-border-responsive mt-2 p-2`, className)}>
+      <article className={cn(`cc-border-responsive bg-accent/30 mt-2 p-2 backdrop-blur-sm`, className)}>
         <div className={`flex flex-wrap items-center`}>
           <h2 className={`font-mono text-sm/6 font-bold capitalize`}>{project.name}</h2>
           <p className={`font-code line-clamp-1 w-full flex-none text-xs/6`}>{project.desc}</p>

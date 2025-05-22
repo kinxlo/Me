@@ -9,8 +9,8 @@ import "../styles/theme.css";
 import "../styles/global.css";
 
 import ThemeProvider from "@/components/core/layout/ThemeToggle/theme-provider";
-import { Footer } from "@/components/shared/footer";
-import Navbar from "@/components/shared/navbar";
+import { Wrapper } from "@/components/core/layout/wrapper";
+import { Me } from "@/components/shared/me";
 import { Toast } from "@/components/shared/Toast";
 import { AppProvider } from "@/context/app-provider";
 import { ReactQueryProvider } from "@/lib/react-query/query-provider";
@@ -69,9 +69,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 enableColorScheme
               >
                 <Toast />
-                <Navbar />
+                {/* <Navbar /> */}
                 <BaseLayout>{children}</BaseLayout>
-                <Footer />
+                {/* <Footer /> */}
               </ThemeProvider>
             </ReactQueryProvider>
           </NuqsAdapter>
@@ -83,11 +83,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className={`max-w-screen overflow-x-hidden`}>
-      <section className="grid min-h-[100dvh] grid-cols-1 grid-rows-[1fr_1px_auto_1px_auto] justify-center py-12 md:-mx-4 md:grid-cols-[2.5rem_minmax(0,80rem)_2.5rem] lg:mx-0">
-        <div className="cc-border-up col-start-1 row-span-full row-start-1 hidden border-x border-x-(--pattern-fg) bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 md:block dark:[--pattern-fg:var(--color-white)]/10" />
-        <section className={"grid gap-24 pb-24 text-gray-950 sm:gap-40 md:pb-40 dark:text-white"}>{children}</section>
-        <div className="cc-border-down row-span-full row-start-1 hidden border-x border-x-(--pattern-fg) bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 md:col-start-3 md:block dark:[--pattern-fg:var(--color-white)]/10" />
+    <main className={`min-h-[100dvh] max-w-screen overflow-hidden`}>
+      <section className="grid grid-cols-1 justify-center md:-mx-4 md:grid-cols-[2rem_minmax(0,80rem)] lg:mx-0">
+        <div className="hidden border-x border-x-(--pattern-fg) bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:5px_5px] bg-fixed [--pattern-fg:var(--color-black)]/10 md:block dark:[--pattern-fg:var(--color-white)]/10" />
+        <section className={"pl-2 text-gray-950 lg:mt-0 lg:mb-50 lg:pl-4 dark:text-white"}>
+          <Me />
+          <Wrapper className="cc-3d-container space-y-24">{children}</Wrapper>
+        </section>
       </section>
     </main>
   );

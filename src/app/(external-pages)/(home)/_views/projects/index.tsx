@@ -3,7 +3,7 @@
 import { getProjects } from "@/action/project.action";
 import { Wrapper } from "@/components/core/layout/wrapper";
 
-import { ProjectCard } from "../../_components/project-card/project-card";
+import { ProjectCard } from "../../_components/project-card";
 
 export const Projects = async () => {
   const projects = await getProjects();
@@ -19,25 +19,33 @@ export const Projects = async () => {
   }
 
   return (
-    <section>
-      <Wrapper className="py-0">
-        <span className={`cc-border text-high-grey-III font-mono text-xl/5 font-medium tracking-wider uppercase`}>
-          Showcase
-        </span>
-        <h3 className={`cc-border-down mt-4 text-4xl/9 font-black tracking-tighter`}>Proof of Competence</h3>
-        <p className={`cc-border text-high-grey-III mt-10 pt-4 font-sans text-lg leading-8 font-medium`}>
-          I was previlaged to encountered several fantastic developers while searching for ways to challenge and improve
-          myself. We spoke, sipped tea (coffee was during debugging), and here are some of the concepts we made into
-          reality.
+    <Wrapper className={`cc-3d-group`}>
+      <div className="">
+        {/* Showcase Title */}
+        <span className="cc-border text-accent font-mono text-xl/5 font-medium tracking-wider uppercase">Showcase</span>
+
+        {/* Main Heading */}
+        <h3 className="cc-border-down mt-4 text-4xl/9 font-black tracking-tighter">Proof of Competence</h3>
+
+        {/* Description */}
+        <p className="cc-border text-high-grey-III mt-10 font-sans text-lg leading-8 font-medium">
+          Its the little things, a padding here, a margin there, a border here, a shadow there. It all adds up to make a
+          great experience.
         </p>
-      </Wrapper>
-      <Wrapper className="bg-accent/5 mt-10 p-0">
+      </div>
+
+      {/* Projects Grid - Outside 3D context for better usability */}
+      <div className="mt-10">
         <section className="grid grid-cols-1 gap-10 sm:grid-cols-2">
           {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              className="cc-3d-flat" // Ensure project cards remain flat
+            />
           ))}
         </section>
-      </Wrapper>
-    </section>
+      </div>
+    </Wrapper>
   );
 };

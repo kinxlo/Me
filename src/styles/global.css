@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
+@import url("animations.css");
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -56,48 +56,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-
-  /* Color intensity variants */
-  --color-high-blue: var(--high-blue);
-  --color-mid-blue: var(--mid-blue);
-  --color-low-blue: var(--low-blue);
-
-  --color-high-danger: var(--high-danger);
-  --color-mid-danger: var(--mid-danger);
-  --color-low-danger: var(--low-danger);
-
-  --color-high-warning: var(--high-warning);
-  --color-mid-warning: var(--mid-warning);
-  --color-low-warning: var(--low-warning);
-
-  --color-high-success: var(--high-success);
-  --color-mid-success: var(--mid-success);
-  --color-low-success: var(--low-success);
-
-  --color-high-grey-III: var(--high-grey-III);
-  --color-mid-grey-III: var(--mid-grey-III);
-  --color-low-grey-III: var(--low-grey-III);
-
-  --color-high-grey-II: var(--high-grey-II);
-  --color-mid-grey-II: var(--mid-grey-II);
-  --color-low-grey-II: var(--low-grey-II);
-
-  --color-high-grey-I: var(--high-grey-I);
-  --color-mid-grey-I: var(--mid-grey-I);
-  --color-low-grey-I: var(--low-grey-I);
 }
 
 :root {
-  /* --font-sans: "Inter", sans-serif;
-  --font-mono: "Fira Code", monospace;
-  --font-sea: "East Sea Dokdo", sans-serif;
-  --font-heading: "Instrument Sans", sans-serif; */
-
-  /* Font families */
-  /* --font-sans: "Inter", sans-serif;
-  --font-mono: "Fira Code", monospace;
-  --font-heading: "Instrument Sans", sans-serif; */
-
   /* Fluid typography scale */
   --text-xs: clamp(0.7rem, 0.85vw + 0.4rem, 0.8rem);
   --text-sm: clamp(0.8rem, 0.9vw + 0.5rem, 0.9rem);
@@ -281,7 +242,7 @@
 
 @layer utilities {
   .cc-bg-dotted {
-    @apply bg-background overflow-hidden rounded-xl border bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed p-8 [--pattern-fg:var(--color-gray-950)]/10 after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-gray-950/5 dark:[--pattern-fg:var(--color-white)]/10 dark:after:inset-ring-white/10;
+    @apply overflow-hidden rounded-xl border bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed p-8 [--pattern-fg:var(--color-gray-950)]/10 after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-gray-950/5 dark:[--pattern-fg:var(--color-white)]/10 dark:after:inset-ring-white/10;
   }
   .cc-border {
     @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10 after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:before:border-white/10 dark:after:border-white/10;
@@ -295,6 +256,10 @@
 
   .cc-border-responsive {
     @apply relative before:absolute before:top-0 before:-left-[100vw] before:hidden before:h-px before:w-[200vw] before:bg-gray-950/10 after:absolute after:bottom-0 after:-left-[100vw] after:hidden after:h-px after:w-[200vw] after:bg-gray-950/10 max-sm:before:block max-sm:after:block dark:before:bg-white/10 dark:after:bg-white/10 sm:[.grid>div:nth-child(2n+1)_&]:before:block sm:[.grid>div:nth-child(2n+1)_&]:after:block lg:max-xl:[.grid>div:nth-child(3n+1)_&]:before:block lg:max-xl:[.grid>div:nth-child(3n+1)_&]:after:block xl:[.grid>div:nth-child(4n+1)_&]:before:block xl:[.grid>div:nth-child(4n+1)_&]:after:block;
+  }
+
+  .cc-shades {
+    @apply bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 md:block dark:[--pattern-fg:var(--color-white)]/10;
   }
 
   .cc-shadow {
@@ -445,51 +410,3 @@ h6 {
   /* color: oklch(var(--primary)); */
   /* color: #414141; */
 }
-
-/* @keyframes teleprompt {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-.animate-teleprompt {
-  animation: teleprompt 10s linear infinite;
-} */
-
-/* @keyframes verticalMarquee {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
-}
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  20% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-.animate-vertical-marquee {
-  animation: verticalMarquee 30s linear infinite;
-}
-.animate-fade-out {
-  animation: fadeOut 2s forwards;
-}
-@media (prefers-reduced-motion) {
-  .animate-vertical-marquee {
-    animation: none;
-    transform: translateY(0) !important;
-  }
-  .animate-fade-out {
-    animation: none;
-    opacity: 0 !important;
-  }
-} */

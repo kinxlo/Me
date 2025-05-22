@@ -22,8 +22,8 @@ const Navbar = () => {
     <nav className={cn(`fixed top-0 z-10 w-full pr-4 backdrop-blur-sm`)} role="navbar">
       <section className="flex w-full items-center justify-between">
         <div className={`flex items-center`}>
-          <MainButton variant={`accent`} className={`text-black`}>
-            Kingsley Solomon
+          <MainButton variant={`accent`} className={`cursor-default text-black`}>
+            I19N
           </MainButton>
           <NavItems className={`hidden lg:block`} links={NAV_LINKS} />
         </div>
