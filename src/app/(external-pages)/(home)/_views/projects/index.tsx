@@ -38,11 +38,7 @@ export const Projects = async () => {
       <div className="mt-10">
         <section className="grid grid-cols-1 gap-10 sm:grid-cols-2">
           {projects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              className="cc-3d-flat" // Ensure project cards remain flat
-            />
+            <ProjectCard key={project.id} project={project} className="cc-3d-flat" />
           ))}
         </section>
       </div>
