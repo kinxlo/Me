@@ -1,23 +1,14 @@
-/* ====================== */
-/* 3D TRANSFORM ANIMATIONS */
-/* ====================== */
+/* styles/animations.css */
+/* @import "tailwindcss"; */
 
-/**
- * Base 3D Context Container
- * Establishes perspective for all 3D children
- */
+/* 3D Transform Classes */
 .cc-3d-container {
   perspective: 2000px;
   transform-style: preserve-3d;
 }
 
-/**
- * Individual 3D Elements
- * Ensures proper rendering in 3D space
- */
 .cc-3d-item-move {
   transform: translateZ(120px) translateX(1rem) translateY(-1rem);
-  /* color: var(--color-primary); */
   z-index: 1;
   text-shadow:
     0 2px 10px rgba(0, 0, 0, 0.1),
@@ -32,10 +23,7 @@
     0 2px 10px rgba(0, 0, 0, 0.1),
     0 4px 20px rgba(0, 0, 0, 0.15);
 }
-
-/* ====================== */
-/* RESPONSIVE ADJUSTMENTS */
-/* ====================== */
+/* Responsive adjustments */
 @media (min-width: 320px) {
   .cc-3d-container {
     perspective: 1800px;
@@ -55,10 +43,8 @@
   }
 }
 
-/* ====================== */
-/* ACCESSIBILITY */
-/* ====================== */
-@media (prefers-reduced-motion: reduce) {
+/* Reduced motion */
+@motion-reduce {
   .cc-3d-group,
   .cc-3d-item {
     transform: none !important;
@@ -66,77 +52,11 @@
   }
 }
 
-/* ====================== */
-/* UTILITY CLASSES */
-/* ====================== */
-.cc-3d-flat {
-  transform: translateZ(0);
-  transform-style: flat;
-}
-
-/**
- * Global transitions - more refined
- */
+/* Global transitions (use sparingly) */
 * {
-  /* will-change: transform, opacity; */
-  /* transform: translate3d(0, 0, 0); */
   transition:
     color 0.4s ease-out,
     background-color 0.4s ease-out,
     opacity 0.4s ease-out,
     transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.animate-fade-out {
-  animation: fadeOut 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Float animations */
-@keyframes float {
-  /* 0% {
-    transform: translateZ(120px) translateX(1rem) translateY(0px);
-  } */
-  50% {
-    transform: translateZ(120px) translateX(1rem) translateY(-20px);
-  }
-  100% {
-    transform: translateZ(120px) translateX(1rem) translateY(0px);
-  }
-}
-
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
-  }
-  50% {
-    transform: translateY(-15px) rotate(2deg);
-    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
-  }
-}
-
-@keyframes float-gentle {
-  0%,
-  100% {
-    transform: translateY(0px);
-    animation-timing-function: ease-in-out;
-  }
-  50% {
-    transform: translateY(-10px);
-    animation-timing-function: ease-in-out;
-  }
-}
-
-/* Animation classes */
-.animate-float:hover {
-  animation: float 3s ease-in-out infinite alternate;
-}
-
-.animate-float-slow {
-  animation: float-slow 4s ease-in-out infinite;
-}
-
-.animate-float-gentle {
-  animation: float-gentle 2.5s ease-in-out infinite;
 }
