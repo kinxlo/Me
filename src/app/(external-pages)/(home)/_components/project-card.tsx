@@ -24,7 +24,12 @@ interface ProjectCardProperties extends React.HTMLProps<HTMLDivElement> {
 }
 
 export const ProjectCard: FC<ProjectCardProperties> = ({ project, className }) => {
+  // const _img = useIntersection({
+  //   threshold: 0.9,
+  // });
+
   if (!project) return null;
+
   return (
     <div
       className={cn(
@@ -33,8 +38,14 @@ export const ProjectCard: FC<ProjectCardProperties> = ({ project, className }) =
       )}
     >
       <article className={cn(`cc-border-responsive p-2`)}>
-        <a href={project?.url} target="_blank" rel="noopener noreferrer">
-          <div className={`relative aspect-[672/494] overflow-hidden rounded-xl outline outline-gray-950/5`}>
+        <div
+          // ref={_img.ref}
+          className={cn(
+            `cc-3d-item relative aspect-[672/494] overflow-hidden rounded-xl outline outline-gray-950/5`,
+            // _img.isIntersecting && `cc-3d-item-move`,
+          )}
+        >
+          <a href={project?.url} target="_blank" rel="noopener noreferrer">
             <BlurImage
               src={project?.imageDesktop}
               width={672}
@@ -42,13 +53,13 @@ export const ProjectCard: FC<ProjectCardProperties> = ({ project, className }) =
               alt={project?.name}
               className="h-full w-full object-cover object-top"
             />
-          </div>
-        </a>
+          </a>
+        </div>
       </article>
       <article className={cn(`cc-border-responsive bg-accent/30 mt-2 p-2 backdrop-blur-sm`, className)}>
         <div className={`flex flex-wrap items-center`}>
           <h2 className={`font-mono text-sm/6 font-bold capitalize`}>{project.name}</h2>
-          <p className={`font-code line-clamp-1 w-full flex-none text-xs/6`}>{project.desc}</p>
+          <p className={`line-clamp-1 w-full flex-none font-mono text-xs/6`}>{project.desc}</p>
         </div>
       </article>
     </div>

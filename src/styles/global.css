@@ -261,20 +261,6 @@
   .cc-shades {
     @apply bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 md:block dark:[--pattern-fg:var(--color-white)]/10;
   }
-
-  .cc-shadow {
-    @apply drop-shadow-xl drop-shadow-gray-400 dark:drop-shadow-none;
-  }
-
-  .border-collapse,
-  .border-collapse * {
-    border-collapse: collapse;
-    margin-left: -1px;
-  }
-
-  .border-collapse > :first-child {
-    margin-left: 0;
-  }
 }
 
 @layer base {
@@ -287,6 +273,7 @@
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
+    scroll-behavior: smooth !important;
   }
 
   h1,
@@ -320,14 +307,13 @@
   }
 
   code,
-  pre,
   .mono {
     font-family: var(--font-mono);
     font-size: var(--text-sm);
   }
 
-  .font-code {
-    font-family: var(--font-code);
+  .font-sea {
+    font-family: var(--font-sea);
     font-size: var(--text-sm);
   }
 

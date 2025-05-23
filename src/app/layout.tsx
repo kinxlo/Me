@@ -2,18 +2,18 @@ import { fontVariables } from "@/lib/tools/font";
 import { cn } from "@/lib/utils";
 import type { Metadata, Viewport } from "next";
 import { cookies } from "next/headers";
-import NextTopLoader from "nextjs-toploader";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import "../styles/theme.css";
 import "../styles/global.css";
 
 import ThemeProvider from "@/components/core/layout/ThemeToggle/theme-provider";
+import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
 import { Wrapper } from "@/components/core/layout/wrapper";
+import MainButton from "@/components/shared/button";
 import { Me } from "@/components/shared/me";
 import { Toast } from "@/components/shared/Toast";
 import { AppProvider } from "@/context/app-provider";
-import { ReactQueryProvider } from "@/lib/react-query/query-provider";
+import SmoothScrollProvider, { SmoothAnchorLinks } from "@/context/scroll-provider";
 
 const META_THEME_COLORS = {
   light: "#ffffff",
@@ -27,6 +27,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: META_THEME_COLORS.light,
+  width: "device-width",
+  initialScale: 0.8,
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -58,23 +60,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         )}
       >
         <AppProvider>
-          <NextTopLoader showSpinner={false} />
-          <NuqsAdapter>
-            <ReactQueryProvider>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-                enableColorScheme
-              >
-                <Toast />
-                {/* <Navbar /> */}
-                <BaseLayout>{children}</BaseLayout>
-                {/* <Footer /> */}
-              </ThemeProvider>
-            </ReactQueryProvider>
-          </NuqsAdapter>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            enableColorScheme
+          >
+            <Toast />
+            <BaseLayout>{children}</BaseLayout>
+            {/* <Footer /> */}
+          </ThemeProvider>
         </AppProvider>
       </body>
     </html>
@@ -84,11 +80,28 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
     <main className={`min-h-[100dvh] max-w-screen overflow-hidden`}>
+      <div className={`fixed top-0 right-0 z-[999] cursor-default space-x-4 text-black lg:hidden`}>
+        <MainButton href={`#about-section`} variant={`accent`}>
+          About Me
+        </MainButton>
+        <MainButton href={`#projects`} variant={`accent`}>
+          Projects
+        </MainButton>
+        <MainButton href={`#contact`} variant={`accent`}>
+          Contact Me
+        </MainButton>
+        <ModeToggle />
+      </div>
       <section className="grid grid-cols-1 justify-center md:-mx-4 md:grid-cols-[2rem_minmax(0,80rem)] lg:mx-0">
         <div className="hidden border-x border-x-(--pattern-fg) bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:5px_5px] bg-fixed [--pattern-fg:var(--color-black)]/10 md:block dark:[--pattern-fg:var(--color-white)]/10" />
-        <section className={"pl-2 text-gray-950 lg:mt-0 lg:mb-50 lg:pl-4 dark:text-white"}>
+        <section className={"lg:mt-0 lg:mb-50 dark:text-white"}>
           <Me />
-          <Wrapper className="cc-3d-container space-y-24">{children}</Wrapper>
+          <Wrapper className="cc-3d-container space-y-[10rem] p-0 lg:space-y-[20rem]">
+            <SmoothScrollProvider>
+              <SmoothAnchorLinks />
+              {children}
+            </SmoothScrollProvider>
+          </Wrapper>
         </section>
       </section>
     </main>

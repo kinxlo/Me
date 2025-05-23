@@ -95,7 +95,7 @@ const MainButton = forwardRef<HTMLButtonElement, ButtonProperties>(
       </>
     );
 
-    const buttonClasses = `transition-all duration-300 ease-in-out shadown-none ${
+    const buttonClasses = `transition-all duration-300 ease-in-out rounded-ee-xl rounded-es-xl shadown-none ${
       isDisabled ? "opacity-50 cursor-not-allowed" : "hover:shadow-sneob dark:hover:shadow-sneobw focus:shadow-none"
     } ${className}`;
 

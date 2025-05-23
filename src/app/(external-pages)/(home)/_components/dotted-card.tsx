@@ -9,7 +9,7 @@ export const DottedCard: FC<DottedCardProperties> = ({ children, className }) =>
   return (
     <div
       className={cn(
-        `text-high-grey-II cc-bg-dotted relative inset-0 max-w-(--breakpoint-md) space-y-2 rounded-2xl font-mono text-2xl`,
+        `text-high-grey-II cc-bg-dotted font-sea relative inset-0 max-w-(--breakpoint-md) space-y-2 rounded-2xl text-2xl`,
         className,
       )}
     >

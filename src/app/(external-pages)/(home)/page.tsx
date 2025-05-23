@@ -1,6 +1,6 @@
 import { About } from "./_views/about";
 import { Hero } from "./_views/hero";
-import { Projects } from "./_views/projects";
+import Projects from "./_views/projects";
 
 const Page = () => {
   return (
