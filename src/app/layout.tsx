@@ -25,11 +25,11 @@ export const metadata: Metadata = {
   description: "Kingsley solomon Portfolio",
 };
 
-export const viewport: Viewport = {
-  themeColor: META_THEME_COLORS.light,
-  width: "device-width",
-  initialScale: 0.5,
-};
+// export const viewport: Viewport = {
+//   themeColor: META_THEME_COLORS.light,
+//   width: "device-width",
+//   initialScale: 1,
+// };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
