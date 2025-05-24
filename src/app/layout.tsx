@@ -1,6 +1,6 @@
 import { fontVariables } from "@/lib/tools/font";
 import { cn } from "@/lib/utils";
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { cookies } from "next/headers";
 
 import "../styles/theme.css";
