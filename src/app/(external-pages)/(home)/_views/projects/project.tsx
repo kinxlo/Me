@@ -24,16 +24,14 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   return (
     <Wrapper id={`projects`} className={`cc-3d-group`}>
       <div>
-        <span className="cc-border text-primary font-mono text-xl/5 font-medium tracking-wider">Showcase</span>
+        <span className="cc-border font-mono text-lg font-medium tracking-wider">Showcase</span>
 
-        <figure className={`cc-border`}>
-          <div className={cn(_title1.isIntersecting && `cc-3d-item-move`)} ref={_title1.ref}>
-            <h3 className="mt-4 text-4xl/9 font-black tracking-tighter">Proof of Competence</h3>
-            <p className="text-high-grey-III mt-5 font-sans text-lg leading-8 font-medium">
-              Its the little things, a padding here, a margin there, a border here, a shadow there. It all adds up to
-              make a great experience.
-            </p>
-          </div>
+        <figure className={`cc-border-down`}>
+          <h3 className="text-4xl font-black tracking-tighter">Proof of Competence</h3>
+          <p className="text-high-grey-III max-w-(--breakpoint-md) font-sans text-lg font-medium">
+            Its the little things, a padding here, a margin there, a border here, a shadow there. It all adds up to make
+            a great experience.
+          </p>
         </figure>
       </div>
 

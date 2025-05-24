@@ -19,18 +19,16 @@ const Navbar = () => {
   }, [pathname]);
 
   return (
-    <nav className={cn(`fixed top-0 z-10 w-full pr-4 backdrop-blur-sm`)} role="navbar">
+    <nav className={cn(`cc-shades cc-border-down fixed top-0 z-10 w-full pr-4 backdrop-blur-sm`)} role="navbar">
       <section className="flex w-full items-center justify-between">
         <div className={`flex items-center`}>
-          <MainButton variant={`accent`} className={`cursor-default text-black`}>
+          <MainButton variant={`accent`} className={`cursor-default`}>
             I19N
           </MainButton>
           <NavItems className={`hidden lg:block`} links={NAV_LINKS} />
         </div>
         <div className={`hidden items-center lg:flex`}>
-          <MainButton variant={`ghost`} className={``}>
-            Contact Me
-          </MainButton>
+          <MainButton variant={`ghost`}>Contact Me</MainButton>
           <ModeToggle />
         </div>
         <MainButton

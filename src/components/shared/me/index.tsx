@@ -3,73 +3,97 @@
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
 import { useAppContext } from "@/hooks/use-app-context";
 import { useIntersection } from "@/hooks/use-observer";
+import { useWindowSize } from "@/hooks/use-window-resize";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 
 export const Me = () => {
   const { isOnAboutMe } = useAppContext();
-  const [zoomLevel, setZoomLevel] = useState(0.7);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [isLoaded, setIsLoaded] = useState(false);
   const imageReference = useRef<HTMLDivElement>(null);
   const aboutSectionReference = useRef<HTMLElement | null>(null);
+  const { width: windowWidth, height: windowHeight } = useWindowSize();
+  const animationFrameRef = useRef<number>(null);
 
-  // Track both intersection and scroll position
   const { ref: intersectionReference } = useIntersection({
     threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
   });
 
-  // Combine refs
   const setReferences = (node: HTMLDivElement | null) => {
     intersectionReference(node);
     if (node) imageReference.current = node;
   };
 
   useEffect(() => {
-    // Get the about section element
     aboutSectionReference.current = document.querySelector("#about-section");
 
     const handleScroll = () => {
       if (!imageReference.current || !aboutSectionReference.current) return;
 
-      const imageRect = imageReference.current.getBoundingClientRect();
-      const aboutRect = aboutSectionReference.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
+      // Use requestAnimationFrame for smoother performance
+      animationFrameRef.current = requestAnimationFrame(() => {
+        const imageRect = imageReference.current?.getBoundingClientRect();
+        const aboutRect = aboutSectionReference.current?.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
 
-      // Calculate proximity to about section (0 when far away, 1 when overlapping)
-      const distanceFromAbout = Math.max(0, aboutRect.top - viewportHeight * 0.5);
-      const proximity = 1 - Math.min(1, distanceFromAbout / (viewportHeight * 0.5));
+        if (aboutRect) {
+          // Calculate distance from about section to viewport center
+          const aboutSectionCenter = aboutRect.top + aboutRect.height / 2;
+          const viewportCenter = viewportHeight / 2;
+          const distanceFromCenter = Math.abs(aboutSectionCenter - viewportCenter);
 
-      // Only apply zoom effect when in proximity to about section
-      if (proximity > 0) {
-        // Calculate how much of the image is visible (0 to 1)
-        const visibleRatio = Math.min(1, Math.max(0, (viewportHeight - imageRect.top) / viewportHeight));
+          // Normalize distance to a 0-1 range
+          const normalizedDistance = Math.min(1, distanceFromCenter / (viewportHeight * 0.75));
 
-        // Apply smooth zoom based on visibility and proximity
-        setZoomLevel(0.7 + 0.3 * visibleRatio * proximity);
-      } else {
-        // Reset to default zoom when far from about section
-        setZoomLevel(0.5);
-      }
+          // Calculate zoom level with easing function for smoother transitions
+          const baseZoom = windowWidth < 768 ? 0.6 : 0.9; // Smaller on mobile
+          const targetZoom = baseZoom - 0.3 * (1 - normalizedDistance);
+          // Apply smooth transition
+          setZoomLevel((prev) => {
+            const diff = targetZoom - prev;
+            return prev + diff * 0.1; // Adjust this value for faster/smoother transition
+          });
+        }
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    handleScroll(); // Initialize position
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [windowWidth, windowHeight]); // Re-run effect on window resize
 
   return (
     <BlurImage
       ref={setReferences}
       src={"/images/me.svg"}
-      alt={"Me"}
+      alt={"Illustration of me"}
       width={507}
       height={469.32}
+      onLoadingComplete={() => setIsLoaded(true)}
       className={cn(
-        `fixed right-0 bottom-0 isolate object-cover object-top opacity-20 transition-transform duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] dark:invert`,
-        isOnAboutMe && `lg:opacity-100`,
+        `fixed right-0 bottom-0 isolate object-cover object-top transition-all duration-500 ease-out`,
         `origin-bottom-right`,
+        // Responsive opacity changes
+        isOnAboutMe ? "opacity-20 lg:opacity-30" : "opacity-40 md:opacity-70 lg:opacity-100",
+        // Loading state
+        isLoaded ? "scale-100" : "scale-90 opacity-0",
+        // Dark mode adjustments
+        "dark:opacity-80 dark:invert",
       )}
       style={{
         transform: `scale(${zoomLevel})`,
+        // Responsive sizing
+        maxWidth: windowWidth < 768 ? "70%" : "none",
+        maxHeight: windowWidth < 768 ? "60%" : "none",
       }}
+      priority // If this is an important image
     />
   );
 };

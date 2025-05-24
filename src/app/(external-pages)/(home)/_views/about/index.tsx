@@ -18,11 +18,9 @@ export const About = () => {
   return (
     <section id={`about-section`} className={`cc-3d-group`}>
       <Wrapper>
-        <span className={`cc-border text-primary font-mono text-xl/5 font-medium`}>Bio</span>
+        <span className={`cc-border font-mono text-lg font-medium`}>Bio</span>
         <figure className={`cc-border-down`}>
-          <h3 className={cn(`mt-4 text-4xl/9 font-black tracking-tighter`, isIntersecting && `cc-3d-item-move`)}>
-            Allow me to Introduce myself
-          </h3>
+          <h3 className={cn(`text-4xl font-black tracking-tighter`)}>Allow me to Introduce myself</h3>
         </figure>
       </Wrapper>
       <Wrapper className={`cc-border mt-10`}>
@@ -51,12 +49,7 @@ export const About = () => {
               </p>
             </div>
             <div className={`cc-bg-dotted relative overflow-hidden border-none`}>
-              <BlurImage
-                fill
-                className={cn(`object-cover`, isIntersecting && `cc-3d-item-move`)}
-                src={"/images/map.png"}
-                alt={"map"}
-              />
+              <BlurImage fill className={cn(`object-cover dark:invert`)} src={"/images/map.png"} alt={"map"} />
               <Image
                 width={1000}
                 height={1000}

@@ -33,17 +33,13 @@ export const ProjectCard: FC<ProjectCardProperties> = ({ project, className }) =
   return (
     <div
       className={cn(
-        "group dark:border-bg-white/10 relative isolate border-x border-gray-950/10 transition-colors hover:bg-gray-950/10 max-sm:border-0 sm:max-lg:nth-[2n]:border-r-0 sm:max-lg:nth-[2n+1]:border-l-0 lg:max-xl:nth-[4n]:border-r-0 lg:max-xl:nth-[4n+1]:border-l-0 xl:nth-[4n]:border-r-0 xl:nth-[4n+1]:border-l-0 dark:border-white/10 dark:hover:bg-white/2.5",
+        "group dark:border-bg-white/10 relative isolate border-x border-gray-950/10 transition-colors hover:bg-gray-950/10 max-sm:border-0 dark:border-white/10 dark:hover:bg-white/2.5",
         className,
       )}
     >
       <article className={cn(`cc-border-responsive p-2`)}>
         <div
-          // ref={_img.ref}
-          className={cn(
-            `cc-3d-item relative aspect-[672/494] overflow-hidden rounded-xl outline outline-gray-950/5`,
-            // _img.isIntersecting && `cc-3d-item-move`,
-          )}
+          className={cn(`cc-3d-item relative aspect-[672/494] overflow-hidden rounded-xl outline outline-gray-950/5`)}
         >
           <a href={project?.url} target="_blank" rel="noopener noreferrer">
             <BlurImage
@@ -56,8 +52,8 @@ export const ProjectCard: FC<ProjectCardProperties> = ({ project, className }) =
           </a>
         </div>
       </article>
-      <article className={cn(`cc-border-responsive bg-accent/30 mt-2 p-2 backdrop-blur-sm`, className)}>
-        <div className={`flex flex-wrap items-center`}>
+      <article className={cn(`cc-border-responsive bg-accent mt-2 p-2 backdrop-blur-sm`, className)}>
+        <div className={`text-accent-foreground flex flex-wrap items-center`}>
           <h2 className={`font-mono text-sm/6 font-bold capitalize`}>{project.name}</h2>
           <p className={`line-clamp-1 w-full flex-none font-mono text-xs/6`}>{project.desc}</p>
         </div>
