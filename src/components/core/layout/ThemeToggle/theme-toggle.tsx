@@ -1,7 +1,7 @@
 "use client";
 
 import MainButton from "@/components/shared/button";
-import { IconBrightness } from "@tabler/icons-react";
+import { Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import * as React from "react";
 
@@ -19,7 +19,7 @@ export function ModeToggle() {
       isIconOnly
       className="group/toggle size-8 bg-transparent"
       onClick={toggleTheme}
-      icon={<IconBrightness />}
+      icon={<Sun />}
     />
   );
 }

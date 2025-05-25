@@ -6,5 +6,9 @@ interface DottedCardProperties extends React.HTMLProps<HTMLDivElement> {
 }
 
 export const PlainCard: FC<DottedCardProperties> = ({ children, className }) => {
-  return <div className={cn(`overflow-hidden rounded-2xl`, className)}>{children}</div>;
+  return (
+    <div className={cn(`bg-background border-foreground/50 overflow-hidden rounded-2xl border-2`, className)}>
+      {children}
+    </div>
+  );
 };

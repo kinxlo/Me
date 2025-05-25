@@ -156,10 +156,12 @@ declare global {
     status: "Production" | "Development (Active)" | "Development (Stale)";
     colorCode: string[];
     values: number[];
-    imageDesktop: string;
-    imageMobile: string;
+    imageDesktop1: string;
+    imageDesktop2: string;
+    imageDesktop3: string;
     url: string;
     github: string | null;
+    logo: string;
     desc: string;
     tools: string | null;
     date: string; // ISO 8601 format (YYYY-MM-DD)

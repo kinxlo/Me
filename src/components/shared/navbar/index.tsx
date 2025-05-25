@@ -21,13 +21,12 @@ export const Navbar = () => {
 
   return (
     <nav className={cn(`cc-shades text-primary sticky top-0 z-[500] border-b backdrop-blur-2xl`)} role="navbar">
-      <Wrapper className="flex w-full max-w-[1280px] items-center justify-between p-0 pr-4">
-        <div className={`flex items-center`}>
+      <Wrapper className="flex w-full max-w-[1280px] items-center justify-between p-0 pr-4 lg:pr-0">
+        <div className={`flex items-center gap-4`}>
           <MainButton variant={`accent`} className={`cursor-default`}>
             I19N
-            <ModeToggle />
           </MainButton>
-
+          <ModeToggle />
           <NavItems className={`hidden lg:block`} links={NAV_LINKS} />
         </div>
         <div className={`hidden items-center lg:flex`}>

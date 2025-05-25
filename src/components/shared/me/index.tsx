@@ -50,7 +50,7 @@ export const Me = () => {
           const viewportCenter = viewportHeight / 2;
           const distanceFromCenter = Math.abs(aboutSectionCenter - viewportCenter);
           const normalizedDistance = Math.min(1, distanceFromCenter / (viewportHeight * 0.75));
-          const baseZoom = windowWidth < 768 ? 0.6 : 0.9;
+          const baseZoom = windowWidth < 768 ? 0.6 : 0.7;
           const targetZoom = baseZoom - 0.3 * (1 - normalizedDistance);
 
           // Apply transition with a minimum limit to prevent getting too small
