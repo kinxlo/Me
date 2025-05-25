@@ -66,8 +66,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             enableColorScheme
           >
             <Toast />
+            <Navbar />
             <BaseLayout>
-              <Navbar />
               {children}
               <Footer />
             </BaseLayout>

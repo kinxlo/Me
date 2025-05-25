@@ -30,9 +30,7 @@ export const NavItems: React.FC<NavItemProperties> = ({ links, isMobile, classNa
 
   return (
     <NavigationMenu className={cn(isMobile && "block max-w-full", className)}>
-      <NavigationMenuList
-        className={cn("cc-border gap-0 divide-y lg:divide-x lg:divide-y-0 lg:border-x", isMobile && "block")}
-      >
+      <NavigationMenuList className={cn("gap-0 divide-y lg:divide-x lg:divide-y-0 lg:border-x", isMobile && "block")}>
         {links.map((link, index) => {
           if (link.type === "dropdown" && link.subLinks) {
             return (
