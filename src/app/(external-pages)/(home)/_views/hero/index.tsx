@@ -8,11 +8,11 @@ import { File } from "lucide-react";
 export const Hero = () => {
   return (
     <>
-      <Wrapper>
+      <Wrapper className={`flex min-h-[100dvh] items-center`}>
         {/* 3D Group Container */}
-        <section>
-          <div className="flex items-end font-mono text-lg font-medium tracking-wider">
-            <span>Welcome,</span>
+        <section className={`max-w-(--breakpoint-md)`}>
+          <div className="flex items-end text-lg font-medium tracking-wider">
+            <p className={`text-primary`}>Welcome,</p>
           </div>
 
           <section className={`space-y-4`}>
@@ -25,7 +25,9 @@ export const Hero = () => {
 
             {/* Job title */}
             <figure className={`cc-border`}>
-              <p className="flex items-end font-mono text-lg font-medium">Software Developer && Instructor</p>
+              <p className="text-primary flex items-end font-mono text-lg font-medium">
+                Software Developer && Instructor
+              </p>
             </figure>
           </section>
 

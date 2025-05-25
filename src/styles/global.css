@@ -251,7 +251,7 @@
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: var(--leading-tight);
-    color: var(--primary);
+    /* color: var(--primary); */
   }
 
   h1 {

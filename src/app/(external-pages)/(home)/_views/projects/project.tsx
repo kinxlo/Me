@@ -16,13 +16,13 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   }
 
   return (
-    <Wrapper id={`projects`} className={`cc-3d-group`}>
+    <Wrapper id={`projects`} className={`min-h-[100dvh]`}>
       <div>
-        <span className="cc-border font-mono text-lg font-medium tracking-wider">Showcase</span>
+        <span className="cc-border text-primary font-mono text-lg font-medium tracking-wider">Showcase</span>
 
         <figure className={`cc-border-down`}>
           <h3 className="text-4xl font-black tracking-tighter">Proof of Competence</h3>
-          <p className="text-high-grey-III max-w-(--breakpoint-md) font-sans text-lg font-medium">
+          <p className="text-high-grey-III text-primary max-w-(--breakpoint-md) font-sans text-lg font-medium">
             Its the little things, a padding here, a margin there, a border here, a shadow there. It all adds up to make
             a great experience.
           </p>
