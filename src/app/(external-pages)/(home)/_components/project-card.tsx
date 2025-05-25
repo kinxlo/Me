@@ -24,10 +24,6 @@ interface ProjectCardProperties extends React.HTMLProps<HTMLDivElement> {
 }
 
 export const ProjectCard: FC<ProjectCardProperties> = ({ project, className }) => {
-  // const _img = useIntersection({
-  //   threshold: 0.9,
-  // });
-
   if (!project) return null;
 
   return (

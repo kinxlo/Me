@@ -8,47 +8,34 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-
   --color-default: var(--default);
   --color-default-foreground: var(--default-foreground);
-
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-
   --color-destructive: var(--destructive);
   --color-destructive-hover: var(--destructive-hover);
   --color-destructive-foreground: var(--destructive-foreground);
-
   --color-subtle: var(--subtle);
   --color-subtle-hover: var(--subtle-hover);
   --color-subtle-foreground: var(--subtle-foreground);
-
   --color-loading: var(--loading);
   --color-loading-hover: var(--loading-hover);
   --color-loading-foreground: var(--loading-foreground);
-
   --color-outline: var(--outline);
   --color-outline-hover: var(--outline-hover);
   --color-outline-foreground: var(--outline-foreground);
-
   --color-link: var(--link);
   --color-error: var(--error);
   --color-success: var(--success);
@@ -81,55 +68,31 @@
   --leading-normal: 1.5;
   --leading-relaxed: 1.625;
   --leading-loose: 2;
-
-  /* Base colors */
   --background: oklch(95% 0.02 85);
   --foreground: oklch(0.16 0 0);
-
-  /* Card */
   --card: oklch(0.99 0 0);
   --card-foreground: oklch(0.16 0 0);
-
-  /* Popover */
   --popover: oklch(0.99 0 0);
   --popover-foreground: oklch(0.16 0 0);
-
-  /* Primary */
   --primary: oklch(95% 0.02 85);
   --primary-foreground: oklch(0.99 0 0);
-
-  /* Secondary */
   --secondary: oklch(85% 0.03 85);
   --secondary-foreground: oklch(0.25 0 0);
-
-  /* Muted */
   --muted: oklch(0.96 0 0);
   --muted-foreground: oklch(0.45 0 0);
-
-  /* Accent */
   --accent: oklch(15% 0.03 260);
   --accent-foreground: oklch(0.95 0 0);
-
-  /* Destructive */
   --destructive: oklch(0.65 0.22 25);
   --destructive-foreground: oklch(0.99 0 0);
-
-  /* Border */
   --border: oklch(0.88 0 0);
   --input: oklch(0.96 0 0);
   --ring: oklch(0.55 0.1 260);
-
-  /* Radius (same as dark) */
   --radius: 0.5rem;
-
-  /* Additional states */
   --muted-hover: oklch(0.93 0 0);
   --accent-hover: oklch(0.93 0 0);
   --primary-hover: oklch(0.6 0.18 260);
   --secondary-hover: oklch(0.93 0 0);
   --destructive-hover: oklch(0.7 0.22 25);
-
-  /* Status colors */
   --success: oklch(0.6 0.18 160);
   --warning: oklch(0.65 0.18 50);
   --info: oklch(0.6 0.18 220);
@@ -273,7 +236,6 @@
     font-size: var(--text-base);
     line-height: var(--leading-normal);
     scroll-behavior: smooth !important;
-    /* color: var(--color-gray-600); */
   }
 
   h1,
@@ -285,7 +247,6 @@
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: var(--leading-tight);
-    /* color: var(--heading); */
   }
 
   h1 {
@@ -384,16 +345,4 @@
 ::-webkit-scrollbar-track {
   background: hsla(0, 0%, 0%, 0.06);
   border-radius: 10px;
-}
-
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  /* color: oklch(var(--primary)); */
-  /* color: #414141; */
 }

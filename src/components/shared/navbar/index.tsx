@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import MainButton from "../button";
 import { NavItems } from "./nav-menu-item";
 
-const Navbar = () => {
+export const Navbar = () => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -19,7 +19,7 @@ const Navbar = () => {
   }, [pathname]);
 
   return (
-    <nav className={cn(`cc-shades cc-border-down fixed top-0 z-10 w-full pr-4 backdrop-blur-sm`)} role="navbar">
+    <nav className={cn(`cc-shades cc-border-down pr-4 backdrop-blur-sm`)} role="navbar">
       <section className="flex w-full items-center justify-between">
         <div className={`flex items-center`}>
           <MainButton variant={`accent`} className={`cursor-default`}>
@@ -51,5 +51,3 @@ const Navbar = () => {
     </nav>
   );
 };
-
-export default Navbar;

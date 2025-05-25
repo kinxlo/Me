@@ -1,16 +1,10 @@
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
-import { useIntersection } from "@/hooks/use-observer";
-import { cn } from "@/lib/utils";
 
 import { ProjectCard } from "../../_components/project-card";
 
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
-  const _title1 = useIntersection({
-    threshold: 0.9,
-  });
-
   if (!projects || projects.length === 0) {
     return (
       <Wrapper>

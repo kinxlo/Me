@@ -1,20 +1,19 @@
 "use client";
 
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import { useAppContext } from "@/hooks/use-app-context";
 import { useIntersection } from "@/hooks/use-observer";
 import { useWindowSize } from "@/hooks/use-window-resize";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 
 export const Me = () => {
-  const { isOnAboutMe } = useAppContext();
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isAboutVisible, setIsAboutVisible] = useState(false);
   const imageReference = useRef<HTMLDivElement>(null);
   const aboutSectionReference = useRef<HTMLElement | null>(null);
   const { width: windowWidth, height: windowHeight } = useWindowSize();
-  const animationFrameRef = useRef<number>(null);
+  const animationFrameReference = useRef<number>(null);
 
   const { ref: intersectionReference } = useIntersection({
     threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
@@ -26,33 +25,38 @@ export const Me = () => {
   };
 
   useEffect(() => {
-    aboutSectionReference.current = document.querySelector("#about-section");
+    aboutSectionReference.current = document.querySelector("#map-section");
 
     const handleScroll = () => {
       if (!imageReference.current || !aboutSectionReference.current) return;
 
-      // Use requestAnimationFrame for smoother performance
-      animationFrameRef.current = requestAnimationFrame(() => {
-        const imageRect = imageReference.current?.getBoundingClientRect();
-        const aboutRect = aboutSectionReference.current?.getBoundingClientRect();
+      animationFrameReference.current = requestAnimationFrame(() => {
+        const mapRect = aboutSectionReference.current?.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
 
-        if (aboutRect) {
-          // Calculate distance from about section to viewport center
-          const aboutSectionCenter = aboutRect.top + aboutRect.height / 2;
+        if (mapRect) {
+          const isVisible = mapRect.top < viewportHeight && mapRect.bottom > 0;
+          setIsAboutVisible(isVisible);
+
+          // When at the very top of the page, force reset to original size
+          if (window.scrollY < 10) {
+            // Small threshold to catch top position
+            setZoomLevel(1);
+            return;
+          }
+
+          // Your original zoom calculation logic
+          const aboutSectionCenter = mapRect.top + mapRect.height / 2;
           const viewportCenter = viewportHeight / 2;
           const distanceFromCenter = Math.abs(aboutSectionCenter - viewportCenter);
-
-          // Normalize distance to a 0-1 range
           const normalizedDistance = Math.min(1, distanceFromCenter / (viewportHeight * 0.75));
-
-          // Calculate zoom level with easing function for smoother transitions
-          const baseZoom = windowWidth < 768 ? 0.6 : 0.9; // Smaller on mobile
+          const baseZoom = windowWidth < 768 ? 0.6 : 0.9;
           const targetZoom = baseZoom - 0.3 * (1 - normalizedDistance);
-          // Apply smooth transition
-          setZoomLevel((prev) => {
-            const diff = targetZoom - prev;
-            return prev + diff * 0.1; // Adjust this value for faster/smoother transition
+
+          // Apply transition with a minimum limit to prevent getting too small
+          setZoomLevel((previous) => {
+            const newZoom = previous + (targetZoom - previous) * 0.1;
+            return Math.max(newZoom, baseZoom - 0.3); // Ensure it doesn't get smaller than intended
           });
         }
       });
@@ -63,11 +67,11 @@ export const Me = () => {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
+      if (animationFrameReference.current) {
+        cancelAnimationFrame(animationFrameReference.current);
       }
     };
-  }, [windowWidth, windowHeight]); // Re-run effect on window resize
+  }, [windowWidth, windowHeight]);
 
   return (
     <BlurImage
@@ -78,22 +82,16 @@ export const Me = () => {
       height={469.32}
       onLoadingComplete={() => setIsLoaded(true)}
       className={cn(
-        `fixed right-0 bottom-0 isolate object-cover object-top transition-all duration-500 ease-out`,
+        `fixed right-0 bottom-0 isolate max-h-[70%] max-w-[60%] object-cover object-top transition-all duration-500 ease-out`,
         `origin-bottom-right`,
-        // Responsive opacity changes
-        isOnAboutMe ? "opacity-20 lg:opacity-30" : "opacity-40 md:opacity-70 lg:opacity-100",
-        // Loading state
-        isLoaded ? "scale-100" : "scale-90 opacity-0",
-        // Dark mode adjustments
+        isAboutVisible ? "opacity-20 lg:opacity-30" : "opacity-40 md:opacity-70 lg:opacity-100",
+        isLoaded ? "scale-100" : "scale-90 opacity-0", // Changed to scale-100 when loaded
         "dark:opacity-80 dark:invert",
       )}
       style={{
         transform: `scale(${zoomLevel})`,
-        // Responsive sizing
-        maxWidth: windowWidth < 768 ? "70%" : "none",
-        maxHeight: windowWidth < 768 ? "60%" : "none",
       }}
-      priority // If this is an important image
+      priority
     />
   );
 };

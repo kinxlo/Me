@@ -2,19 +2,12 @@
 
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import { useAppContext } from "@/hooks/use-app-context";
-import { useIntersectionToggleWithState } from "@/hooks/use-observer";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 import { PlainCard } from "../../_components/plain-card";
 
 export const About = () => {
-  const { toggleAboutMe } = useAppContext();
-  const { ref: aboutReference, isIntersecting } = useIntersectionToggleWithState(toggleAboutMe, {
-    threshold: 0.6,
-  });
-
   return (
     <section id={`about-section`} className={`cc-3d-group`}>
       <Wrapper>
@@ -24,7 +17,7 @@ export const About = () => {
         </figure>
       </Wrapper>
       <Wrapper className={`cc-border mt-10`}>
-        <div className={cn("font-sea text-2xl/9")} ref={aboutReference}>
+        <div className={cn("font-sea text-2xl/9")}>
           <PlainCard className={`grid grid-cols-1 p-4 md:grid-cols-2 lg:mx-0`}>
             <div>
               <p className={`max-w-(--breakpoint-md) indent-10`}>
@@ -34,21 +27,21 @@ export const About = () => {
                 and Chakra UI—always with an eye toward <mark>performance</mark>, accessibility, and best practices. I
                 take pride in writing efficient, DRY code, and I enjoy turning complex logic into elegant interfaces.
               </p>
-              <p className={`max-w-(--breakpoint-md) indent-10`}>
+              {/* <p className={`max-w-(--breakpoint-md) indent-10`}>
                 I&apos;m also deeply invested in design consistency and usability, whether I&apos;m building custom form
                 components, responsive layouts, or real-time features with technologies like <mark>Pusher</mark> or{" "}
                 <mark>GSAP</mark>. While I currently thrive in software development, I&apos;m steadily moving toward a
                 future in cybersecurity. My mindset is detail-driven, curious, and systematic—qualities that fuel both
                 my engineering discipline and my interest in security.
-              </p>
-              <p className={`max-w-(--breakpoint-md) indent-10`}>
+              </p> */}
+              {/* <p className={`max-w-(--breakpoint-md) indent-10`}>
                 Outside of code, I&apos;m practical, creative, and always looking for ways to improve the developer
                 experience. Whether it&apos;s building a reusable component library, fine-tuning a custom error view, or
                 configuring a background queue for emails, I approach every challenge with focus and precision.
                 Let&apos;s build something smart, secure, and scalable.
-              </p>
+              </p> */}
             </div>
-            <div className={`cc-bg-dotted relative overflow-hidden border-none`}>
+            <div id="map-section" className={`cc-bg-dotted relative overflow-hidden border-none`}>
               <BlurImage fill className={cn(`object-cover dark:invert`)} src={"/images/map.png"} alt={"map"} />
               <Image
                 width={1000}
