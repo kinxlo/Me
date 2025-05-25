@@ -4,6 +4,7 @@ import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 import { PlainCard } from "../../_components/plain-card";
@@ -31,7 +32,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         <span className="cc-border text-primary font-mono text-lg font-medium tracking-wider">Showcase</span>
 
         <figure className={`cc-border-down`}>
-          <h3 className="text-4xl font-black tracking-tighter">Proof of Competence</h3>
+          <h3 className="cc-border-down text-4xl font-black tracking-tighter">Proof of Competence</h3>
           <p className="text-high-grey-III text-primary max-w-(--breakpoint-md) font-sans text-lg font-medium">
             Its the little things, a padding here, a margin there, a border here, a shadow there. It all adds up to make
             a great experience.
@@ -67,35 +68,37 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
           })}
         </Wrapper>
         <Wrapper className="cc-border mt-4 bg-gray-400/50">
-          <PlainCard className="border-none">
-            <div
-              className={cn(
-                `relative grid h-[20rem] scale-200 rotate-x-55 rotate-y-0 -rotate-z-45 grid-cols-3 gap-2 rounded-xl transform-3d lg:top-[-10rem] lg:left-[-10rem] lg:h-[25rem] lg:scale-100 lg:gap-8`,
-              )}
-            >
-              <BlurImage
-                src={selectedProject.imageDesktop1}
-                width={1000}
-                height={1000}
-                alt={"project"}
-                className="h-full w-full object-cover"
-              />
-              <BlurImage
-                src={selectedProject.imageDesktop2}
-                width={1000}
-                height={1000}
-                alt={"project"}
-                className="h-full w-full object-cover"
-              />
-              <BlurImage
-                src={selectedProject.imageDesktop2}
-                width={1000}
-                height={1000}
-                alt={"project"}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </PlainCard>
+          <Link referrerPolicy={`no-referrer`} target={`_blank`} href={selectedProject.url}>
+            <PlainCard className="border-none">
+              <div
+                className={cn(
+                  `relative grid h-[20rem] scale-200 rotate-x-55 rotate-y-0 -rotate-z-45 grid-cols-3 gap-2 rounded-xl transform-3d lg:top-[-10rem] lg:left-[-10rem] lg:h-[25rem] lg:scale-100 lg:gap-8`,
+                )}
+              >
+                <BlurImage
+                  src={selectedProject.imageDesktop1}
+                  width={1000}
+                  height={1000}
+                  alt={"project"}
+                  className="h-full w-full object-cover"
+                />
+                <BlurImage
+                  src={selectedProject.imageDesktop2}
+                  width={1000}
+                  height={1000}
+                  alt={"project"}
+                  className="h-full w-full object-cover"
+                />
+                <BlurImage
+                  src={selectedProject.imageDesktop2}
+                  width={1000}
+                  height={1000}
+                  alt={"project"}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </PlainCard>
+          </Link>
         </Wrapper>
       </Wrapper>
     </Wrapper>

@@ -84,7 +84,7 @@ export const Me = () => {
       className={cn(
         `fixed right-0 bottom-0 isolate max-h-[70%] max-w-[60%] object-cover object-top transition-all duration-500 ease-out`,
         `origin-bottom-right`,
-        isAboutVisible ? "opacity-20 lg:opacity-30" : "opacity-40 md:opacity-70 lg:opacity-100",
+        isAboutVisible ? "opacity-20 lg:opacity-30" : "opacity-20 md:opacity-70 lg:opacity-100",
         isLoaded ? "scale-100" : "scale-90 opacity-0", // Changed to scale-100 when loaded
         "dark:opacity-80 dark:invert",
       )}

@@ -65,8 +65,9 @@ export const NavItems: React.FC<NavItemProperties> = ({ links, isMobile, classNa
                   href={link.href}
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    "min-h-[48px] w-full rounded-none lg:w-fit",
+                    "w-full rounded-none lg:w-fit",
                     pathname === link.href && "text-accent",
+                    `cc-shades h-[49px] bg-transparent lg:h-fit`,
                   )}
                 >
                   {link.title}

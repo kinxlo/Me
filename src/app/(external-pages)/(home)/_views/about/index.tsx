@@ -3,13 +3,12 @@
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 
 import { PlainCard } from "../../_components/plain-card";
 
 export const About = () => {
   return (
-    <section>
+    <section id={`about`}>
       <Wrapper id={`map-section`}>
         <span className="cc-border text-primary font-mono text-lg font-medium">Bio</span>
         <h3 className={cn("cc-border-down text-4xl font-black tracking-tighter")}>Allow me to Introduce myself</h3>
@@ -45,7 +44,8 @@ export const About = () => {
                 height={300}
                 className="mix-blend-multipy h-full w-full object-contain dark:mix-blend-screen dark:invert"
               />
-              <Image
+              <div className="marker absolute inset-0 top-[-45%] left-[50%] size-5 transform" />
+              {/* <Image
                 src="/images/pin.png"
                 alt="Location pin"
                 width={40}
@@ -55,7 +55,7 @@ export const About = () => {
                   width: "clamp(30px, 5vw, 40px)",
                   height: "clamp(30px, 5vw, 40px)",
                 }}
-              />
+              /> */}
             </div>
           </div>
         </PlainCard>

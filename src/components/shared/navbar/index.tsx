@@ -43,10 +43,8 @@ export const Navbar = () => {
         />
       </Wrapper>
       {isMobileMenuOpen && (
-        <div className={cn("fixed inset-x-0 z-40 w-full bg-white shadow-none lg:hidden")}>
-          <div>
-            <NavItems className={``} links={NAV_LINKS} isMobile />
-          </div>
+        <div className={cn("inset-x-0 z-40 w-full shadow-none lg:hidden")}>
+          <NavItems links={NAV_LINKS} isMobile />
         </div>
       )}
     </nav>

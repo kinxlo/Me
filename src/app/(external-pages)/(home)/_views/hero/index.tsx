@@ -8,7 +8,7 @@ import { File } from "lucide-react";
 export const Hero = () => {
   return (
     <>
-      <Wrapper className={`flex items-center`}>
+      <Wrapper className={`flex min-h-[100dvh] items-center`}>
         {/* 3D Group Container */}
         <section className={`max-w-(--breakpoint-md)`}>
           <div className="flex items-end text-lg font-medium tracking-wider">
