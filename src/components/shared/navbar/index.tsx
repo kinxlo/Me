@@ -19,7 +19,7 @@ export const Navbar = () => {
   }, [pathname]);
 
   return (
-    <nav className={cn(`cc-shades cc-border relative z-10 pr-4 backdrop-blur-sm`)} role="navbar">
+    <nav className={cn(`cc-shades cc-border fixed top-0 z-10 pr-4 backdrop-blur-sm`)} role="navbar">
       <section className="flex w-full items-center justify-between">
         <div className={`flex items-center`}>
           <MainButton variant={`accent`} className={`cursor-default`}>
