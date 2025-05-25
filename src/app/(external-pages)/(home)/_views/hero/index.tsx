@@ -17,7 +17,7 @@ export const Hero = () => {
 
           <section className={`space-y-4`}>
             {/* Name sections */}
-            <figure className="cc-border font-black capitalize">
+            <figure className="cc-border capitalize">
               <h1 className={cn(`text-5xl tracking-tighter text-balance sm:text-9xl/24 lg:tracking-[-10px]`)}>
                 Ifijeh Kingsley Solomon.
               </h1>

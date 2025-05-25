@@ -1,6 +1,7 @@
 "use client";
 
 import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
+import { Wrapper } from "@/components/core/layout/wrapper";
 import { NAV_LINKS } from "@/lib/tools/constants";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
@@ -19,8 +20,8 @@ export const Navbar = () => {
   }, [pathname]);
 
   return (
-    <nav className={cn(`cc-shades sticky top-0 z-[500] border-b pr-4 backdrop-blur-2xl`)} role="navbar">
-      <section className="flex w-full items-center justify-between">
+    <nav className={cn(`cc-shades sticky top-0 z-[500] border-b backdrop-blur-2xl`)} role="navbar">
+      <Wrapper className="flex w-full max-w-[1280px] items-center justify-between p-0">
         <div className={`flex items-center`}>
           <MainButton variant={`accent`} className={`cursor-default`}>
             I19N
@@ -28,7 +29,7 @@ export const Navbar = () => {
           <NavItems className={`hidden lg:block`} links={NAV_LINKS} />
         </div>
         <div className={`hidden items-center lg:flex`}>
-          <MainButton variant={`ghost`}>Contact Me</MainButton>
+          <MainButton variant={`accent`}>Contact Me</MainButton>
           <ModeToggle />
         </div>
         <MainButton
@@ -40,7 +41,7 @@ export const Navbar = () => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         />
-      </section>
+      </Wrapper>
       {isMobileMenuOpen && (
         <div className={cn("fixed inset-x-0 z-40 w-full bg-white shadow-none lg:hidden")}>
           <div>
