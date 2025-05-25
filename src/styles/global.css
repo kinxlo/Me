@@ -207,13 +207,13 @@
     @apply overflow-hidden rounded-xl border bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed p-8 [--pattern-fg:var(--color-gray-950)]/10 after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-gray-950/5 dark:[--pattern-fg:var(--color-white)]/10 dark:after:inset-ring-white/10;
   }
   .cc-border {
-    @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10 after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:before:border-white/10 dark:after:border-white/10;
+    @apply relative z-[-1] before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10 after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:before:border-white/10 dark:after:border-white/10;
   }
   .cc-border-up {
-    @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10 dark:before:border-white/10;
+    @apply relative z-[-1] before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10 dark:before:border-white/10;
   }
   .cc-border-down {
-    @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:after:border-white/10;
+    @apply relative z-[-1] after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:after:border-white/10;
   }
 
   .cc-border-responsive {
