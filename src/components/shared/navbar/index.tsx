@@ -23,7 +23,7 @@ export const Navbar = () => {
     <nav className={cn(`cc-shades text-primary sticky top-0 z-[500] border-b backdrop-blur-2xl`)} role="navbar">
       <Wrapper className="flex w-full max-w-[1280px] items-center justify-between p-0 pr-4 lg:pr-0">
         <div className={`flex items-center gap-4`}>
-          <MainButton variant={`accent`} className={`cursor-default`}>
+          <MainButton variant={`accent`} className={`font-sea cursor-default text-lg`}>
             I19N
           </MainButton>
           <ModeToggle />

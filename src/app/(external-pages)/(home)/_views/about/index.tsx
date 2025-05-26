@@ -10,14 +10,14 @@ export const About = () => {
   return (
     <section id={`about`}>
       <Wrapper id={`map-section`}>
-        <span className="cc-border text-primary font-mono text-lg font-medium">Bio</span>
-        <h3 className={cn("cc-border-down text-4xl font-black tracking-tighter")}>Allow me to Introduce myself</h3>
+        <span className="cc-border font-mono text-lg font-medium">Bio</span>
+        <h3 className={cn("cc-border-down text-primary text-4xl font-black")}>Allow me to Introduce myself</h3>
       </Wrapper>
 
       <Wrapper className="cc-border mt-10 bg-gray-400/50">
-        <PlainCard className="text-primary font-sea grid grid-cols-1 gap-6 text-justify md:grid-cols-2 md:gap-8">
+        <PlainCard className="grid grid-cols-1 gap-6 text-justify md:grid-cols-2 md:gap-8">
           {/* about me */}
-          <p className="prose dark:prose-invert p-2 indent-8 text-lg leading-relaxed md:text-xl md:leading-relaxed">
+          <p className="prose dark:prose-invert p-2 indent-8 font-mono">
             I&apos;m a full-stack software developer with over 3 years of experience, specializing in building
             thoughtful, scalable, and user-focused front-end solutions. My core strength lies in crafting clean,
             maintainable UI components using modern frameworks like <mark>React</mark>, <mark>Next.js</mark>, and Chakra
@@ -45,17 +45,6 @@ export const About = () => {
                 className="mix-blend-multipy h-full w-full object-contain dark:mix-blend-screen dark:invert"
               />
               <div className="marker absolute inset-0 top-[-45%] left-[50%] size-5 transform" />
-              {/* <Image
-                src="/images/pin.png"
-                alt="Location pin"
-                width={40}
-                height={40}
-                className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 transform"
-                style={{
-                  width: "clamp(30px, 5vw, 40px)",
-                  height: "clamp(30px, 5vw, 40px)",
-                }}
-              /> */}
             </div>
           </div>
         </PlainCard>

@@ -27,15 +27,16 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   };
 
   return (
-    <Wrapper className={"p-0"} id={`projects`}>
+    <Wrapper className={"min-h-[calc(100dvh-48px)] p-0"} id={`projects`}>
       <Wrapper>
-        <span className="cc-border text-primary font-mono text-lg font-medium tracking-wider">Showcase</span>
+        <span className="cc-border font-mono text-lg font-medium tracking-wider">Showcase</span>
 
         <figure className={`cc-border-down`}>
-          <h3 className="cc-border-down text-4xl font-black tracking-tighter">Proof of Competence</h3>
-          <p className="text-high-grey-III text-primary max-w-(--breakpoint-md) font-sans text-lg font-medium">
-            Its the little things, a padding here, a margin there, a border here, a shadow there. It all adds up to make
-            a great experience.
+          <h3 className="cc-border-down text-primary text-4xl font-black">How its going</h3>
+          <p className="font-mediu max-w-(--breakpoint-md) py-2 text-justify text-sm">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eaque saepe fugiat cum temporibus suscipit
+            nobis, architecto optio odit, velit, voluptatem tenetur facilis excepturi recusandae. Voluptatibus voluptate
+            quam nihil ducimus!
           </p>
         </figure>
       </Wrapper>
