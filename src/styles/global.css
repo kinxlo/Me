@@ -222,8 +222,18 @@
   }
 
   .cc-shades {
-    @apply bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 md:block dark:[--pattern-fg:var(--color-white)]/10;
+    @apply bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 dark:[--pattern-fg:var(--color-white)]/10;
   }
+}
+
+.xl\:line-y\/half:before {
+  top: 50%;
+  right: calc(var(--spacing) * 0);
+  content: var(--tw-content);
+  background-color: var(--border);
+  width: 100vw;
+  height: 1px;
+  position: absolute;
 }
 
 @layer base {

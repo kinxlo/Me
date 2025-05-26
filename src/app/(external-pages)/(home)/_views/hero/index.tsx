@@ -8,8 +8,12 @@ export const Hero = () => {
     <>
       <Wrapper className={`flex min-h-[calc(100dvh-48px)] items-center`}>
         {/* 3D Group Container */}
-        <section className={`max-w-(--breakpoint-md)`}>
-          <section className={``}>
+        <section className={`w-full`}>
+          <div className={`flex justify-between`}>
+            <p className={`font-mono text-sm/2 font-black`}>The</p>
+            <p className={`font-mono text-sm/2 font-black`}>13:00</p>
+          </div>
+          <section className={`max-w-(--breakpoint-md)`}>
             {/* Name sections */}
             <div className={`space-y-4`}>
               <div className="cc-border capitalize">

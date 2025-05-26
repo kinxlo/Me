@@ -27,13 +27,13 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   };
 
   return (
-    <Wrapper className={"min-h-[calc(100dvh-48px)] p-0"} id={`projects`}>
+    <Wrapper id={`fade-section`} className={"min-h-[calc(100dvh-48px)] p-0"}>
       <Wrapper>
         <span className="cc-border font-mono text-lg font-medium tracking-wider">Showcase</span>
 
         <figure className={`cc-border-down`}>
-          <h3 className="cc-border-down text-primary text-4xl font-black">How its going</h3>
-          <p className="font-mediu max-w-(--breakpoint-md) py-2 text-justify text-sm">
+          <h3 className="cc-border-down text-primary text-4xl font-black tracking-[-4px]">How its going</h3>
+          <p className="max-w-(--breakpoint-md) py-2 text-justify text-sm font-medium">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eaque saepe fugiat cum temporibus suscipit
             nobis, architecto optio odit, velit, voluptatem tenetur facilis excepturi recusandae. Voluptatibus voluptate
             quam nihil ducimus!
@@ -41,15 +41,15 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         </figure>
       </Wrapper>
 
-      <Wrapper className={`mt-10 p-0`}>
-        <Wrapper className={`cc-border divide-border grid grid-cols-2 p-0 lg:grid-cols-4 lg:divide-x`}>
+      <Wrapper className={`cc-border-up mt-10 flex flex-col gap-10 p-0 lg:flex-row`}>
+        <Wrapper className={`xl:line-y/half cc-border-down relative grid grid-cols-2 border-r p-0 lg:grid-cols-2`}>
           {projects.map((project) => {
             return (
               <div
                 key={project.name}
                 onClick={() => handleSelectProject(project.name)}
                 className={cn(
-                  `flex cursor-pointer flex-col items-center justify-center gap-4 p-2 text-center lg:flex-row lg:p-8 lg:text-left`,
+                  `flex cursor-pointer flex-col items-center justify-center gap-4 px-2 py-2 text-center odd:border-r max-sm:px-4`,
                   project.name === selectedProject.name && `bg-primary/10`,
                 )}
               >
@@ -68,12 +68,12 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
             );
           })}
         </Wrapper>
-        <Wrapper className="cc-border mt-4 bg-gray-400/50">
+        <Wrapper className="bg-secondary">
           <Link referrerPolicy={`no-referrer`} target={`_blank`} href={selectedProject.url}>
             <PlainCard className="border-none">
               <div
                 className={cn(
-                  `relative grid h-[20rem] scale-200 rotate-x-55 rotate-y-0 -rotate-z-45 grid-cols-3 gap-2 rounded-xl transform-3d lg:top-[-10rem] lg:left-[-10rem] lg:h-[25rem] lg:scale-100 lg:gap-8`,
+                  `relative grid h-[20rem] scale-200 rotate-x-55 rotate-y-0 -rotate-z-45 grid-cols-3 gap-2 rounded-xl transform-3d lg:h-[25rem] lg:scale-200 lg:gap-4`,
                 )}
               >
                 <BlurImage
