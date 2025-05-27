@@ -27,7 +27,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   };
 
   return (
-    <Wrapper id={`fade-section`} className={"min-h-[calc(100dvh-48px)] p-0"}>
+    <Wrapper id={`fade-section`} className={"p-0"}>
       <Wrapper>
         <span className="cc-border font-mono text-lg font-medium tracking-wider">Showcase</span>
 
@@ -70,7 +70,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         </Wrapper>
         <Wrapper className="bg-secondary">
           <Link referrerPolicy={`no-referrer`} target={`_blank`} href={selectedProject.url}>
-            <PlainCard className="border-none">
+            <PlainCard className="bg-foreground border-none">
               <div
                 className={cn(
                   `relative grid h-[20rem] scale-200 rotate-x-55 rotate-y-0 -rotate-z-45 grid-cols-3 gap-2 rounded-xl transform-3d lg:h-[25rem] lg:scale-200 lg:gap-4`,

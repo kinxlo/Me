@@ -83,7 +83,7 @@ function BaseLayout({ children }: { children: React.ReactNode }) {
     <main className={`min-h-[100dvh] max-w-screen overflow-hidden`}>
       <section className="grid grid-cols-[1rem_minmax(0,80rem)_1rem] justify-center md:-mx-4 md:grid-cols-[2.5rem_minmax(0,80rem)_2.5rem] lg:mx-0">
         <div className="border-x border-x-(--pattern-fg) bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 md:block dark:[--pattern-fg:var(--color-white)]/10" />
-        <Wrapper className="grid grid-cols-1 gap-[4rem] p-0 lg:gap-[0rem]">{children}</Wrapper>
+        <Wrapper className="grid grid-cols-1 gap-[4rem] p-0 lg:gap-[10rem]">{children}</Wrapper>
         <div className="border-x border-x-(--pattern-fg) bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 md:block dark:[--pattern-fg:var(--color-white)]/10" />
       </section>
     </main>

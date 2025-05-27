@@ -1,6 +1,6 @@
 import { Me } from "@/components/shared/me";
 
-// import { ThemeSlider } from "./_components/theme-slider";
+// import { SplitViewSlider } from "./_components/theme-slider";
 import { About } from "./_views/about";
 import { Hero } from "./_views/hero";
 import Projects from "./_views/projects";
@@ -12,7 +12,7 @@ const Page = () => {
       <Hero />
       <Projects />
       <About />
-      {/* <ThemeSlider /> */}
+      {/* <SplitViewSlider lightImage={"/images/me.svg"} darkImage={"/images/me.webp"} /> */}
     </>
   );
 };
