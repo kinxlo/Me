@@ -50,7 +50,7 @@ export const SplitViewSlider: React.FC<SplitViewSliderProperties> = ({
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [handleMouseMove, isDragging]);
+  }, [isDragging]);
 
   return (
     <div className="@container">
