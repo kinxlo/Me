@@ -41,8 +41,8 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         </figure>
       </Wrapper>
 
-      <Wrapper className={`cc-border-up mt-10 flex flex-col gap-10 p-0 lg:flex-row`}>
-        <Wrapper className={`xl:line-y/half cc-border-down relative grid grid-cols-2 border-r p-0 lg:grid-cols-2`}>
+      <Wrapper className={`cc-border-up mt-10 flex flex-col-reverse gap-10 p-0 lg:flex-row-reverse`}>
+        <Wrapper className={`xl:line-y/half cc-border-down relative grid grid-cols-2 border-l p-0 lg:grid-cols-2`}>
           {projects.map((project) => {
             return (
               <div

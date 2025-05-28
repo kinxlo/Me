@@ -4,6 +4,7 @@ import { Wrapper } from "@/components/core/layout/wrapper";
 import { cn } from "@/lib/utils";
 
 import { BusinessCard } from "../../_components/business-card";
+import { Skills } from "../../_components/skill";
 
 // import Map from "../../_components/Map";
 
@@ -18,10 +19,12 @@ export const About = () => {
       </Wrapper>
 
       <Wrapper className={`cc-border mt-10 flex flex-col gap-10 p-0 lg:flex-row`}>
-        <Wrapper className={`bg-secondary border-r`}>
+        <Wrapper className={`bg-secondary flex-1 border-r`}>
           <BusinessCard />
         </Wrapper>
-        <Wrapper className="border-l">{/* <Map /> */}</Wrapper>
+        <Wrapper className="cc-shads flex-1 border-l p-0">
+          <Skills />
+        </Wrapper>
       </Wrapper>
     </section>
   );
