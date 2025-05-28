@@ -13,9 +13,7 @@ export const About = () => {
     <section id={`about`}>
       <Wrapper id={`fade-section`}>
         <span className="cc-border font-mono text-lg font-medium">Bio</span>
-        <h3 className={cn("cc-border-down text-primary text-4xl font-black tracking-[-4px]")}>
-          Allow me to Introduce myself
-        </h3>
+        <h3 className={cn("cc-border-down text-4xl font-black tracking-[-4px]")}>Allow me to Introduce myself</h3>
       </Wrapper>
 
       <Wrapper className={`cc-border mt-10 flex flex-col gap-10 p-0 lg:flex-row`}>

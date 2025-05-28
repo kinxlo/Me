@@ -82,7 +82,7 @@ export const Me = () => {
       height={469.32}
       onLoadingComplete={() => setIsLoaded(true)}
       className={cn(
-        `fixed right-0 bottom-0 isolate max-h-[70%] max-w-[60%] object-cover object-top transition-all duration-500 ease-out`,
+        `fixed right-0 bottom-0 isolate max-h-[70%] max-w-[60%] object-cover object-top mix-blend-multiply transition-all duration-500 ease-out`,
         `origin-bottom-right`,
         isAboutVisible ? "opacity-20 lg:opacity-30" : "opacity-10 md:opacity-40 lg:opacity-100",
         isLoaded ? "scale-100" : "scale-90 opacity-0", // Changed to scale-100 when loaded

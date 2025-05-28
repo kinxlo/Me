@@ -32,7 +32,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         <span className="cc-border font-mono text-lg font-medium tracking-wider">Showcase</span>
 
         <figure className={`cc-border-down`}>
-          <h3 className="cc-border-down text-primary text-4xl font-black tracking-[-4px]">How its going</h3>
+          <h3 className="cc-border-down text-4xl font-black tracking-[-4px]">How its going</h3>
           <p className="max-w-(--breakpoint-md) py-2 text-justify text-sm font-medium">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eaque saepe fugiat cum temporibus suscipit
             nobis, architecto optio odit, velit, voluptatem tenetur facilis excepturi recusandae. Voluptatibus voluptate
@@ -41,7 +41,9 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         </figure>
       </Wrapper>
 
-      <Wrapper className={`cc-border-up mt-10 flex flex-col-reverse gap-10 p-0 lg:flex-row-reverse`}>
+      <Wrapper
+        className={`cc-border-up mt-10 flex flex-col-reverse gap-10 p-0 mix-blend-multiply grayscale lg:flex-row-reverse`}
+      >
         <Wrapper className={`xl:line-y/half cc-border-down relative grid grid-cols-2 border-l p-0 lg:grid-cols-2`}>
           {projects.map((project) => {
             return (

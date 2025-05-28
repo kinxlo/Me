@@ -7,7 +7,7 @@ export const Skills = () => {
         <div>
           <h3
             className={cn(
-              "text-primary p-2 text-4xl/10 font-black",
+              "p-2 text-4xl/10 font-black",
               "relative", // Added padding to separate from grid
             )}
           >

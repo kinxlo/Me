@@ -6,17 +6,17 @@ import { PlainCard } from "./plain-card";
 
 export const BusinessCard = () => {
   return (
-    <PlainCard className="bg-foreground text-background space-y-8 p-5 lg:p-10">
+    <PlainCard className="bg-foreground text-background space-y-8 p-5 mix-blend-multiply lg:p-10">
       <section className={`space-y-4`}>
         <p className={`font-mono text-xs uppercase lg:text-sm`}>Get everything with</p>
         <h3 className={`text-xl lg:text-3xl`}>
-          <span className={`text-primary`}>Ifijeh</span> Kingsley Solomon
+          <span className={``}>Ifijeh</span> Kingsley Solomon
         </h3>
       </section>
       <section className={`space-y-4`}>
         <div className={`flex items-center justify-between gap-2`}>
           <p className={`font-mono text-xl font-black tracking-tighter lg:text-3xl`}>~3 Years</p>
-          <MainButton variant={`primary`} className={`rounded-full`}>
+          <MainButton variant={`primary`} className={`rounded-full bg-stone-700`}>
             View Resume
           </MainButton>
         </div>
@@ -32,7 +32,7 @@ export const BusinessCard = () => {
             <CheckCircle size={20} className={`text-success`} />
           </span>
           <p>
-            <span className={`text-primary font-bold`}>Over 500+ UI blocks </span>— everything you need to build
+            <span className={`font-bold text-stone-700`}>Over 500+ UI blocks </span>— everything you need to build
             beautiful marketing sites, application UIs, ecommerce stores, and more.
           </p>
         </div>
@@ -41,7 +41,7 @@ export const BusinessCard = () => {
             <CheckCircle size={20} className={`text-success`} />
           </span>
           <p>
-            <span className={`text-primary font-bold`}>Over 500+ UI blocks </span>— everything you need to build
+            <span className={`font-bold text-stone-700`}>Over 500+ UI blocks </span>— everything you need to build
             beautiful marketing sites, application UIs, ecommerce stores, and more.
           </p>
         </div>
@@ -50,7 +50,7 @@ export const BusinessCard = () => {
             <CheckCircle size={20} className={`text-success`} />
           </span>
           <p>
-            <span className={`text-primary font-bold`}>Over 500+ UI blocks </span>— everything you need to build
+            <span className={`font-bold text-stone-700`}>Over 500+ UI blocks </span>— everything you need to build
             beautiful marketing sites, application UIs, ecommerce stores, and more.
           </p>
         </div>
@@ -60,8 +60,8 @@ export const BusinessCard = () => {
           <Phone size={20} className={`text-success`} />
         </span>
         <p>
-          <span className={`text-success font-bold`}>Join 1000+ happy users </span>— our community is growing every day,
-          and we can&apos;t wait for you to join us.
+          <span className={`font-bold text-stone-700`}>Join 1000+ happy users </span>— our community is growing every
+          day, and we can&apos;t wait for you to join us.
         </p>
       </div>
     </PlainCard>
