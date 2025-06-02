@@ -1,10 +1,14 @@
 "use client";
 
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
+import { useResponsiveLayout } from "@/hooks/use-media-query";
 import { useIntersection } from "@/hooks/use-observer";
 import { useWindowSize } from "@/hooks/use-window-resize";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+
+import MainButton from "../button";
 
 export const Me = () => {
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -13,7 +17,38 @@ export const Me = () => {
   const imageReference = useRef<HTMLDivElement>(null);
   const aboutSectionReference = useRef<HTMLElement | null>(null);
   const { width: windowWidth, height: windowHeight } = useWindowSize();
+  const { isMobile, isScrolled, getResponsivePosition } = useResponsiveLayout();
   const animationFrameReference = useRef<number>(null);
+
+  const socials = [
+    {
+      type: "icon",
+      src: "/images/github.png",
+      alt: "github",
+      position: getResponsivePosition("bottom-[10rem] right-[30rem]", "top-[5rem] right-4"),
+      rotation: getResponsivePosition("rotate-2", "rotate-0"),
+      size: getResponsivePosition(80, 60),
+      mobileScale: "scale-90",
+    },
+    {
+      type: "icon",
+      src: "/images/twitter.png",
+      alt: "Twitter",
+      position: getResponsivePosition("bottom-[20rem] right-[30rem]", "top-[10rem] right-4"),
+      rotation: getResponsivePosition("-rotate-8", "rotate-0"),
+      size: getResponsivePosition(70, 60),
+      mobileScale: "scale-90",
+    },
+    {
+      type: "icon",
+      src: "/images/linkedin.png",
+      alt: "LinkedIn",
+      position: getResponsivePosition("bottom-[30rem] right-[25rem]", "top-[15rem] right-4"),
+      rotation: getResponsivePosition("rotate-15", "rotate-0"),
+      size: getResponsivePosition(90, 60),
+      mobileScale: "scale-90",
+    },
+  ];
 
   const { ref: intersectionReference } = useIntersection({
     threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
@@ -38,32 +73,28 @@ export const Me = () => {
           const isVisible = mapRect.top < viewportHeight && mapRect.bottom > 0;
           setIsAboutVisible(isVisible);
 
-          // When at the very top of the page, force reset to original size
           if (window.scrollY < 10) {
-            // Small threshold to catch top position
             setZoomLevel(1);
             return;
           }
 
-          // Your original zoom calculation logic
           const aboutSectionCenter = mapRect.top + mapRect.height / 2;
           const viewportCenter = viewportHeight / 2;
           const distanceFromCenter = Math.abs(aboutSectionCenter - viewportCenter);
           const normalizedDistance = Math.min(1, distanceFromCenter / (viewportHeight * 0.75));
-          const baseZoom = windowWidth < 768 ? 0.6 : 0.7;
+          const baseZoom = windowWidth < 768 ? 0.3 : 0.7;
           const targetZoom = baseZoom - 0.3 * (1 - normalizedDistance);
 
-          // Apply transition with a minimum limit to prevent getting too small
           setZoomLevel((previous) => {
             const newZoom = previous + (targetZoom - previous) * 0.1;
-            return Math.max(newZoom, baseZoom - 0.3); // Ensure it doesn't get smaller than intended
+            return Math.max(newZoom, baseZoom - 0.3);
           });
         }
       });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initialize position
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -74,24 +105,48 @@ export const Me = () => {
   }, [windowWidth, windowHeight]);
 
   return (
-    <BlurImage
-      ref={setReferences}
-      src={"/images/me.svg"}
-      alt={"Illustration of me"}
-      width={507}
-      height={469.32}
-      onLoadingComplete={() => setIsLoaded(true)}
-      className={cn(
-        `fixed right-0 bottom-0 isolate max-h-[70%] max-w-[60%] object-cover object-top mix-blend-multiply transition-all duration-500 ease-out`,
-        `origin-bottom-right`,
-        isAboutVisible ? "opacity-20 lg:opacity-30" : "opacity-10 md:opacity-40 lg:opacity-100",
-        isLoaded ? "scale-100" : "scale-90 opacity-0", // Changed to scale-100 when loaded
-        "dark:opacity-5 dark:invert",
-      )}
-      style={{
-        transform: `scale(${zoomLevel})`,
-      }}
-      priority
-    />
+    <>
+      <BlurImage
+        ref={setReferences}
+        src={"/images/me.svg"}
+        alt={"Illustration of me"}
+        width={507}
+        height={469.32}
+        onLoadingComplete={() => setIsLoaded(true)}
+        className={cn(
+          `fixed right-0 bottom-0 isolate max-h-[70%] max-w-[60%] object-cover object-top mix-blend-multiply transition-all duration-500 ease-out`,
+          `origin-bottom-right`,
+          isAboutVisible ? "opacity-20 lg:opacity-30" : "opacity-10 md:opacity-40 lg:opacity-50",
+          isLoaded ? "scale-50 opacity-50 lg:scale-100" : "scale-90 opacity-0",
+          "dark:opacity-5 dark:invert",
+        )}
+        style={{
+          transform: `scale(${zoomLevel})`,
+        }}
+        priority
+      />
+
+      {socials.map((element, index) => (
+        <div
+          key={index}
+          className={cn(
+            "font-sea pointer-events-auto fixed cursor-default transition-all duration-500 hover:!scale-110 hover:!opacity-100",
+            element.position,
+            element.rotation,
+            isMobile ? element.mobileScale : "",
+            // isMobile ? "animate-float-mobile" : "animate-float",
+            // "opacity-70 hover:opacity-100",
+          )}
+          style={{
+            transitionDelay: `${index * 100}ms`,
+            transform: isScrolled ? "translateY(-10px)" : "",
+          }}
+        >
+          <MainButton variant="link" size="icon" className="transition-all duration-300 hover:!scale-125">
+            <Image src={element.src} alt={element.alt} width={50} height={50} className="cc-icon" />
+          </MainButton>
+        </div>
+      ))}
+    </>
   );
 };

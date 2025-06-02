@@ -51,7 +51,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body
         className={cn(
-          "bg-[url('/images/ptc-3.png')] bg-fixed font-sans antialiased",
+          "bg-fixed font-sans antialiased",
           "bg-cover lg:bg-contain", // Default to Inter
           activeThemeValue ? `theme-${activeThemeValue}` : "",
           isScaled ? "theme-scaled" : "",

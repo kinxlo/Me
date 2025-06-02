@@ -228,6 +228,10 @@
   .cc-border-half {
     @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:after:border-white/10;
   }
+
+  .cc-icon {
+    @apply opacity-50 mix-blend-multiply transition-all hover:opacity-100 dark:mix-blend-normal;
+  }
 }
 
 .xl\:line-y\/half:before {
@@ -254,6 +258,7 @@
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
+    background: url(/images/ptc-3.png);
   }
 
   h1,
@@ -295,7 +300,10 @@
 
   .font-sea {
     font-family: var(--font-sea);
-    font-size: var(--text-sm);
+  }
+
+  .font-old {
+    font-family: var(--font-baskerville);
   }
 
   small,
