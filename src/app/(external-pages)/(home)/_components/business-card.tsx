@@ -1,6 +1,6 @@
 import MainButton from "@/components/shared/button";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle, File, Phone } from "lucide-react";
+import { CheckCircle, Phone } from "lucide-react";
 
 import { PlainCard } from "./plain-card";
 

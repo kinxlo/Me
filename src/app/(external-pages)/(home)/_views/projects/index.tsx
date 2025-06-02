@@ -14,9 +14,8 @@ export default function Projects() {
         setLoading(true);
         const data = await getProjects();
         setProjects(data);
-      } catch (err) {
+      } catch {
         setError("Failed to load projects");
-        console.error(err);
       } finally {
         setLoading(false);
       }
