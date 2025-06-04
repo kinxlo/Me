@@ -224,11 +224,19 @@
   .cc-shades {
     @apply bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 dark:[--pattern-fg:var(--color-white)]/10;
   }
+
+  .cc-border-half {
+    @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:after:border-white/10;
+  }
+
+  .cc-icon {
+    @apply size-[30px] opacity-50 mix-blend-multiply transition-all hover:opacity-100 lg:size-[50px] dark:mix-blend-normal;
+  }
 }
 
 .xl\:line-y\/half:before {
   top: 50%;
-  right: calc(var(--spacing) * 0);
+  left: calc(var(--spacing) * 0);
   content: var(--tw-content);
   background-color: var(--border);
   width: 100vw;
@@ -246,10 +254,13 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-[#787169];
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
+    background: url(/images/bg-1.png);
+    /* background-size: cover;
+    background-repeat: no-repeat; */
   }
 
   h1,
@@ -291,7 +302,14 @@
 
   .font-sea {
     font-family: var(--font-sea);
-    font-size: var(--text-sm);
+  }
+
+  .font-head {
+    font-family: var(--font-heading);
+  }
+
+  .font-old {
+    font-family: var(--font-baskerville);
   }
 
   small,
