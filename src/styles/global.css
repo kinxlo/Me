@@ -230,7 +230,7 @@
   }
 
   .cc-icon {
-    @apply opacity-50 mix-blend-multiply transition-all hover:opacity-100 dark:mix-blend-normal;
+    @apply size-[30px] opacity-50 mix-blend-multiply transition-all hover:opacity-100 lg:size-[50px] dark:mix-blend-normal;
   }
 }
 
@@ -254,11 +254,13 @@
   }
 
   body {
-    @apply bg-background text-stone-700;
+    @apply bg-background text-[#787169];
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
-    background: url(/images/ptc-3.png);
+    background: url(/images/bg-1.png);
+    /* background-size: cover;
+    background-repeat: no-repeat; */
   }
 
   h1,
@@ -300,6 +302,10 @@
 
   .font-sea {
     font-family: var(--font-sea);
+  }
+
+  .font-head {
+    font-family: var(--font-heading);
   }
 
   .font-old {

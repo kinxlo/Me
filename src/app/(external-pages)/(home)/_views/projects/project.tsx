@@ -27,7 +27,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   };
 
   return (
-    <Wrapper className={"mt-12 flex min-h-[calc(100dvh-48px)] items-center p-0 mix-blend-multiply"}>
+    <Wrapper className={"mt-0 p-0 mix-blend-multiply"}>
       <Wrapper className={`flex flex-col-reverse items-center gap-10 xl:flex-row`}>
         <Wrapper className={`grid grid-cols-2 xl:grid-cols-1`}>
           {projects?.map((project) => {
@@ -36,7 +36,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                 key={project?.name}
                 onClick={() => handleSelectProject(project.name)}
                 className={cn(
-                  `relative z-10 flex cursor-pointer flex-col items-center justify-center gap-4 px-2 py-2 text-center max-sm:px-4`,
+                  `relative flex cursor-pointer flex-col items-center justify-center gap-4 px-2 py-2 text-center max-sm:px-4`,
                 )}
               >
                 <Image

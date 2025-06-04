@@ -13,7 +13,13 @@ const HomeClient = () => {
   const view = useSearchParameters("view");
 
   if (view === "projects") return <Projects />;
-  if (view === "about") return <About />;
+  if (view === "about")
+    return (
+      <>
+        <Me />
+        <About />
+      </>
+    );
 
   return (
     <>
