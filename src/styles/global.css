@@ -269,7 +269,7 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-heading);
+    font-family: var(--font-im-fell);
     font-weight: 700;
     line-height: var(--leading-tight);
     /* color: var(--primary); */
@@ -297,7 +297,6 @@
   code,
   .mono {
     font-family: var(--font-mono);
-    font-size: var(--text-sm);
   }
 
   .font-sea {
@@ -305,11 +304,11 @@
   }
 
   .font-head {
-    font-family: var(--font-heading);
+    font-family: var(--font-im-fell);
   }
 
   .font-old {
-    font-family: var(--font-baskerville);
+    font-family: var(--font-sans);
   }
 
   small,

@@ -1,5 +1,7 @@
 "use client";
 
+import { LuGithub, LuLinkedin, LuTwitter } from "react-icons/lu";
+
 export const NAV_LINKS: NavLink[] = [
   {
     id: 1,
@@ -204,4 +206,31 @@ export const countries = [
   { value: "yemen", label: "🇾🇪 Yemen" },
   { value: "zambia", label: "🇿🇲 Zambia" },
   { value: "zimbabwe", label: "🇿🇼 Zimbabwe" },
+];
+
+export const socials = [
+  {
+    type: "icon",
+    src: "/images/github.png",
+    alt: "github",
+    mobileScale: "scale-90",
+    content: "Github",
+    icon: <LuGithub />,
+  },
+  {
+    type: "icon",
+    src: "/images/twitter.png",
+    alt: "Twitter",
+    mobileScale: "scale-90",
+    content: "Twitter",
+    icon: <LuTwitter />,
+  },
+  {
+    type: "icon",
+    src: "/images/linkedin.png",
+    alt: "LinkedIn",
+    mobileScale: "scale-90",
+    content: "LinkedIn",
+    icon: <LuLinkedin />,
+  },
 ];

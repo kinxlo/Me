@@ -10,7 +10,7 @@ import MainButton from "../button";
 
 export const Navbar = () => {
   const view = useSearchParameters("view");
-  const { isMobile, isScrolled, getResponsivePosition } = useResponsiveLayout();
+  const { isMobile } = useResponsiveLayout();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -22,8 +22,6 @@ export const Navbar = () => {
     {
       type: "button",
       content: "Home",
-      position: getResponsivePosition("top-20 left-20", "top-4 left-4"),
-      rotation: getResponsivePosition("-rotate-6", "rotate-0"),
       variant: "link" as const,
       isActive: view === null || view === "home",
       mobileScale: "scale-75",
@@ -31,8 +29,6 @@ export const Navbar = () => {
     {
       type: "button",
       content: "Projects",
-      position: getResponsivePosition("top-20 left-1/4", "top-14 left-4"),
-      rotation: getResponsivePosition("-rotate-6", "rotate-0"),
       variant: "link" as const,
       isActive: view === "projects",
       mobileScale: "scale-75",
@@ -40,11 +36,17 @@ export const Navbar = () => {
     {
       type: "button",
       content: "About",
-      position: getResponsivePosition("top-20 left-1/2", "top-24 left-4"),
-      rotation: getResponsivePosition("rotate-3", "rotate-0"),
       variant: "link" as const,
       isActive: view === "about",
       mobileScale: "scale-75",
+    },
+    {
+      type: "button",
+      content: "Resume",
+      variant: "link" as const,
+      isActive: view === "resume",
+      mobileScale: "scale-75",
+      link: "https://drive.google.com/file/d/1-emFvqL9-gs6v7DitqyR8aLxfZmb52Fz/view?usp=sharing",
     },
   ];
 
@@ -85,7 +87,7 @@ export const Navbar = () => {
         {/* Navigation items */}
         <nav
           className={cn(
-            "transition-all duration-300",
+            "font-head fixed top-0 right-[5%] flex flex-col transition-all duration-300",
             isMobile
               ? mobileMenuOpen
                 ? "pointer-events-auto opacity-100"
@@ -96,39 +98,20 @@ export const Navbar = () => {
           role="navigation"
         >
           {floatingElements.map((element, index) => (
-            <div
+            <MainButton
               key={index}
+              href={element.link ?? `/?view=${element.content?.toLowerCase()}`}
+              variant={element.variant}
               className={cn(
-                "font-sea pointer-events-auto fixed transition-all duration-500 hover:!scale-110",
-                element.position,
-                element.rotation,
-                isMobile ? element.mobileScale : "",
-                isMobile ? "animate-float-mobile" : "animate-float",
-                element.type === "icon" ? "opacity-70" : "opacity-90",
-                isMobile && !mobileMenuOpen && "hidden",
-                "z-[1000]",
+                "relative text-2xl transition-all duration-300 hover:opacity-100 md:text-xl",
+                "text-black/70 hover:text-black dark:text-white/70 dark:hover:text-white",
+                element.isActive && "!text-primary font-bold underline underline-offset-4",
+                isMobile && "text-4xl",
               )}
-              style={{
-                transitionDelay: `${index * 75}ms`,
-                transform: isScrolled ? "translateY(-10px)" : "",
-              }}
+              onClick={() => isMobile && setMobileMenuOpen(false)}
             >
-              {element.type === "button" && (
-                <MainButton
-                  href={`/?view=${element.content?.toLowerCase()}`}
-                  variant={element.variant}
-                  className={cn(
-                    "relative text-2xl transition-all duration-300 hover:opacity-100 md:text-3xl",
-                    "text-black/70 hover:text-black dark:text-white/70 dark:hover:text-white",
-                    element.isActive && "!text-primary font-bold underline underline-offset-4",
-                    isMobile && "text-4xl",
-                  )}
-                  onClick={() => isMobile && setMobileMenuOpen(false)}
-                >
-                  {element.content}
-                </MainButton>
-              )}
-            </div>
+              {element.content}
+            </MainButton>
           ))}
         </nav>
       </section>

@@ -1,62 +1,84 @@
-import MainButton from "@/components/shared/button";
 import { CheckCircle } from "lucide-react";
 
 import { PlainCard } from "./plain-card";
 
 export const BusinessCard = () => {
   return (
-    <PlainCard className="font-sea space-y-8 p-5 mix-blend-multiply lg:p-10">
-      <section className={`space-y-4`}>
-        {/* <p className={`font-old text-xs uppercase lg:text-sm`}>Get everything with</p> */}
-        <h3 className={`text-primary text-2xl lg:text-5xl`}>
-          <span className={``}>Ifijeh</span> Kingsley Solomon
-        </h3>
+    <PlainCard className="space-y-8 rounded-none p-5 mix-blend-multiply lg:p-10">
+      {/* Name & Role */}
+      <section className="space-y-4">
+        <h3 className="text-primary text-2xl lg:text-5xl">Ifijeh Kingsley Solomon</h3>
+        <p className="">Front-End Engineer at TSA, with an interest in Backend engineering, and System architecture.</p>
       </section>
-      <section className={`space-y-4`}>
-        <div className={`flex items-center justify-between gap-2`}>
-          <h3 className={`text-primary text-xl font-black tracking-tighter lg:text-3xl`}>~3 Years</h3>
-          <MainButton
-            href={`/`}
-            variant={`link`}
-            className={`text-primary xl:bottom fixed bottom-[10%] left-[5%] rotate-30 rounded-full px-8 py-4 text-2xl xl:left-[20rem]`}
-          >
-            View Resume
-          </MainButton>
+
+      {/* Experience & Resume */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between gap-2">
+          <h3 className="text-primary text-xl font-black tracking-tighter lg:text-3xl">~3 Years Experience</h3>
         </div>
-        <p className={`text-xl/4 lg:text-2xl/6`}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa suscipit recusandae qui dolore at ullam
-          corrupti laborum officiis ducimus? Ratione id quisquam consectetur neque soluta amet ad eveniet ipsa dolorum.
+        <p className="">
+          I enjoy building interfaces that are both beautiful and interactive, bringing ideas to completion in a way
+          that looks great, feels smooth, and works well for everyone and every devices too.
         </p>
       </section>
-      {/* separator */}
-      <section className={`space-y-4 text-xl/4 lg:text-2xl/6`}>
-        <div className={`flex items-start gap-4`}>
-          <span>
-            <CheckCircle size={20} className={`text-success`} />
-          </span>
+
+      {/* Highlights */}
+      <section className="space-y-4">
+        <div className="flex items-start gap-4">
+          <div>
+            <CheckCircle size={20} className="text-success mt-1" />
+          </div>
           <p>
-            <span className={`text-primary font-head text-base font-bold`}>Over 500+ UI blocks </span>— everything you
-            need to build beautiful marketing sites, application UIs, ecommerce stores, and more.
+            <span className="text-primary font-head text-lg font-bold">Accessibility-first approach</span> — ensuring
+            interfaces meet web standards and offer inclusive experiences.
           </p>
         </div>
-        <div className={`flex items-start gap-4`}>
-          <span>
-            <CheckCircle size={20} className={`text-success`} />
-          </span>
+        <div className="flex items-start gap-4">
+          <div>
+            <CheckCircle size={20} className="text-success mt-1" />
+          </div>
           <p>
-            <span className={`text-primary font-head text-base font-bold`}>Over 500+ UI blocks </span>— everything you
-            need to build beautiful marketing sites, application UIs, ecommerce stores, and more.
+            <span className="text-primary font-head text-lg font-bold">Versatile background</span> — from agencies and
+            startups to corporate teams, I’ve built software across diverse environments.
           </p>
         </div>
-        <div className={`flex items-start gap-4`}>
-          <span>
-            <CheckCircle size={20} className={`text-success`} />
-          </span>
+        <div className="flex items-start gap-4">
+          <div>
+            <CheckCircle size={20} className="text-success mt-1" />
+          </div>
           <p>
-            <span className={`text-primary font-head font-head text-base font-bold`}>Over 500+ UI blocks </span>—
-            everything you need to build beautiful marketing sites, application UIs, ecommerce stores, and more.
+            <span className="text-primary font-head text-lg font-bold">Mentorship [Mentor]</span> — Guiding less
+            experienced developers through structured internship programs, helping them grow into confident, impactful
+            team members.
           </p>
         </div>
+        <div className="flex items-start gap-4">
+          <div>
+            <CheckCircle size={20} className="text-success mt-1" />
+          </div>
+          <p>
+            <span className="text-primary font-head text-lg font-bold">Mentorship [Mentee]</span> — Still benefiting
+            from thoughtful guidance from more experienced Engineers and Designers, shaping how I mentor others today.
+          </p>
+        </div>
+        <div className="flex items-start gap-4">
+          <div>
+            <CheckCircle size={20} className="text-success mt-1" />
+          </div>
+          <p>
+            <span className="text-primary font-head text-lg font-bold">Open Source</span> — Contributed to and
+            maintained community-driven projects, collaborating in public and learning from diverse engineering
+            perspectives.
+          </p>
+        </div>
+      </section>
+
+      {/* Personal Touch */}
+      <section className="text-muted-foreground font-sea pt-2 text-xl lg:text-2xl">
+        <p>
+          Outside of work, you’ll find me reading ( its not code ) , hanging out with the &rdquo;homies&rdquo;, or
+          playing video games.
+        </p>
       </section>
     </PlainCard>
   );
