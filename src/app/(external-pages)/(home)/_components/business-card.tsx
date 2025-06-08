@@ -74,7 +74,7 @@ export const BusinessCard = () => {
       </section>
 
       {/* Personal Touch */}
-      <section className="text-muted-foreground font-sea pt-2 text-xl lg:text-2xl">
+      <section className="font-sea pt-2 text-xl text-black lg:text-2xl">
         <p>
           Outside of work, you’ll find me reading ( its not code ) , hanging out with the &rdquo;homies&rdquo;, or
           playing video games.

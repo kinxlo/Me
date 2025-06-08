@@ -32,4 +32,5 @@ const HomeClient = () => {
 // The default export remains a server component
 export default function Page() {
   return <HomeClient />;
+  // return <></>;
 }
