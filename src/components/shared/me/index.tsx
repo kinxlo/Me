@@ -11,14 +11,18 @@ export const Me = () => {
   return (
     <section
       className={cn(
-        `fixed right-0 bottom-0 isolate max-h-[40%] max-w-[30%] object-cover object-top mix-blend-multiply transition-all duration-500 ease-out lg:max-h-[70%] lg:max-w-[60%]`,
+        `fixed right-0 bottom-0 isolate object-cover object-top mix-blend-multiply transition-all duration-500 ease-out`,
+        `max-h-[40%] max-w-[30%]`,
+        `xl:max-h-[70%] xl:max-w-[60%]`,
         `origin-bottom-right`,
         `opacity-50`,
       )}
     >
       <BlurImage src={"/images/me.svg"} alt={"Illustration of me"} width={507} height={469.32} priority />
 
-      <Skills className={`font-sea -top-[10%] -left-[10%] z-10 hidden -rotate-10 lg:absolute lg:block`} />
+      <Skills
+        className={`font-sea -xl:left-[20%] bottom-[15%] -left-[40%] z-10 hidden -rotate-10 lg:absolute lg:block`}
+      />
     </section>
   );
 };

@@ -46,15 +46,17 @@ export const Hero = () => {
           </p>
         </section>
 
-        <section className="cc-border my-2 space-x-4 px-4">
+        <section className="mt-4 flex flex-col gap-4">
           {socials.map((social) => (
             <MainButton
               key={social.content}
               size="icon"
               isIconOnly
               icon={social.icon}
-              className="social-button rounded-full border-3 border-gray-500 transition-all duration-300"
-            />
+              className="social-button w-fit px-5 transition-all duration-300"
+            >
+              {social.content}
+            </MainButton>
           ))}
         </section>
       </section>

@@ -1,6 +1,7 @@
 "use client";
 
-import { LuGithub, LuLinkedin, LuTwitter } from "react-icons/lu";
+import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { VscGithub } from "react-icons/vsc";
 
 export const NAV_LINKS: NavLink[] = [
   {
@@ -215,7 +216,7 @@ export const socials = [
     alt: "github",
     mobileScale: "scale-90",
     content: "Github",
-    icon: <LuGithub />,
+    icon: <VscGithub />,
   },
   {
     type: "icon",
@@ -223,7 +224,7 @@ export const socials = [
     alt: "Twitter",
     mobileScale: "scale-90",
     content: "Twitter",
-    icon: <LuTwitter />,
+    icon: <FaXTwitter />,
   },
   {
     type: "icon",
@@ -231,6 +232,6 @@ export const socials = [
     alt: "LinkedIn",
     mobileScale: "scale-90",
     content: "LinkedIn",
-    icon: <LuLinkedin />,
+    icon: <FaLinkedinIn />,
   },
 ];

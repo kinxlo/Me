@@ -1,7 +1,9 @@
+"use client";
+
 import { getProjects } from "@/action/project.action";
 import { useEffect, useState } from "react";
 
-import { ProjectsClient } from "./project";
+import { ProjectsClient } from "./_views/project";
 
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);

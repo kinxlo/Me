@@ -1,15 +1,16 @@
 "use client";
 
 import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
+import { Badge } from "@/components/ui/badge";
 import { useResponsiveLayout } from "@/hooks/use-media-query";
-import { useSearchParameters } from "@/hooks/use-search-parameters";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import MainButton from "../button";
 
 export const Navbar = () => {
-  const view = useSearchParameters("view");
+  const view = usePathname();
   const { isMobile } = useResponsiveLayout();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -23,21 +24,21 @@ export const Navbar = () => {
       type: "button",
       content: "Home",
       variant: "link" as const,
-      isActive: view === null || view === "home",
+      isActive: view === "/",
       mobileScale: "scale-75",
     },
     {
       type: "button",
       content: "Projects",
       variant: "link" as const,
-      isActive: view === "projects",
+      isActive: view.includes("/projects"),
       mobileScale: "scale-75",
     },
     {
       type: "button",
       content: "About",
       variant: "link" as const,
-      isActive: view === "about",
+      isActive: view.includes("/about"),
       mobileScale: "scale-75",
     },
     {
@@ -67,14 +68,12 @@ export const Navbar = () => {
         {isMobile && (
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="fixed top-4 right-4 z-[1000] rounded-full bg-black/10 p-2 transition-all hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20"
+            className="fixed top-4 right-4 z-[1000] mr-1 rounded-full border-2 border-black bg-black/10 p-2 transition-all hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20"
             aria-label="Toggle menu"
           >
+            <div className={`h-0.5 w-6 bg-black transition-all ${mobileMenuOpen ? "translate-y-1.5 rotate-45" : ""}`} />
             <div
-              className={`h-0.5 w-6 bg-current transition-all ${mobileMenuOpen ? "translate-y-1.5 rotate-45" : ""}`}
-            />
-            <div
-              className={`mt-1.5 h-0.5 w-6 bg-current transition-all ${mobileMenuOpen ? "-translate-y-1.5 -rotate-45" : ""}`}
+              className={`mt-1.5 h-0.5 w-6 bg-black transition-all ${mobileMenuOpen ? "-translate-y-1.5 -rotate-45" : ""}`}
             />
           </button>
         )}
@@ -83,6 +82,8 @@ export const Navbar = () => {
         <div className="fixed top-4 left-1/2 z-[1000] -translate-x-1/2">
           <ModeToggle />
         </div>
+
+        <Badge className={`absolute top-4 rounded-none bg-black`}>I19N</Badge>
 
         {/* Navigation items */}
         <nav
@@ -100,11 +101,11 @@ export const Navbar = () => {
           {floatingElements.map((element, index) => (
             <MainButton
               key={index}
-              href={element.link ?? `/?view=${element.content?.toLowerCase()}`}
+              href={element.link ?? (element.content === "Home" ? "/" : `/${element.content?.toLowerCase()}`)}
               variant={element.variant}
               className={cn(
                 "relative text-2xl transition-all duration-300 hover:opacity-100 md:text-xl",
-                "text-black/70 hover:text-black dark:text-white/70 dark:hover:text-white",
+                "text-black/50 hover:text-black dark:text-white/70 dark:hover:text-white",
                 element.isActive && "!text-primary font-bold underline underline-offset-4",
                 isMobile && "text-4xl",
               )}
