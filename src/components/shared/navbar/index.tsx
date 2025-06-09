@@ -3,13 +3,15 @@
 import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { useResponsiveLayout } from "@/hooks/use-media-query";
+import { tagAnimation } from "@/lib/animation/tag-animation";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import MainButton from "../button";
 
 export const Navbar = () => {
+  const nameReference = useRef<HTMLHeadingElement>(null);
   const view = usePathname();
   const { isMobile } = useResponsiveLayout();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -83,7 +85,22 @@ export const Navbar = () => {
           <ModeToggle />
         </div>
 
-        <Badge className={`absolute top-4 rounded-none bg-black`}>I19N</Badge>
+        <Badge
+          ref={nameReference}
+          onMouseLeave={() => {
+            if (nameReference.current) {
+              nameReference.current.textContent = "I19N";
+            }
+          }}
+          onMouseEnter={() => {
+            if (nameReference.current) {
+              tagAnimation(nameReference.current);
+            }
+          }}
+          className={`absolute top-4 rounded-none bg-black`}
+        >
+          I19N
+        </Badge>
 
         {/* Navigation items */}
         <nav
@@ -108,6 +125,7 @@ export const Navbar = () => {
                 "text-black/50 hover:text-black dark:text-white/70 dark:hover:text-white",
                 element.isActive && "!text-primary font-bold underline underline-offset-4",
                 isMobile && "text-4xl",
+                `hover:translate-x-[20%]`,
               )}
               onClick={() => isMobile && setMobileMenuOpen(false)}
             >

@@ -1,23 +1,22 @@
-import gsap from "gsap";
+// components/shared/Animator.tsx
+"use client";
+
 import { useLayoutEffect, useRef } from "react";
 
-// Modified Animator component
-export const Animator = ({
-  children,
-  animation,
-  timeline,
-}: {
+type AnimatorProperties = {
   children: React.ReactNode;
-  animation: (tl: gsap.core.Timeline) => void;
-  timeline: gsap.core.Timeline;
-}) => {
+  animation: (element: HTMLDivElement) => void;
+  // timeline: gsap.core.Timeline;
+};
+
+export const Animator = ({ children, animation }: AnimatorProperties) => {
   const reference = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     if (reference.current) {
-      animation(timeline);
+      animation(reference.current);
     }
-  }, [animation, timeline]);
+  }, [animation]);
 
   return <div ref={reference}>{children}</div>;
 };
