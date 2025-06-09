@@ -3,11 +3,12 @@
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
 // import { useSearchParameters } from "@/hooks/use-search-parameters";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 import { Skills } from "./skills";
 
 export const Me = () => {
-  // const view = useSearchParameters("view");
+  const view = usePathname();
   return (
     <section
       className={cn(
@@ -15,14 +16,16 @@ export const Me = () => {
         `max-h-[40%] max-w-[30%]`,
         `xl:max-h-[70%] xl:max-w-[60%]`,
         `origin-bottom-right`,
-        `opacity-50`,
+        // `opacity-50`,
       )}
     >
       <BlurImage src={"/images/me.svg"} alt={"Illustration of me"} width={507} height={469.32} priority />
 
-      <Skills
-        className={`font-sea -xl:left-[20%] bottom-[15%] -left-[40%] z-10 hidden -rotate-10 lg:absolute lg:block`}
-      />
+      {!view.includes(`/about`) && (
+        <Skills
+          className={`font-sea -xl:left-[20%] bottom-[10%] -left-[20%] z-10 hidden -rotate-10 lg:absolute lg:block`}
+        />
+      )}
     </section>
   );
 };

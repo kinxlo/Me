@@ -1,0 +1,32 @@
+"use client";
+
+import { NAV_ITEMS } from "@/lib/tools/constants";
+import { usePathname } from "next/navigation";
+
+import { NavItem } from "./navbar-item";
+
+type NavItemsProperties = {
+  isMobile?: boolean;
+  onItemClick?: () => void;
+};
+
+export const NavItems = ({ isMobile = false, onItemClick }: NavItemsProperties) => {
+  const pathname = usePathname();
+
+  return (
+    <>
+      {NAV_ITEMS.map((item, index) => (
+        <NavItem
+          key={index}
+          content={item.content}
+          path={item.path}
+          variant={item.variant}
+          isActive={item.path === "/" ? pathname === "/" : pathname.startsWith(item.path) && item.path !== "/"}
+          isMobile={isMobile}
+          onClick={onItemClick}
+          isExternal={item.isExternal}
+        />
+      ))}
+    </>
+  );
+};
