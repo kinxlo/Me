@@ -69,7 +69,7 @@ export const Hero = () => {
           </p>
         </section>
 
-        <section className="mt-4 ml-2 flex gap-4">
+        <section className="cc-border mt-1 flex gap-4">
           {socials.map((social) => (
             <MainButton
               key={social.content}
@@ -78,7 +78,7 @@ export const Hero = () => {
               variant={`outline`}
               href={social.link}
               icon={social.icon}
-              className="cc-shades w-fit bg-transparent px-5 text-black transition-all duration-300"
+              className="cc-shades text-primary w-fit bg-transparent px-5 transition-all duration-300 hover:bg-black hover:text-white"
             >
               {social.content}
             </MainButton>
