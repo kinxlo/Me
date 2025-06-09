@@ -15,21 +15,11 @@ type NavItemProperties = {
   isExternal?: boolean;
 };
 
-export const NavItem = ({
-  content,
-  path,
-  variant,
-  isActive,
-  isMobile = false,
-  onClick,
-  isExternal = false,
-}: NavItemProperties) => {
+export const NavItem = ({ content, path, variant, isActive, isMobile = false, onClick }: NavItemProperties) => {
   return (
     <MainButton
       href={path}
       variant={variant}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
       className={cn(
         "cc-nav relative text-2xl transition-all duration-300 hover:opacity-100 md:text-xl",
         "text-black/50 hover:text-black dark:text-white/70 dark:hover:text-white",
