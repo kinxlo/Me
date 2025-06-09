@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body
         className={cn(
           "bg-fixed font-sans antialiased",
-          "bg-cover bg-bottom",
+          "bg-bottom lg:bg-cover",
           activeThemeValue ? `theme-${activeThemeValue}` : "",
           isScaled ? "theme-scaled" : "",
           fontVariables,

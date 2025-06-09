@@ -1,25 +1,15 @@
 import gsap from "./gsap";
 
-export const heroTextAnimation = ({
-  title,
-  developer,
-  software,
-  line,
-}: {
-  title: HTMLElement;
-  developer: HTMLElement;
-  software: HTMLElement;
-  line: HTMLElement;
-}) => {
+export const heroTextAnimation = () => {
   const tl = gsap.timeline();
 
-  tl.to(title, {
+  tl.from(`.title`, {
     opacity: 1,
     y: 0,
     ease: "power3.out",
   })
-    .to(
-      developer,
+    .from(
+      `.developer`,
       {
         opacity: 1,
         y: 0, // from translateY(100%) to 0
@@ -28,8 +18,8 @@ export const heroTextAnimation = ({
       },
       // "-=1.5",
     )
-    .to(
-      software,
+    .from(
+      `.software`,
       {
         opacity: 1,
         y: 0, // from translateY(-100%) to 0
@@ -38,10 +28,14 @@ export const heroTextAnimation = ({
       },
       "-=2",
     )
-    .to(line, {
+    .to(`.line`, {
       width: "100%",
       ease: "power3.out",
     });
+  // .from(`.cc-nav`, {
+  //   x: `-100vw`,
+  //   stagger: 0.2,
+  // });
 
   return tl;
 };

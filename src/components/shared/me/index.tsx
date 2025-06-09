@@ -12,7 +12,7 @@ export const Me = () => {
   return (
     <section
       className={cn(
-        `fixed right-0 bottom-0 isolate object-cover object-top mix-blend-multiply transition-all duration-500 ease-out`,
+        `absolute right-0 bottom-0 isolate object-cover object-top mix-blend-multiply transition-all duration-500 ease-out`,
         `max-h-[40%] max-w-[30%]`,
         `xl:max-h-[70%] xl:max-w-[60%]`,
         `origin-bottom-right`,

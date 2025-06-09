@@ -13,6 +13,7 @@ type NavItemProperties = {
   isMobile?: boolean;
   onClick?: () => void;
   isExternal?: boolean;
+  index?: number; // Added for staggered animations
 };
 
 export const NavItem = ({ content, path, variant, isActive, isMobile = false, onClick }: NavItemProperties) => {
@@ -21,11 +22,10 @@ export const NavItem = ({ content, path, variant, isActive, isMobile = false, on
       href={path}
       variant={variant}
       className={cn(
-        "cc-nav relative text-2xl transition-all duration-300 hover:opacity-100 md:text-xl",
+        "cc-nav relative text-2xl transition-opacity duration-300 hover:opacity-100 md:text-xl",
         "text-black/50 hover:text-black dark:text-white/70 dark:hover:text-white",
         isActive && "!text-primary font-bold underline underline-offset-4",
         isMobile && "text-4xl",
-        "hover:translate-x-[20%]",
       )}
       onClick={onClick}
     >

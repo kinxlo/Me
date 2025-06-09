@@ -1,65 +1,37 @@
 "use client";
 
-import { Animator } from "@/components/shared/animator";
 import MainButton from "@/components/shared/button";
 import { heroTextAnimation } from "@/lib/animation/hero-animation";
 import { socials } from "@/lib/tools/constants";
-import { useRef } from "react";
+import { useEffect } from "react";
 
 export const Hero = () => {
-  const titleReference = useRef<HTMLHeadingElement>(null);
-  const lineReference = useRef<HTMLHRElement>(null);
-  const developerReference = useRef<HTMLParagraphElement>(null);
-  const softwareReference = useRef<HTMLParagraphElement>(null);
+  useEffect(() => {
+    heroTextAnimation();
+  }, []);
 
   return (
     <section className="mix-blend-multiply">
       <section className="max-w-(--breakpoint-md)">
         {/* Animate the text content after entrance */}
-        <Animator
-          animation={() =>
-            heroTextAnimation({
-              title: titleReference.current!,
-              developer: developerReference.current!,
-              software: softwareReference.current!,
-              line: lineReference.current!,
-            })
-          }
-        >
-          <div>
-            <h1 className="text-primary shadow-primary/50 relative flex w-full origin-bottom-left items-end capitalize [text-shadow:2px_2px_4px_var(--tw-shadow-color)]">
-              <span
-                ref={titleReference}
-                className="xs:text-[15rem]/[10rem] translate-y-[10%] text-[10rem]/[7rem] opacity-0 lg:text-[20rem]/[13rem]"
-              >
-                S
-              </span>
-              <div className="relative flex flex-col items-start justify-center overflow-hidden">
-                <p
-                  ref={developerReference}
-                  className="translate-y-[30%] text-5xl opacity-0 sm:text-6xl md:text-7xl lg:text-8xl"
-                >
-                  Developer
-                </p>
+        <div>
+          <h1 className="shadow-primary/50 relative flex w-full origin-bottom-left items-end text-black capitalize [text-shadow:2px_2px_4px_var(--tw-shadow-color)]">
+            <span className="xs:text-[15rem]/[10rem] title text-[10rem]/[7rem] lg:text-[20rem]/[13rem]">S</span>
+            <div className="relative flex flex-col items-start justify-center overflow-hidden">
+              <p className="developer text-5xl sm:text-6xl md:text-7xl lg:text-8xl">Developer</p>
 
-                <hr ref={lineReference} className="bg-primary h-1 w-[0%]" />
+              <hr className="bg-primary line h-1" />
 
-                <p
-                  ref={softwareReference}
-                  className="-translate-y-[30%] text-5xl lowercase opacity-0 sm:text-6xl md:text-7xl lg:ml-0 lg:text-8xl"
-                >
-                  oftware
-                </p>
-              </div>
-            </h1>
-
-            <div className="cc-border">
-              <p className="font-old min-h-[70px] px-4 py-2 font-medium">
-                I like to craft solid and scalable frontend products with great user experiences.
-              </p>
+              <p className="software text-5xl lowercase sm:text-6xl md:text-7xl lg:ml-0 lg:text-8xl">oftware.</p>
             </div>
+          </h1>
+
+          <div className="cc-border">
+            <p className="font-old min-h-[70px] px-4 py-2 font-medium">
+              I like to craft solid and scalable frontend products with great user experiences.
+            </p>
           </div>
-        </Animator>
+        </div>
 
         {/* Below content appears naturally or could be animated as well */}
         <section className="cc-border-down font-old flex flex-col items-start text-sm lg:flex-row">
