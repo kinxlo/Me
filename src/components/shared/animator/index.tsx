@@ -1,3 +1,4 @@
+import gsap from "gsap";
 import { useLayoutEffect, useRef } from "react";
 
 // Modified Animator component
