@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 export function BaseLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isHome = pathname.includes("/about") || pathname.includes("/projects");
+
   return (
     <main className={`max-w-screen overflow-hidden`}>
       <section className="grid min-h-[100dvh] grid-cols-[1rem_minmax(0,80rem)_1rem] justify-center md:-mx-4 md:grid-cols-[2.5rem_minmax(0,80rem)_2.5rem] lg:mx-0">

@@ -1,15 +1,15 @@
 "use client";
 
 import MainButton from "@/components/shared/button";
-import { heroTextAnimation } from "@/lib/animation/hero-animation";
+import { heroTimeline, initHeroAnimation } from "@/lib/animation/hero-animation";
 import { socials } from "@/lib/tools/constants";
-import { useEffect } from "react";
+import { useGSAP } from "@gsap/react";
 
 export const Hero = () => {
-  useEffect(() => {
-    heroTextAnimation();
+  useGSAP(() => {
+    initHeroAnimation();
+    heroTimeline.play();
   }, []);
-
   return (
     <section className="mix-blend-multiply">
       <section className="max-w-(--breakpoint-md)">

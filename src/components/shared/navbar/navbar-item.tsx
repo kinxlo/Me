@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { useAnimation } from "@/hooks/use-animation";
 import { cn } from "@/lib/utils";
+import { useEffect } from "react";
 
 import MainButton from "../button";
 
@@ -17,6 +19,19 @@ type NavItemProperties = {
 };
 
 export const NavItem = ({ content, path, variant, isActive, isMobile = false, onClick }: NavItemProperties) => {
+  // Animation setup
+  const { play } = useAnimation((tl) => {
+    tl.from(`.cc-nav`, {
+      duration: 1,
+      x: 0,
+      stagger: 2,
+    });
+  }, []); // Empty dependency array means this runs once on mount
+
+  useEffect(() => {
+    play();
+  }, [play]);
+
   return (
     <MainButton
       href={path}

@@ -56,9 +56,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange enableColorScheme>
           <BaseLayout>
-            <Navbar />
-            {children}
-            {/* <Footer /> */}
+            <section>
+              <Navbar />
+              {children}
+            </section>
           </BaseLayout>
         </ThemeProvider>
       </body>

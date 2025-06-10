@@ -2,12 +2,10 @@
 
 import gsap from "./gsap";
 
-export const navAnimation = () => {
-  const tl = gsap.timeline();
+export const navAnimation = (tl: gsap.core.Timeline) => {
   tl.from(`.cc-nav`, {
     duration: 1,
     x: 0,
     stagger: 2,
   });
-  return tl;
 };

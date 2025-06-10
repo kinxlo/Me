@@ -24,7 +24,7 @@ export const NavLogo = () => {
       ref={nameReference}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
-      className="absolute top-4 rounded-none bg-black"
+      className="absolute bottom-[20%] rounded-none bg-black"
     >
       I19N
     </Badge>
