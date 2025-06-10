@@ -13,10 +13,10 @@ type NavItemProperties = {
   isMobile?: boolean;
   onClick?: () => void;
   isExternal?: boolean;
-  index?: number; // Added for staggered animations
+  index?: number;
 };
 
-export const NavItem = ({ content, path, variant, isActive, isMobile = false }: NavItemProperties) => {
+export const NavItem = ({ content, path, variant, isActive, isMobile = false, onClick }: NavItemProperties) => {
   return (
     <MainButton
       href={path}
@@ -27,6 +27,11 @@ export const NavItem = ({ content, path, variant, isActive, isMobile = false }: 
         isActive && "!text-primary font-bold underline underline-offset-4",
         isMobile && "text-4xl",
       )}
+      onClick={() => {
+        if (isMobile && onClick) {
+          onClick();
+        }
+      }}
     >
       {content}
     </MainButton>

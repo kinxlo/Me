@@ -23,7 +23,11 @@ export const NavItems = ({ isMobile = false, onItemClick }: NavItemsProperties) 
           variant={item.variant}
           isActive={item.path === "/" ? pathname === "/" : pathname.startsWith(item.path) && item.path !== "/"}
           isMobile={isMobile}
-          onClick={onItemClick}
+          onClick={() => {
+            if (isMobile && onItemClick) {
+              onItemClick();
+            }
+          }}
           isExternal={item.isExternal}
         />
       ))}
