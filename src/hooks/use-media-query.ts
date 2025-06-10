@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export const useResponsiveLayout = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     const checkIfMobile = () => {

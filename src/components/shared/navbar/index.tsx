@@ -1,8 +1,11 @@
 "use client";
 
 import { useResponsiveLayout } from "@/hooks/use-media-query";
+import gsap from "@/lib/animation/gsap";
+import { navAnimation } from "@/lib/animation/nav-animation";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import { useEffect, useRef, useState } from "react";
 
 import { MobileMenuBackdrop } from "./mobile-backdrop";
 import { MobileMenuButton } from "./mobile-menu-button";
@@ -17,8 +20,19 @@ const MobileNav = ({
   isOpen: boolean;
   toggleMenu: () => void;
 }) => {
+  const containerReference = useRef<HTMLElement>(null);
+
+  useGSAP(() => {
+    if (isOpen) {
+      // Reset initial state
+      gsap.set(".cc-nav", { opacity: 0, y: 50 });
+      // Run animation when menu opens
+      navAnimation(true);
+    }
+  }, [isOpen]);
+
   return (
-    <section className={`md:hidden`}>
+    <section ref={containerReference} className={`md:hidden`}>
       {isOpen && <MobileMenuBackdrop onClick={onClose} />}
       <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
       <nav
@@ -36,8 +50,22 @@ const MobileNav = ({
 };
 
 const DesktopNav = () => {
+  const containerReference = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      // Run animation when component mounts
+      navAnimation();
+    },
+    { scope: containerReference },
+  );
+
   return (
-    <section className="font-head fixed top-0 right-[5%] z-[999] hidden flex-col md:flex" role="navigation">
+    <section
+      ref={containerReference}
+      className="font-head fixed top-0 right-[5%] z-[999] hidden flex-col md:flex"
+      role="navigation"
+    >
       <NavItems isMobile={false} onItemClick={() => {}} />
     </section>
   );
