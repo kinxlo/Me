@@ -18,7 +18,7 @@ const MobileNav = ({
   toggleMenu: () => void;
 }) => {
   return (
-    <>
+    <section className={`md:hidden`}>
       {isOpen && <MobileMenuBackdrop onClick={onClose} />}
       <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
       <nav
@@ -31,16 +31,13 @@ const MobileNav = ({
       >
         <NavItems isMobile={true} onItemClick={onClose} />
       </nav>
-    </>
+    </section>
   );
 };
 
 const DesktopNav = () => {
   return (
-    <section
-      className="font-head border-primary fixed top-0 right-[5%] z-[999] flex flex-col border-4"
-      role="navigation"
-    >
+    <section className="font-head fixed top-0 right-[5%] z-[999] hidden flex-col md:flex" role="navigation">
       <NavItems isMobile={false} onItemClick={() => {}} />
     </section>
   );
