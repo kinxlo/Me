@@ -1,5 +1,6 @@
 "use client";
 
+import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
 import { NAV_ITEMS } from "@/lib/tools/constants";
 import { usePathname } from "next/navigation";
 
@@ -31,6 +32,7 @@ export const NavItems = ({ isMobile = false, onItemClick }: NavItemsProperties) 
           isExternal={item.isExternal}
         />
       ))}
+      <ModeToggle />
     </>
   );
 };

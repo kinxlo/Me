@@ -69,7 +69,6 @@
   --leading-relaxed: 1.625;
   --leading-loose: 2;
 
-  /* --background: oklch(95% 0.02 85); */
   --background: oklch(15% 0.03 260);
   --foreground: oklch(0.16 0 0);
   --card: oklch(0.99 0 0);
@@ -125,128 +124,29 @@
   --color-gray-950: oklch(0.15 0 0);
 }
 
-.dark {
-  /* Base colors */
-  --background: oklch(15% 0.03 260);
-  --foreground: oklch(0.95 0 0);
-
-  /* Card */
-  --card: oklch(0.16 0 0);
-  --card-foreground: oklch(0.95 0 0);
-
-  /* Popover */
-  --popover: oklch(0.16 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-
-  /* Primary */
-  --primary: oklch(0.7 0.15 260);
-  --primary-foreground: oklch(0.95 0 0);
-
-  /* Secondary */
-  --secondary: oklch(0.25 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-
-  /* Muted */
-  --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.55 0 0);
-
-  /* Accent */
-  --accent: oklch(0.8 0.17 70);
-  --accent-foreground: oklch(0.95 0 0);
-
-  /* Destructive */
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.95 0 0);
-
-  /* Border */
-  --border: oklch(0.25 0 0);
-  --input: oklch(0.25 0 0);
-  --ring: oklch(0.35 0 0);
-
-  /* Radius */
-  --radius: 0.5rem;
-
-  /* Additional shadcn-like variables */
-  --muted-hover: oklch(0.3 0 0);
-  --accent-hover: oklch(0.3 0 0);
-  --primary-hover: oklch(0.75 0.15 260);
-  --secondary-hover: oklch(0.3 0 0);
-  --destructive-hover: oklch(0.6 0.2 25);
-
-  /* Status colors */
-  --success: oklch(0.55 0.15 160);
-  --warning: oklch(0.6 0.15 50);
-  --info: oklch(0.55 0.15 220);
-  --error: oklch(0.55 0.2 25);
-
-  /* Link */
-  --link: oklch(0.7 0.15 260);
-  --link-hover: oklch(0.75 0.15 260);
-
-  /* Shadows */
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-
-  /* Dark mode gray shades */
-  --color-gray-50: oklch(0.15 0 0);
-  --color-gray-100: oklch(0.2 0 0);
-  --color-gray-200: oklch(0.25 0 0);
-  --color-gray-300: oklch(0.32 0 0);
-  --high-grey-III: oklch(0.42 0 0); /* converted dark:text-gray-400 */
-  --color-gray-500: oklch(0.53 0 0);
-  --color-gray-600: oklch(0.65 0 0);
-  --color-gray-700: oklch(0.75 0 0);
-  --color-gray-800: oklch(0.85 0 0);
-  --color-gray-900: oklch(0.92 0 0);
-  --color-gray-950: oklch(0.96 0 0);
-}
-
 @layer utilities {
   .cc-bg-dotted {
-    @apply overflow-hidden bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed p-8 [--pattern-fg:var(--color-gray-950)]/10 after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-gray-950/5 dark:[--pattern-fg:var(--color-white)]/10 dark:after:inset-ring-white/10;
-  }
-  .cc-border {
-    @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10 after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:before:border-white/10 dark:after:border-white/10;
-  }
-  .cc-border-up {
-    @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10 dark:before:border-white/10;
-  }
-  .cc-border-down {
-    @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:after:border-white/10;
+    @apply overflow-hidden bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed p-8 [--pattern-fg:var(--color-gray-950)]/10 after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-gray-950/5;
   }
 
-  .cc-border-responsive {
-    @apply relative before:absolute before:top-0 before:-left-[100vw] before:hidden before:h-px before:w-[200vw] before:bg-gray-950/10 after:absolute after:bottom-0 after:-left-[100vw] after:hidden after:h-px after:w-[200vw] after:bg-gray-950/10 max-sm:before:block max-sm:after:block dark:before:bg-white/10 dark:after:bg-white/10 sm:[.grid>div:nth-child(2n+1)_&]:before:block sm:[.grid>div:nth-child(2n+1)_&]:after:block lg:max-xl:[.grid>div:nth-child(3n+1)_&]:before:block lg:max-xl:[.grid>div:nth-child(3n+1)_&]:after:block xl:[.grid>div:nth-child(4n+1)_&]:before:block xl:[.grid>div:nth-child(4n+1)_&]:after:block;
+  .cc-border {
+    @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10 after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10;
+  }
+
+  .cc-border-up {
+    @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10;
+  }
+
+  .cc-border-down {
+    @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10;
   }
 
   .cc-shades {
-    @apply bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-black)]/10 dark:[--pattern-fg:var(--color-white)]/10;
+    @apply bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/10;
   }
-
-  .cc-border-half {
-    @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10 dark:after:border-white/10;
-  }
-
-  .cc-icon {
-    @apply size-[30px] opacity-50 mix-blend-multiply transition-all hover:opacity-100 lg:size-[50px] dark:mix-blend-normal;
-  }
-
   .cc-init {
     @apply opacity-0;
   }
-}
-
-.xl\:line-y\/half:before {
-  top: 50%;
-  left: calc(var(--spacing) * 0);
-  content: var(--tw-content);
-  background-color: var(--border);
-  width: 100vw;
-  height: 1px;
-  position: absolute;
 }
 
 @layer base {
@@ -259,13 +159,11 @@
   }
 
   body {
-    @apply bg-secondary text-[#787169];
+    @apply text-muted-foreground;
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
     background: url(/images/bg-6.png);
-    /* background-size: cover;
-    background-repeat: no-repeat; */
   }
 
   h1,
@@ -277,7 +175,6 @@
     font-family: var(--font-im-fell);
     font-weight: 700;
     line-height: var(--leading-tight);
-    /* color: var(--primary); */
   }
 
   h1 {
@@ -454,18 +351,4 @@
     box-shadow: 0px 0px 0px 10px rgba(219, 40, 40, 0);
     transform: scale(1);
   }
-}
-
-.cc-developer {
-  position: relative;
-}
-
-.cc-developer:after {
-  position: absolute;
-  content: "";
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-primary);
 }
