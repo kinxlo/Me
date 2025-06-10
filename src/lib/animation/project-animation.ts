@@ -10,7 +10,7 @@ export const initProjectAnimationList = (projects: Project[]) => {
       text: "",
       scrollTrigger: {
         trigger: project,
-        start: "top 75%",
+        start: "top 50%",
         toggleActions: "play none none none",
       },
     });
@@ -21,7 +21,7 @@ export const initProjectAnimationList = (projects: Project[]) => {
       text: "",
       scrollTrigger: {
         trigger: project,
-        start: "top 75%",
+        start: "top 50%",
         toggleActions: "play none none none",
       },
     });
