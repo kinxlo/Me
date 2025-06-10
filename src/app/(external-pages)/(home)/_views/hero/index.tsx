@@ -1,42 +1,50 @@
 "use client";
 
 import MainButton from "@/components/shared/button";
-import { heroTimeline, initHeroAnimation } from "@/lib/animation/hero-animation";
+import { initHeroAnimation } from "@/lib/animation/hero-animation";
+import { showAnimation, textAnimation } from "@/lib/animation/tag-animation";
 import { socials } from "@/lib/tools/constants";
 import { useGSAP } from "@gsap/react";
 
 export const Hero = () => {
   useGSAP(() => {
-    initHeroAnimation();
-    heroTimeline.play();
+    const tl = initHeroAnimation();
+    tl.eventCallback("onComplete", () => {
+      const tl = showAnimation();
+      tl.eventCallback("onComplete", () => {
+        textAnimation();
+      });
+    });
   }, []);
   return (
     <section className="mix-blend-multiply">
       <section className="max-w-(--breakpoint-md)">
         {/* Animate the text content after entrance */}
         <div>
-          <h1 className="shadow-primary/50 relative flex w-full origin-bottom-left items-end text-black capitalize [text-shadow:2px_2px_4px_var(--tw-shadow-color)]">
-            <span className="xs:text-[15rem]/[10rem] title text-[10rem]/[7rem] lg:text-[20rem]/[13rem]">S</span>
+          <h1 className="text-primary relative flex w-full origin-bottom-left items-end capitalize">
+            <span className="xs:text-[15rem]/[10rem] title cc-init text-[10rem]/[7rem] lg:text-[20rem]/[13rem]">S</span>
             <div className="relative flex flex-col items-start justify-center overflow-hidden">
-              <p className="developer text-5xl sm:text-6xl md:text-7xl lg:text-8xl">Developer</p>
-
+              <p className="developer cc-init text-5xl sm:text-6xl md:text-7xl lg:text-8xl">Developer</p>
               <hr className="bg-primary line h-1" />
-
-              <p className="software text-5xl lowercase sm:text-6xl md:text-7xl lg:ml-0 lg:text-8xl">oftware.</p>
+              <p className="software cc-init text-5xl lowercase sm:text-6xl md:text-7xl lg:ml-0 lg:text-8xl">
+                oftware.
+              </p>
             </div>
           </h1>
 
           <div className="cc-border">
-            <p className="font-old min-h-[70px] px-4 py-2 font-medium">
+            <p className="font-head hero-text cc-init show translate-x-[20%] px-4 py-2 text-lg font-medium">
               I like to craft solid and scalable frontend products with great user experiences.
             </p>
           </div>
         </div>
 
         {/* Below content appears naturally or could be animated as well */}
-        <section className="cc-border-down font-old flex flex-col items-start text-sm lg:flex-row">
-          <p className="p-4 font-medium">Highly skilled at progressive enhancement, design systems & UI Engineering.</p>
-          <p className="p-4 pr-0 font-medium">
+        <section className="cc-border-down font-head flex flex-col items-start text-lg lg:flex-row">
+          <p className="hero-text-1 show cc-init translate-x-[50%] p-4 font-medium">
+            Highly skilled at progressive enhancement, design systems & UI Engineering.
+          </p>
+          <p className="hero-text-2 show cc-init translate-x-[50%] p-4 pr-0 font-medium">
             Proven experience building successful products for clients across several countries.
           </p>
         </section>
@@ -50,7 +58,7 @@ export const Hero = () => {
               variant={`outline`}
               href={social.link}
               icon={social.icon}
-              className="cc-shades text-primary w-fit bg-transparent px-5 transition-all duration-300 hover:bg-black hover:text-white"
+              className="cc-shades cc-init show text-primary w-fit translate-x-[50%] bg-transparent px-5 transition-all duration-300 hover:bg-black hover:text-white"
             >
               {social.content}
             </MainButton>

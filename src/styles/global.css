@@ -232,6 +232,10 @@
   .cc-icon {
     @apply size-[30px] opacity-50 mix-blend-multiply transition-all hover:opacity-100 lg:size-[50px] dark:mix-blend-normal;
   }
+
+  .cc-init {
+    @apply opacity-0;
+  }
 }
 
 .xl\:line-y\/half:before {

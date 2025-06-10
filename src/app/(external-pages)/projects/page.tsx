@@ -27,7 +27,11 @@ export default function Projects() {
   }, []);
 
   if (loading) {
-    return <div>Loading projects...</div>; // Add a better loading state
+    return (
+      <div className={`flex items-center justify-center`}>
+        <p className={`text-primary font-head text-3xl font-black`}>Loading projects...</p>
+      </div>
+    ); // Add a better loading state
   }
 
   if (error) {

@@ -1,21 +1,21 @@
 import { gsap } from "gsap";
 
-export const heroTimeline = gsap.timeline({ paused: true });
+export const heroTimeline = gsap.timeline();
 
 export const initHeroAnimation = () => {
   heroTimeline
-    .from(`.title`, {
+    .to(`.title`, {
       opacity: 1,
       y: 0,
       ease: "power3.out",
     })
-    .from(`.developer`, {
+    .to(`.developer`, {
       opacity: 1,
-      y: 0,
+      y: 5,
       duration: 1.4,
       ease: "power2.out",
     })
-    .from(
+    .to(
       `.software`,
       {
         opacity: 1,
