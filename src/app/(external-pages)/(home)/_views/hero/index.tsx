@@ -18,7 +18,7 @@ export const Hero = () => {
   }, []);
   return (
     <section className="mix-blend-multiply">
-      <section className="max-w-(--breakpoint-md)">
+      <section className="max-w-(--breakpoint-md) -rotate-2">
         {/* Animate the text content after entrance */}
         <div>
           <h1 className="text-primary relative flex w-full origin-bottom-left items-end capitalize">
