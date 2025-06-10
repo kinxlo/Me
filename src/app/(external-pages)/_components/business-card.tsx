@@ -1,13 +1,19 @@
+import { aboutTextAnimation } from "@/lib/animation/about-animation";
+import { useGSAP } from "@gsap/react";
 import { CheckCircle } from "lucide-react";
 
 import { PlainCard } from "./plain-card";
 
 export const BusinessCard = () => {
+  useGSAP(() => {
+    aboutTextAnimation();
+  }, []);
+
   return (
-    <PlainCard className="-lg:rotate-2 ml-3 -rotate-1 space-y-8 rounded-none p-5 mix-blend-multiply lg:ml-8 lg:p-10">
+    <PlainCard className="business-card -lg:rotate-2 ml-3 -rotate-1 space-y-8 rounded-none p-5 mix-blend-multiply lg:ml-8 lg:p-10">
       {/* Name & Role */}
       <section className="space-y-4">
-        <h3 className="text-primary text-2xl underline lg:text-5xl">Ifijeh Kingsley Solomon</h3>
+        <h3 className="text-primary about-txt text-2xl underline lg:text-5xl">Ifijeh Kingsley Solomon</h3>
         <p className="font-sea text-2xl text-black/80">
           Front-End Engineer at TSA, with an interest in Backend engineering, and System architecture.
         </p>
@@ -41,7 +47,7 @@ export const BusinessCard = () => {
           </div>
           <p>
             <span className="text-primary font-head text-lg font-bold underline">Versatile background</span> — From
-            agencies and startups to corporate teams, I’ve built software across diverse environments.
+            agencies and startups to corporate teams, I&apos;ve built software across diverse environments.
           </p>
         </div>
         <div className="flex items-start gap-4">
@@ -79,7 +85,7 @@ export const BusinessCard = () => {
       {/* Personal Touch */}
       <section className="font-sea pt-2 text-xl text-black/50">
         <p>
-          Outside of work, you’ll find me reading ( its not code ) , hanging out with the &rdquo;homies&rdquo;, or
+          Outside of work, you&apos;ll find me reading (its not code), hanging out with the &rdquo;homies&rdquo;, or
           playing video games.
         </p>
       </section>

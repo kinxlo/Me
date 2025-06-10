@@ -1,4 +1,4 @@
-import { gsap } from "gsap";
+import gsap from "./gsap";
 
 export const initProjectAnimationList = (projects: Project[]) => {
   for (const [index] of projects.entries()) {
