@@ -1,8 +1,7 @@
 "use client";
 
 import MainButton from "@/components/shared/button";
-import { initHeroAnimation } from "@/lib/animation/hero-animation";
-import { showAnimation, textAnimation } from "@/lib/animation/tag-animation";
+import { initHeroAnimation, showAnimation, textAnimation } from "@/lib/animation/home-animation";
 import { socials } from "@/lib/tools/constants";
 import { useGSAP } from "@gsap/react";
 

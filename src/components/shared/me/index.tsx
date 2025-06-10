@@ -12,11 +12,11 @@ export const Me = () => {
   return (
     <section
       className={cn(
-        `fixed right-0 bottom-0 isolate object-cover object-top mix-blend-multiply transition-all duration-500 ease-out`,
+        `fixed right-0 bottom-0 isolate object-cover object-top mix-blend-multiply transition-all duration-500 ease-out lg:opacity-50`,
         `max-h-[40%] max-w-[30%]`,
         `xl:max-h-[70%] xl:max-w-[60%]`,
         `origin-bottom-right`,
-        // `opacity-50`,
+        view.includes(`/about`) && `opacity-30`,
       )}
     >
       <BlurImage src={"/images/me.svg"} alt={"Illustration of me"} width={507} height={469.32} priority />

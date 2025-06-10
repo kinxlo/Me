@@ -4,7 +4,7 @@ export const Skills = ({ className }: { className?: string }) => {
   return (
     <section className={cn(className)}>
       <h6 className={`text-primary underline`}>Aquired Skills so far:</h6>
-      <section className={`flex gap-1 text-xl font-light text-black/50`}>
+      <section className={`flex gap-1 text-xl font-light text-black`}>
         <div>
           <h6>Frontend</h6>
           <p>-Next.js</p>

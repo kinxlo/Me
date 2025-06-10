@@ -4,7 +4,7 @@ import { PlainCard } from "./plain-card";
 
 export const BusinessCard = () => {
   return (
-    <PlainCard className="space-y-8 rounded-none p-5 mix-blend-multiply lg:p-10">
+    <PlainCard className="-lg:rotate-2 ml-3 -rotate-1 space-y-8 rounded-none p-5 mix-blend-multiply lg:ml-8 lg:p-10">
       {/* Name & Role */}
       <section className="space-y-4">
         <h3 className="text-primary text-2xl underline lg:text-5xl">Ifijeh Kingsley Solomon</h3>
@@ -16,7 +16,7 @@ export const BusinessCard = () => {
       {/* Experience & Resume */}
       <section className="space-y-4">
         <div className="flex items-center justify-between gap-2">
-          <h3 className="text-primary text-xl font-black tracking-tighter lg:text-3xl">~3 Years Experience</h3>
+          <h3 className="text-xl font-black tracking-tighter text-black lg:text-3xl">~4 Years Experience</h3>
         </div>
         <p className="font-sea text-2xl text-black/80">
           I enjoy building interfaces that are both beautiful and interactive, bringing ideas to completion in a way
