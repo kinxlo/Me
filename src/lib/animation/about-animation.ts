@@ -1,10 +1,11 @@
 import gsap from "./gsap";
 
 export const aboutTextTimeline = gsap.timeline();
+export const skillTimeline = gsap.timeline();
+
 export const aboutTextAnimation = () => {
   aboutTextTimeline.clear();
 
-  // Animate each section with proper staggering
   aboutTextTimeline
     // Name & Role section
     .from(".business-card section:nth-child(1) h3", {
@@ -21,7 +22,7 @@ export const aboutTextAnimation = () => {
         ease: "power1.in",
       },
       "<+0.3",
-    ) // slightly overlap with previous animation
+    )
 
     // Experience section
     .from(
@@ -33,7 +34,7 @@ export const aboutTextAnimation = () => {
         ease: "back.out",
       },
       "+=0.5",
-    ) // pause before this section
+    )
     .from(
       ".business-card section:nth-child(2) p",
       {
@@ -44,7 +45,7 @@ export const aboutTextAnimation = () => {
       "<+0.2",
     )
 
-    // Highlights section (each bullet point)
+    // Highlights section
     .from(
       ".business-card section:nth-child(3) div",
       {

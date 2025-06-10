@@ -40,8 +40,8 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
     <div>
       <Wrapper className="mt-0 space-y-4 p-0">
         <section className="show mt-[5rem] max-w-(--breakpoint-md) -rotate-2 space-y-1 px-2">
-          <h1 className="project-text cc-border cc-init txt-1 translate-x-[50%]">Showcase</h1>
-          <p className="project-text cc-border txt-2 font-sea cc-init translate-x-[50%] text-2xl">
+          <h1 className="project-text cc-border cc-init text-primary translate-x-[50%]">Showcase</h1>
+          <p className="project-text cc-border font-sea cc-init translate-x-[50%] text-2xl text-black">
             Here you will find some of the personal and clients projects that I created with each project containing its
             own case study
           </p>
@@ -51,10 +51,10 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
           {projects.map((project, index) => (
             <Wrapper key={project.id} className={`p-0 project-${index}`}>
               <Wrapper className="space-y-1 py-0">
-                <p className="project-title cc-border font-head text-primary text-2xl font-medium">
+                <p className="project-title cc-border font-head text-primary h-10 text-2xl font-medium">
                   {project.id}. {project.name}
                 </p>
-                <p className="project-p cc-border font-sea max-w-(--breakpoint-md) text-xl text-black">
+                <p className="project-p cc-border font-sea min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">
                   {project.desc}
                 </p>
               </Wrapper>
