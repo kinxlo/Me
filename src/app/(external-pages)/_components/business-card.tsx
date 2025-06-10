@@ -10,9 +10,9 @@ export const BusinessCard = () => {
   }, []);
 
   return (
-    <PlainCard className="business-card -lg:rotate-2 ml-3 -rotate-1 space-y-8 rounded-none p-5 mix-blend-multiply lg:ml-8 lg:p-10">
+    <PlainCard className="business-card -lg:rotate-2 ml-3 min-h-[1128px] -rotate-1 space-y-8 rounded-none p-5 mix-blend-multiply lg:ml-8 lg:p-10">
       {/* Name & Role */}
-      <section className="space-y-4">
+      <section className="cc-border space-y-4 py-4">
         <h3 className="text-primary about-txt text-2xl underline lg:text-5xl">Ifijeh Kingsley Solomon</h3>
         <p className="font-sea text-2xl text-black/80">
           Front-End Engineer at TSA, with an interest in Backend engineering, and System architecture.
@@ -20,7 +20,7 @@ export const BusinessCard = () => {
       </section>
 
       {/* Experience & Resume */}
-      <section className="space-y-4">
+      <section className="cc-border space-y-4 py-4">
         <div className="flex items-center justify-between gap-2">
           <h3 className="text-xl font-black tracking-tighter text-black lg:text-3xl">~4 Years Experience</h3>
         </div>
@@ -31,7 +31,7 @@ export const BusinessCard = () => {
       </section>
 
       {/* Highlights */}
-      <section className="font-sea space-y-10 text-xl text-black/80">
+      <section className="font-sea cc-border space-y-10 py-4 text-xl text-black/80">
         <div className="flex items-start gap-4">
           <div>
             <CheckCircle size={20} className="text-success mt-1" />
@@ -85,8 +85,8 @@ export const BusinessCard = () => {
       {/* Personal Touch */}
       <section className="font-sea pt-2 text-xl text-black/50">
         <p>
-          Outside of work, you&apos;ll find me reading (its not code), hanging out with the &rdquo;homies&rdquo;, or
-          playing video games.
+          *** Outside of work, you&apos;ll find me reading (its not code), hanging out with the &rdquo;homies&rdquo;, or
+          playing video games.***
         </p>
       </section>
     </PlainCard>

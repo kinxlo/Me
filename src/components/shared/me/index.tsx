@@ -5,7 +5,7 @@ import { BlurImage } from "@/components/core/miscellaneous/blur-image";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-import { Skills } from "./skills";
+// import { Skills } from "./skills";
 
 export const Me = () => {
   const view = usePathname();
@@ -21,11 +21,11 @@ export const Me = () => {
     >
       <BlurImage src={"/images/me.svg"} alt={"Illustration of me"} width={507} height={469.32} priority />
 
-      {!view.includes(`/about`) && (
+      {/* {!view.includes(`/about`) && (
         <Skills
           className={`font-sea -xl:left-[20%] bottom-[10%] -left-[20%] z-10 hidden -rotate-10 lg:absolute lg:block`}
         />
-      )}
+      )} */}
     </section>
   );
 };
