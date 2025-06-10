@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cloneElement, forwardRef, MouseEventHandler, ReactElement, ReactNode } from "react";
 import { LuLoader, LuPlus } from "react-icons/lu";
 
-type Variant =
+export type Variant =
   | "default"
   | "primary"
   | "destructive"
@@ -16,7 +16,7 @@ type Variant =
   | "accent";
 type Size = "default" | "sm" | "lg" | "xl" | "link" | "icon" | "circle";
 
-interface ButtonProperties {
+export interface ButtonProperties {
   type?: "submit" | "button" | "reset";
   /** Specifies the button style variant */
   variant?: Variant;

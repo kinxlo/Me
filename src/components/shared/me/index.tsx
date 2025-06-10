@@ -1,152 +1,31 @@
 "use client";
 
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import { useResponsiveLayout } from "@/hooks/use-media-query";
-import { useIntersection } from "@/hooks/use-observer";
-import { useWindowSize } from "@/hooks/use-window-resize";
+// import { useSearchParameters } from "@/hooks/use-search-parameters";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
-import MainButton from "../button";
+import { Skills } from "./skills";
 
 export const Me = () => {
-  const [zoomLevel, setZoomLevel] = useState(1);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isAboutVisible, setIsAboutVisible] = useState(false);
-  const imageReference = useRef<HTMLDivElement>(null);
-  const aboutSectionReference = useRef<HTMLElement | null>(null);
-  const { width: windowWidth, height: windowHeight } = useWindowSize();
-  const { isMobile, isScrolled, getResponsivePosition } = useResponsiveLayout();
-  const animationFrameReference = useRef<number>(null);
-
-  const socials = [
-    {
-      type: "icon",
-      src: "/images/github.png",
-      alt: "github",
-      position: getResponsivePosition("bottom-[10rem] right-[30rem]", "top-[5rem] right-[40%]"),
-      rotation: getResponsivePosition("rotate-2", "rotate-0"),
-      size: getResponsivePosition(80, 60),
-      mobileScale: "scale-90",
-    },
-    {
-      type: "icon",
-      src: "/images/twitter.png",
-      alt: "Twitter",
-      position: getResponsivePosition("bottom-[20rem] right-[30rem]", "top-[6rem] right-[30%]"),
-      rotation: getResponsivePosition("-rotate-8", "rotate-0"),
-      size: getResponsivePosition(70, 60),
-      mobileScale: "scale-90",
-    },
-    {
-      type: "icon",
-      src: "/images/linkedin.png",
-      alt: "LinkedIn",
-      position: getResponsivePosition("bottom-[30rem] right-[25rem]", "top-[7rem] right-[20%]"),
-      rotation: getResponsivePosition("rotate-15", "rotate-0"),
-      size: getResponsivePosition(90, 60),
-      mobileScale: "scale-90",
-    },
-  ];
-
-  const { ref: intersectionReference } = useIntersection({
-    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-  });
-
-  const setReferences = (node: HTMLDivElement | null) => {
-    intersectionReference(node);
-    if (node) imageReference.current = node;
-  };
-
-  useEffect(() => {
-    aboutSectionReference.current = document.querySelector("#fade-section");
-
-    const handleScroll = () => {
-      if (!imageReference.current || !aboutSectionReference.current) return;
-
-      animationFrameReference.current = requestAnimationFrame(() => {
-        const mapRect = aboutSectionReference.current?.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-
-        if (mapRect) {
-          const isVisible = mapRect.top < viewportHeight && mapRect.bottom > 0;
-          setIsAboutVisible(isVisible);
-
-          if (window.scrollY < 10) {
-            setZoomLevel(1);
-            return;
-          }
-
-          const aboutSectionCenter = mapRect.top + mapRect.height / 2;
-          const viewportCenter = viewportHeight / 2;
-          const distanceFromCenter = Math.abs(aboutSectionCenter - viewportCenter);
-          const normalizedDistance = Math.min(1, distanceFromCenter / (viewportHeight * 0.75));
-          const baseZoom = windowWidth < 768 ? 0.3 : 0.7;
-          const targetZoom = baseZoom - 0.3 * (1 - normalizedDistance);
-
-          setZoomLevel((previous) => {
-            const newZoom = previous + (targetZoom - previous) * 0.1;
-            return Math.max(newZoom, baseZoom - 0.3);
-          });
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (animationFrameReference.current) {
-        cancelAnimationFrame(animationFrameReference.current);
-      }
-    };
-  }, [windowWidth, windowHeight]);
-
+  const view = usePathname();
   return (
-    <>
-      <BlurImage
-        ref={setReferences}
-        src={"/images/me.svg"}
-        alt={"Illustration of me"}
-        width={507}
-        height={469.32}
-        onLoadingComplete={() => setIsLoaded(true)}
-        className={cn(
-          `fixed right-0 bottom-0 isolate max-h-[70%] max-w-[60%] object-cover object-top mix-blend-multiply transition-all duration-500 ease-out`,
-          `origin-bottom-right`,
-          isAboutVisible ? "opacity-20 lg:opacity-30" : "opacity-10 md:opacity-40 lg:opacity-50",
-          isLoaded ? "scale-50 opacity-20 lg:scale-100" : "scale-90 opacity-0",
-          "dark:opacity-5 dark:invert",
-        )}
-        style={{
-          transform: `scale(${zoomLevel})`,
-        }}
-        priority
-      />
+    <section
+      className={cn(
+        `fixed right-0 bottom-0 isolate object-cover object-top mix-blend-multiply transition-all duration-500 ease-out lg:opacity-50`,
+        `max-h-[40%] max-w-[30%]`,
+        `xl:max-h-[70%] xl:max-w-[60%]`,
+        `origin-bottom-right`,
+        view.includes(`/about`) && `opacity-30`,
+      )}
+    >
+      <BlurImage src={"/images/me.svg"} alt={"Illustration of me"} width={507} height={469.32} priority />
 
-      {socials.map((element, index) => (
-        <div
-          key={index}
-          className={cn(
-            "font-sea pointer-events-auto fixed cursor-default transition-all duration-500 hover:!scale-110 hover:!opacity-100",
-            element.position,
-            element.rotation,
-            isMobile ? element.mobileScale : "",
-            // isMobile ? "animate-float-mobile" : "animate-float",
-            // "opacity-70 hover:opacity-100",
-          )}
-          style={{
-            transitionDelay: `${index * 100}ms`,
-            transform: isScrolled ? "translateY(-10px)" : "",
-          }}
-        >
-          <MainButton variant="link" size="icon" className="transition-all duration-300 hover:!scale-125">
-            <Image src={element.src} alt={element.alt} width={50} height={50} className="cc-icon" />
-          </MainButton>
-        </div>
-      ))}
-    </>
+      {!view.includes(`/about`) && (
+        <Skills
+          className={`font-sea -xl:left-[20%] bottom-[10%] -left-[20%] z-10 hidden -rotate-10 lg:absolute lg:block`}
+        />
+      )}
+    </section>
   );
 };

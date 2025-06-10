@@ -14,10 +14,10 @@ export function ModeToggle() {
 
   return (
     <MainButton
-      variant="default"
+      variant="primary"
       size="icon"
       isIconOnly
-      className="group/toggle size-8 bg-transparent"
+      className="group/toggle text-primary size-8 bg-transparent"
       onClick={toggleTheme}
       icon={<Sun />}
     />

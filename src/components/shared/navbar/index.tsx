@@ -1,137 +1,97 @@
 "use client";
 
-import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
 import { useResponsiveLayout } from "@/hooks/use-media-query";
-import { useSearchParameters } from "@/hooks/use-search-parameters";
+import gsap from "@/lib/animation/gsap";
+import { navAnimation } from "@/lib/animation/nav-animation";
 import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import { useEffect, useRef, useState } from "react";
 
-import MainButton from "../button";
+import { MobileMenuBackdrop } from "./mobile-backdrop";
+import { MobileMenuButton } from "./mobile-menu-button";
+import { NavItems } from "./navbar-items";
 
-export const Navbar = () => {
-  const view = useSearchParameters("view");
-  const { isMobile, isScrolled, getResponsivePosition } = useResponsiveLayout();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+const MobileNav = ({
+  onClose,
+  isOpen,
+  toggleMenu,
+}: {
+  onClose: () => void;
+  isOpen: boolean;
+  toggleMenu: () => void;
+}) => {
+  const containerReference = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const floatingElements = [
-    {
-      type: "button",
-      content: "Home",
-      position: getResponsivePosition("top-20 left-20", "top-4 left-4"),
-      rotation: getResponsivePosition("-rotate-6", "rotate-0"),
-      variant: "link" as const,
-      isActive: view === null || view === "home",
-      mobileScale: "scale-75",
-    },
-    {
-      type: "button",
-      content: "Projects",
-      position: getResponsivePosition("top-20 left-1/4", "top-14 left-4"),
-      rotation: getResponsivePosition("-rotate-6", "rotate-0"),
-      variant: "link" as const,
-      isActive: view === "projects",
-      mobileScale: "scale-75",
-    },
-    {
-      type: "button",
-      content: "About",
-      position: getResponsivePosition("top-20 left-1/2", "top-24 left-4"),
-      rotation: getResponsivePosition("rotate-3", "rotate-0"),
-      variant: "link" as const,
-      isActive: view === "about",
-      mobileScale: "scale-75",
-    },
-  ];
-
-  if (!isMounted) return null;
+  useGSAP(() => {
+    if (isOpen) {
+      // Reset initial state
+      gsap.set(".cc-nav", { opacity: 0, y: 50 });
+      // Run animation when menu opens
+      navAnimation(true);
+    }
+  }, [isOpen]);
 
   return (
-    <>
-      {/* Mobile backdrop - appears only when menu is open */}
-      {isMobile && mobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-[998] bg-black/50 backdrop-blur-sm transition-opacity duration-300"
-          onClick={() => setMobileMenuOpen(false)}
-        />
-      )}
-
-      <section className={`z-[999]`}>
-        {/* Mobile menu button */}
-        {isMobile && (
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="fixed top-4 right-4 z-[1000] rounded-full bg-black/10 p-2 transition-all hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20"
-            aria-label="Toggle menu"
-          >
-            <div
-              className={`h-0.5 w-6 bg-current transition-all ${mobileMenuOpen ? "translate-y-1.5 rotate-45" : ""}`}
-            />
-            <div
-              className={`mt-1.5 h-0.5 w-6 bg-current transition-all ${mobileMenuOpen ? "-translate-y-1.5 -rotate-45" : ""}`}
-            />
-          </button>
+    <section ref={containerReference} className={`md:hidden`}>
+      {isOpen && <MobileMenuBackdrop onClick={onClose} />}
+      <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
+      <nav
+        className={cn(
+          "font-head fixed top-0 right-[5%] flex min-h-[100dvh] min-w-[100dvw] flex-col items-center justify-center transition-all duration-300",
+          isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+          "z-[999]",
         )}
+        role="navigation"
+      >
+        <NavItems isMobile={true} onItemClick={onClose} />
+      </nav>
+    </section>
+  );
+};
 
-        {/* Theme toggle */}
-        <div className="fixed top-4 left-1/2 z-[1000] -translate-x-1/2">
-          <ModeToggle />
-        </div>
+const DesktopNav = () => {
+  const containerReference = useRef<HTMLElement>(null);
 
-        {/* Navigation items */}
-        <nav
-          className={cn(
-            "transition-all duration-300",
-            isMobile
-              ? mobileMenuOpen
-                ? "pointer-events-auto opacity-100"
-                : "pointer-events-none opacity-0"
-              : "pointer-events-auto opacity-100",
-            "z-[999]",
-          )}
-          role="navigation"
-        >
-          {floatingElements.map((element, index) => (
-            <div
-              key={index}
-              className={cn(
-                "font-sea pointer-events-auto fixed transition-all duration-500 hover:!scale-110",
-                element.position,
-                element.rotation,
-                isMobile ? element.mobileScale : "",
-                isMobile ? "animate-float-mobile" : "animate-float",
-                element.type === "icon" ? "opacity-70" : "opacity-90",
-                isMobile && !mobileMenuOpen && "hidden",
-                "z-[1000]",
-              )}
-              style={{
-                transitionDelay: `${index * 75}ms`,
-                transform: isScrolled ? "translateY(-10px)" : "",
-              }}
-            >
-              {element.type === "button" && (
-                <MainButton
-                  href={`/?view=${element.content?.toLowerCase()}`}
-                  variant={element.variant}
-                  className={cn(
-                    "relative text-2xl transition-all duration-300 hover:opacity-100 md:text-3xl",
-                    "text-black/70 hover:text-black dark:text-white/70 dark:hover:text-white",
-                    element.isActive && "!text-primary font-bold underline underline-offset-4",
-                    isMobile && "text-4xl",
-                  )}
-                  onClick={() => isMobile && setMobileMenuOpen(false)}
-                >
-                  {element.content}
-                </MainButton>
-              )}
-            </div>
-          ))}
-        </nav>
-      </section>
-    </>
+  useGSAP(
+    () => {
+      // Run animation when component mounts
+      navAnimation();
+    },
+    { scope: containerReference },
+  );
+
+  return (
+    <section
+      ref={containerReference}
+      className="font-head fixed top-0 right-[5%] z-[999] hidden flex-col md:flex"
+      role="navigation"
+    >
+      <NavItems isMobile={false} onItemClick={() => {}} />
+    </section>
+  );
+};
+
+export const Navbar = () => {
+  const { isMobile } = useResponsiveLayout();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile menu when window is resized to desktop size
+  useEffect(() => {
+    if (!isMobile && mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  }, [isMobile, mobileMenuOpen]);
+
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  return (
+    <section className="z-[999]">
+      {isMobile ? (
+        <MobileNav onClose={closeMobileMenu} isOpen={mobileMenuOpen} toggleMenu={toggleMobileMenu} />
+      ) : (
+        <DesktopNav />
+      )}
+    </section>
   );
 };
