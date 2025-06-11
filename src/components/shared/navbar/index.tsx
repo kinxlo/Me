@@ -55,7 +55,7 @@ const DesktopNav = () => {
   useGSAP(
     () => {
       // Run animation when component mounts
-      navAnimation();
+      navAnimation(true);
     },
     { scope: containerReference },
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
+// import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
 import { NAV_ITEMS } from "@/lib/tools/constants";
 import { usePathname } from "next/navigation";
 
@@ -15,7 +15,7 @@ export const NavItems = ({ isMobile = false, onItemClick }: NavItemsProperties) 
   const pathname = usePathname();
 
   return (
-    <>
+    <div className={`flex flex-col items-center justify-center gap-8 lg:items-start lg:gap-4`}>
       {NAV_ITEMS.map((item, index) => (
         <NavItem
           key={index}
@@ -32,7 +32,7 @@ export const NavItems = ({ isMobile = false, onItemClick }: NavItemsProperties) 
           isExternal={item.isExternal}
         />
       ))}
-      <ModeToggle />
-    </>
+      {/* <ModeToggle /> */}
+    </div>
   );
 };

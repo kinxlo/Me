@@ -50,7 +50,7 @@ export const NAV_ITEMS = [
     variant: "link" as const,
   },
   {
-    content: "Resume",
+    content: "Résumé",
     path: "https://drive.google.com/file/d/1-emFvqL9-gs6v7DitqyR8aLxfZmb52Fz/view?usp=sharing",
     variant: "link" as const,
     isExternal: true,
