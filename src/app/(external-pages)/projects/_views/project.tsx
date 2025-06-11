@@ -42,26 +42,16 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         <section className="show mt-[5rem] max-w-(--breakpoint-md) -rotate-2 space-y-1 px-2">
           <h1 className="project-text cc-border cc-init text-primary translate-x-[50%]">Showcase</h1>
           <p className="project-text cc-border font-sea cc-init translate-x-[50%] text-2xl text-black">
-            Here you will find some of the personal and clients projects that I created with each project containing its
-            own case study
+            Here you will find some project that made it from development to production.
           </p>
         </section>
 
         <section className="my-[5rem] space-y-[5rem] lg:space-y-[10rem]">
           {projects.map((project, index) => (
             <Wrapper key={project.id} className={`p-0 project-${index}`}>
-              <Wrapper className="space-y-1 py-0">
-                <p className="project-title cc-border font-head text-primary h-10 text-2xl font-medium">
-                  {project.id}. {project.name}
-                </p>
-                <p className="project-p cc-border font-sea min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">
-                  {project.desc}
-                </p>
-              </Wrapper>
-
               <Wrapper className="cc-border my-2 p-0">
                 <Link referrerPolicy="no-referrer" target="_blank" href={project?.url || ""}>
-                  <PlainCard className="project-image-container group h-[273px] rounded-none border-none mix-blend-multiply transition-all lg:h-[483px]">
+                  <PlainCard className="project-image-container group max-h-[273px] rounded-none border-none mix-blend-multiply transition-all lg:max-h-[483px]">
                     <div
                       className={cn("image-marquee-container relative grid grid-cols-3 gap-2 will-change-transform")}
                     >
@@ -89,6 +79,14 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                     </div>
                   </PlainCard>
                 </Link>
+              </Wrapper>
+              <Wrapper className="space-y-1 py-0">
+                <p className="project-title cc-border font-head text-primary h-10 text-2xl font-medium">
+                  {project.id}. {project.name}
+                </p>
+                <p className="project-p cc-border font-sea min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">
+                  {project.desc}
+                </p>
               </Wrapper>
             </Wrapper>
           ))}

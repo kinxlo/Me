@@ -1,6 +1,7 @@
 import { aboutTextAnimation } from "@/lib/animation/about-animation";
 import { useGSAP } from "@gsap/react";
 import { CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 import { PlainCard } from "./plain-card";
 
@@ -15,7 +16,11 @@ export const BusinessCard = () => {
       <section className="cc-border space-y-4 py-4">
         <h3 className="text-primary about-txt text-2xl underline lg:text-5xl">Ifijeh Kingsley Solomon</h3>
         <p className="font-sea text-2xl text-black/80">
-          Front-End Engineer at TSA, with an interest in Backend engineering, and System architecture.
+          Lead Frontend dev at{" "}
+          <Link target={`_blank`} href={`https://techstudioacademy.com`} className={`text-success hover:underline`}>
+            TSA
+          </Link>
+          , with an interest in Backend engineering, and System architecture.
         </p>
       </section>
 
@@ -75,18 +80,18 @@ export const BusinessCard = () => {
             <CheckCircle size={20} className="text-success mt-1" />
           </div>
           <p>
-            <span className="text-primary font-head text-lg font-bold underline">Open Source</span> — Contributed to and
-            maintained community-driven projects, collaborating in public and learning from diverse engineering
+            <span className="text-primary font-head text-lg font-bold underline">Open Source</span> — Contributing to
+            and maintaining community-driven projects, collaborating in public and learning from diverse engineering
             perspectives.
           </p>
         </div>
       </section>
 
       {/* Personal Touch */}
-      <section className="font-sea pt-2 text-xl text-black/50">
+      <section className="font-sea mb-20 pt-2 text-2xl text-black/50">
         <p>
-          *** Outside of work, you&apos;ll find me reading (its not code), hanging out with the &rdquo;homies&rdquo;, or
-          playing video games.***
+          *** Outside of work, you&apos;ll find me reading, hanging out with the &rdquo;Guys&rdquo;, or playing video
+          games.***
         </p>
       </section>
     </PlainCard>

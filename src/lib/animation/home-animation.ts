@@ -40,26 +40,36 @@ export const textAnimation = () => {
   textTimeline
     .to(`.hero-text`, {
       text: {
-        value: "I like to craft solid and scalable frontend products with great user experiences.",
+        value: "I build stuff you see on the internet   &   Apps you use on mobile devices too!",
         newClass: "text-black",
         speed: 1,
       },
+      repeat: -1,
+      yoyo: true,
+      repeatDelay: 10,
       ease: "none",
     })
     .to(`.hero-text-1`, {
       text: {
-        value: "Highly skilled at progressive enhancement, design systems & UI Engineering.",
+        value: "...using tools like [ REACT.js, VUE.js, TAILWINDCSS, TYPESCRIPT, NEXT.js ]...etc",
         newClass: "text-black",
         speed: 1,
       },
+      repeat: -1,
+      yoyo: true,
+      repeatDelay: 10,
       ease: "none",
     })
     .to(`.hero-text-2`, {
       text: {
-        value: "Proven experience building successful products for clients across several countries.",
+        value:
+          "SCALABLE, EFFICIENT, SECURE, ROBUST, OPTIMIZED...a few of this words have been used to describe my projects.",
         newClass: "text-black",
         speed: 1,
       },
+      repeat: -1,
+      yoyo: true,
+      repeatDelay: 10,
       ease: "none",
     });
   return textTimeline;
