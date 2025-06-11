@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { A11y, FreeMode, Navigation, Pagination, Scrollbar, Thumbs } from "swiper/modules";
+import { A11y, Autoplay, FreeMode, Navigation, Pagination, Scrollbar, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { SwiperOptions, Swiper as SwiperType } from "swiper/types";
 
@@ -75,6 +75,7 @@ export const UniversalSwiper = ({
     ...(showScrollbar ? [Scrollbar] : []),
     ...(freeMode ? [FreeMode] : []),
     ...(thumbsSwiper ? [Thumbs] : []),
+    Autoplay,
     A11y,
   ];
 
@@ -108,7 +109,7 @@ export const UniversalSwiper = ({
 
       {/* Navigation buttons - positioned below the swiper */}
       {showNavigation && (
-        <div className="cc-border flex justify-center gap-4">
+        <div className="flex justify-center gap-4">
           <MainButton
             onClick={() => swiperReference.current?.slidePrev()}
             isIconOnly
@@ -116,7 +117,7 @@ export const UniversalSwiper = ({
             variant="outline"
             size="circle"
             aria-label="Previous slide"
-            className="hover:bg-primary w-fit translate-x-[50%] rounded-full border-5 bg-black text-white transition-all duration-300 hover:text-white"
+            className="hover:bg-primary w-fit rounded-full border-5 bg-black text-white transition-all duration-300 hover:text-white"
           />
           <MainButton
             onClick={() => swiperReference.current?.slideNext()}
@@ -125,7 +126,7 @@ export const UniversalSwiper = ({
             variant="outline"
             size="circle"
             aria-label="Next slide"
-            className="hover:bg-primary w-fit translate-x-[50%] rounded-full border-5 bg-black text-white transition-all duration-300 hover:text-white"
+            className="hover:bg-primary w-fit rounded-full border-5 bg-black text-white transition-all duration-300 hover:text-white"
           />
         </div>
       )}

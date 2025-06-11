@@ -36,7 +36,7 @@ export const NavItem = ({ content, path, variant, isActive, isMobile = false, on
         "cc-nav font-head relative opacity-0 transition-all duration-300 hover:opacity-100 md:text-2xl",
         "text-black/50 hover:text-black",
         isActive && "!text-primary font-bold underline underline-offset-4",
-        isMobile && "text-4xl",
+        isMobile && "text-4xl text-white",
       )}
       onClick={() => {
         if (isMobile && onClick) {
