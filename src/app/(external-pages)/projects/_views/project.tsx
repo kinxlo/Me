@@ -1,19 +1,19 @@
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
-import { BlurImage } from "@/components/core/miscellaneous/blur-image";
 import {
   initProjectAnimationList,
   projectTextAnimation,
   showProjectTextAnimation,
 } from "@/lib/animation/project-animation";
-import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
 
-import { PlainCard } from "../../_components/plain-card";
+// import Link from "next/link";
+
+// import { PlainCard } from "../../_components/plain-card";
+import { ProjectsCarousel } from "../../_components/project-carousel";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,54 +42,14 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         <section className="show mt-[5rem] max-w-(--breakpoint-md) -rotate-2 space-y-1 px-2">
           <h1 className="project-text cc-border cc-init text-primary translate-x-[50%]">Showcase</h1>
           <p className="project-text cc-border font-sea cc-init translate-x-[50%] text-2xl text-black">
-            Here you will find some project that made it from development to production.
+            Here you will find some project that made it from development to production. <br /> <span>Note:</span> that
+            this previews are interactive to a point. if you want to have the full experience, click the link attached
+            to the project.
           </p>
         </section>
 
-        <section className="my-[5rem] space-y-[5rem] lg:space-y-[10rem]">
-          {projects.map((project, index) => (
-            <Wrapper key={project.id} className={`p-0 project-${index}`}>
-              <Wrapper className="cc-border my-2 p-0">
-                <Link referrerPolicy="no-referrer" target="_blank" href={project?.url || ""}>
-                  <PlainCard className="project-image-container group max-h-[273px] rounded-none border-none mix-blend-multiply transition-all lg:max-h-[483px]">
-                    <div
-                      className={cn("image-marquee-container relative grid grid-cols-3 gap-2 will-change-transform")}
-                    >
-                      <BlurImage
-                        src={project?.imageDesktop1}
-                        width={1000}
-                        height={1000}
-                        alt="project"
-                        className="marquee-image-1 h-full w-full border object-cover transition-all group-hover:border-black"
-                      />
-                      <BlurImage
-                        src={project?.imageDesktop2}
-                        width={1000}
-                        height={1000}
-                        alt="project"
-                        className="marquee-image-2 h-full w-full border object-cover transition-all group-hover:border-black"
-                      />
-                      <BlurImage
-                        src={project?.imageDesktop2}
-                        width={1000}
-                        height={1000}
-                        alt="project"
-                        className="marquee-image-3 h-full w-full border object-cover transition-all group-hover:border-black"
-                      />
-                    </div>
-                  </PlainCard>
-                </Link>
-              </Wrapper>
-              <Wrapper className="space-y-1 py-0">
-                <p className="project-title cc-border font-head text-primary h-10 text-2xl font-medium">
-                  {project.id}. {project.name}
-                </p>
-                <p className="project-p cc-border font-sea min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">
-                  {project.desc}
-                </p>
-              </Wrapper>
-            </Wrapper>
-          ))}
+        <section className="cc-border my-[5rem] space-y-[5rem] lg:space-y-[10rem]">
+          <ProjectsCarousel projects={projects} />
         </section>
       </Wrapper>
     </div>
