@@ -22,14 +22,14 @@ export const Hero = () => {
                 text="Kingsley"
                 animateBy="letters"
                 direction="top"
-                className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]"
+                className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]"
               />
               <hr className="border-primary -md:my-4 mb-2 w-full border-t-2" />
               <BlurText
                 text="fijeh"
                 animateBy="letters"
                 direction="bottom"
-                className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
+                className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl"
               />
             </div>
           </h1>
