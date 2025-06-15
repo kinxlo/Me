@@ -1,32 +1,26 @@
 "use client";
 
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-// import { useSearchParameters } from "@/hooks/use-search-parameters";
-import { cn } from "@/lib/utils";
 
-// import { usePathname } from "next/navigation";
-
-// import { Skills } from "./skills";
+import { MySvgPic } from "./my-svg-pic";
 
 export const Me = () => {
-  // const view = usePathname();
   return (
-    <section
-      className={cn(
-        `fixed right-0 bottom-0 isolate object-cover object-top opacity-30 mix-blend-multiply transition-all duration-500 ease-out lg:opacity-50`,
-        `max-h-[40%] max-w-[30%]`,
-        `xl:max-h-[70%] xl:max-w-[60%]`,
-        `origin-bottom-right`,
-        // view.includes(`/about`) && `opacity-30`,
-      )}
-    >
-      <BlurImage src={"/images/me.svg"} alt={"Illustration of me"} width={507} height={469.32} priority />
+    <div className="pointer-events-none absolute right-0 bottom-0 z-0 h-[100vh] w-[50%] overflow-hidden">
+      {/* SVG Background - maintains position with responsive scaling */}
+      <MySvgPic
+        className={`absolute right-0 translate-x-[25%] translate-y-[35%] scale-[2] opacity-10 md:translate-y-[25%] md:scale-[2] lg:translate-x-[20%] lg:translate-y-[20%] lg:scale-[2] xl:opacity-10`}
+      />
 
-      {/* {!view.includes(`/about`) && (
-        <Skills
-          className={`font-sea -xl:left-[20%] bottom-[10%] -left-[20%] z-10 hidden -rotate-10 lg:absolute lg:block`}
-        />
-      )} */}
-    </section>
+      {/* Main Image - maintains bottom-right position with responsive scaling */}
+      <BlurImage
+        className={`absolute right-0 bottom-0 origin-bottom-right translate-x-[25%] translate-y-[25%] scale-75 md:scale-90 lg:translate-x-[35%] lg:translate-y-[35%] lg:scale-100`}
+        src="/images/me.svg"
+        alt="Illustration shadow effect"
+        width={500}
+        height={800}
+        priority
+      />
+    </div>
   );
 };
