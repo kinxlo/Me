@@ -11,11 +11,11 @@ export const BusinessCard = () => {
   }, []);
 
   return (
-    <PlainCard className="business-card -lg:rotate-2 ml-3 min-h-[1128px] -rotate-1 space-y-8 rounded-none p-5 mix-blend-multiply lg:ml-8 lg:p-10">
+    <PlainCard className="business-card ml-3 min-h-[1128px] -rotate-2 rounded-none p-5 mix-blend-multiply lg:ml-8 lg:p-10">
       {/* Name & Role */}
       <section className="cc-border space-y-4 py-4">
-        <h3 className="text-primary about-txt text-2xl underline lg:text-5xl">Ifijeh Kingsley Solomon</h3>
-        <p className="font-sea text-2xl text-black/80">
+        <h3 className="text-primary about-txt text-3xl underline lg:text-5xl">Ifijeh Kingsley Solomon</h3>
+        <p className="font-head h-[91px] text-xl text-black/70">
           Lead Frontend dev at{" "}
           <Link target={`_blank`} href={`https://techstudioacademy.com`} className={`text-success hover:underline`}>
             TSA
@@ -23,20 +23,20 @@ export const BusinessCard = () => {
           , with an interest in Backend engineering, and System architecture.
         </p>
       </section>
-
+      <div className={`cc-border cc-shades h-4`} />
       {/* Experience & Resume */}
-      <section className="cc-border space-y-4 py-4">
+      <section className="cc-border h-[235px] space-y-4 py-4">
         <div className="flex items-center justify-between gap-2">
           <h3 className="text-xl font-black tracking-tighter text-black lg:text-3xl">~4 Years Experience</h3>
         </div>
-        <p className="font-sea text-2xl text-black/80">
+        <p className="font-head text-xl text-black/70">
           I enjoy building interfaces that are both beautiful and interactive, bringing ideas to completion in a way
           that looks great, feels smooth, and works well for everyone and every devices too.
         </p>
       </section>
-
+      <div className={`cc-border cc-shades h-4`} />
       {/* Highlights */}
-      <section className="font-sea cc-border space-y-10 py-4 text-xl text-black/80">
+      <section className="font-head cc-border min-h-[573px] space-y-10 py-4 text-lg text-black/70">
         <div className="flex items-start gap-4">
           <div>
             <CheckCircle size={20} className="text-success mt-1" />
@@ -87,6 +87,7 @@ export const BusinessCard = () => {
         </div>
       </section>
 
+      <div className={`cc-border cc-shades h-4`} />
       {/* Personal Touch */}
       <section className="font-sea mb-20 pt-2 text-2xl text-black/50">
         <p>

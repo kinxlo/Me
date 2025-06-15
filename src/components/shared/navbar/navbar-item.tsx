@@ -45,9 +45,9 @@ export const NavItem = ({ content, path, variant, isActive, isMobile = false, on
       }}
     >
       {content}
-      {!isMobile && (
+      {/* {!isMobile && (
         <span className="bg-primary absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full" />
-      )}
+      )} */}
     </MainButton>
   );
 };

@@ -11,7 +11,7 @@ import { PlainCard } from "./plain-card";
 export const ProjectsCarousel = ({ projects }: { projects: Project[] }) => {
   return (
     <UniversalSwiper
-      className="overflow-hidden !mix-blend-multiply"
+      className="overflow-hidden !mix-blend-multiply backdrop-blur-xs"
       items={projects}
       renderItem={(project: Project) => (
         <Wrapper key={project.id} className={`p-0`}>
@@ -19,7 +19,9 @@ export const ProjectsCarousel = ({ projects }: { projects: Project[] }) => {
             <p className="project-title font-head text-primary h-10 text-2xl font-medium underline">
               {project.id}. {project.name}
             </p>
-            <p className="project-p font-sea min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">{project.desc}</p>
+            <p className="project-p font-head min-h-[65px] max-w-(--breakpoint-md) text-xl text-black/80">
+              {project.desc}
+            </p>
           </Wrapper>
           <Wrapper className="p-0">
             <Link referrerPolicy="no-referrer" target="_blank" href={project?.url || ""}>

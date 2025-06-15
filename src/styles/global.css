@@ -362,3 +362,9 @@
     transform: scale(1);
   }
 }
+
+.business-card p,
+.business-card h3,
+.business-card div {
+  will-change: transform, opacity;
+}
