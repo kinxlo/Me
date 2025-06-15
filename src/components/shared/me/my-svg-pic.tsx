@@ -1,8 +1,13 @@
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 
 export const MySvgPic = ({ className }: { className?: string }) => {
+  const svgReference = useRef<SVGSVGElement>(null);
+
+  useGSAP();
   return (
-    <svg width="full" height="full" viewBox="0 0 1100 1576" className={cn(className)}>
+    <svg ref={svgReference} width="100%" height="100%" viewBox="0 0 1100 1576" className={cn(className)}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

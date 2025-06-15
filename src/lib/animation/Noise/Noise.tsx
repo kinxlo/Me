@@ -1,6 +1,4 @@
-/*
-	Installed from https://reactbits.dev/ts/tailwind/
-*/
+"use client";
 
 import React, { useEffect, useRef } from "react";
 
@@ -85,7 +83,7 @@ const Noise: React.FC<NoiseProperties> = ({
     };
   }, [patternSize, patternScaleX, patternScaleY, patternRefreshInterval, patternAlpha]);
 
-  return <canvas className="absolute top-0 left-0 h-screen w-screen" ref={grainReference} />;
+  return <canvas className="fixed top-0 left-0 h-screen w-screen" ref={grainReference} />;
 };
 
 export default Noise;

@@ -1,10 +1,13 @@
 "use client";
 
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 import { MySvgPic } from "./my-svg-pic";
 
 export const Me = () => {
+  const pathname = usePathname();
   return (
     <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[50%] overflow-hidden">
       {/* SVG Background - maintains position with responsive scaling */}
@@ -14,7 +17,10 @@ export const Me = () => {
 
       {/* Main Image - maintains bottom-right position with responsive scaling */}
       <BlurImage
-        className={`absolute right-0 bottom-0 origin-bottom-right translate-x-[25%] translate-y-[25%] scale-75 md:scale-90 lg:translate-x-[35%] lg:translate-y-[35%] lg:scale-100`}
+        className={cn(
+          `absolute right-0 bottom-0 origin-bottom-right translate-x-[25%] translate-y-[25%] scale-75 md:scale-90 lg:translate-x-[35%] lg:translate-y-[35%] lg:scale-100`,
+          pathname.includes(`/projects`) && `hidden`,
+        )}
         src="/images/me.svg"
         alt="Illustration shadow effect"
         width={500}
