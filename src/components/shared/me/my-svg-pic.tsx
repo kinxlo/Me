@@ -2,13 +2,7 @@ import { cn } from "@/lib/utils";
 
 export const MySvgPic = ({ className }: { className?: string }) => {
   return (
-    <svg
-      width="full"
-      height="full"
-      //   preserveAspectRatio="xMinYMin meet"
-      viewBox="0 0 1100 1576"
-      className={cn(className)}
-    >
+    <svg width="full" height="full" viewBox="0 0 1100 1576" className={cn(className)}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
