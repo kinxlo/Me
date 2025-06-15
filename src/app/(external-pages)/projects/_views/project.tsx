@@ -1,12 +1,26 @@
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BlurImage } from "@/components/core/miscellaneous/blur-image";
+import InfiniteScroll from "@/lib/animation/InfiniteScroll/InfiniteScroll";
+// import Noise from "@/lib/animation/Noise/Noise";
+import { cn } from "@/lib/utils";
 
-import { ProjectsCarousel } from "../../_components/project-carousel";
+import { PlainCard } from "../../_components/plain-card";
 
-gsap.registerPlugin(ScrollTrigger);
+// const items = [
+//   {
+//     content: (
+//       <BlurImage
+//         src={project?.imageDesktop1}
+//         width={1000}
+//         height={1000}
+//         alt="project"
+//         className="h-full w-full border object-cover transition-all group-hover:border-black"
+//       />
+//     ),
+//   },
+// ];
 
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   if (!projects?.length) {
@@ -33,8 +47,94 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
           </p>
         </section>
 
-        <section className="cc-border my-[5rem] space-y-[5rem] py-1 lg:space-y-[10rem]">
-          <ProjectsCarousel projects={projects} />
+        <section className="cc-border my-[5rem]">
+          {/* <ProjectsCarousel projects={projects} /> */}
+
+          <section className="space-y-[5rem] lg:space-y-[10rem]">
+            {projects.map((project) => (
+              <Wrapper key={project.id} className={`overflow-hidden p-0`}>
+                {/* <Noise
+                  patternSize={250}
+                  patternScaleX={1}
+                  patternScaleY={1}
+                  patternRefreshInterval={2}
+                  patternAlpha={15}
+                /> */}
+                <Wrapper className="space-y-1 py-0">
+                  <p className="project-title font-head text-primary h-10 text-2xl font-bold">
+                    {project.id}. {project.name}
+                  </p>
+                  <p className="project-p font-head min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">
+                    {project.desc}
+                  </p>
+                </Wrapper>
+                <Wrapper className="my-2 p-0">
+                  <PlainCard className="group hover:border-primary relative rounded-none !mix-blend-multiply backdrop-blur-xs transition-all duration-300">
+                    {/* <div
+                      className={`!mix-blend-multiply`}
+                      style={{ position: "relative", height: `100%`, overflow: "hidden" }}
+                    >
+                      <iframe
+                        className={``}
+                        sandbox="allow-same-origin allow-scripts allow-popups"
+                        src={project.url}
+                        title="Responsive iframe"
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          border: "none",
+                          mixBlendMode: `multiply`,
+                        }}
+                        allowFullScreen
+                      />
+                    </div> */}
+                    <InfiniteScroll
+                      items={[
+                        {
+                          content: (
+                            <div className={cn("grid grid-cols-3 gap-4 !mix-blend-multiply will-change-transform")}>
+                              <BlurImage
+                                src={project?.imageDesktop1}
+                                width={1000}
+                                height={1000}
+                                alt="project"
+                                className="h-full w-full border object-cover transition-all group-hover:border-black"
+                              />
+                              <BlurImage
+                                src={project?.imageDesktop2}
+                                width={1000}
+                                height={1000}
+                                alt="project"
+                                className="h-full w-full border object-cover transition-all group-hover:border-black"
+                              />
+                              <BlurImage
+                                src={project?.imageDesktop2}
+                                width={1000}
+                                height={1000}
+                                alt="project"
+                                className="h-full w-full border object-cover transition-all group-hover:border-black"
+                              />
+                            </div>
+                          ),
+                        },
+                      ]}
+                      isTilted={false}
+                      tiltDirection="left"
+                      autoplay={true}
+                      autoplaySpeed={0.1}
+                      autoplayDirection="up"
+                      pauseOnHover={true}
+                      itemMinHeight={300}
+                      width={`100%`}
+                    />
+                  </PlainCard>
+                </Wrapper>
+              </Wrapper>
+            ))}
+          </section>
         </section>
       </Wrapper>
     </div>
