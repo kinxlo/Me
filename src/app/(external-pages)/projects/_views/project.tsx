@@ -127,7 +127,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       autoplaySpeed={0.1}
                       autoplayDirection="up"
                       pauseOnHover={true}
-                      itemMinHeight={300}
+                      itemMinHeight={400}
                       width={`100%`}
                     />
                   </PlainCard>
