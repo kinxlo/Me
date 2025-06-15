@@ -11,11 +11,11 @@ import { PlainCard } from "./plain-card";
 export const ProjectsCarousel = ({ projects }: { projects: Project[] }) => {
   return (
     <UniversalSwiper
-      className="overflow-hidden !mix-blend-multiply backdrop-blur-xs"
+      className="blend-multiply-backdrop overflow-hidden bg-transparent !mix-blend-multiply backdrop-blur-xs"
       items={projects}
       renderItem={(project: Project) => (
         <Wrapper key={project.id} className={`p-0`}>
-          <Wrapper className="cc-bg-dotted flex -rotate-2 flex-col items-center justify-center space-y-1 py-0 text-center">
+          <Wrapper className="flex min-h-[130px] -rotate-2 flex-col items-center justify-center space-y-1 bg-transparent py-10 text-center">
             <p className="project-title font-head text-primary h-10 text-2xl font-medium underline">
               {project.id}. {project.name}
             </p>
@@ -23,7 +23,7 @@ export const ProjectsCarousel = ({ projects }: { projects: Project[] }) => {
               {project.desc}
             </p>
           </Wrapper>
-          <Wrapper className="p-0">
+          <Wrapper className="bg-transparent p-0">
             <Link referrerPolicy="no-referrer" target="_blank" href={project?.url || ""}>
               <PlainCard className="project-image-container group hover:border-primary relative max-h-[30dvh] rounded-none !mix-blend-multiply transition-all duration-300 lg:max-h-[50dvh]">
                 <div

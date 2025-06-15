@@ -11,11 +11,11 @@ export const BusinessCard = () => {
   }, []);
 
   return (
-    <PlainCard className="business-card ml-3 min-h-[1128px] -rotate-2 rounded-none p-5 mix-blend-multiply lg:ml-8 lg:p-10">
+    <PlainCard className="business-card min-h-[1128px] rounded-none p-5 mix-blend-multiply lg:ml-8 lg:rotate-[-2deg] lg:p-10">
       {/* Name & Role */}
       <section className="cc-border space-y-4 py-4">
         <h3 className="text-primary about-txt text-3xl underline lg:text-5xl">Ifijeh Kingsley Solomon</h3>
-        <p className="font-head h-[91px] text-xl text-black/70">
+        <p className="font-head h-[100px] text-xl text-black/70">
           Lead Frontend dev at{" "}
           <Link target={`_blank`} href={`https://techstudioacademy.com`} className={`text-success hover:underline`}>
             TSA

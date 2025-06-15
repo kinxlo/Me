@@ -368,3 +368,28 @@
 .business-card div {
   will-change: transform, opacity;
 }
+
+.blend-multiply-backdrop {
+  /* Mix blend mode */
+  mix-blend-mode: multiply;
+  -webkit-mix-blend-mode: multiply;
+
+  /* Backdrop filter - adjust blur value as needed */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  /* Fallback for browsers that don't support backdrop-filter */
+  @supports not (backdrop-filter: blur(8px)) {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white fallback */
+  }
+
+  /* Edge 17-18 support */
+  @supports (-ms-ime-align: auto) {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* IE11 support */
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
