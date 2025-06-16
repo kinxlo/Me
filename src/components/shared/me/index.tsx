@@ -15,7 +15,10 @@ export const Me = () => {
       {/* SVG Background - maintains position with responsive scaling */}
       <MySvgPic
         // path={me}
-        className={`absolute right-0 translate-x-[25%] translate-y-[35%] scale-[2] opacity-10 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%] xl:opacity-10`}
+        className={cn(
+          `absolute right-0 translate-x-[25%] translate-y-[35%] scale-[1.5] opacity-10 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%] xl:opacity-20`,
+          pathname.includes(`/project`) && `hidden translate-0 scale-[1] lg:block lg:translate-0`,
+        )}
       />
 
       {/* Main Image - maintains bottom-right position with responsive scaling */}

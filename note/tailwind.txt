@@ -1,86 +1,14 @@
-/* Small dots (1px) */
-bg-[image:radial-gradient(var(--pattern-fg)_1px,transparent_0)]
-bg-[size:10px_10px]
-
-/* Medium dots (1.5px) */
-bg-[image:radial-gradient(var(--pattern-fg)_1.5px,transparent_0)]
-bg-[size:12px_12px]
-
-/* Large dots (2px) */
-bg-[image:radial-gradient(var(--pattern-fg)_2px,transparent_0)]
-bg-[size:15px_15px]
-
-/* Square grid */
-bg-[image:linear-gradient(var(--pattern-fg)_1px,transparent_0),
-     linear-gradient(90deg,var(--pattern-fg)_1px,transparent_0)]
-bg-[size:20px_20px]
-
-/* Dotted grid */
-bg-[image:radial-gradient(var(--pattern-fg)_1px,transparent_1px),
-     radial-gradient(var(--pattern-fg)_1px,transparent_1px)]
-bg-[size:20px_20px]
-bg-[position:0_0,10px_10px]
-
-
-/* Horizontal lines */
-bg-[image:repeating-linear-gradient(0deg,var(--pattern-fg)_0_1px,transparent_1px_4px)]
-bg-[size:100%_4px]
-
-/* Vertical lines */
-bg-[image:repeating-linear-gradient(90deg,var(--pattern-fg)_0_1px,transparent_1px_4px)]
-bg-[size:4px_100%]
-
-/* Diagonal lines */
-bg-[image:repeating-linear-gradient(45deg,var(--pattern-fg)_0_1px,transparent_1px_5px)]
-bg-[size:5px_5px]
-
-/* Graph paper (grid + dots) */
-bg-[image:linear-gradient(var(--pattern-fg)_1px,transparent_0),
-     linear-gradient(90deg,var(--pattern-fg)_1px,transparent_0),
-     radial-gradient(var(--pattern-fg)_1px,transparent_1px)]
-bg-[size:40px_40px,40px_40px,20px_20px]
-bg-[position:0_0,0_0,10px_10px]
-
-<div class="
-  [--pattern-fg:oklch(0.5_0_0)]
-  dark:[--pattern-fg:oklch(0.8_0_0)]
-  bg-[image:radial-gradient(var(--pattern-fg)_1px,transparent_0)]
-  bg-[size:10px_10px]
-  bg-fixed
-">
-  <!-- Content -->
-</div>
-
-
-========================================
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import {
-  initProjectAnimationList,
-  projectTextAnimation,
-  showProjectTextAnimation,
-} from "@/lib/animation/project-animation";
+import InfiniteScroll from "@/lib/animation/InfiniteScroll/InfiniteScroll";
 import { cn } from "@/lib/utils";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// import Link from "next/link";
-
-import { PlainCard } from "../../_components/plain-card";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useState } from "react";
 
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
-  useGSAP(() => {
-    const timeline = showProjectTextAnimation();
-    timeline.eventCallback(`onComplete`, () => {
-      initProjectAnimationList(projects);
-      projectTextAnimation();
-    });
-  }, []);
+  // Track hover state for each project by its ID
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   if (!projects?.length) {
     return (
@@ -94,84 +22,96 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
 
   return (
     <div>
-      <Wrapper className="mt-0 space-y-4 p-0">
-        <section className="show mt-[5rem] max-w-(--breakpoint-md) -rotate-2 space-y-1 px-2">
-          <h1 className="project-text cc-border cc-init text-primary translate-x-[50%]">Showcase</h1>
-          <p className="project-text cc-border font-sea cc-init translate-x-[50%] text-2xl text-black">
+      <section className="mt-0 space-y-4 p-0">
+        <section className="mt-[5rem] max-w-(--breakpoint-md) space-y-1 px-2">
+          <h1 className="cc-border text-primary">Showcase</h1>
+          <p className="project-text cc-border font-head text-2xl text-black/90">
             Here you will find some project that made it from development to production.
+          </p>
+          <p className={`font-sea mt-4 text-xl`}>
+            <span className={`text-primary`}>Note:</span> that this previews are interactive to a point. if you want to
+            have the full experience, click the link attached to the project.
           </p>
         </section>
 
-        <section className="my-[5rem] space-y-[5rem] lg:space-y-[10rem]">
-          {projects.map((project, index) => (
-            <Wrapper key={project.id} className={`p-0 project-${index}`}>
-              <Wrapper className="space-y-1 py-0">
-                <p className="project-title cc-border font-head text-primary h-10 text-2xl font-medium">
-                  {project.id}. {project.name}
-                </p>
-                <p className="project-p cc-border font-sea min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">
-                  {project.desc}
-                </p>
-              </Wrapper>
-              <Wrapper className="cc-border my-2 p-0">
-                {/* <Link referrerPolicy="no-referrer" target="_blank" href={project?.url || ""}> */}
-                <PlainCard className="project-image-container group hover:border-primary relative h-[500px] rounded-none border border-black !mix-blend-multiply transition-all duration-300">
-                  <div
-                    className={`!mix-blend-multiply`}
-                    style={{ position: "relative", height: `100%`, overflow: "hidden" }}
-                  >
-                    <iframe
-                      className={``}
-                      sandbox="allow-same-origin allow-scripts allow-popups"
-                      src={project.url}
-                      title="Responsive iframe"
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100%",
-                        border: "none",
-                        mixBlendMode: `multiply`,
-                      }}
-                      allowFullScreen
-                    />
-                  </div>
-
-                  {/* <div
+        <section className="cc-border my-[5rem]">
+          <section className="space-y-[5rem] lg:space-y-[10rem]">
+            {projects.map((project) => (
+              <Wrapper key={project.id} id={`project-${project.id}`} className={`overflow-hidden p-0`}>
+                <Wrapper className="space-y-1 py-0">
+                  <p className="project-title font-head text-primary h-10 text-2xl font-bold">
+                    {project.id}. {project.name}
+                  </p>
+                  <p className="project-p font-head min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">
+                    {project.desc}
+                  </p>
+                </Wrapper>
+                <Wrapper className="my-2 p-0">
+                  <section
                     className={cn(
-                      "image-marquee-container relative grid grid-cols-3 gap-2 !mix-blend-multiply will-change-transform",
+                      "group hover:border-primary relative max-w-(--breakpoint-md) rounded-none !mix-blend-multiply backdrop-blur-xs transition-all duration-300",
+                      hoveredProject === String(project.id) && `max-w-full`,
                     )}
+                    onMouseEnter={() => setHoveredProject(String(project.id))}
+                    onMouseLeave={() => setHoveredProject(null)}
                   >
-                    <BlurImage
-                      src={project?.imageDesktop1}
-                      width={1000}
-                      height={1000}
-                      alt="project"
-                      className="marquee-image-1 h-full w-full border object-cover transition-all group-hover:border-black"
-                    />
-                    <BlurImage
-                      src={project?.imageDesktop2}
-                      width={1000}
-                      height={1000}
-                      alt="project"
-                      className="marquee-image-2 h-full w-full border object-cover transition-all group-hover:border-black"
-                    />
-                    <BlurImage
-                      src={project?.imageDesktop2}
-                      width={1000}
-                      height={1000}
-                      alt="project"
-                      className="marquee-image-3 h-full w-full border object-cover transition-all group-hover:border-black"
-                    />
-                  </div> */}
-                </PlainCard>
-                {/* </Link> */}
+                    <div
+                      className={cn(
+                        `relative hidden h-[40rem] overflow-hidden border border-black !mix-blend-multiply grayscale transition-all hover:grayscale-50 lg:block`,
+                      )}
+                    >
+                      <div className={cn("relative h-full w-full overflow-hidden")}>
+                        <iframe
+                          className={`w-full transition-all duration-500 ease-in-out`}
+                          sandbox="allow-same-origin allow-scripts allow-popups"
+                          src={project.url}
+                          title="Responsive iframe"
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            height: "100%",
+                            border: "none",
+                            mixBlendMode: `multiply`,
+                          }}
+                          allowFullScreen
+                        />
+                      </div>
+                    </div>
+                    <div className={`lg:hidden`}>
+                      <InfiniteScroll
+                        items={[
+                          {
+                            content: (
+                              <div className="grid grid-cols-1 gap-4 mix-blend-multiply backdrop-blur-xs will-change-transform">
+                                <BlurImage
+                                  width={1000}
+                                  height={1000}
+                                  src={project?.imageDesktop1}
+                                  alt="project"
+                                  className="w-full border object-cover transition-all hover:border-black"
+                                />
+                              </div>
+                            ),
+                          },
+                        ]}
+                        isTilted={false}
+                        autoplay={true}
+                        autoplaySpeed={0.1}
+                        pauseOnHover={true}
+                        width={`100%`}
+                        maxHeight={`300px`}
+                        itemMinHeight={500}
+                        autoplayDirection={`up`}
+                      />
+                    </div>
+                  </section>
+                </Wrapper>
               </Wrapper>
-            </Wrapper>
-          ))}
+            ))}
+          </section>
         </section>
-      </Wrapper>
+      </section>
     </div>
   );
 };
