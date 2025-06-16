@@ -22,20 +22,28 @@ export const MySvgPic = ({ className }: { className?: string }) => {
       const routeTargets = {
         "/": "#me",
         "/projects": "#pj-1",
-        "/about": "#about-path",
+        "/about": "#me",
       } as const;
 
       const targetPath = routeTargets[pathname as keyof typeof routeTargets] || "#me";
 
-      // Initial animation
-      gsap.to("#me", {
-        duration: 1,
-        delay: 1,
-        morphSVG: targetPath,
-        ease: "power2.inOut",
-      });
+      if (pathname !== "/projects") {
+        // Initial animation
+        gsap.to("#me", {
+          duration: 1,
+          delay: 1,
+          morphSVG: targetPath,
+          ease: "power2.inOut",
+        });
+      }
 
       if (pathname === "/projects") {
+        gsap.to("#pj-1", {
+          duration: 1,
+          delay: 1,
+          morphSVG: targetPath,
+          ease: "power2.inOut",
+        });
         for (const [index, project] of projects.entries()) {
           const projectSection = document.querySelector(`#project-${project.id}`);
           if (!projectSection) continue;
