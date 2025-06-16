@@ -6,13 +6,16 @@ import { usePathname } from "next/navigation";
 
 import { MySvgPic } from "./my-svg-pic";
 
+// import { me } from "./path";
+
 export const Me = () => {
   const pathname = usePathname();
   return (
-    <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[50%] overflow-hidden">
+    <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[50%] overflow-hidden !mix-blend-multiply">
       {/* SVG Background - maintains position with responsive scaling */}
       <MySvgPic
-        className={`absolute right-0 translate-x-[25%] translate-y-[35%] scale-[2] opacity-10 md:translate-y-[25%] md:scale-[2] lg:translate-x-[20%] lg:translate-y-[20%] lg:scale-[2] xl:opacity-10`}
+        // path={me}
+        className={`absolute right-0 translate-x-[25%] translate-y-[35%] scale-[2] opacity-10 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%] xl:opacity-10`}
       />
 
       {/* Main Image - maintains bottom-right position with responsive scaling */}

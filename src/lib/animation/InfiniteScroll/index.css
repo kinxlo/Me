@@ -32,22 +32,18 @@
   display: flex;
   flex-direction: column;
   overscroll-behavior: contain;
-  padding-inline: 1rem;
+  /* padding-inline: 1rem; */
   cursor: grab;
   transform-origin: center center;
 }
 
 .infinite-scroll-item {
-  --accent-color: #ffffff;
-  border-radius: 15px;
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
   font-size: 1.25rem;
   font-weight: 600;
-  text-align: center;
-  border: 2px solid var(--accent-color);
+  text-align: center; */
   user-select: none;
   box-sizing: border-box;
   position: relative;
