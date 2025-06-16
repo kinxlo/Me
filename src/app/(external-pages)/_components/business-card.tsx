@@ -23,7 +23,7 @@ export const BusinessCard = () => {
           , with an interest in Backend engineering, and System architecture.
         </p>
       </section>
-      {/* <div className={`cc-border cc-shades h-4`} /> */}
+      <div className={`cc-border cc-shades h-4`} />
       {/* Experience & Resume */}
       <section className="cc-border h-[235px] space-y-4 py-4">
         <div className="flex items-center justify-between gap-2">
@@ -34,7 +34,7 @@ export const BusinessCard = () => {
           that looks great, feels smooth, and works well for everyone and every devices too.
         </p>
       </section>
-      {/* <div className={`cc-border cc-shades h-4`} /> */}
+      <div className={`cc-border cc-shades h-4`} />
       {/* Highlights */}
       <section className="font-head cc-border min-h-[573px] space-y-10 py-4 text-lg text-black/70">
         <div className="flex items-start gap-4">
@@ -87,7 +87,7 @@ export const BusinessCard = () => {
         </div>
       </section>
 
-      {/* <div className={`cc-border cc-shades h-4`} /> */}
+      <div className={`cc-border cc-shades h-4`} />
       {/* Personal Touch */}
       <section className="font-sea mb-20 pt-2 text-2xl text-black/50">
         <p>
