@@ -37,7 +37,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         <section className="cc-border my-[5rem]">
           <section className="space-y-[5rem] lg:space-y-[10rem]">
             {projects.map((project) => (
-              <Wrapper key={project.id} className={`overflow-hidden p-0`}>
+              <Wrapper key={project.id} id={`project-${project.id}`} className={`overflow-hidden p-0`}>
                 <Wrapper className="space-y-1 py-0">
                   <p className="project-title font-head text-primary h-10 text-2xl font-bold">
                     {project.id}. {project.name}
