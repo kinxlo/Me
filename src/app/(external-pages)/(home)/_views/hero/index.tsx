@@ -7,7 +7,7 @@ import { socials } from "@/lib/tools/constants";
 export const Hero = () => {
   return (
     <section className="mix-blend-multiply">
-      <section className="mx-auto max-w-(--breakpoint-lg) -rotate-2">
+      <section className="mx-auto max-w-(--breakpoint-lg)">
         {/* Animate the text content after entrance */}
         <div>
           <h1 className="text-primary relative flex w-full items-end capitalize">

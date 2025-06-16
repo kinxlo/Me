@@ -18,7 +18,7 @@ export const NavItems = ({ isMobile = false, onItemClick }: NavItemsProperties) 
   return (
     <div
       className={cn(
-        `flex -rotate-2 flex-col items-center justify-center gap-8 md:gap-2 lg:items-start`,
+        `flex flex-col items-center justify-center gap-8 md:gap-2 lg:items-start`,
         // `md:flex-row`,
         // pathname.includes(`/project`) && `md:flex-row`,
       )}
