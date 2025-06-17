@@ -20,7 +20,7 @@ export const Me = () => {
         <ProjectSVGBG
           // path={me}
           className={cn(
-            `absolute right-0 translate-x-[25%] translate-y-[35%] scale-[1.5] opacity-10 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%] xl:opacity-20`,
+            `absolute right-0 translate-x-[25%] translate-y-[35%] scale-[1.5] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
             pathname.includes(`/project`) && `hidden translate-0 scale-[1] lg:block lg:translate-0`,
           )}
         />
