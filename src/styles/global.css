@@ -159,10 +159,11 @@
   }
 
   body {
-    @apply text-muted-foreground;
+    @apply text-muted-foreground bg-secondary;
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
+    /* background: url(/images/bg-2.png); */
     background: url(/images/bg-6.png);
   }
 
