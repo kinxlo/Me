@@ -1,7 +1,7 @@
 "use client";
 
 import { useProjects } from "@/context/global-context";
-import gsap from "@/lib/animation/gsap";
+import gsap from "@/lib/animation/gsap/init";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
@@ -40,52 +40,78 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
         visibility: "visible",
       });
 
-      // Initial animation
-      gsap.to(pathReference.current, {
-        drawSVG: "100%",
-        duration: 3,
-        ease: "power2.inOut",
-      });
+      // Initial animation - more elegant entrance
+      gsap
+        .timeline()
+        .to(pathReference.current, {
+          drawSVG: "100%",
+          duration: 3,
+          ease: "sine.inOut",
+        })
+        .to(
+          pathReference.current,
+          {
+            // strokeOpacity: 0.8,
+            duration: 0.5,
+          },
+          "-=0.5",
+        );
 
-      // Setup scroll triggers after a small delay to ensure DOM is ready
+      // Setup scroll triggers
       const timeout = setTimeout(() => {
         for (const [index, project] of projects.entries()) {
           if (index >= projectPaths.length) continue;
 
           const section = document.querySelector(`#project-${project.id}`);
-          if (!section) {
-            continue;
-          }
+          if (!section) continue;
 
           ScrollTrigger.create({
             trigger: section,
-            start: "top center",
-            end: "bottom center",
+            start: "top 60%", // Earlier trigger for anticipation
+            end: "bottom 40%",
             onEnter: () => animateToPath(index),
             onEnterBack: () => animateToPath(index),
-            markers: true, // Set to true to debug trigger positions
+            markers: false,
           });
         }
-      }, 100);
+      }, 300); // Slightly longer delay for DOM readiness
 
       function animateToPath(index: number) {
         if (index < 0 || index >= projectPaths.length) return;
 
         gsap
           .timeline()
+          // First fade out current path smoothly
           .to(pathReference.current, {
-            drawSVG: "0%",
-            duration: 3,
+            // strokeOpacity: 0,
+            duration: 0.8,
             ease: "power2.inOut",
           })
+          // Then animate drawing out
+          .to(pathReference.current, {
+            drawSVG: "0%",
+            duration: 1.2,
+            ease: "sine.inOut",
+          })
+          // Change path
           .set(pathReference.current, {
             attr: { d: projectPaths[index] },
           })
+          // Animate new path drawing in
           .to(pathReference.current, {
             drawSVG: "100%",
-            duration: 1,
-            ease: "power2.inOut",
-          });
+            duration: 2.5,
+            ease: "sine.inOut",
+          })
+          // Fade back in
+          .to(
+            pathReference.current,
+            {
+              // strokeOpacity: 0.8,
+              duration: 0.8,
+            },
+            "-=1",
+          ); // Overlap with draw animation
       }
 
       return () => clearTimeout(timeout);
@@ -105,7 +131,12 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
       <path
         ref={pathReference}
         className="fill-none stroke-black stroke-[3px]"
-        style={{ visibility: "visible" }} // Changed to visible
+        style={{
+          visibility: "visible",
+          // strokeOpacity: 0, // Start transparent
+          strokeLinecap: "round", // Smoother line ends
+          strokeLinejoin: "round", // Smoother corners
+        }}
       />
     </svg>
   );
