@@ -1,20 +1,32 @@
 "use client";
 
 import MainButton from "@/components/shared/button";
+import { initHomeHeroAnimation } from "@/lib/animation/pages/home";
 import { socials } from "@/lib/tools/constants";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 
 export const Hero = () => {
+  const titleReference = useRef<HTMLHeadingElement>(null);
+  const subtitleReference = useRef<HTMLParagraphElement>(null);
+
+  useGSAP(() => {
+    initHomeHeroAnimation({ title: titleReference.current, subtitle: subtitleReference.current });
+  }, []);
   return (
     <section className="mix-blend-multiply">
       <section className="mx-auto max-w-(--breakpoint-lg)">
         {/* Animate the text content after entrance */}
 
         <div>
-          <h1 className="text-primary flex w-full items-end text-4xl capitalize sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
+          <h1
+            ref={titleReference}
+            className="text-primary flex w-full items-end text-4xl capitalize sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]"
+          >
             Ifijeh Kingsley Solomon.
           </h1>
           <div className={`cc-border cc-shades h-4`} />
-          <div className="cc-border">
+          <div ref={subtitleReference} className="cc-border">
             <p className="font-head txt px-4 py-2 text-2xl font-medium">
               Frontend Developer | Instructor | Web Developer...
             </p>

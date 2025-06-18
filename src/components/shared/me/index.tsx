@@ -1,10 +1,9 @@
 "use client";
 
-import { BlurImage } from "@/components/core/miscellaneous/blur-image";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-import ReactLogo from "./paths/react";
+import { MySvgPic } from "./paths/react";
 import { ProjectSVGBG } from "./project-svg-bg";
 
 // import { me } from "./path";
@@ -15,7 +14,7 @@ export const Me = () => {
     <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[50%] overflow-hidden !mix-blend-multiply">
       {/* SVG Background - maintains position with responsive scaling */}
       {pathname === "/" ? (
-        <ReactLogo />
+        <MySvgPic />
       ) : (
         <ProjectSVGBG
           // path={me}
@@ -27,7 +26,7 @@ export const Me = () => {
       )}
 
       {/* Main Image - maintains bottom-right position with responsive scaling */}
-      <BlurImage
+      {/* <BlurImage
         className={cn(
           `absolute right-0 bottom-0 origin-bottom-right translate-x-[25%] translate-y-[25%] scale-75 md:scale-90 lg:translate-x-[35%] lg:translate-y-[35%] lg:scale-100`,
           pathname.includes(`/projects`) && `hidden`,
@@ -37,7 +36,7 @@ export const Me = () => {
         width={500}
         height={800}
         priority
-      />
+      /> */}
     </div>
   );
 };
