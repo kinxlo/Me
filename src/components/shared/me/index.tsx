@@ -11,7 +11,7 @@ import { ProjectSVGBG } from "./project-svg-bg";
 export const Me = () => {
   const pathname = usePathname();
   return (
-    <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[50%] overflow-hidden !mix-blend-multiply">
+    <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[100%] overflow-hidden !mix-blend-multiply lg:w-[50%]">
       {/* SVG Background - maintains position with responsive scaling */}
       {pathname === "/" ? (
         <MySvgPic />
