@@ -21,16 +21,14 @@ export const Me = () => {
             return (
               <ProjectSVGBG
                 className={cn(
-                  `absolute right-0 translate-x-[25%] translate-y-[35%] scale-[1.5] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
+                  `absolute right-0 translate-x-[25%] translate-y-[35%] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
                   "translate-0 scale-[1] lg:block lg:translate-0",
                 )}
               />
             );
           }
           case "/about": {
-            return (
-              <ProjectSVGBG className="absolute right-0 translate-x-[25%] translate-y-[35%] scale-[1.5] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]" />
-            );
+            return;
           }
           default: {
             return null;

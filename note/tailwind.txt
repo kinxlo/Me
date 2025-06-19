@@ -1,117 +1,195 @@
-"use client";
+// "use client";
 
-import { Wrapper } from "@/components/core/layout/wrapper";
-import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import InfiniteScroll from "@/lib/animation/InfiniteScroll/InfiniteScroll";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
+// import { Wrapper } from "@/components/core/layout/wrapper";
+// import { BlurImage } from "@/components/core/miscellaneous/blur-image";
+// import { cn } from "@/lib/utils";
+// import Link from "next/link";
 
-export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
-  // Track hover state for each project by its ID
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+// export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
+//   if (!projects?.length) {
+//     return (
+//       <Wrapper>
+//         <div className="py-10 text-center">
+//           <p className="text-muted-foreground">No projects found</p>
+//         </div>
+//       </Wrapper>
+//     );
+//   }
 
-  if (!projects?.length) {
-    return (
-      <Wrapper>
-        <div className="py-10 text-center">
-          <p className="text-muted-foreground">No projects found</p>
-        </div>
-      </Wrapper>
-    );
-  }
+//   return (
+//     <div>
+//       <section className="mt-0 space-y-4 p-0">
+//         <section className="mt-[5rem] max-w-(--breakpoint-md) space-y-1 px-2">
+//           <h1 className="cc-border text-primary">Showcase</h1>
+//           <p className="project-text cc-border font-head text-2xl text-black/90">
+//             Here you will find some project that made it from development to production.
+//           </p>
+//           <p className={`font-sea mt-4 text-xl`}>
+//             <span className={`text-primary`}>Note:</span> that this previews are interactive to a point. if you want to
+//             have the full experience, click the link attached to the project.
+//           </p>
+//         </section>
 
-  return (
-    <div>
-      <section className="mt-0 space-y-4 p-0">
-        <section className="mt-[5rem] max-w-(--breakpoint-md) space-y-1 px-2">
-          <h1 className="cc-border text-primary">Showcase</h1>
-          <p className="project-text cc-border font-head text-2xl text-black/90">
-            Here you will find some project that made it from development to production.
-          </p>
-          <p className={`font-sea mt-4 text-xl`}>
-            <span className={`text-primary`}>Note:</span> that this previews are interactive to a point. if you want to
-            have the full experience, click the link attached to the project.
-          </p>
-        </section>
+//         <section className="my-[5rem]">
+//           <section className="space-y-[5rem] lg:space-y-[10rem]">
+//             {projects.map((project) => (
+//               <Wrapper key={project.id} id={`project-${project.id}`} className={`cc-border overflow-hidden p-0 pl-2`}>
+//                 <Wrapper className="my-2 p-0">
+//                   <section
+//                     className={cn(
+//                       "group relative flex min-h-[30rem] max-w-(--breakpoint-md) flex-col items-center justify-center gap-8 rounded-none !mix-blend-multiply transition-all duration-300",
+//                     )}
+//                   >
+//                     <Wrapper className="space-y-6 py-0">
+//                       {/* Project Header */}
+//                       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+//                         <div>
+//                           <p className="project-title font-head text-primary text-2xl font-bold">
+//                             {project.id}. {project.name}
+//                           </p>
+//                           <div className="mt-1 flex items-center gap-2">
+//                             <span className="text-muted-foreground text-sm font-medium">{project.category}</span>
+//                             <span className="bg-muted-foreground h-1 w-1 rounded-full" />
+//                             <span className="text-muted-foreground text-sm font-medium">{project.date}</span>
+//                           </div>
+//                         </div>
 
-        <section className="cc-border my-[5rem]">
-          <section className="space-y-[5rem] lg:space-y-[10rem]">
-            {projects.map((project) => (
-              <Wrapper key={project.id} id={`project-${project.id}`} className={`overflow-hidden p-0`}>
-                <Wrapper className="space-y-1 py-0">
-                  <p className="project-title font-head text-primary h-10 text-2xl font-bold">
-                    {project.id}. {project.name}
-                  </p>
-                  <p className="project-p font-head min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">
-                    {project.desc}
-                  </p>
-                </Wrapper>
-                <Wrapper className="my-2 p-0">
-                  <section
-                    className={cn(
-                      "group hover:border-primary relative max-w-(--breakpoint-md) rounded-none !mix-blend-multiply backdrop-blur-xs transition-all duration-300",
-                      hoveredProject === String(project.id) && `max-w-full`,
-                    )}
-                    onMouseEnter={() => setHoveredProject(String(project.id))}
-                    onMouseLeave={() => setHoveredProject(null)}
-                  >
-                    <div
-                      className={cn(
-                        `relative hidden h-[40rem] overflow-hidden border border-black !mix-blend-multiply grayscale transition-all hover:grayscale-50 lg:block`,
-                      )}
-                    >
-                      <div className={cn("relative h-full w-full overflow-hidden")}>
-                        <iframe
-                          className={`w-full transition-all duration-500 ease-in-out`}
-                          sandbox="allow-same-origin allow-scripts allow-popups"
-                          src={project.url}
-                          title="Responsive iframe"
-                          style={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            height: "100%",
-                            border: "none",
-                            mixBlendMode: `multiply`,
-                          }}
-                          allowFullScreen
-                        />
-                      </div>
-                    </div>
-                    <div className={`lg:hidden`}>
-                      <InfiniteScroll
-                        items={[
-                          {
-                            content: (
-                              <div className="grid grid-cols-1 gap-4 mix-blend-multiply backdrop-blur-xs will-change-transform">
-                                <BlurImage
-                                  width={1000}
-                                  height={1000}
-                                  src={project?.imageDesktop1}
-                                  alt="project"
-                                  className="w-full border object-cover transition-all hover:border-black"
-                                />
-                              </div>
-                            ),
-                          },
-                        ]}
-                        isTilted={false}
-                        autoplay={true}
-                        autoplaySpeed={0.1}
-                        pauseOnHover={true}
-                        width={`100%`}
-                        maxHeight={`300px`}
-                        itemMinHeight={500}
-                        autoplayDirection={`up`}
-                      />
-                    </div>
-                  </section>
-                </Wrapper>
-              </Wrapper>
-            ))}
-          </section>
-        </section>
-      </section>
-    </div>
-  );
-};
+//                         <div className="flex gap-2">
+//                           {project.github && (
+//                             <a
+//                               href={project.github}
+//                               target="_blank"
+//                               rel="noopener noreferrer"
+//                               className="hover:bg-accent rounded-md border px-3 py-1.5 text-sm transition-colors"
+//                             >
+//                               View Code
+//                             </a>
+//                           )}
+//                           <a
+//                             href={project.url}
+//                             target="_blank"
+//                             rel="noopener noreferrer"
+//                             className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm transition-colors"
+//                           >
+//                             Live Demo
+//                           </a>
+//                         </div>
+//                       </div>
+
+//                       {/* Project Description */}
+//                       <p className="project-p text-foreground text-lg leading-relaxed">{project.desc}</p>
+
+//                       {/* Status & Tech Stack */}
+//                       <div className="flex flex-wrap items-center gap-4">
+//                         <div className="flex items-center gap-2">
+//                           <span className="relative flex h-3 w-3">
+//                             <span
+//                               className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${
+//                                 project.status.includes("Active") ? "animate-pulse bg-emerald-500" : "bg-amber-500"
+//                               }`}
+//                             />
+//                             <span
+//                               className={`relative inline-flex h-3 w-3 rounded-full ${
+//                                 project.status.includes("Active") ? "bg-emerald-500" : "bg-amber-500"
+//                               }`}
+//                             />
+//                           </span>
+//                           <span className="text-sm font-medium">{project.status}</span>
+//                         </div>
+
+//                         <div className="flex flex-wrap items-center gap-2">
+//                           {project.language.map((lang, index) => (
+//                             <span
+//                               key={lang}
+//                               className="rounded-full border px-2.5 py-1 text-xs font-medium"
+//                               style={{
+//                                 backgroundColor: project.colorCode[index] || "#f1f5f9",
+//                                 borderColor: project.colorCode[index]
+//                                   ? `${project.colorCode[index].replace("50", "80")}`
+//                                   : "#e2e8f0",
+//                               }}
+//                             >
+//                               {lang}
+//                             </span>
+//                           ))}
+//                         </div>
+//                       </div>
+
+//                       {/* Desktop Preview */}
+// <div
+//   className={cn(
+//     "group relative hidden overflow-hidden rounded-lg border shadow-lg transition-all hover:shadow-xl lg:block",
+//     "hover:border-primary hover:!mix-blend-normal hover:grayscale-0",
+//   )}
+// >
+//   <div className="aspect-video w-full overflow-hidden">
+//     <BlurImage
+//       src={project.imageDesktop1}
+//       alt={`${project.name} screenshot`}
+//       width={1280}
+//       height={720}
+//       className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+//     />
+//   </div>
+//   <Link
+//     href={project.url}
+//     target={`_blank`}
+//     className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
+//   >
+//     <div className="absolute right-0 bottom-0 left-0 translate-y-4 p-4 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+//       <p className="font-medium text-white">Click to visit live site</p>
+//     </div>
+//   </Link>
+// </div>
+
+//                       {/* Mobile Preview */}
+//                       <div className="lg:hidden">
+//                         <div className="relative overflow-hidden rounded-lg border shadow-md">
+//                           <div className="aspect-[9/16] w-full overflow-hidden">
+//                             <BlurImage
+//                               src={project.imageDesktop1}
+//                               alt={`${project.name} mobile screenshot`}
+//                               width={720}
+//                               height={1280}
+//                               className="h-full w-full object-cover"
+//                             />
+//                           </div>
+//                           <div className="p-4">
+//                             <p className="text-muted-foreground text-center text-sm">Swipe for more screenshots →</p>
+//                           </div>
+//                         </div>
+//                       </div>
+
+//                       {/* Contributors */}
+// {project.contributors && project.contributors.length > 0 && (
+//   <div className="space-y-2">
+//     <h3 className="text-muted-foreground text-sm font-medium">Contributors</h3>
+//     <div className="flex flex-wrap gap-3">
+//       {project.contributors.map((contributor) => (
+//         <div key={contributor.name} className="flex items-center gap-2">
+//           <div className="relative h-8 w-8 overflow-hidden rounded-full">
+//             <BlurImage
+//               src={contributor.img}
+//               alt={contributor.name}
+//               width={32}
+//               height={32}
+//               className="h-full w-full object-cover"
+//             />
+//           </div>
+//           <span className="text-sm">{contributor.name}</span>
+//         </div>
+//       ))}
+//     </div>
+//   </div>
+// )}
+//                     </Wrapper>
+//                   </section>
+//                 </Wrapper>
+//               </Wrapper>
+//             ))}
+//           </section>
+//         </section>
+//       </section>
+//     </div>
+//   );
+// };

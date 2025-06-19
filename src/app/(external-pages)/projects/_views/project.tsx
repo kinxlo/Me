@@ -2,10 +2,16 @@
 
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
+import { initMobileRevealAnimations } from "@/lib/animation/pages/project";
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
+  useGSAP(() => {
+    initMobileRevealAnimations();
+  }, [projects]);
+
   if (!projects?.length) {
     return (
       <Wrapper>
@@ -33,13 +39,13 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         <section className="my-[5rem]">
           <section className="space-y-[5rem] lg:space-y-[10rem]">
             {projects.map((project) => (
-              <Wrapper key={project.id} id={`project-${project.id}`} className={`cc-border overflow-hidden p-0 pl-2`}>
+              <Wrapper
+                key={project.id}
+                id={`project-${project.id}`}
+                className={`project-section cc-border overflow-hidden p-0 pl-2`}
+              >
                 <Wrapper className="my-2 p-0">
-                  <section
-                    className={cn(
-                      "group relative flex min-h-[30rem] max-w-(--breakpoint-md) flex-col items-center justify-center gap-8 rounded-none !mix-blend-multiply transition-all duration-300",
-                    )}
-                  >
+                  <section className="group relative flex min-h-[30rem] max-w-(--breakpoint-md) flex-col items-center justify-center gap-8 rounded-none !mix-blend-multiply transition-all duration-300">
                     <Wrapper className="space-y-6 py-0">
                       {/* Project Header */}
                       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -54,7 +60,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                           </div>
                         </div>
 
-                        <div className="flex gap-2">
+                        <div className="project-buttons flex gap-2">
                           {project.github && (
                             <a
                               href={project.github}
@@ -97,7 +103,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                           <span className="text-sm font-medium">{project.status}</span>
                         </div>
 
-                        <div className="flex flex-wrap items-center gap-2">
+                        <div className="tech-stack flex flex-wrap items-center gap-2">
                           {project.language.map((lang, index) => (
                             <span
                               key={lang}
@@ -115,7 +121,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                         </div>
                       </div>
 
-                      {/* Desktop Preview */}
+                      {/* Desktop Preview - Hidden on mobile */}
                       <div
                         className={cn(
                           "group relative hidden overflow-hidden rounded-lg border shadow-lg transition-all hover:shadow-xl lg:block",
@@ -143,7 +149,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       </div>
 
                       {/* Mobile Preview */}
-                      <div className="lg:hidden">
+                      <div className="project-image lg:hidden">
                         <div className="relative overflow-hidden rounded-lg border shadow-md">
                           <div className="aspect-[9/16] w-full overflow-hidden">
                             <BlurImage
