@@ -1,19 +1,24 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
-export function useMediaQuery() {
-  const [isOpen, setIsOpen] = useState(false);
+export const useResponsiveLayout = () => {
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    setIsOpen(mediaQuery.matches);
-
-    const handler = (event: MediaQueryListEvent) => {
-      setIsOpen(event.matches);
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
     };
 
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
+    // Initial check
+    checkIfMobile();
+
+    // Add event listener
+    window.addEventListener("resize", checkIfMobile);
+
+    // Clean up
+    return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
-  return { isOpen };
-}
+  return { isMobile };
+};

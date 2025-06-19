@@ -1,52 +1,97 @@
 "use client";
 
-import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
-import { Wrapper } from "@/components/core/layout/wrapper";
-import { NAV_LINKS } from "@/lib/tools/constants";
+import { useResponsiveLayout } from "@/hooks/use-media-query";
+import gsap from "@/lib/animation/gsap/init";
+import { navAnimation } from "@/lib/animation/nav-animation";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import { useEffect, useRef, useState } from "react";
 
-import MainButton from "../button";
-import { NavItems } from "./nav-menu-item";
+import { MobileMenuBackdrop } from "./mobile-backdrop";
+import { MobileMenuButton } from "./mobile-menu-button";
+import { NavItems } from "./navbar-items";
 
-export const Navbar = () => {
-  const pathname = usePathname();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+const MobileNav = ({
+  onClose,
+  isOpen,
+  toggleMenu,
+}: {
+  onClose: () => void;
+  isOpen: boolean;
+  toggleMenu: () => void;
+}) => {
+  const containerReference = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
+  useGSAP(() => {
+    if (isOpen) {
+      // Reset initial state
+      gsap.set(".cc-nav", { opacity: 0, y: 50 });
+      // Run animation when menu opens
+      navAnimation(true);
+    }
+  }, [isOpen]);
 
   return (
-    <nav className={cn(`cc-shades text-primary sticky top-0 z-[500] border-b backdrop-blur-2xl`)} role="navbar">
-      <Wrapper className="flex w-full max-w-[1280px] items-center justify-between p-0 pr-4 lg:pr-0">
-        <div className={`flex items-center gap-4`}>
-          <MainButton variant={`accent`} className={`font-sea cursor-default text-lg`}>
-            I19N
-          </MainButton>
-          <ModeToggle />
-          <NavItems className={`hidden lg:block`} links={NAV_LINKS} />
-        </div>
-        <div className={`hidden items-center lg:flex`}>
-          <MainButton variant={`accent`}>Contact Me</MainButton>
-        </div>
-        <MainButton
-          variant="ghost"
-          size="icon"
-          className="lg:hidden"
-          isIconOnly
-          icon={isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        />
-      </Wrapper>
-      {isMobileMenuOpen && (
-        <div className={cn("inset-x-0 z-40 w-full shadow-none lg:hidden")}>
-          <NavItems links={NAV_LINKS} isMobile />
-        </div>
+    <section ref={containerReference} className={`md:hidden`}>
+      {isOpen && <MobileMenuBackdrop onClick={onClose} />}
+      <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
+      <nav
+        className={cn(
+          "font-head fixed top-0 right-[5%] flex min-h-[100dvh] min-w-[100dvw] flex-col items-center justify-center transition-all duration-300",
+          isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+          "z-[999]",
+        )}
+        role="navigation"
+      >
+        <NavItems isMobile={true} onItemClick={onClose} />
+      </nav>
+    </section>
+  );
+};
+
+const DesktopNav = () => {
+  const containerReference = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      // Run animation when component mounts
+      navAnimation(true);
+    },
+    { scope: containerReference },
+  );
+
+  return (
+    <section
+      ref={containerReference}
+      className="font-head fixed top-0 right-[5%] z-[999] hidden flex-col md:flex"
+      role="navigation"
+    >
+      <NavItems isMobile={false} onItemClick={() => {}} />
+    </section>
+  );
+};
+
+export const Navbar = () => {
+  const { isMobile } = useResponsiveLayout();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile menu when window is resized to desktop size
+  useEffect(() => {
+    if (!isMobile && mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  }, [isMobile, mobileMenuOpen]);
+
+  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  return (
+    <section className="z-[999]">
+      {isMobile ? (
+        <MobileNav onClose={closeMobileMenu} isOpen={mobileMenuOpen} toggleMenu={toggleMobileMenu} />
+      ) : (
+        <DesktopNav />
       )}
-    </nav>
+    </section>
   );
 };

@@ -40,7 +40,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "next.config.mjs", "tailwind.config.js",
+    "next.config.mjs", "tailwind.config.js", "src/app/(external-pages)/play-ground/page.tsx", "src/components/shared/animator/index.tsx", "src/context/global-context.tsx", "src/lib/animation/transition.js", "src/lib/animation/transition.jsx", "src/lib/animation/transition.js",
   ],
   "exclude": [
     "node_modules"

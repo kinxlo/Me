@@ -3,21 +3,41 @@
 
 import { useEffect, useRef, useState } from "react";
 import { A11y, Autoplay, FreeMode, Navigation, Pagination, Scrollbar, Thumbs } from "swiper/modules";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper/types";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { SwiperOptions, Swiper as SwiperType } from "swiper/types";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-// import "swiper/css/navigation";
+import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import "swiper/css/free-mode";
 import "swiper/css/thumbs";
 
+// import { Icons } from "@/components/core/miscellaneous/icons";
 import { cn } from "@/lib/utils";
 import { ChevronLeftCircle, ChevronRightCircle } from "lucide-react";
 
-import SkiButton from "../button";
+import MainButton from "../button";
+
+interface UniversalSwiperProperties {
+  items: any[];
+  renderItem: (item: any, index: number) => React.ReactNode;
+  swiperOptions?: SwiperOptions;
+  showNavigation?: boolean;
+  showPagination?: boolean;
+  showScrollbar?: boolean;
+  navigationVariant?: "default" | "minimal" | "none";
+  navigationSize?: number;
+  navigationOffset?: number;
+  className?: string;
+  swiperClassName?: string;
+  slideClassName?: string;
+  thumbsSwiper?: SwiperType | null;
+  breakpoints?: any;
+  freeMode?: boolean;
+  onSwiperInit?: (swiper: SwiperType) => void;
+}
 
 export const UniversalSwiper = ({
   items,
@@ -26,8 +46,7 @@ export const UniversalSwiper = ({
   showNavigation = false,
   showPagination = false,
   showScrollbar = false,
-  // navigationSize = 24,
-  // navigationOffset = 0,
+  navigationSize = 24,
   className,
   swiperClassName,
   slideClassName,
@@ -37,22 +56,15 @@ export const UniversalSwiper = ({
   onSwiperInit,
 }: UniversalSwiperProperties) => {
   const [isMounted, setIsMounted] = useState(false);
-  const [, setSwiperInstance] = useState<SwiperType | null>(null);
   const swiperReference = useRef<SwiperType | null>(null);
-  const autoplayReference = useRef<any>(null);
 
   useEffect(() => {
     setIsMounted(true);
     return () => {
-      // Cleanup autoplay on unmount
-      if (autoplayReference.current) {
-        autoplayReference.current.stop();
+      if (swiperReference.current) {
+        swiperReference.current.destroy(true, true);
       }
     };
-  }, []);
-
-  useEffect(() => {
-    setIsMounted(true);
   }, []);
 
   if (!isMounted || !items?.length) return null;
@@ -68,95 +80,56 @@ export const UniversalSwiper = ({
   ];
 
   return (
-    <div className={cn(className)}>
-      <Swiper
-        {...swiperOptions}
-        autoplay={{
-          delay: 3000, // 3 seconds delay
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
-        modules={modules}
-        thumbs={{ swiper: thumbsSwiper }}
-        breakpoints={breakpoints}
-        freeMode={freeMode}
-        className={cn(swiperClassName)}
-        onSwiper={(swiper) => {
-          setSwiperInstance(swiper);
-          onSwiperInit?.(swiper);
-          swiperReference.current = swiper;
-          autoplayReference.current = swiper.autoplay;
-          onSwiperInit?.(swiper);
-        }}
-      >
-        {items.map((item, index) => (
-          <SwiperSlide key={index} className={cn(slideClassName)}>
-            {renderItem(item, index)}
-          </SwiperSlide>
-        ))}
-        {/* <div className={`py-5`}></div> */}
-        {/* {showNavigation && swiperInstance && <CustomNavigation iconSize={navigationSize} offset={navigationOffset} />} */}
-      </Swiper>
-    </div>
-  );
-};
+    <div className={cn("flex flex-col gap-4", className)}>
+      {/* Swiper container */}
+      <div className={swiperClassName}>
+        <Swiper
+          {...swiperOptions}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          modules={modules}
+          thumbs={{ swiper: thumbsSwiper }}
+          breakpoints={breakpoints}
+          freeMode={freeMode}
+          onSwiper={(swiper) => {
+            swiperReference.current = swiper;
+            onSwiperInit?.(swiper);
+          }}
+        >
+          {items.map((item, index) => (
+            <SwiperSlide key={index} className={cn(slideClassName, `grayscale-40`)}>
+              {renderItem(item, index)}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
-type CustomNavigationProperties = {
-  variant?: "default" | "minimal";
-  iconSize?: number;
-  offset?: number;
-  className?: string;
-};
-
-export const CustomNavigation = ({ iconSize = 24, className }: CustomNavigationProperties) => {
-  const swiper = useSwiper();
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
-
-  useEffect(() => {
-    const handleSlideChange = (swiper: SwiperType) => {
-      setIsBeginning(swiper.isBeginning);
-      setIsEnd(swiper.isEnd);
-    };
-
-    swiper.on("slideChange", handleSlideChange);
-
-    return () => {
-      swiper.off("slideChange", handleSlideChange);
-    };
-  }, [swiper]);
-
-  return (
-    <div className={cn("absolute inset-0 flex items-center justify-between p-2", className)}>
-      <SkiButton
-        onClick={(event) => {
-          event.stopPropagation();
-          swiper.slidePrev();
-        }}
-        isDisabled={isBeginning}
-        isIconOnly
-        icon={<ChevronLeftCircle size={iconSize} />}
-        variant="ghost"
-        size="circle"
-        aria-label="Previous slide"
-        className={cn(
-          "hover:bg-primary z-10 bg-black/50 text-white hover:text-white",
-          isBeginning ? "hidden" : "block",
-        )}
-      />
-      <SkiButton
-        onClick={(event) => {
-          event.stopPropagation();
-          swiper.slideNext();
-        }}
-        isDisabled={isEnd}
-        isIconOnly
-        icon={<ChevronRightCircle size={iconSize} />}
-        variant="ghost"
-        size="circle"
-        aria-label="Next slide"
-        className={cn("hover:bg-primary z-10 bg-black/50 text-white hover:text-white", isEnd ? "hidden" : "block")}
-      />
+      {/* Navigation buttons - positioned below the swiper */}
+      {showNavigation && (
+        <div className="flex justify-center gap-4">
+          <MainButton
+            onClick={() => swiperReference.current?.slidePrev()}
+            isIconOnly
+            icon={<ChevronLeftCircle size={navigationSize} />}
+            variant="outline"
+            size="circle"
+            aria-label="Previous slide"
+            className="hover:bg-primary w-fit rounded-full border-5 bg-black text-white transition-all duration-300 hover:text-white"
+          />
+          <MainButton
+            onClick={() => swiperReference.current?.slideNext()}
+            isIconOnly
+            icon={<ChevronRightCircle size={navigationSize} />}
+            variant="outline"
+            size="circle"
+            aria-label="Next slide"
+            className="hover:bg-primary w-fit rounded-full border-5 bg-black text-white transition-all duration-300 hover:text-white"
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 // @/lib/tools/font.ts
 import { cn } from "@/lib/utils";
-import { East_Sea_Dokdo, Fira_Code, Inter, Raleway } from "next/font/google";
+import { East_Sea_Dokdo, Fira_Code, IM_Fell_English_SC, Inter } from "next/font/google";
 
 // Primary sans-serif font (clean, modern, highly readable)
 const inter = Inter({
@@ -20,10 +20,11 @@ const firaCode = Fira_Code({
   variable: "--font-mono",
 });
 
-// Secondary sans-serif font for headings/accent
-const raleway = Raleway({
+// Historical fonts — added
+const imFell = IM_Fell_English_SC({
   subsets: ["latin"],
-  variable: "--font-heading",
+  variable: "--font-im-fell",
+  weight: "400",
 });
 
-export const fontVariables = cn(eastSeaDokdo.variable, inter.variable, firaCode.variable, raleway.variable);
+export const fontVariables = cn(eastSeaDokdo.variable, inter.variable, firaCode.variable, imFell.variable);

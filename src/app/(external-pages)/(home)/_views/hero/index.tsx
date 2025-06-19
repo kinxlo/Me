@@ -1,49 +1,78 @@
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
-import { cn } from "@/lib/utils";
+import MainButton from "@/components/shared/button";
+import { initHomeHeroAnimation } from "@/lib/animation/pages/home";
+import { socials } from "@/lib/tools/constants";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 
 export const Hero = () => {
+  const titleReference = useRef<HTMLHeadingElement>(null);
+  const subtitleReference = useRef<HTMLDivElement>(null);
+  const cardsReference = useRef<HTMLDivElement>(null);
+  const socialsReference = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    initHomeHeroAnimation({
+      subtitle: subtitleReference.current,
+      cardsContainer: cardsReference.current,
+      socialsContainer: socialsReference.current,
+    });
+  }, []);
+
   return (
-    <>
-      <Wrapper className={`flex min-h-[calc(100dvh-48px)] items-center`}>
-        {/* 3D Group Container */}
-        <section className={`w-full`}>
-          <div className={`flex justify-between`}>
-            <p className={`font-mono text-sm/2 font-black`}>The</p>
-            <p className={`font-mono text-sm/2 font-black`}>13:00</p>
+    <section className="mix-blend-multiply">
+      <section className="mx-auto max-w-(--breakpoint-lg)">
+        <Wrapper>
+          <h1 className="text-primary show flex w-full items-end overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
+            <span className="title-word">Ifijeh</span>
+          </h1>
+          <h1
+            ref={titleReference}
+            className="text-primary show flex w-full items-end overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]"
+          >
+            <span className="title-word">Kingsley</span>.<span className="title-word">Solomon.</span>
+          </h1>
+
+          <div ref={subtitleReference} className="cc-border overflow-hidden">
+            <p className="font-head py-2 text-2xl font-medium">Frontend Developer | Instructor | Web Developer...</p>
           </div>
-          <section className={`max-w-(--breakpoint-md)`}>
-            {/* Name sections */}
-            <div className={`space-y-4`}>
-              <div className="cc-border capitalize">
-                <h1 className={cn(`text-primary text-5xl font-black text-balance sm:text-9xl/24 lg:tracking-[-10px]`)}>
-                  Frontend Developer.
-                </h1>
-              </div>
-              <div className="cc-border">
-                <p className={`py-2 text-justify text-sm font-medium`}>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti ipsa blanditiis, voluptates quasi a
-                  veniam repellat nisi necessitatibus omnis cupiditate rem consectetur hic, non sunt. Explicabo fuga
-                  itaque molestiae officia!
-                </p>
-              </div>
-            </div>
-            <section className={`cc-border-down flex items-start divide-x text-justify`}>
-              <p className={`p-2 pl-0 text-sm font-medium`}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat ex magnam corrupti cumque quos adipisci
-                iure. Quo veritatis provident consectetur rerum, atque illo itaque. Eius tenetur dignissimos incidunt
-                asperiores nihil.
-              </p>
-              <p className={`p-2 pr-0 text-justify text-sm font-medium`}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam inventore explicabo eligendi. Totam ab
-                quis porro inventore dicta? Omnis aspernatur dolore ratione molestiae sed unde neque fugiat id minima
-                deleniti!
-              </p>
-            </section>
-          </section>
+        </Wrapper>
+
+        <section
+          ref={cardsReference}
+          className="cc-border-down font-head flex max-w-(--breakpoint-md) flex-col items-start gap-4 p-2 lg:flex-row lg:text-lg"
+        >
+          <div className="flex gap-3 rounded-lg border border-gray-200 bg-white/90 p-4 shadow-lg transition-all hover:bg-white hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/90 dark:hover:bg-gray-800">
+            <p className="font-medium text-gray-800 dark:text-gray-200">
+              A <span className="text-primary-600 dark:text-primary-400">CRITICAL THINKER</span> by default. A{" "}
+              <span className="text-primary-600 dark:text-primary-400">PROGRAMMER</span> by effort.
+            </p>
+          </div>
+
+          <div className="flex gap-3 rounded-lg border border-gray-200 bg-white/90 p-4 shadow-lg transition-all hover:bg-white hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/90 dark:hover:bg-gray-800">
+            <p className="font-medium text-gray-800 dark:text-gray-200">
+              Not a fan of <span className="text-primary-600 dark:text-primary-400">&apos;Buzz words&apos;</span>, but
+              I&apos;m very much aware of them. lol
+            </p>
+          </div>
         </section>
-      </Wrapper>
-    </>
+
+        <section className="cc-border mt-16 flex gap-4" ref={socialsReference}>
+          {socials.map((social) => (
+            <MainButton
+              key={social.content}
+              size="icon"
+              isIconOnly
+              variant={`primary`}
+              href={social.link}
+              icon={social.icon}
+              className="cc-shades hover:bg-primary w-fit rounded-full border-5 bg-black transition-all duration-300 hover:scale-110 hover:text-white"
+            />
+          ))}
+        </section>
+      </section>
+    </section>
   );
 };

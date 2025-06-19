@@ -1,97 +1,52 @@
 "use client";
 
-import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import { useIntersection } from "@/hooks/use-observer";
-import { useWindowSize } from "@/hooks/use-window-resize";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+
+import { HomeSVGBG } from "./paths/home-svg-bg";
+import { ProjectSVGBG } from "./project-svg-bg";
+
+// import { me } from "./path";
 
 export const Me = () => {
-  const [zoomLevel, setZoomLevel] = useState(1);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isAboutVisible, setIsAboutVisible] = useState(false);
-  const imageReference = useRef<HTMLDivElement>(null);
-  const aboutSectionReference = useRef<HTMLElement | null>(null);
-  const { width: windowWidth, height: windowHeight } = useWindowSize();
-  const animationFrameReference = useRef<number>(null);
-
-  const { ref: intersectionReference } = useIntersection({
-    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-  });
-
-  const setReferences = (node: HTMLDivElement | null) => {
-    intersectionReference(node);
-    if (node) imageReference.current = node;
-  };
-
-  useEffect(() => {
-    aboutSectionReference.current = document.querySelector("#fade-section");
-
-    const handleScroll = () => {
-      if (!imageReference.current || !aboutSectionReference.current) return;
-
-      animationFrameReference.current = requestAnimationFrame(() => {
-        const mapRect = aboutSectionReference.current?.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-
-        if (mapRect) {
-          const isVisible = mapRect.top < viewportHeight && mapRect.bottom > 0;
-          setIsAboutVisible(isVisible);
-
-          // When at the very top of the page, force reset to original size
-          if (window.scrollY < 10) {
-            // Small threshold to catch top position
-            setZoomLevel(1);
+  const pathname = usePathname();
+  return (
+    <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[100%] overflow-hidden !mix-blend-multiply lg:w-[50%]">
+      {(() => {
+        switch (pathname) {
+          case "/": {
+            return <HomeSVGBG />;
+          }
+          case "/projects": {
+            return (
+              <ProjectSVGBG
+                className={cn(
+                  `absolute right-0 translate-x-[25%] translate-y-[35%] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
+                  "translate-0 scale-[1] lg:block lg:translate-0",
+                )}
+              />
+            );
+          }
+          case "/about": {
             return;
           }
-
-          // Your original zoom calculation logic
-          const aboutSectionCenter = mapRect.top + mapRect.height / 2;
-          const viewportCenter = viewportHeight / 2;
-          const distanceFromCenter = Math.abs(aboutSectionCenter - viewportCenter);
-          const normalizedDistance = Math.min(1, distanceFromCenter / (viewportHeight * 0.75));
-          const baseZoom = windowWidth < 768 ? 0.6 : 0.7;
-          const targetZoom = baseZoom - 0.3 * (1 - normalizedDistance);
-
-          // Apply transition with a minimum limit to prevent getting too small
-          setZoomLevel((previous) => {
-            const newZoom = previous + (targetZoom - previous) * 0.1;
-            return Math.max(newZoom, baseZoom - 0.3); // Ensure it doesn't get smaller than intended
-          });
+          default: {
+            return null;
+          }
         }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initialize position
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (animationFrameReference.current) {
-        cancelAnimationFrame(animationFrameReference.current);
-      }
-    };
-  }, [windowWidth, windowHeight]);
-
-  return (
-    <BlurImage
-      ref={setReferences}
-      src={"/images/me.svg"}
-      alt={"Illustration of me"}
-      width={507}
-      height={469.32}
-      onLoadingComplete={() => setIsLoaded(true)}
-      className={cn(
-        `fixed right-0 bottom-0 isolate max-h-[70%] max-w-[60%] object-cover object-top transition-all duration-500 ease-out`,
-        `origin-bottom-right`,
-        isAboutVisible ? "opacity-20 lg:opacity-30" : "opacity-10 md:opacity-40 lg:opacity-100",
-        isLoaded ? "scale-100" : "scale-90 opacity-0", // Changed to scale-100 when loaded
-        "dark:opacity-5 dark:invert",
-      )}
-      style={{
-        transform: `scale(${zoomLevel})`,
-      }}
-      priority
-    />
+      })()}
+      {/* Main Image - maintains bottom-right position with responsive scaling */}
+      {/* <BlurImage
+        className={cn(
+          `absolute right-0 bottom-0 origin-bottom-right translate-x-[25%] translate-y-[25%] scale-75 md:scale-90 lg:translate-x-[35%] lg:translate-y-[35%] lg:scale-100`,
+          pathname.includes(`/projects`) && `hidden`,
+        )}
+        src="/images/me.svg"
+        alt="Illustration shadow effect"
+        width={500}
+        height={800}
+        priority
+      /> */}
+    </div>
   );
 };
