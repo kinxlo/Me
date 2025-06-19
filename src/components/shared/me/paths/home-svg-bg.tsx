@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 
-export const MySvgPic = () => {
+export const HomeSVGBG = () => {
   const svgReference = useRef<SVGSVGElement>(null);
   const pathsReference = useRef<(SVGPathElement | null)[]>([]);
 
