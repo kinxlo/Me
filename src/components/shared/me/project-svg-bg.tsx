@@ -46,6 +46,7 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
           onEnter: () => {
             gsap.to("#pj-1", {
               duration: 0.8,
+              delay: 1,
               morphSVG: `#pj-${index + 1}`,
               ease: "power2.inOut",
               overwrite: "auto",
@@ -54,6 +55,7 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
           onEnterBack: () => {
             gsap.to("#pj-1", {
               duration: 0.8,
+              delay: 1,
               morphSVG: `#pj-${index + 1}`,
               ease: "power2.inOut",
               overwrite: "auto",
