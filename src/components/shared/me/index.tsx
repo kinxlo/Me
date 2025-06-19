@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-import { MySvgPic } from "./paths/react";
+import { HomeSVGBG } from "./paths/home-svg-bg";
 import { ProjectSVGBG } from "./project-svg-bg";
 
 // import { me } from "./path";
@@ -12,19 +12,31 @@ export const Me = () => {
   const pathname = usePathname();
   return (
     <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[100%] overflow-hidden !mix-blend-multiply lg:w-[50%]">
-      {/* SVG Background - maintains position with responsive scaling */}
-      {pathname === "/" ? (
-        <MySvgPic />
-      ) : (
-        <ProjectSVGBG
-          // path={me}
-          className={cn(
-            `absolute right-0 translate-x-[25%] translate-y-[35%] scale-[1.5] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
-            pathname.includes(`/project`) && `hidden translate-0 scale-[1] lg:block lg:translate-0`,
-          )}
-        />
-      )}
-
+      {(() => {
+        switch (pathname) {
+          case "/": {
+            return <HomeSVGBG />;
+          }
+          case "/projects": {
+            return (
+              <ProjectSVGBG
+                className={cn(
+                  `absolute right-0 translate-x-[25%] translate-y-[35%] scale-[1.5] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
+                  "translate-0 scale-[1] lg:block lg:translate-0",
+                )}
+              />
+            );
+          }
+          case "/about": {
+            return (
+              <ProjectSVGBG className="absolute right-0 translate-x-[25%] translate-y-[35%] scale-[1.5] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]" />
+            );
+          }
+          default: {
+            return null;
+          }
+        }
+      })()}
       {/* Main Image - maintains bottom-right position with responsive scaling */}
       {/* <BlurImage
         className={cn(
