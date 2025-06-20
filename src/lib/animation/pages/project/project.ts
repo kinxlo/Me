@@ -1,17 +1,16 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Create master timeline
+export const PTL = gsap.timeline({
+  paused: false,
+  defaults: { ease: "power3.out" },
+});
+
 export const initRevealAnimations = () => {
   // Wait for the next tick to ensure DOM is ready
   return new Promise<void>((resolve) => {
     setTimeout(() => {
-      // Clean up any existing animations first
-      // for (const trigger of ScrollTrigger.getAll()) {
-      //   if (trigger.trigger?.classList?.contains("reveal-section")) {
-      //     trigger.kill();
-      //   }
-      // }
-
       // Select all sections to animate
       const sections = document.querySelectorAll<HTMLElement>(".reveal-section");
 

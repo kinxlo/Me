@@ -1,6 +1,12 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Create master timeline
+export const PBGTL = gsap.timeline({
+  paused: true,
+  defaults: { ease: "power3.out" },
+});
+
 export const initProjectBGAnimation = (svgReference: SVGSVGElement | null, projects: Project[]) => {
   if (!svgReference) return;
 

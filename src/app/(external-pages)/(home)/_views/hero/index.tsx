@@ -2,7 +2,8 @@
 
 import { Wrapper } from "@/components/core/layout/wrapper";
 import MainButton from "@/components/shared/button";
-import { initHomeHeroAnimation } from "@/lib/animation/pages/home/home";
+import { HBGTL } from "@/lib/animation/pages/home/background";
+import { HTL, initHomeHeroAnimation } from "@/lib/animation/pages/home/home";
 import { socials } from "@/lib/tools/constants";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
@@ -18,6 +19,9 @@ export const Hero = () => {
       subtitle: subtitleReference.current,
       cardsContainer: cardsReference.current,
       socialsContainer: socialsReference.current,
+    });
+    HTL?.eventCallback("onComplete", () => {
+      HBGTL?.play();
     });
   }, []);
 

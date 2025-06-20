@@ -1,6 +1,10 @@
 import gsap from "gsap";
 
-import { timelineRegistry } from "../../timeline-registery";
+// Create master timeline
+export const HTL = gsap.timeline({
+  paused: false,
+  defaults: { ease: "power3.out" },
+});
 
 export const initHomeHeroAnimation = ({
   subtitle,
@@ -23,13 +27,8 @@ export const initHomeHeroAnimation = ({
     y: 20,
   });
 
-  // Create master timeline
-  const masterTL = gsap.timeline({
-    defaults: { ease: "power3.out" },
-  });
-
   // Subtitle animation
-  masterTL.to(
+  HTL.to(
     subtitleText,
     {
       opacity: 1,
@@ -41,7 +40,7 @@ export const initHomeHeroAnimation = ({
   );
 
   // Cards animation
-  masterTL.to(
+  HTL.to(
     cards,
     {
       opacity: 1,
@@ -54,7 +53,7 @@ export const initHomeHeroAnimation = ({
   );
 
   // Social buttons
-  masterTL.to(
+  HTL.to(
     socialButtons,
     {
       opacity: 1,
@@ -64,6 +63,4 @@ export const initHomeHeroAnimation = ({
     },
     ">0.2",
   );
-
-  timelineRegistry.set("home-hero", masterTL);
 };

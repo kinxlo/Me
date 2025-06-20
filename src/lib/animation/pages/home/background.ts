@@ -1,6 +1,12 @@
 import { logoVariants } from "@/lib/tools/constants";
 import gsap from "gsap";
 
+// Create master timeline
+export const HBGTL = gsap.timeline({
+  paused: true,
+  defaults: { ease: "power3.out" },
+});
+
 export const initHomeBGAnimation = (
   svgReference: SVGElement | null,
   pathsReference: React.RefObject<(SVGPathElement | null)[]>,
@@ -34,7 +40,7 @@ export const initHomeBGAnimation = (
         });
 
         // MorphSVG animation
-        gsap.to(pathElement, {
+        HBGTL.to(pathElement, {
           duration: 1.5,
           morphSVG: {
             shape: targetPath.d,
@@ -50,7 +56,7 @@ export const initHomeBGAnimation = (
         });
       } else {
         // Hide extra paths
-        gsap.to(pathElement, {
+        HBGTL.to(pathElement, {
           duration: 1.5,
           opacity: 0,
           onComplete: () => {
@@ -62,7 +68,6 @@ export const initHomeBGAnimation = (
 
     currentIndex = nextIndex;
   };
-
-  const intervalId = setInterval(animateToNextVariant, 7000);
+  const intervalId = setInterval(animateToNextVariant, 4000);
   return () => clearInterval(intervalId);
 };
