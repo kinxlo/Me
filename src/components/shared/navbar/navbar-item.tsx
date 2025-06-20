@@ -2,7 +2,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
 import MainButton from "../button";
@@ -19,13 +18,6 @@ type NavItemProperties = {
 
 export const NavItem = ({ content, path, variant, isActive, isMobile = false, onClick }: NavItemProperties) => {
   const navItemReference = useRef<HTMLButtonElement>(null);
-
-  useGSAP(
-    () => {
-      // Animation is now handled by the parent component
-    },
-    { scope: navItemReference },
-  );
 
   return (
     <MainButton

@@ -81,15 +81,13 @@ export const BusinessCard = () => {
                 <div
                   key={index}
                   className={cn(
-                    "backdrop-blur-0 bg-secondary flex gap-3 rounded-lg border p-4 shadow transition-all hover:bg-black/5",
-                    // item.bgColor,
-                    // item.borderColor,
+                    "flex gap-3 rounded-lg border bg-gray-800 p-4 text-white shadow backdrop-blur-xl transition-all",
                   )}
                 >
                   {item.icon}
-                  <div>
-                    <h4 className="font-head text-primary text-lg font-bold underline">{item.title}</h4>
-                    <p className="font-head text-black/90">{item.desc}</p>
+                  <div className={`space-y-2`}>
+                    <h4 className="font-head text-lg font-bold underline">{item.title}</h4>
+                    <p className="text-sm">{item.desc}</p>
                   </div>
                 </div>
               ))}
