@@ -2,14 +2,22 @@
 
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import { initMobileRevealAnimations } from "@/lib/animation/pages/project";
+import { cleanupRevealAnimations, initRevealAnimations } from "@/lib/animation/pages/project";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 
+// Initialize animations when projects change
+const initialize = async () => {
+  await initRevealAnimations();
+};
+
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   useGSAP(() => {
-    initMobileRevealAnimations();
+    initialize();
+    return () => {
+      cleanupRevealAnimations();
+    };
   }, [projects]);
 
   if (!projects?.length) {
@@ -42,7 +50,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
               <Wrapper
                 key={project.id}
                 id={`project-${project.id}`}
-                className={`project-section cc-border overflow-hidden p-0 pl-2`}
+                className={`project-section reveal-section cc-border overflow-hidden p-0 pl-2`}
               >
                 <Wrapper className="my-2 p-0">
                   <section className="group relative flex min-h-[30rem] max-w-(--breakpoint-md) flex-col items-center justify-center gap-8 rounded-none !mix-blend-multiply transition-all duration-300">
@@ -50,13 +58,17 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       {/* Project Header */}
                       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                         <div>
-                          <p className="project-title font-head text-primary text-2xl font-bold">
+                          <p className="project-title reveal-title font-head text-primary text-2xl font-bold">
                             {project.id}. {project.name}
                           </p>
                           <div className="mt-1 flex items-center gap-2">
-                            <span className="text-muted-foreground text-sm font-medium">{project.category}</span>
-                            <span className="bg-muted-foreground h-1 w-1 rounded-full" />
-                            <span className="text-muted-foreground text-sm font-medium">{project.date}</span>
+                            <span className="text-muted-foreground reveal-title text-sm font-medium">
+                              {project.category}
+                            </span>
+                            <span className="bg-muted-foreground reveal-title h-1 w-1 rounded-full" />
+                            <span className="text-muted-foreground reveal-title text-sm font-medium">
+                              {project.date}
+                            </span>
                           </div>
                         </div>
 
@@ -66,7 +78,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                               href={project.github}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="hover:bg-accent rounded-md border px-3 py-1.5 text-sm transition-colors"
+                              className="hover:bg-accent reveal-button rounded-md border px-3 py-1.5 text-sm transition-colors"
                             >
                               View Code
                             </a>
@@ -75,7 +87,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                             href={project.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm transition-colors"
+                            className="bg-primary reveal-button text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm transition-colors"
                           >
                             Live Demo
                           </a>
@@ -83,10 +95,10 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       </div>
 
                       {/* Project Description */}
-                      <p className="project-p text-foreground text-lg leading-relaxed">{project.desc}</p>
+                      <p className="project-p text-foreground reveal-text text-lg leading-relaxed">{project.desc}</p>
 
                       {/* Status & Tech Stack */}
-                      <div className="flex flex-wrap items-center gap-4">
+                      <div className="reveal-text flex flex-wrap items-center gap-4">
                         <div className="flex items-center gap-2">
                           <span className="relative flex h-3 w-3">
                             <span
@@ -124,7 +136,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       {/* Desktop Preview - Hidden on mobile */}
                       <div
                         className={cn(
-                          "group relative hidden overflow-hidden rounded-lg border shadow-lg transition-all hover:shadow-xl lg:block",
+                          "group reveal-image relative hidden overflow-hidden rounded-lg border shadow-lg transition-all hover:shadow-xl lg:block",
                           "hover:border-primary hover:!mix-blend-normal hover:grayscale-0",
                         )}
                       >
@@ -149,7 +161,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       </div>
 
                       {/* Mobile Preview */}
-                      <div className="project-image lg:hidden">
+                      <div className="project-image reveal-image lg:hidden">
                         <div className="relative overflow-hidden rounded-lg border shadow-md">
                           <div className="aspect-[9/16] w-full overflow-hidden">
                             <BlurImage

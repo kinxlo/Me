@@ -44,14 +44,14 @@ export const Hero = () => {
           ref={cardsReference}
           className="cc-border-down font-head flex max-w-(--breakpoint-md) flex-col items-start gap-4 p-2 lg:flex-row lg:text-lg"
         >
-          <div className="flex gap-3 rounded-lg border border-gray-200 bg-white/90 p-4 shadow-lg transition-all hover:bg-white hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/90 dark:hover:bg-gray-800">
+          <div className="bg-secondary flex gap-3 rounded-lg border border-gray-200 p-4 shadow-lg transition-all hover:bg-white hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/90 dark:hover:bg-gray-800">
             <p className="font-medium text-gray-800 dark:text-gray-200">
               A <span className="text-primary-600 dark:text-primary-400">CRITICAL THINKER</span> by default. A{" "}
               <span className="text-primary-600 dark:text-primary-400">PROGRAMMER</span> by effort.
             </p>
           </div>
 
-          <div className="flex gap-3 rounded-lg border border-gray-200 bg-white/90 p-4 shadow-lg transition-all hover:bg-white hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/90 dark:hover:bg-gray-800">
+          <div className="bg-secondary flex gap-3 rounded-lg border border-gray-200 p-4 shadow-lg transition-all hover:bg-white hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/90 dark:hover:bg-gray-800">
             <p className="font-medium text-gray-800 dark:text-gray-200">
               Not a fan of <span className="text-primary-600 dark:text-primary-400">&apos;Buzz words&apos;</span>, but
               I&apos;m very much aware of them. lol
