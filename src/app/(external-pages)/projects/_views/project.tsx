@@ -38,10 +38,10 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
           <p className="project-text cc-border font-head text-2xl text-black/90">
             Here you will find some project that made it from development to production.
           </p>
-          <p className={`font-sea mt-4 text-xl`}>
+          {/* <p className={`font-sea mt-4 text-xl`}>
             <span className={`text-primary`}>Note:</span> that this previews are interactive to a point. if you want to
             have the full experience, click the link attached to the project.
-          </p>
+          </p> */}
         </section>
 
         <section className="my-[5rem]">

@@ -124,6 +124,21 @@
   --color-gray-950: oklch(0.15 0 0);
 }
 
+.dark {
+  /* Base colors */
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(21.3% 0 0);
+  /* Primary */
+  --primary: oklch(50.5% 0.235 257.6);
+  --primary-50: oklch(94.5% 0.025 258.5);
+  --primary-75: oklch(80.2% 0.075 258.3);
+  --primary-100: oklch(72.5% 0.115 258.1);
+  --primary-200: oklch(58.2% 0.195 257.8);
+  --primary-400: oklch(38.5% 0.195 257.4);
+  --primary-500: oklch(34.5% 0.175 257.3);
+  --primary-foreground: oklch(1 0 0);
+}
+
 @layer utilities {
   .cc-bg-dotted {
     @apply overflow-hidden bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed p-8 [--pattern-fg:var(--color-gray-950)]/10 after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-gray-950/5;
@@ -159,12 +174,26 @@
   }
 
   body {
+    position: relative;
     @apply text-muted-foreground bg-secondary;
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
     /* background: url(/images/bg-2.png); */
-    background: url(/images/bg-6.png);
+    background: url(/images/bg-light.svg);
+    -webkit-mix-blend-mode: multiply !important;
+  }
+  body:after {
+    position: fixed;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000050;
+    background-size: cover;
+    mix-blend-mode: multiply;
+    z-index: -1;
   }
 
   h1,

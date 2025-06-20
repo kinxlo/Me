@@ -1,14 +1,15 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
+import { Wrapper } from "@/components/core/layout/wrapper";
 // import { tagAnimation } from "@/lib/animation/tag-animation";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
-import { useRef } from "react";
+
+// import { usePathname } from "next/navigation";
+// import { useRef } from "react";
 
 export const NavLogo = () => {
-  const nameReference = useRef<HTMLHeadingElement>(null);
-  const path = usePathname();
+  // const nameReference = useRef<HTMLHeadingElement>(null);
+  // const path = usePathname();
 
   // const handleMouseEnter = () => {
   //   if (nameReference.current) {
@@ -23,16 +24,10 @@ export const NavLogo = () => {
   // };
 
   return (
-    <Badge
-      ref={nameReference}
-      // onMouseLeave={handleMouseLeave}
-      // onMouseEnter={handleMouseEnter}
-      className={cn(
-        "cc-init show-tag absolute bottom-[20%] w-0 rounded-none bg-black px-0",
-        path.includes(`/about`) || (path.includes(`/projects`) && `hidden`),
-      )}
-    >
-      I19N
-    </Badge>
+    <Wrapper className={cn(`max-w-(--breakpoint-lg)`)}>
+      <span className="border-primary font-sea text-primary rounded-full border-2 bg-black/10 px-2.5 py-1 text-xl font-medium">
+        I19N
+      </span>
+    </Wrapper>
   );
 };

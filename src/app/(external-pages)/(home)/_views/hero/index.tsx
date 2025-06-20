@@ -1,11 +1,13 @@
 "use client";
 
+import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
 import { Wrapper } from "@/components/core/layout/wrapper";
 import MainButton from "@/components/shared/button";
 import { HBGTL } from "@/lib/animation/pages/home/background";
 import { HTL, initHomeHeroAnimation } from "@/lib/animation/pages/home/home";
 import { socials } from "@/lib/tools/constants";
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 import { useRef } from "react";
 
 export const Hero = () => {
@@ -46,24 +48,22 @@ export const Hero = () => {
 
         <section
           ref={cardsReference}
-          className="cc-border-down font-head flex max-w-(--breakpoint-md) flex-col items-start gap-4 p-2 lg:flex-row lg:text-lg"
+          className="cc-border-down flex max-w-(--breakpoint-md) flex-col items-start gap-4 p-2 text-sm text-white lg:flex-row"
         >
-          <div className="bg-secondary flex gap-3 rounded-lg border border-gray-200 p-4 shadow-lg transition-all hover:bg-white hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/90 dark:hover:bg-gray-800">
-            <p className="font-medium text-gray-800 dark:text-gray-200">
+          <div className="flex flex-1 gap-3 rounded-lg border border-gray-200 bg-gray-800 p-4 transition-all md:min-h-[6rem]">
+            <p className="font-medium">
+              I build interfaces that balance aesthetic and function, delivering smooth experiences across all devices.
+            </p>
+          </div>
+          <div className="transition-al flex flex-1 gap-3 rounded-lg border border-gray-200 bg-gray-800 p-4 md:min-h-[6rem]">
+            <p className="font-medium">
               A <span className="text-primary-600 dark:text-primary-400">CRITICAL THINKER</span> by default. A{" "}
               <span className="text-primary-600 dark:text-primary-400">PROGRAMMER</span> by effort.
             </p>
           </div>
-
-          <div className="bg-secondary flex gap-3 rounded-lg border border-gray-200 p-4 shadow-lg transition-all hover:bg-white hover:shadow-xl dark:border-gray-700 dark:bg-gray-800/90 dark:hover:bg-gray-800">
-            <p className="font-medium text-gray-800 dark:text-gray-200">
-              Not a fan of <span className="text-primary-600 dark:text-primary-400">&apos;Buzz words&apos;</span>, but
-              I&apos;m very much aware of them. lol
-            </p>
-          </div>
         </section>
 
-        <section className="cc-border mt-16 flex gap-4" ref={socialsReference}>
+        <section className="cc-border mt-5 flex gap-4 p-2" ref={socialsReference}>
           {socials.map((social) => (
             <MainButton
               key={social.content}
@@ -72,10 +72,17 @@ export const Hero = () => {
               variant={`primary`}
               href={social.link}
               icon={social.icon}
-              className="cc-shades hover:bg-primary w-fit rounded-full border-5 bg-black transition-all duration-300 hover:scale-110 hover:text-white"
+              className="hover:bg-primary w-fit rounded-full border-5 bg-gray-800 transition-all duration-300 hover:scale-110 hover:text-white"
             />
           ))}
         </section>
+        <Wrapper className={`font-head mt-5 flex w-full items-center justify-between gap-2 text-center`}>
+          <Link href={``} onClick={() => HTL.reverse()} className={`font-medium hover:underline`}>
+            Credit:
+          </Link>
+          <ModeToggle />
+          <p title="Ifijeh Kingsley Solomon">&copy; By I19N</p>
+        </Wrapper>
       </section>
     </section>
   );
