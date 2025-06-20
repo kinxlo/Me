@@ -1,9 +1,9 @@
 "use client";
 
+import { initHomeBGAnimation } from "@/lib/animation/pages/home/background";
 import { logoVariants } from "@/lib/tools/constants";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { useRef } from "react";
 
 export const HomeSVGBG = () => {
@@ -12,66 +12,7 @@ export const HomeSVGBG = () => {
 
   useGSAP(
     () => {
-      if (!svgReference.current) return;
-
-      let currentIndex = 0;
-
-      const animateToNextVariant = () => {
-        const nextIndex = (currentIndex + 1) % logoVariants.length;
-        const nextVariant = logoVariants[nextIndex];
-
-        // Ensure we have enough path elements
-        while (pathsReference.current.length < nextVariant.paths.length) {
-          const newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          svgReference.current?.append(newPath);
-          pathsReference.current.push(newPath);
-        }
-
-        // Animate each path
-        for (const [index, pathElement] of pathsReference.current.entries()) {
-          if (!pathElement) continue;
-
-          const targetPath = nextVariant.paths[index];
-
-          if (targetPath) {
-            // Show and animate existing paths
-            gsap.set(pathElement, {
-              display: "block",
-              opacity: 1,
-            });
-
-            // MorphSVG animation
-            gsap.to(pathElement, {
-              duration: 1.5,
-              morphSVG: {
-                shape: targetPath.d,
-                type: "rotational",
-              },
-              attr: {
-                fill: targetPath.fill || "transparent",
-                stroke: targetPath.stroke || "none",
-                "fill-opacity": targetPath.fillOpacity ?? 1,
-                "stroke-width": targetPath.strokeWidth ?? 0,
-              },
-              ease: "power2.inOut",
-            });
-          } else {
-            // Hide extra paths
-            gsap.to(pathElement, {
-              duration: 1.5,
-              opacity: 0,
-              onComplete: () => {
-                pathElement.style.display = "none";
-              },
-            });
-          }
-        }
-
-        currentIndex = nextIndex;
-      };
-
-      const intervalId = setInterval(animateToNextVariant, 7000);
-      return () => clearInterval(intervalId);
+      initHomeBGAnimation(svgReference.current, pathsReference);
     },
     { scope: svgReference },
   );

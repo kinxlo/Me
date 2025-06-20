@@ -53,34 +53,38 @@ export const BusinessCard = () => {
                   icon: <CheckCircle className="text-success" size={20} />,
                   title: "Accessibility-first",
                   desc: "WCAG compliant interfaces that work for everyone",
-                  color: "#61dbfb50", // React blue
+                  bgColor: "bg-blue-100", // Opaque background
+                  borderColor: "border-blue-200",
                 },
                 {
                   icon: <CheckCircle className="text-success" size={20} />,
                   title: "Fullstack Mindset",
                   desc: "Frontend expertise with backend/system awareness",
-                  color: "#38b2ac50", // Tailwind teal
+                  bgColor: "bg-teal-100", // Opaque background
+                  borderColor: "border-teal-200",
                 },
                 {
                   icon: <CheckCircle className="text-success" size={20} />,
                   title: "Mentorship",
                   desc: "Guiding juniors while learning from seniors",
-                  color: "#f472b650", // Pink
+                  bgColor: "bg-pink-100", // Opaque background
+                  borderColor: "border-pink-200",
                 },
                 {
                   icon: <CheckCircle className="text-success" size={20} />,
                   title: "Open Source",
                   desc: "Contributing to community-driven projects",
-                  color: "#f59e0b50", // Amber
+                  bgColor: "bg-amber-100", // Opaque background
+                  borderColor: "border-amber-200",
                 },
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex gap-3 rounded-lg border p-4 transition-all hover:bg-black/5"
-                  style={{
-                    backgroundColor: item.color,
-                    borderColor: item.color.replace("50", "30"),
-                  }}
+                  className={cn(
+                    "backdrop-blur-0 flex gap-3 rounded-lg border p-4 transition-all hover:bg-black/5",
+                    item.bgColor,
+                    item.borderColor,
+                  )}
                 >
                   {item.icon}
                   <div>
