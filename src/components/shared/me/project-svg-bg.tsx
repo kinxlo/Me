@@ -2,10 +2,9 @@
 
 import { useProjects } from "@/context/global-context";
 import { useResponsiveLayout } from "@/hooks/use-media-query";
+import { initProjectBGAnimation } from "@/lib/animation/pages/project/background";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
 
@@ -22,49 +21,12 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
 
   useGSAP(
     () => {
-      if (!svgReference.current || isMobile) return;
-
-      // Clear previous animations
-      for (const trigger of ScrollTrigger.getAll()) trigger.kill();
-
-      gsap.to("#pj-1", {
-        duration: 1,
-        delay: 1,
-        morphSVG: "#pj-1",
-        ease: "power2.inOut",
-      });
-
-      // Setup scroll triggers for each project
-      for (const [index, project] of projects.entries()) {
-        const projectSection = document.querySelector(`#project-${project.id}`);
-        if (!projectSection) continue;
-
-        ScrollTrigger.create({
-          trigger: projectSection,
-          start: "top center",
-          end: "bottom center",
-          onEnter: () => {
-            gsap.to("#pj-1", {
-              duration: 0.8,
-              delay: 1,
-              morphSVG: `#pj-${index + 1}`,
-              ease: "power2.inOut",
-              overwrite: "auto",
-            });
-          },
-          onEnterBack: () => {
-            gsap.to("#pj-1", {
-              duration: 0.8,
-              delay: 1,
-              morphSVG: `#pj-${index + 1}`,
-              ease: "power2.inOut",
-              overwrite: "auto",
-            });
-          },
-        });
-      }
+      initProjectBGAnimation(svgReference.current, projects);
     },
-    { dependencies: [pathname, projects, isMobile], scope: svgReference },
+    {
+      dependencies: [pathname, projects, isMobile],
+      scope: svgReference,
+    },
   );
 
   // Hide the SVG completely on mobile

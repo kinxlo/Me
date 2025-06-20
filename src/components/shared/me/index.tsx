@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
+import { AboutSVGBG } from "./paths/about-svg-bg";
 import { HomeSVGBG } from "./paths/home-svg-bg";
 import { ProjectSVGBG } from "./project-svg-bg";
 
@@ -17,6 +18,10 @@ export const Me = () => {
           case "/": {
             return <HomeSVGBG />;
           }
+          case "/about": {
+            // return;
+            return <AboutSVGBG />;
+          }
           case "/projects": {
             return (
               <ProjectSVGBG
@@ -27,26 +32,11 @@ export const Me = () => {
               />
             );
           }
-          case "/about": {
-            return;
-          }
           default: {
             return null;
           }
         }
       })()}
-      {/* Main Image - maintains bottom-right position with responsive scaling */}
-      {/* <BlurImage
-        className={cn(
-          `absolute right-0 bottom-0 origin-bottom-right translate-x-[25%] translate-y-[25%] scale-75 md:scale-90 lg:translate-x-[35%] lg:translate-y-[35%] lg:scale-100`,
-          pathname.includes(`/projects`) && `hidden`,
-        )}
-        src="/images/me.svg"
-        alt="Illustration shadow effect"
-        width={500}
-        height={800}
-        priority
-      /> */}
     </div>
   );
 };

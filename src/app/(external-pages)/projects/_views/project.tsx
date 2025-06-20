@@ -2,7 +2,7 @@
 
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import { cleanupRevealAnimations, initRevealAnimations } from "@/lib/animation/pages/project";
+import { cleanupRevealAnimations, initRevealAnimations } from "@/lib/animation/pages/project/project";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";

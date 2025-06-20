@@ -1,5 +1,6 @@
-import gsap from "../gsap/init";
-import { timelineRegistry } from "../timeline-registery";
+import gsap from "gsap";
+
+import { timelineRegistry } from "../../timeline-registery";
 
 export const initHomeHeroAnimation = ({
   subtitle,
