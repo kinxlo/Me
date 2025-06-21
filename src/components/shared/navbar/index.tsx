@@ -1,10 +1,7 @@
 "use client";
 
 import { useResponsiveLayout } from "@/hooks/use-media-query";
-import gsap from "@/lib/animation/gsap/init";
-import { navAnimation } from "@/lib/animation/nav-animation";
 import { cn } from "@/lib/utils";
-import { useGSAP } from "@gsap/react";
 import { useEffect, useRef, useState } from "react";
 
 import { MobileMenuBackdrop } from "./mobile-backdrop";
@@ -21,15 +18,6 @@ const MobileNav = ({
   toggleMenu: () => void;
 }) => {
   const containerReference = useRef<HTMLElement>(null);
-
-  useGSAP(() => {
-    if (isOpen) {
-      // Reset initial state
-      gsap.set(".cc-nav", { opacity: 0, y: 50 });
-      // Run animation when menu opens
-      navAnimation(true);
-    }
-  }, [isOpen]);
 
   return (
     <section ref={containerReference} className={`md:hidden`}>
@@ -50,22 +38,8 @@ const MobileNav = ({
 };
 
 const DesktopNav = () => {
-  const containerReference = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      // Run animation when component mounts
-      navAnimation(true);
-    },
-    { scope: containerReference },
-  );
-
   return (
-    <section
-      ref={containerReference}
-      className="font-head fixed top-0 right-[5%] z-[999] hidden flex-col md:flex"
-      role="navigation"
-    >
+    <section className="font-head fixed top-0 right-[5%] z-[999] hidden flex-col md:flex" role="navigation">
       <NavItems isMobile={false} onItemClick={() => {}} />
     </section>
   );

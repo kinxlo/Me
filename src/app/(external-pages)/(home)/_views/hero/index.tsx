@@ -63,7 +63,7 @@ export const Hero = () => {
           </div>
         </section>
 
-        <section className="cc-border mt-5 flex gap-4 p-2" ref={socialsReference}>
+        <section className="cc-border mt-5 flex gap-4 px-2 py-0" ref={socialsReference}>
           {socials.map((social) => (
             <MainButton
               key={social.content}
@@ -76,7 +76,7 @@ export const Hero = () => {
             />
           ))}
         </section>
-        <Wrapper className={`font-head mt-5 flex w-full items-center justify-between gap-2 text-center`}>
+        <Wrapper className={`font-head mt-5 flex w-full items-center justify-between gap-2 py-0 text-center`}>
           <Link href={``} onClick={() => HTL.reverse()} className={`font-medium hover:underline`}>
             Credit:
           </Link>

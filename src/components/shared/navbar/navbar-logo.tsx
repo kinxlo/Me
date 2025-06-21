@@ -24,8 +24,8 @@ export const NavLogo = () => {
   // };
 
   return (
-    <Wrapper className={cn(`max-w-(--breakpoint-lg)`)}>
-      <span className="border-primary font-sea text-primary rounded-full border-2 bg-black/10 px-2.5 py-1 text-xl font-medium">
+    <Wrapper className={cn(`cc-border max-w-(--breakpoint-lg) py-0`)}>
+      <span className="font-sea rounded-full border-2 border-gray-800 bg-black/10 px-2.5 py-1 text-xl font-medium text-gray-800">
         I19N
       </span>
     </Wrapper>

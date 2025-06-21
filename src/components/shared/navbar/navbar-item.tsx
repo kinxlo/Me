@@ -25,7 +25,7 @@ export const NavItem = ({ content, path, variant, isActive, isMobile = false, on
       href={path}
       variant={variant}
       className={cn(
-        "cc-nav font-head relative opacity-0 transition-all duration-300 hover:opacity-100 md:text-2xl",
+        "font-head relative transition-all duration-300 hover:translate-x-[1rem] hover:opacity-100 md:text-2xl",
         "text-black hover:text-black/50",
         isActive && "!text-primary font-bold underline underline-offset-4",
         isMobile && "text-4xl text-white",

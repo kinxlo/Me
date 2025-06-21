@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import gsap from "@/lib/animation/gsap/init";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Create master timeline

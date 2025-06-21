@@ -1,5 +1,5 @@
+import gsap from "@/lib/animation/gsap/init";
 import { logoVariants } from "@/lib/tools/constants";
-import gsap from "gsap";
 
 // Create master timeline
 export const HBGTL = gsap.timeline({
