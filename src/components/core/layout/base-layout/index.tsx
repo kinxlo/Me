@@ -1,8 +1,8 @@
 "use client";
 
+import gsap from "@/lib/animation/gsap/init";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { usePathname } from "next/navigation";
@@ -22,8 +22,6 @@ export function BaseLayout({ children }: { children: React.ReactNode }) {
   }, [pathname]);
 
   useGSAP(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

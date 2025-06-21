@@ -33,7 +33,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   return (
     <div>
       <section className="mt-0 space-y-4 p-0">
-        <section className="mt-[5rem] max-w-(--breakpoint-md) space-y-1 px-2">
+        <section className="mt-[5rem] max-w-(--breakpoint-md) space-y-1 px-2 mix-blend-multiply">
           <h1 className="cc-border text-primary">Showcase</h1>
           <p className="project-text cc-border font-head text-2xl text-black/90">
             Here you will find some project that made it from development to production.
@@ -161,7 +161,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       </div>
 
                       {/* Mobile Preview */}
-                      <div className="project-image reveal-image lg:hidden">
+                      <div className="project-image reveal-image !mix-blend-multiply lg:hidden">
                         <div className="relative overflow-hidden rounded-lg border shadow-md">
                           <div className="aspect-[9/16] w-full overflow-hidden">
                             <BlurImage
