@@ -1,53 +1,69 @@
 "use client";
 
+import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
+import { Wrapper } from "@/components/core/layout/wrapper";
 import MainButton from "@/components/shared/button";
-import { initHeroAnimation, showAnimation, textAnimation } from "@/lib/animation/home-animation";
+import { HBGTL } from "@/lib/animation/pages/home/background";
+import { HTL, initHomeHeroAnimation } from "@/lib/animation/pages/home/home";
 import { socials } from "@/lib/tools/constants";
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
+import { useRef } from "react";
 
 export const Hero = () => {
+  const titleReference = useRef<HTMLHeadingElement>(null);
+  const subtitleReference = useRef<HTMLDivElement>(null);
+  const cardsReference = useRef<HTMLDivElement>(null);
+  const socialsReference = useRef<HTMLDivElement>(null);
+
   useGSAP(() => {
-    const tl = initHeroAnimation();
-    tl.eventCallback("onComplete", () => {
-      const tl = showAnimation();
-      tl.eventCallback("onComplete", () => {
-        textAnimation();
-      });
+    initHomeHeroAnimation({
+      subtitle: subtitleReference.current,
+      cardsContainer: cardsReference.current,
+      socialsContainer: socialsReference.current,
+    });
+    HTL?.eventCallback("onComplete", () => {
+      HBGTL?.play();
     });
   }, []);
+
   return (
     <section className="mix-blend-multiply">
-      <section className="max-w-(--breakpoint-md) -rotate-2">
-        {/* Animate the text content after entrance */}
-        <div>
-          <h1 className="text-primary relative flex w-full origin-bottom-left items-end capitalize">
-            <span className="xs:text-[15rem]/[10rem] title cc-init text-[10rem]/[7rem] lg:text-[20rem]/[13rem]">I</span>
-            <div className="relative flex flex-col items-start justify-center overflow-hidden">
-              <p className="developer cc-init text-5xl sm:text-6xl md:text-7xl lg:text-8xl">Kingsley</p>
-              <hr className="bg-primary line h-1" />
-              <p className="software cc-init text-5xl lowercase sm:text-6xl md:text-7xl lg:ml-0 lg:text-8xl">fijeh.</p>
-            </div>
+      <section className="mx-auto max-w-(--breakpoint-lg)">
+        <Wrapper>
+          <h1 className="text-primary show flex w-full items-end overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
+            <span className="title-word">Ifijeh</span>
+          </h1>
+          <h1
+            ref={titleReference}
+            className="text-primary show flex w-full items-end overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]"
+          >
+            <span className="title-word">Kingsley</span>.<span className="title-word">Solomon.</span>
           </h1>
 
-          <div className="cc-border">
-            <p className="font-head hero-text cc-init show translate-x-[20%] px-4 py-2 text-lg font-medium">
-              Frontend Developer | Instructor | Web Developer...
+          <div ref={subtitleReference} className="cc-border overflow-hidden">
+            <p className="font-head py-2 text-2xl font-medium">Frontend Developer | Instructor | Web Developer...</p>
+          </div>
+        </Wrapper>
+
+        <section
+          ref={cardsReference}
+          className="cc-border-down flex max-w-(--breakpoint-md) flex-col items-start gap-4 p-2 text-sm text-white lg:flex-row"
+        >
+          <div className="flex flex-1 gap-3 rounded-lg border border-gray-200 bg-gray-800 p-4 transition-all md:min-h-[6rem]">
+            <p className="font-medium">
+              I build interfaces that balance aesthetic and function, delivering smooth experiences across all devices.
             </p>
           </div>
-        </div>
-
-        {/* Below content appears naturally or could be animated as well */}
-        <section className="cc-border-down font-head flex flex-col items-start text-lg lg:flex-row">
-          <p className="hero-text-1 show cc-init h-[98px] min-w-[50%] translate-x-[50%] p-4 font-medium lg:h-[98px]">
-            A <span className={`text-primary`}>CRITICAL THINKER</span> by default. A{" "}
-            <span className={`text-primary`}>PROGRAMMER</span> by effort.
-          </p>
-          <p className="hero-text-2 text-primary show cc-init h-[90px] min-w-[50%] translate-x-[50%] p-4 pr-0 font-medium lg:h-[135px]">
-            Not a fan of &apos;Buzz words&apos;, but i&apos;m very much aware of them. lol
-          </p>
+          <div className="transition-al flex flex-1 gap-3 rounded-lg border border-gray-200 bg-gray-800 p-4 md:min-h-[6rem]">
+            <p className="font-medium">
+              A <span className="text-primary-600 dark:text-primary-400">CRITICAL THINKER</span> by default. A{" "}
+              <span className="text-primary-600 dark:text-primary-400">PROGRAMMER</span> by effort.
+            </p>
+          </div>
         </section>
 
-        <section className="cc-border mt-16 flex gap-4">
+        <section className="cc-border mt-5 flex gap-4 p-2" ref={socialsReference}>
           {socials.map((social) => (
             <MainButton
               key={social.content}
@@ -56,10 +72,17 @@ export const Hero = () => {
               variant={`primary`}
               href={social.link}
               icon={social.icon}
-              className="cc-shades cc-init show hover:bg-primary w-fit translate-x-[50%] rounded-full border-5 bg-black transition-all duration-300 hover:text-white"
+              className="hover:bg-primary w-fit rounded-full border-5 bg-gray-800 transition-all duration-300 hover:scale-110 hover:text-white"
             />
           ))}
         </section>
+        <Wrapper className={`font-head mt-5 flex w-full items-center justify-between gap-2 text-center`}>
+          <Link href={``} onClick={() => HTL.reverse()} className={`font-medium hover:underline`}>
+            Credit:
+          </Link>
+          <ModeToggle />
+          <p title="Ifijeh Kingsley Solomon">&copy; By I19N</p>
+        </Wrapper>
       </section>
     </section>
   );

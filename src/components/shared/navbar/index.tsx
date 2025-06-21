@@ -1,7 +1,7 @@
 "use client";
 
 import { useResponsiveLayout } from "@/hooks/use-media-query";
-import gsap from "@/lib/animation/gsap";
+import gsap from "@/lib/animation/gsap/init";
 import { navAnimation } from "@/lib/animation/nav-animation";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";

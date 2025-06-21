@@ -1,99 +1,105 @@
-import { aboutTextAnimation } from "@/lib/animation/about-animation";
-import { useGSAP } from "@gsap/react";
-import { CheckCircle } from "lucide-react";
+"use client";
+
+import { Wrapper } from "@/components/core/layout/wrapper";
+import { cn } from "@/lib/utils";
+import { ArrowUpRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
-import { PlainCard } from "./plain-card";
-
 export const BusinessCard = () => {
-  useGSAP(() => {
-    aboutTextAnimation();
-  }, []);
-
   return (
-    <PlainCard className="business-card -lg:rotate-2 ml-3 min-h-[1128px] -rotate-1 space-y-8 rounded-none p-5 mix-blend-multiply lg:ml-8 lg:p-10">
-      {/* Name & Role */}
-      <section className="cc-border space-y-4 py-4">
-        <h3 className="text-primary about-txt text-2xl underline lg:text-5xl">Ifijeh Kingsley Solomon</h3>
-        <p className="font-sea text-2xl text-black/80">
-          Lead Frontend dev at{" "}
-          <Link target={`_blank`} href={`https://techstudioacademy.com`} className={`text-success hover:underline`}>
-            TSA
-          </Link>
-          , with an interest in Backend engineering, and System architecture.
-        </p>
-      </section>
+    <section className="my-[5rem]">
+      <Wrapper className="overflow-hidden p-0 pl-2">
+        <Wrapper className="my-2 p-0">
+          <section
+            className={cn(
+              "business-card group relative flex min-h-[30rem] flex-col justify-center gap-8 rounded-none !mix-blend-multiply",
+              "transition-all duration-300",
+            )}
+          >
+            {/* Header Section - Will animate with .about-txt class */}
+            <div className="section-1 space-y-6">
+              <h3 className="text-primary about-txt font-head text-3xl underline lg:text-4xl">
+                Ifijeh Kingsley Solomon
+              </h3>
+              <p className="font-head text-xl text-black/90">
+                Lead Frontend dev at{" "}
+                <Link
+                  target="_blank"
+                  href="https://techstudioacademy.com"
+                  className="text-success hover:text-success/80 hover:underline"
+                >
+                  TSA <ArrowUpRight className="inline h-4 w-4" />
+                </Link>
+                , with an interest in Backend engineering, and System architecture.
+              </p>
+            </div>
 
-      {/* Experience & Resume */}
-      <section className="cc-border space-y-4 py-4">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="text-xl font-black tracking-tighter text-black lg:text-3xl">~4 Years Experience</h3>
-        </div>
-        <p className="font-sea text-2xl text-black/80">
-          I enjoy building interfaces that are both beautiful and interactive, bringing ideas to completion in a way
-          that looks great, feels smooth, and works well for everyone and every devices too.
-        </p>
-      </section>
+            {/* Experience - Will animate with section-3 class */}
+            <div className="section-3 space-y-4">
+              <div className="flex items-baseline gap-3">
+                <h3 className="font-head text-2xl font-black text-black">~4 Years</h3>
+                <span className="font-head text-black/60">Experience</span>
+              </div>
+              <p className="font-head text-xl leading-relaxed text-black/90">
+                I build interfaces that balance aesthetic and function, delivering smooth experiences across all
+                devices.
+              </p>
+            </div>
 
-      {/* Highlights */}
-      <section className="font-sea cc-border space-y-10 py-4 text-xl text-black/80">
-        <div className="flex items-start gap-4">
-          <div>
-            <CheckCircle size={20} className="text-success mt-1" />
-          </div>
-          <p>
-            <span className="text-primary font-head text-lg font-bold underline">Accessibility-first approach</span> —
-            Ensuring interfaces meet web standards and offer inclusive experiences.
-          </p>
-        </div>
-        <div className="flex items-start gap-4">
-          <div>
-            <CheckCircle size={20} className="text-success mt-1" />
-          </div>
-          <p>
-            <span className="text-primary font-head text-lg font-bold underline">Versatile background</span> — From
-            agencies and startups to corporate teams, I&apos;ve built software across diverse environments.
-          </p>
-        </div>
-        <div className="flex items-start gap-4">
-          <div>
-            <CheckCircle size={20} className="text-success mt-1" />
-          </div>
-          <p>
-            <span className="text-primary font-head text-lg font-bold underline">Mentorship [Mentor]</span> — Guiding
-            less experienced developers through structured internship programs, helping them grow into confident,
-            impactful team members.
-          </p>
-        </div>
-        <div className="flex items-start gap-4">
-          <div>
-            <CheckCircle size={20} className="text-success mt-1" />
-          </div>
-          <p>
-            <span className="text-primary font-head text-lg font-bold underline">Mentorship [Mentee]</span> — Still
-            benefiting from thoughtful guidance from more experienced Engineers and Designers, shaping how I mentor
-            others today.
-          </p>
-        </div>
-        <div className="flex items-start gap-4">
-          <div>
-            <CheckCircle size={20} className="text-success mt-1" />
-          </div>
-          <p>
-            <span className="text-primary font-head text-lg font-bold underline">Open Source</span> — Contributing to
-            and maintaining community-driven projects, collaborating in public and learning from diverse engineering
-            perspectives.
-          </p>
-        </div>
-      </section>
+            {/* Highlights Grid - Will animate with section-5 class */}
+            <div className="section-5 grid gap-6 md:grid-cols-2">
+              {[
+                {
+                  icon: <CheckCircle className="text-success" size={20} />,
+                  title: "Accessibility-first",
+                  desc: "WCAG compliant interfaces that work for everyone",
+                  bgColor: "bg-blue-100", // Opaque background
+                  borderColor: "border-blue-200",
+                },
+                {
+                  icon: <CheckCircle className="text-success" size={20} />,
+                  title: "Fullstack Mindset",
+                  desc: "Frontend expertise with backend/system awareness",
+                  bgColor: "bg-teal-100", // Opaque background
+                  borderColor: "border-teal-200",
+                },
+                {
+                  icon: <CheckCircle className="text-success" size={20} />,
+                  title: "Mentorship",
+                  desc: "Guiding juniors while learning from seniors",
+                  bgColor: "bg-pink-100", // Opaque background
+                  borderColor: "border-pink-200",
+                },
+                {
+                  icon: <CheckCircle className="text-success" size={20} />,
+                  title: "Open Source",
+                  desc: "Contributing to community-driven projects",
+                  bgColor: "bg-amber-100", // Opaque background
+                  borderColor: "border-amber-200",
+                },
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    "flex gap-3 rounded-lg border bg-gray-800 p-4 text-white shadow backdrop-blur-xl transition-all",
+                  )}
+                >
+                  {item.icon}
+                  <div className={`space-y-2`}>
+                    <h4 className="font-head text-lg font-bold underline">{item.title}</h4>
+                    <p className="text-sm">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-      {/* Personal Touch */}
-      <section className="font-sea mb-20 pt-2 text-2xl text-black/50">
-        <p>
-          *** Outside of work, you&apos;ll find me reading, hanging out with the &rdquo;Guys&rdquo;, or playing video
-          games.***
-        </p>
-      </section>
-    </PlainCard>
+            {/* Personal Touch - Will animate with section-7 class */}
+            <div className="section-7 mt-8 border-t border-black/20 pt-4">
+              <p className="font-sea text-xl text-black/70 italic">*** Off-duty: Books. Squads. Gaming. Repeat. ***</p>
+            </div>
+          </section>
+        </Wrapper>
+      </Wrapper>
+    </section>
   );
 };

@@ -1,8 +1,56 @@
 [
   {
-    "id": "I",
+    "id": "1",
+    "name": "ByteAlley",
+    "language": ["Next.js", "TypeScript", "Tailwind", "SCSS", "PHP"],
+    "status": "Production",
+    "colorCode": ["#61dbfb50"],
+    "values": [99, 11, 70.5],
+    "imageDesktop1": "/images/ba-screen-1.png",
+    "imageDesktop2": "/images/ba-screen-2.png",
+    "imageDesktop3": "/images/ba-screen-7.png",
+    "url": "https://trybytealley.com/",
+    "github": null,
+    "logo": "/images/ba-logo.png",
+    "desc": "A platform where digital creators could easily share their products with the world. Think of it like an online market place like Gumroad!",
+    "tools": null,
+    "date": "2023-09-10",
+    "category": "E-commerce",
+    "contributors": [
+      {
+        "name": "kingsley solomon",
+        "img": "https://res.cloudinary.com/kingsleysolomon/image/upload/v1662471346/portfolio/WhatsApp_Image_2021-03-31_at_5.27.13_PM_nbmhus.jpg"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "TechStudio Academy",
+    "language": ["Next.js", "TypeScript", "Tailwind", "SCSS", "Express.js"],
+    "status": "Production",
+    "colorCode": ["#61dbfb50"],
+    "values": [65.7, 45.5, 22.7],
+    "imageDesktop1": "/images/tsa-screen-1.png",
+    "imageDesktop2": "/images/tsa-screen-2.png",
+    "imageDesktop3": "/images/tsa-screen-3.png",
+    "github": null,
+    "logo": "/images/tsa-logo.png",
+    "desc": "Tech Studio Academy is a tech training company based in Lagos, Nigeria, founded in 2017 with the objective of providing cost-effective and high-quality tech education to aspiring young people in the country.",
+    "tools": null,
+    "date": "2023-01-15",
+    "url": "https://techstudioacademy.com",
+    "category": "E-learning",
+    "contributors": [
+      {
+        "name": "kingsley solomon",
+        "img": "https://res.cloudinary.com/kingsleysolomon/image/upload/v1662471346/portfolio/WhatsApp_Image_2021-03-31_at_5.27.13_PM_nbmhus.jpg"
+      }
+    ]
+  },
+  {
+    "id": "3",
     "name": "Darex Engineering",
-    "language": ["HTML", "Bootstrap 3", "Javascript"],
+    "language": ["HTML", "Bootstrap 3", "JavaScript"],
     "status": "Production",
     "colorCode": ["#61dbfb50"],
     "values": [84.2, 15.1, 0.7],
@@ -11,7 +59,7 @@
     "imageDesktop3": "/images/de-screen-3.png",
     "logo": "/images/de-logo.jpg",
     "url": "https://darexengineering.com",
-    "github": "private",
+    "github": null,
     "desc": "An Electro-Mechanical services company in Nigeria. They specialize in building services and infrastructural solutions.",
     "tools": null,
     "date": "2021-03-03",
@@ -24,65 +72,9 @@
     ]
   },
   {
-    "id": "II",
-    "name": "TechStudio Academy",
-    "language": ["React/Js", "Bootstrap 5", "SASS"],
-    "status": "Production",
-    "colorCode": ["#61dbfb50"],
-    "values": [65.7, 45.5, 22.7],
-    "imageDesktop1": "/images/tsa-screen-1.png",
-    "imageDesktop2": "/images/tsa-screen-2.png",
-    "imageDesktop3": "/images/tsa-screen-3.png",
-    "github": "Private",
-    "logo": "/images/tsa-logo.png",
-    "desc": "A tech training company based in Lagos, Nigeria",
-    "tools": null,
-    "date": "2023-01-15",
-    "url": "https://techstudioacademy.com",
-    "category": "E-learning",
-    "contributors": [
-      {
-        "name": "kingsley solomon",
-        "img": "https://res.cloudinary.com/kingsleysolomon/image/upload/v1662471346/portfolio/WhatsApp_Image_2021-03-31_at_5.27.13_PM_nbmhus.jpg"
-      },
-      {
-        "name": "Olanitori Tobi",
-        "img": "https://res.cloudinary.com/kingsleysolomon/image/upload/v1667661316/clapmi/97626624_vsprnv.jpg"
-      },
-      {
-        "name": "Abdulhafeez Kekere-Ekun",
-        "img": "https://res.cloudinary.com/kingsleysolomon/image/upload/v1643440809/clapmi/avatar_3_lnfwyk.png"
-      }
-    ]
-  },
-  {
-    "id": "III",
-    "name": "ByteAlley",
-    "language": ["NextJS", "Tailwind"],
-    "status": "Development (Active)",
-    "colorCode": ["#61dbfb50"],
-    "values": [99, 11, 70.5],
-    "imageDesktop1": "/images/ba-screen-1.png",
-    "imageDesktop2": "/images/ba-screen-2.png",
-    "imageDesktop3": "/images/ba-screen-7.png",
-    "url": "https://trybytealley.com/",
-    "github": null,
-    "logo": "/images/ba-logo.png",
-    "desc": "An online market place like Gumroad!",
-    "tools": "",
-    "date": "2023-09-10",
-    "category": "E-commerce",
-    "contributors": [
-      {
-        "name": "kingsley solomon",
-        "img": "https://res.cloudinary.com/kingsleysolomon/image/upload/v1662471346/portfolio/WhatsApp_Image_2021-03-31_at_5.27.13_PM_nbmhus.jpg"
-      }
-    ]
-  },
-  {
-    "id": "IV",
+    "id": "4",
     "name": "Yemsays Proprties",
-    "language": ["React/JS", "SCSS", "Chakra"],
+    "language": ["React", "JavaScript", "SCSS", "ChakraUI"],
     "status": "Development (Stale)",
     "colorCode": ["#61dbfb50"],
     "values": [99, 11, 70.5],
@@ -92,7 +84,7 @@
     "url": "https://yemsays-app.vercel.app",
     "github": null,
     "desc": "They provide the best real estate property For You.",
-    "tools": "",
+    "tools": null,
     "logo": "/images/yms-logo.png",
     "date": "2023-03-19",
     "category": "Real Estate",

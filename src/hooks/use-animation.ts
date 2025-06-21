@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // hooks/useAnimation.ts
-import gsap from "@/lib/animation/gsap";
+import gsap from "@/lib/animation/gsap/init";
 import { useEffect, useRef } from "react";
 
 type AnimationSetup = (tl: gsap.core.Timeline, context?: gsap.Context | null) => void;

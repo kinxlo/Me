@@ -2,29 +2,23 @@
 
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import {
-  initProjectAnimationList,
-  projectTextAnimation,
-  showProjectTextAnimation,
-} from "@/lib/animation/project-animation";
+import { cleanupRevealAnimations, initRevealAnimations } from "@/lib/animation/pages/project/project";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 
-import { PlainCard } from "../../_components/plain-card";
-
-gsap.registerPlugin(ScrollTrigger);
+// Initialize animations when projects change
+const initialize = async () => {
+  await initRevealAnimations();
+};
 
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   useGSAP(() => {
-    const timeline = showProjectTextAnimation();
-    timeline.eventCallback(`onComplete`, () => {
-      initProjectAnimationList(projects);
-      projectTextAnimation();
-    });
-  }, []);
+    initialize();
+    return () => {
+      cleanupRevealAnimations();
+    };
+  }, [projects]);
 
   if (!projects?.length) {
     return (
@@ -38,60 +32,182 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
 
   return (
     <div>
-      <Wrapper className="mt-0 space-y-4 p-0">
-        <section className="show mt-[5rem] max-w-(--breakpoint-md) -rotate-2 space-y-1 px-2">
-          <h1 className="project-text cc-border cc-init text-primary translate-x-[50%]">Showcase</h1>
-          <p className="project-text cc-border font-sea cc-init translate-x-[50%] text-2xl text-black">
+      <section className="mt-0 space-y-4 p-0">
+        <section className="mt-[5rem] max-w-(--breakpoint-md) space-y-1 px-2">
+          <h1 className="cc-border text-primary">Showcase</h1>
+          <p className="project-text cc-border font-head text-2xl text-black/90">
             Here you will find some project that made it from development to production.
           </p>
+          {/* <p className={`font-sea mt-4 text-xl`}>
+            <span className={`text-primary`}>Note:</span> that this previews are interactive to a point. if you want to
+            have the full experience, click the link attached to the project.
+          </p> */}
         </section>
 
-        <section className="my-[5rem] space-y-[5rem] lg:space-y-[10rem]">
-          {projects.map((project, index) => (
-            <Wrapper key={project.id} className={`p-0 project-${index}`}>
-              <Wrapper className="cc-border my-2 p-0">
-                <Link referrerPolicy="no-referrer" target="_blank" href={project?.url || ""}>
-                  <PlainCard className="project-image-container group max-h-[273px] rounded-none border-none mix-blend-multiply transition-all lg:max-h-[483px]">
-                    <div
-                      className={cn("image-marquee-container relative grid grid-cols-3 gap-2 will-change-transform")}
-                    >
-                      <BlurImage
-                        src={project?.imageDesktop1}
-                        width={1000}
-                        height={1000}
-                        alt="project"
-                        className="marquee-image-1 h-full w-full border object-cover transition-all group-hover:border-black"
-                      />
-                      <BlurImage
-                        src={project?.imageDesktop2}
-                        width={1000}
-                        height={1000}
-                        alt="project"
-                        className="marquee-image-2 h-full w-full border object-cover transition-all group-hover:border-black"
-                      />
-                      <BlurImage
-                        src={project?.imageDesktop2}
-                        width={1000}
-                        height={1000}
-                        alt="project"
-                        className="marquee-image-3 h-full w-full border object-cover transition-all group-hover:border-black"
-                      />
-                    </div>
-                  </PlainCard>
-                </Link>
+        <section className="my-[5rem]">
+          <section className="space-y-[5rem] lg:space-y-[10rem]">
+            {projects.map((project) => (
+              <Wrapper
+                key={project.id}
+                id={`project-${project.id}`}
+                className={`project-section reveal-section cc-border overflow-hidden p-0 pl-2`}
+              >
+                <Wrapper className="my-2 p-0">
+                  <section className="group relative flex min-h-[30rem] max-w-(--breakpoint-md) flex-col items-center justify-center gap-8 rounded-none !mix-blend-multiply transition-all duration-300">
+                    <Wrapper className="space-y-6 py-0">
+                      {/* Project Header */}
+                      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                        <div>
+                          <p className="project-title reveal-title font-head text-primary text-2xl font-bold">
+                            {project.id}. {project.name}
+                          </p>
+                          <div className="mt-1 flex items-center gap-2">
+                            <span className="text-muted-foreground reveal-title text-sm font-medium">
+                              {project.category}
+                            </span>
+                            <span className="bg-muted-foreground reveal-title h-1 w-1 rounded-full" />
+                            <span className="text-muted-foreground reveal-title text-sm font-medium">
+                              {project.date}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="project-buttons flex gap-2">
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:bg-accent reveal-button rounded-md border px-3 py-1.5 text-sm transition-colors"
+                            >
+                              View Code
+                            </a>
+                          )}
+                          <a
+                            href={project.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-primary reveal-button text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm transition-colors"
+                          >
+                            Live Demo
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Project Description */}
+                      <p className="project-p text-foreground reveal-text text-lg leading-relaxed">{project.desc}</p>
+
+                      {/* Status & Tech Stack */}
+                      <div className="reveal-text flex flex-wrap items-center gap-4">
+                        <div className="flex items-center gap-2">
+                          <span className="relative flex h-3 w-3">
+                            <span
+                              className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                                project.status.includes("Active") ? "animate-pulse bg-emerald-500" : "bg-amber-500"
+                              }`}
+                            />
+                            <span
+                              className={`relative inline-flex h-3 w-3 rounded-full ${
+                                project.status.includes("Active") ? "bg-emerald-500" : "bg-amber-500"
+                              }`}
+                            />
+                          </span>
+                          <span className="text-sm font-medium">{project.status}</span>
+                        </div>
+
+                        <div className="tech-stack flex flex-wrap items-center gap-2">
+                          {project.language.map((lang, index) => (
+                            <span
+                              key={lang}
+                              className="rounded-full border px-2.5 py-1 text-xs font-medium"
+                              style={{
+                                backgroundColor: project.colorCode[index] || "#f1f5f9",
+                                borderColor: project.colorCode[index]
+                                  ? `${project.colorCode[index].replace("50", "80")}`
+                                  : "#e2e8f0",
+                              }}
+                            >
+                              {lang}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Desktop Preview - Hidden on mobile */}
+                      <div
+                        className={cn(
+                          "group reveal-image relative hidden overflow-hidden rounded-lg border shadow-lg transition-all hover:shadow-xl lg:block",
+                          "hover:border-primary hover:!mix-blend-normal hover:grayscale-0",
+                        )}
+                      >
+                        <div className="aspect-video w-full overflow-hidden">
+                          <BlurImage
+                            src={project.imageDesktop1}
+                            alt={`${project.name} screenshot`}
+                            width={1280}
+                            height={720}
+                            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+                          />
+                        </div>
+                        <Link
+                          href={project.url}
+                          target={`_blank`}
+                          className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
+                        >
+                          <div className="absolute right-0 bottom-0 left-0 translate-y-4 p-4 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                            <p className="font-medium text-white">Click to visit live site</p>
+                          </div>
+                        </Link>
+                      </div>
+
+                      {/* Mobile Preview */}
+                      <div className="project-image reveal-image lg:hidden">
+                        <div className="relative overflow-hidden rounded-lg border shadow-md">
+                          <div className="aspect-[9/16] w-full overflow-hidden">
+                            <BlurImage
+                              src={project.imageDesktop1}
+                              alt={`${project.name} mobile screenshot`}
+                              width={720}
+                              height={1280}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                          <div className="p-4">
+                            <p className="text-muted-foreground text-center text-sm">Swipe for more screenshots →</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Contributors */}
+                      {project.contributors && project.contributors.length > 0 && (
+                        <div className="space-y-2">
+                          <h3 className="text-muted-foreground text-sm font-medium">Contributors</h3>
+                          <div className="flex flex-wrap gap-3">
+                            {project.contributors.map((contributor) => (
+                              <div key={contributor.name} className="flex items-center gap-2">
+                                <div className="relative h-8 w-8 overflow-hidden rounded-full">
+                                  <BlurImage
+                                    src={contributor.img}
+                                    alt={contributor.name}
+                                    width={32}
+                                    height={32}
+                                    className="h-full w-full object-cover"
+                                  />
+                                </div>
+                                <span className="text-sm">{contributor.name}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </Wrapper>
+                  </section>
+                </Wrapper>
               </Wrapper>
-              <Wrapper className="space-y-1 py-0">
-                <p className="project-title cc-border font-head text-primary h-10 text-2xl font-medium">
-                  {project.id}. {project.name}
-                </p>
-                <p className="project-p cc-border font-sea min-h-[65px] max-w-(--breakpoint-md) text-xl text-black">
-                  {project.desc}
-                </p>
-              </Wrapper>
-            </Wrapper>
-          ))}
+            ))}
+          </section>
         </section>
-      </Wrapper>
+      </section>
     </div>
   );
 };

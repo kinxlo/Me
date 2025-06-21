@@ -2,6 +2,7 @@
 
 // import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
 import { NAV_ITEMS } from "@/lib/tools/constants";
+import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 import { NavItem } from "./navbar-item";
@@ -15,7 +16,13 @@ export const NavItems = ({ isMobile = false, onItemClick }: NavItemsProperties) 
   const pathname = usePathname();
 
   return (
-    <div className={`flex flex-col items-center justify-center gap-8 lg:items-start lg:gap-4`}>
+    <div
+      className={cn(
+        `flex flex-col items-center justify-center gap-8 md:gap-2 lg:items-start`,
+        // `md:flex-row`,
+        // pathname.includes(`/project`) && `md:flex-row`,
+      )}
+    >
       {NAV_ITEMS.map((item, index) => (
         <NavItem
           key={index}

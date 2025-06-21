@@ -2,7 +2,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
 import MainButton from "../button";
@@ -20,13 +19,6 @@ type NavItemProperties = {
 export const NavItem = ({ content, path, variant, isActive, isMobile = false, onClick }: NavItemProperties) => {
   const navItemReference = useRef<HTMLButtonElement>(null);
 
-  useGSAP(
-    () => {
-      // Animation is now handled by the parent component
-    },
-    { scope: navItemReference },
-  );
-
   return (
     <MainButton
       ref={navItemReference}
@@ -34,9 +26,9 @@ export const NavItem = ({ content, path, variant, isActive, isMobile = false, on
       variant={variant}
       className={cn(
         "cc-nav font-head relative opacity-0 transition-all duration-300 hover:opacity-100 md:text-2xl",
-        "text-black/50 hover:text-black",
+        "text-black hover:text-black/50",
         isActive && "!text-primary font-bold underline underline-offset-4",
-        isMobile && "text-4xl",
+        isMobile && "text-4xl text-white",
       )}
       onClick={() => {
         if (isMobile && onClick) {
@@ -45,9 +37,9 @@ export const NavItem = ({ content, path, variant, isActive, isMobile = false, on
       }}
     >
       {content}
-      {!isMobile && (
+      {/* {!isMobile && (
         <span className="bg-primary absolute bottom-0 left-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full" />
-      )}
+      )} */}
     </MainButton>
   );
 };

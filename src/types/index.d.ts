@@ -27,6 +27,20 @@ declare global {
   type ProjectCategory = "Business" | "E-learning" | "Real Estate" | "E-commerce" | string; // Fallback for any other categories
 
   type Projects = Project[];
+
+  type LogoPath = {
+    d: string;
+    fill?: string;
+    stroke?: string;
+    fillOpacity?: number;
+    strokeWidth?: number;
+    className?: string;
+  };
+
+  type LogoVariant = {
+    name: string;
+    paths: LogoPath[];
+  };
 }
 
 // This export is needed to make the file a module

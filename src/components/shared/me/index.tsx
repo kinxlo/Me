@@ -1,32 +1,42 @@
 "use client";
 
-import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-// import { useSearchParameters } from "@/hooks/use-search-parameters";
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
-// import { usePathname } from "next/navigation";
+import { AboutSVGBG } from "./paths/about-svg-bg";
+import { HomeSVGBG } from "./paths/home-svg-bg";
+import { ProjectSVGBG } from "./project-svg-bg";
 
-// import { Skills } from "./skills";
+// import { me } from "./path";
 
 export const Me = () => {
-  // const view = usePathname();
+  const pathname = usePathname();
   return (
-    <section
-      className={cn(
-        `fixed right-0 bottom-0 isolate object-cover object-top opacity-30 mix-blend-multiply transition-all duration-500 ease-out lg:opacity-50`,
-        `max-h-[40%] max-w-[30%]`,
-        `xl:max-h-[70%] xl:max-w-[60%]`,
-        `origin-bottom-right`,
-        // view.includes(`/about`) && `opacity-30`,
-      )}
-    >
-      <BlurImage src={"/images/me.svg"} alt={"Illustration of me"} width={507} height={469.32} priority />
-
-      {/* {!view.includes(`/about`) && (
-        <Skills
-          className={`font-sea -xl:left-[20%] bottom-[10%] -left-[20%] z-10 hidden -rotate-10 lg:absolute lg:block`}
-        />
-      )} */}
-    </section>
+    <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[100%] overflow-hidden !mix-blend-multiply lg:w-[50%]">
+      {(() => {
+        switch (pathname) {
+          case "/": {
+            return <HomeSVGBG />;
+          }
+          case "/about": {
+            // return;
+            return <AboutSVGBG />;
+          }
+          case "/projects": {
+            return (
+              <ProjectSVGBG
+                className={cn(
+                  `absolute right-0 translate-x-[25%] translate-y-[35%] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
+                  "translate-0 scale-[1] lg:block lg:translate-0",
+                )}
+              />
+            );
+          }
+          default: {
+            return null;
+          }
+        }
+      })()}
+    </div>
   );
 };
