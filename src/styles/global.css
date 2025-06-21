@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 /* @import "./animations.css"; */
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *)); */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -175,14 +175,12 @@
 
   body {
     position: relative;
-    @apply text-muted-foreground bg-secondary;
+    @apply text-muted-foreground;
     font-family: var(--font-sans);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
-    /* background: url(/images/bg-2.png); */
     /* background: url(/images/bg-light.svg); */
     background: url(/images/bg-6.webp);
-    -webkit-mix-blend-mode: multiply !important;
   }
 
   h1,
