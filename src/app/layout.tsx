@@ -20,9 +20,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn("bg-fixed font-sans antialiased", "bg-contain bg-bottom bg-no-repeat lg:bg-cover", fontVariables)}
-      >
+      <body className={cn("bg-fixed font-sans antialiased", "bg-bottom lg:bg-contain", fontVariables)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange enableColorScheme>
           {/* <Noise patternSize={250} patternScaleX={2} patternScaleY={2} patternRefreshInterval={2} patternAlpha={25} /> */}
           <GlobalProvider>
