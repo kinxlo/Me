@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import gsap from "@/lib/animation/gsap/init";
 
 // Create master timeline
 export const HTL = gsap.timeline({
