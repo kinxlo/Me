@@ -8,7 +8,7 @@ import Link from "next/link";
 export const BusinessCard = () => {
   return (
     <section className="my-[5rem]">
-      <Wrapper className="overflow-hidden p-0 pl-2">
+      <Wrapper className="overflow-hidden p-0">
         <Wrapper className="my-2 p-0">
           <section
             className={cn(
