@@ -50,15 +50,15 @@ export const Hero = () => {
 
         <section
           ref={cardsReference}
-          className="font-head flex max-w-[50%] flex-col items-end gap-4 p-2 text-sm lg:flex-row"
+          className="font-head flex max-w-[60%] flex-col items-end gap-4 p-2 text-base lg:flex-row lg:text-lg xl:max-w-[50%]"
         >
           <div className="flex-1 py-4">
-            <p className="font-medium lg:text-lg">
+            <p className="">
               I build interfaces that balance aesthetic and function, delivering smooth experiences across all devices.
             </p>
           </div>
           <div className="flex-1 py-4">
-            <p className="font-medium lg:text-lg">
+            <p className="font-medium">
               A <span className="text-primary-600 dark:text-primary-400">CRITICAL THINKER</span> by default. A{" "}
               <span className="text-primary-600 dark:text-primary-400">PROGRAMMER</span> by effort.
             </p>

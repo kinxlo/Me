@@ -10,7 +10,7 @@ export default function Projects() {
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center`}>
+      <div className={`flex h-[100dvh] w-full items-center justify-center`}>
         <p className={`text-primary font-head text-3xl font-black`}>Loading projects...</p>
       </div>
     );
