@@ -33,9 +33,9 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   return (
     <div>
       <section className="mt-0 space-y-4 p-0">
-        <section className="mt-[5rem] max-w-(--breakpoint-md) space-y-1 px-2 mix-blend-multiply">
-          <h1 className="cc-border text-primary">Showcase</h1>
-          <p className="project-text cc-border font-head text-2xl text-black/90">
+        <section className="mt-[5rem] max-w-(--breakpoint-md) space-y-1 px-2">
+          <h1 className="text-primary">Showcase</h1>
+          <p className="project-text font-head text-2xl text-black/90">
             Here you will find some project that made it from development to production.
           </p>
           {/* <p className={`font-sea mt-4 text-xl`}>
@@ -50,10 +50,10 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
               <Wrapper
                 key={project.id}
                 id={`project-${project.id}`}
-                className={`project-section reveal-section cc-border overflow-hidden p-0 pl-2`}
+                className={`project-section reveal-section overflow-hidden p-0`}
               >
                 <Wrapper className="my-2 p-0">
-                  <section className="group relative flex min-h-[30rem] max-w-(--breakpoint-md) flex-col items-center justify-center gap-8 rounded-none !mix-blend-multiply transition-all duration-300">
+                  <section className="group relative flex min-h-[30rem] max-w-(--breakpoint-md) flex-col items-center justify-center gap-8 rounded-none transition-all duration-300">
                     <Wrapper className="space-y-6 py-0">
                       {/* Project Header */}
                       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -95,7 +95,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       </div>
 
                       {/* Project Description */}
-                      <p className="project-p text-foreground reveal-text text-lg leading-relaxed">{project.desc}</p>
+                      <p className="project-p reveal-text">{project.desc}</p>
 
                       {/* Status & Tech Stack */}
                       <div className="reveal-text flex flex-wrap items-center gap-4">
@@ -119,7 +119,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                           {project.language.map((lang, index) => (
                             <span
                               key={lang}
-                              className="rounded-full border px-2.5 py-1 text-xs font-medium"
+                              className="rounded-full border border-black/50 px-2.5 py-1 text-xs font-medium"
                               style={{
                                 backgroundColor: project.colorCode[index] || "#f1f5f9",
                                 borderColor: project.colorCode[index]
@@ -136,8 +136,8 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       {/* Desktop Preview - Hidden on mobile */}
                       <div
                         className={cn(
-                          "group reveal-image relative hidden overflow-hidden rounded-lg border shadow-lg transition-all hover:shadow-xl lg:block",
-                          "hover:border-primary hover:!mix-blend-normal hover:grayscale-0",
+                          "group reveal-image relative hidden overflow-hidden rounded-lg border border-black/20 mix-blend-multiply shadow-lg backdrop-blur-3xl transition-all hover:shadow-xl lg:block",
+                          "hover:!mix-blend-normal hover:grayscale-0",
                         )}
                       >
                         <div className="aspect-video w-full overflow-hidden">
@@ -161,8 +161,8 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       </div>
 
                       {/* Mobile Preview */}
-                      <div className="project-image reveal-image !mix-blend-multiply lg:hidden">
-                        <div className="relative overflow-hidden rounded-lg border shadow-md">
+                      <div className="project-image reveal-image lg:hidden">
+                        <div className="relative overflow-hidden rounded-lg border border-black/20 mix-blend-multiply shadow-md backdrop-blur-3xl">
                           <div className="aspect-[9/16] w-full overflow-hidden">
                             <BlurImage
                               src={project.imageDesktop1}
