@@ -32,15 +32,11 @@ export const initHomeBGAnimation = (
       const targetPath = nextVariant.paths[index];
 
       if (targetPath) {
-        // Show and animate existing paths
-        gsap.set(pathElement, {
-          display: "block",
-          opacity: 1,
-        });
-
         // MorphSVG animation
         HBGTL.to(pathElement, {
           duration: 1.5,
+          opacity: 1,
+          visibility: "visible",
           morphSVG: {
             shape: targetPath.d,
             type: "rotational",

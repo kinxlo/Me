@@ -19,7 +19,7 @@ export const Hero = () => {
             <span className="title-word">Kingsley</span>.<span className="title-word">Solomon.</span>
           </h1>
 
-          <div className="flex items-baseline gap-2 overflow-hidden">
+          <div className="rotating-text-container flex items-baseline gap-2 overflow-hidden">
             <RotatingText
               texts={["Application Developer", "Software Developer", "Web Developer", "Mobile Developer"]}
               mainClassName="font-head font-medium text-sm bg-gray-300 px-4 lg:px-8 py-1 lg:text-xl border-2 backdrop-blur-3xl border-black/50 rounded-full w-fit transition-all duration-100"
@@ -33,12 +33,12 @@ export const Hero = () => {
         </Wrapper>
 
         <section className="font-head flex max-w-[60%] flex-col items-end gap-4 p-2 text-base lg:flex-row lg:text-lg xl:max-w-[50%]">
-          <div className="flex-1 py-4">
+          <div className="hero-description flex-1 py-4">
             <p className="">
               I build interfaces that balance aesthetic and function, delivering smooth experiences across all devices.
             </p>
           </div>
-          <div className="flex-1 py-4">
+          <div className="hero-description flex-1 py-4">
             <p className="font-medium">
               A <span className="text-primary-600 dark:text-primary-400">CRITICAL THINKER</span> by default. A{" "}
               <span className="text-primary-600 dark:text-primary-400">PROGRAMMER</span> by effort.
@@ -46,7 +46,7 @@ export const Hero = () => {
           </div>
         </section>
 
-        <section className="animated-element gsap-social-button mt-5 flex gap-4 px-2 py-0">
+        <section className="social-button mt-5 flex gap-4 px-2 py-0">
           {socials.map((social) => (
             <MainButton
               key={social.content}
@@ -60,7 +60,9 @@ export const Hero = () => {
           ))}
         </section>
       </section>
-      <Wrapper className={`font-head mt-20 flex w-full items-center justify-between gap-2 text-center font-medium`}>
+      <Wrapper
+        className={`hero-footer font-head mt-20 flex w-full items-center justify-between gap-2 text-center font-medium`}
+      >
         <Link href={``} className={`font-medium hover:underline`}>
           Credit:
         </Link>

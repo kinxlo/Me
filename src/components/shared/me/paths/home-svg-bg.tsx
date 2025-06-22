@@ -38,7 +38,7 @@ export const HomeSVGBG = () => {
             fillOpacity={path.fillOpacity}
             strokeWidth={path.strokeWidth}
             className={cn(
-              `origin-top-right translate-x-[3rem] translate-y-[-1rem] scale-110`,
+              `animated-element home-bg origin-top-right translate-x-[3rem] translate-y-[-1rem] scale-110`,
               `scale-80 md:translate-x-[3rem] md:translate-y-[-3rem]`,
               `scale-100 lg:translate-x-[3rem] lg:translate-y-[-1rem]`,
               `scale-90 xl:translate-x-[4rem] xl:translate-y-[-2rem]`,
