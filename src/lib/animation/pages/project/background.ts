@@ -3,7 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Create master timeline
 export const PBGTL = gsap.timeline({
-  paused: true,
+  paused: false,
   defaults: { ease: "power3.out" },
 });
 
@@ -13,7 +13,7 @@ export const initProjectBGAnimation = (svgReference: SVGSVGElement | null, proje
   // Clear previous animations
   for (const trigger of ScrollTrigger.getAll()) trigger.kill();
 
-  gsap.to("#pj-1", {
+  PBGTL.to("#pj-1", {
     duration: 1,
     delay: 1,
     morphSVG: "#pj-1",
@@ -30,7 +30,7 @@ export const initProjectBGAnimation = (svgReference: SVGSVGElement | null, proje
       start: "top center",
       end: "bottom center",
       onEnter: () => {
-        gsap.to("#pj-1", {
+        PBGTL.to("#pj-1", {
           duration: 0.8,
           delay: 1,
           morphSVG: `#pj-${index + 1}`,
@@ -39,7 +39,7 @@ export const initProjectBGAnimation = (svgReference: SVGSVGElement | null, proje
         });
       },
       onEnterBack: () => {
-        gsap.to("#pj-1", {
+        PBGTL.to("#pj-1", {
           duration: 0.8,
           delay: 1,
           morphSVG: `#pj-${index + 1}`,

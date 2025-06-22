@@ -3,7 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Create master timeline
 export const PTL = gsap.timeline({
-  paused: false,
+  paused: true,
   defaults: { ease: "power3.out" },
 });
 
@@ -15,7 +15,7 @@ export const initRevealAnimations = () => {
       const sections = document.querySelectorAll<HTMLElement>(".reveal-section");
 
       // Reset all elements to their natural state
-      gsap.set(".reveal-section *", {
+      PTL.set(".reveal-section *", {
         opacity: "",
         y: "",
         clearProps: "all",
@@ -36,7 +36,7 @@ export const initRevealAnimations = () => {
         anyAnimationsCreated = true;
 
         // Set initial state
-        gsap.set([title, text, ...buttons, image].filter(Boolean), {
+        PTL.set([title, text, ...buttons, image].filter(Boolean), {
           opacity: 0,
           y: 40,
         });
@@ -123,7 +123,7 @@ export const cleanupRevealAnimations = () => {
     trigger.kill();
 
   // Reset styles
-  gsap.set(".reveal-section *", {
+  PTL.set(".reveal-section *", {
     opacity: "",
     y: "",
     clearProps: "all",

@@ -51,12 +51,7 @@ export function Component() {
           <RadialBarChart data={chartData} startAngle={-90} endAngle={380} innerRadius={30} outerRadius={110}>
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel nameKey="browser" />} />
             <RadialBar dataKey="visitors" background>
-              <LabelList
-                position="insideStart"
-                dataKey="browser"
-                className="fill-white capitalize mix-blend-luminosity"
-                fontSize={11}
-              />
+              <LabelList position="insideStart" dataKey="browser" className="fill-white capitalize" fontSize={11} />
             </RadialBar>
           </RadialBarChart>
         </ChartContainer>
