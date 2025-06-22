@@ -13,7 +13,7 @@ export const BusinessCard = () => {
         <Wrapper className="my-2 p-0">
           <section
             className={cn(
-              "business-card group relative flex min-h-[30rem] flex-col justify-center gap-8 rounded-none !mix-blend-multiply",
+              "business-card group relative flex min-h-[30rem] flex-col justify-center gap-8 rounded-none",
               "transition-all duration-300",
             )}
           >

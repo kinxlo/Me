@@ -1,14 +1,15 @@
 // components/Loader.tsx
 "use client";
 
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export default function Loader() {
   const loaderReference = useRef<HTMLDivElement>(null);
   const progressReference = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     // Ensure GSAP targets exist
     if (!progressReference.current || !loaderReference.current) return;
 

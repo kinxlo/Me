@@ -20,7 +20,7 @@ const Map = () => {
             alt="World map"
             width={500}
             height={300}
-            className="mix-blend-multipy h-full w-full object-contain dark:mix-blend-screen dark:invert"
+            className="d h-full w-full object-contain dark:invert"
           />
           <div className="marker absolute inset-0 top-[-45%] left-[50%] size-1 transform" />
         </div>

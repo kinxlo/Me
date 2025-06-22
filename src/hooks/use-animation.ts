@@ -1,46 +1,41 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// hooks/useAnimation.ts
-import gsap from "@/lib/animation/gsap/init";
-import { useEffect, useRef } from "react";
+"use client";
 
-type AnimationSetup = (tl: gsap.core.Timeline, context?: gsap.Context | null) => void;
+import { useRouter } from "next/navigation";
+import { useCallback, useRef } from "react";
 
-export const useAnimation = (animationSetup: AnimationSetup, dependencies: any[] = []) => {
-  const timeline = useRef<gsap.core.Timeline | null>(null);
-  const context = useRef<gsap.Context | null>(null);
+export function useRouteAnimation() {
+  const router = useRouter();
+  const isAnimating = useRef(false);
 
-  // Initialize animation
-  useEffect(() => {
-    context.current = gsap.context(() => {
-      timeline.current = gsap.timeline({ paused: true });
-      animationSetup(timeline.current, context.current);
-    });
+  const handleAnimatedNavigation = useCallback(
+    (timeline: gsap.core.Timeline, targetUrl: string) => {
+      if (isAnimating.current) return;
+      isAnimating.current = true;
+
+      timeline.reverse().then(() => {
+        router.push(targetUrl);
+        isAnimating.current = false;
+      });
+    },
+    [router],
+  );
+
+  const setupLinkInterceptors = useCallback((handler: (event: MouseEvent) => void) => {
+    const links = document.querySelectorAll<HTMLAnchorElement>("a[href^='/']");
+
+    for (const link of links) {
+      link.addEventListener("click", handler);
+    }
 
     return () => {
-      // Cleanup
-      timeline.current?.kill();
-      context.current?.revert();
+      for (const link of links) {
+        link.removeEventListener("click", handler);
+      }
     };
-  }, dependencies);
-
-  // Animation controls
-  const play = () => timeline.current?.play();
-  const pause = () => timeline.current?.pause();
-  const reverse = () => timeline.current?.reverse();
-  const restart = () => timeline.current?.restart();
-  const seek = (position: number) => timeline.current?.seek(position);
-  const timeScale = (rate: number) => {
-    if (timeline.current) timeline.current.timeScale(rate);
-  };
+  }, []);
 
   return {
-    timeline: timeline.current,
-    play,
-    pause,
-    reverse,
-    restart,
-    seek,
-    timeScale,
+    handleAnimatedNavigation,
+    setupLinkInterceptors,
   };
-};
+}

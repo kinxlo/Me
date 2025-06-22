@@ -4,7 +4,6 @@ import { logoVariants } from "@/lib/tools/constants";
 // Create master timeline
 export const HBGTL = gsap.timeline({
   paused: true,
-  defaults: { ease: "power3.out" },
 });
 
 export const initHomeBGAnimation = (
@@ -52,7 +51,6 @@ export const initHomeBGAnimation = (
             "fill-opacity": targetPath.fillOpacity ?? 1,
             "stroke-width": targetPath.strokeWidth ?? 0,
           },
-          ease: "power2.inOut",
         });
       } else {
         // Hide extra paths
