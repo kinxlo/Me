@@ -8,13 +8,22 @@ export function useRouteAnimation() {
   const isAnimating = useRef(false);
 
   const handleAnimatedNavigation = useCallback(
-    (timeline: gsap.core.Timeline, targetUrl: string) => {
+    (timeline: gsap.core.Timeline, bgTimeline: gsap.core.Timeline, targetUrl: string) => {
       if (isAnimating.current) return;
       isAnimating.current = true;
 
       timeline.reverse().then(() => {
-        router.push(targetUrl);
-        isAnimating.current = false;
+        bgTimeline
+          .to(".home-bg", {
+            opacity: 0,
+            visibility: "hidden",
+            duration: 1,
+            x: 1000,
+          })
+          .then(() => {
+            router.push(targetUrl);
+            isAnimating.current = false;
+          });
       });
     },
     [router],

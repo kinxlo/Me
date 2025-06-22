@@ -15,7 +15,7 @@ export default function Page() {
   useGSAP(() => {
     runHomeAnimation();
     HTL.play();
-    HTL.eventCallback("onComplete", () => {
+    HTL.eventCallback("onStart", () => {
       HBGTL.play();
     });
   }, []);
@@ -25,7 +25,7 @@ export default function Page() {
     const handler = (event: MouseEvent) => {
       event.preventDefault();
       const target = event.currentTarget as HTMLAnchorElement;
-      handleAnimatedNavigation(HTL, target.href);
+      handleAnimatedNavigation(HTL, HBGTL, target.href);
     };
 
     return setupLinkInterceptors(handler);
