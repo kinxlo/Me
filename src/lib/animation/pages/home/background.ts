@@ -4,7 +4,7 @@ import { logoVariants } from "@/lib/tools/constants";
 // Create master timeline
 export const HBGTL = gsap.timeline({
   paused: true,
-  defaults: { ease: "power3.out" },
+  // defaults: { duration: 0.2 },
 });
 
 export const initHomeBGAnimation = (
@@ -33,14 +33,9 @@ export const initHomeBGAnimation = (
       const targetPath = nextVariant.paths[index];
 
       if (targetPath) {
-        // Show and animate existing paths
-        gsap.set(pathElement, {
-          display: "block",
-          opacity: 1,
-        });
-
         // MorphSVG animation
         HBGTL.to(pathElement, {
+          delay: 1,
           duration: 1.5,
           morphSVG: {
             shape: targetPath.d,
@@ -52,7 +47,6 @@ export const initHomeBGAnimation = (
             "fill-opacity": targetPath.fillOpacity ?? 1,
             "stroke-width": targetPath.strokeWidth ?? 0,
           },
-          ease: "power2.inOut",
         });
       } else {
         // Hide extra paths
@@ -68,6 +62,7 @@ export const initHomeBGAnimation = (
 
     currentIndex = nextIndex;
   };
+
   const intervalId = setInterval(animateToNextVariant, 4000);
   return () => clearInterval(intervalId);
 };

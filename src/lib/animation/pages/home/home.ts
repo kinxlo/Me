@@ -1,66 +1,86 @@
 import gsap from "@/lib/animation/gsap/init";
 
-// Create master timeline
+import { HBGTL } from "./background";
+
 export const HTL = gsap.timeline({
-  paused: false,
-  defaults: { ease: "power3.out" },
+  paused: true,
+  defaults: { duration: 0.2 },
 });
 
-export const initHomeHeroAnimation = ({
-  subtitle,
-  cardsContainer,
-  socialsContainer,
-}: {
-  subtitle: HTMLElement | null;
-  cardsContainer: HTMLElement | null;
-  socialsContainer: HTMLElement | null;
-}) => {
-  if (!subtitle || !cardsContainer || !socialsContainer) return;
-
-  // Get all h1 elements (assuming they're siblings)
-  const cards = [...cardsContainer.children];
-  const socialButtons = [...socialsContainer.children];
-  const subtitleText = subtitle.querySelector("p");
-
-  gsap.set([subtitleText, cards, socialButtons], {
+export const runHomeAnimation = () => {
+  HTL.to(".htl-page", {
+    opacity: 1,
+    visibility: "visible",
+    // duration: 0.5,
+  });
+  // Main tiHTLe animation
+  HTL.from(".title-word", {
+    y: 80,
     opacity: 0,
-    y: 20,
+    duration: 1.2,
+    stagger: 0.15,
+    ease: "back.out(1.7)",
   });
 
-  // Subtitle animation
-  HTL.to(
-    subtitleText,
+  // Rotating text
+  HTL.from(
+    ".rotating-text-container",
     {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: "elastic.out(1, 0.5)",
+      x: 100,
+      opacity: 0,
+      // duration: 0.8,
     },
-    ">0.4",
+    "-=0.8",
   );
 
-  // Cards animation
-  HTL.to(
-    cards,
+  // Description paragraphs
+  HTL.from(
+    ".hero-description:nth-child(1)",
     {
-      opacity: 1,
-      y: 0,
-      stagger: 0.1,
-      duration: 0.7,
-      ease: "back.out(1.7)",
+      x: -40,
+      opacity: 0,
+      // duration: 0.8,
     },
-    ">0.3",
+    "-=0.6",
+  );
+
+  HTL.from(
+    ".hero-description:nth-child(2)",
+    {
+      x: 40,
+      opacity: 0,
+      // duration: 0.8,
+    },
+    "-=0.5",
   );
 
   // Social buttons
-  HTL.to(
-    socialButtons,
+  HTL.from(
+    ".social-button",
     {
-      opacity: 1,
-      y: 0,
-      stagger: 0.08,
-      duration: 0.5,
+      y: 30,
+      opacity: 0,
+      scale: 0.8,
+      // duration: 0.6,
+      stagger: 0.1,
+      ease: "back.out(1.7)",
     },
-    ">0.2",
+    "-=0.4",
   );
+
+  // Footer elements
+  HTL.from(
+    ".hero-footer > *",
+    {
+      y: 20,
+      opacity: 0,
+      // duration: 0.6,
+      stagger: 0.1,
+    },
+    "-=0.3",
+  );
+
+  HTL.eventCallback("onComplete", () => {
+    HBGTL.play();
+  });
 };

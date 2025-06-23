@@ -12,7 +12,7 @@ import { ProjectSVGBG } from "./project-svg-bg";
 export const Me = () => {
   const pathname = usePathname();
   return (
-    <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[100%] overflow-hidden !mix-blend-multiply lg:w-[50%]">
+    <div className="pointer-events-none fixed right-0 bottom-0 z-0 h-[100vh] w-[100%] overflow-hidden lg:w-[50%]">
       {(() => {
         switch (pathname) {
           case "/": {

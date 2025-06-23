@@ -1,32 +1,52 @@
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
+import { useRouteAnimation } from "@/hooks/use-animation";
+import { AboutTL, runAboutAnimation } from "@/lib/animation/pages/about/about";
+import TrueFocus from "@/lib/animation/TrueFocus/TrueFocus";
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export const BusinessCard = () => {
+  const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
+
+  useGSAP(() => {
+    runAboutAnimation();
+    AboutTL.play();
+  }, []);
+
+  // Setup link interceptors
+  useEffect(() => {
+    const handler = (event: MouseEvent) => {
+      event.preventDefault();
+      const target = event.currentTarget as HTMLAnchorElement;
+      handleAnimatedNavigation(AboutTL, target.href);
+    };
+
+    return setupLinkInterceptors(handler);
+  }, [handleAnimatedNavigation, setupLinkInterceptors]);
   return (
     <section className="my-[5rem]">
       <Wrapper className="overflow-hidden p-0">
         <Wrapper className="my-2 p-0">
           <section
             className={cn(
-              "business-card group relative flex min-h-[30rem] flex-col justify-center gap-8 rounded-none !mix-blend-multiply",
+              "business-card group relative flex min-h-[30rem] flex-col justify-center gap-8 rounded-none",
               "transition-all duration-300",
             )}
           >
             {/* Header Section - Will animate with .about-txt class */}
-            <div className="section-1 space-y-6">
-              <h3 className="text-primary about-txt font-head text-3xl underline lg:text-4xl">
-                Ifijeh Kingsley Solomon
-              </h3>
-              <p className="font-head text-xl text-black/90">
+            <div className="space-y-6">
+              <h3 className="text-primary text-3xl underline lg:text-4xl">Ifijeh Kingsley Solomon</h3>
+              <p className="justify max-w-[60%] text-base text-black/70 xl:max-w-[50%]">
                 Lead Frontend dev at{" "}
                 <Link
                   target="_blank"
                   href="https://techstudioacademy.com"
-                  className="text-success hover:text-success/80 hover:underline"
+                  className="text-success font-head hover:text-success/80 hover:underline"
                 >
                   TSA <ArrowUpRight className="inline h-4 w-4" />
                 </Link>
@@ -37,10 +57,18 @@ export const BusinessCard = () => {
             {/* Experience - Will animate with section-3 class */}
             <div className="section-3 space-y-4">
               <div className="flex items-baseline gap-3">
-                <h3 className="font-head text-2xl font-black text-black">~4 Years</h3>
-                <span className="font-head text-black/60">Experience</span>
+                <TrueFocus
+                  sentence="~IV Years Experience"
+                  manualMode={false}
+                  blurAmount={3}
+                  borderColor="oklch(40% 0.12 25)"
+                  animationDuration={1}
+                  pauseBetweenAnimations={1}
+                />
+                {/* <h3 className="font-head text-2xl font-black text-black">~4 Years</h3> */}
+                {/* <span className="font-head text-black/60">Experience</span> */}
               </div>
-              <p className="font-head text-xl leading-relaxed text-black/90">
+              <p className="justify max-w-[60%] text-base text-black/70 xl:max-w-[50%]">
                 I build interfaces that balance aesthetic and function, delivering smooth experiences across all
                 devices.
               </p>
@@ -50,40 +78,35 @@ export const BusinessCard = () => {
             <div className="section-5 grid gap-6 md:grid-cols-2">
               {[
                 {
-                  icon: <CheckCircle className="text-success" size={20} />,
+                  icon: <CheckCircle className="text-success mt-1" size={20} />,
                   title: "Accessibility-first",
                   desc: "WCAG compliant interfaces that work for everyone",
                   bgColor: "bg-blue-100", // Opaque background
                   borderColor: "border-blue-200",
                 },
                 {
-                  icon: <CheckCircle className="text-success" size={20} />,
+                  icon: <CheckCircle className="text-success mt-1" size={20} />,
                   title: "Fullstack Mindset",
                   desc: "Frontend expertise with backend/system awareness",
                   bgColor: "bg-teal-100", // Opaque background
                   borderColor: "border-teal-200",
                 },
                 {
-                  icon: <CheckCircle className="text-success" size={20} />,
+                  icon: <CheckCircle className="text-success mt-1" size={20} />,
                   title: "Mentorship",
                   desc: "Guiding juniors while learning from seniors",
                   bgColor: "bg-pink-100", // Opaque background
                   borderColor: "border-pink-200",
                 },
                 {
-                  icon: <CheckCircle className="text-success" size={20} />,
+                  icon: <CheckCircle className="text-success mt-1" size={20} />,
                   title: "Open Source",
                   desc: "Contributing to community-driven projects",
                   bgColor: "bg-amber-100", // Opaque background
                   borderColor: "border-amber-200",
                 },
               ].map((item, index) => (
-                <div
-                  key={index}
-                  className={cn(
-                    "flex gap-3 rounded-lg border bg-gray-800 p-4 text-white shadow backdrop-blur-xl transition-all",
-                  )}
-                >
+                <div key={index} className={cn("flex gap-3")}>
                   {item.icon}
                   <div className={`space-y-2`}>
                     <h4 className="font-head text-lg font-bold underline">{item.title}</h4>

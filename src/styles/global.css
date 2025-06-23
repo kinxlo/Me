@@ -139,31 +139,6 @@
   --primary-foreground: oklch(1 0 0);
 }
 
-@layer utilities {
-  .cc-bg-dotted {
-    @apply overflow-hidden bg-[image:radial-gradient(var(--pattern-fg)_1px,_transparent_0)] bg-[size:10px_10px] bg-fixed p-8 [--pattern-fg:var(--color-gray-950)]/10 after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-gray-950/5;
-  }
-
-  .cc-border {
-    @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10 after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10;
-  }
-
-  .cc-border-up {
-    @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:border-b before:border-gray-950/10;
-  }
-
-  .cc-border-down {
-    @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:border-t after:border-gray-950/10;
-  }
-
-  .cc-shades {
-    @apply bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/10;
-  }
-  .cc-init {
-    @apply opacity-0;
-  }
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -409,4 +384,20 @@
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     background-color: rgba(255, 255, 255, 0.8);
   }
+}
+
+.animated-element {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Smooth image loading */
+.reveal-image {
+  transform-style: preserve-3d;
+  /* backface-visibility: hidden; */
+}
+
+/* Performance optimizations */
+.gsap-optimize {
+  will-change: transform, opacity;
 }

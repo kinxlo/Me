@@ -1,14 +1,16 @@
 "use client";
 
-import { initHomeBGAnimation } from "@/lib/animation/pages/home/background";
+import { useRouteAnimation } from "@/hooks/use-animation";
+import { HBGTL, initHomeBGAnimation } from "@/lib/animation/pages/home/background";
 import { logoVariants } from "@/lib/tools/constants";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export const HomeSVGBG = () => {
   const svgReference = useRef<SVGSVGElement>(null);
   const pathsReference = useRef<(SVGPathElement | null)[]>([]);
+  const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
 
   useGSAP(
     () => {
@@ -17,11 +19,22 @@ export const HomeSVGBG = () => {
     { scope: svgReference },
   );
 
+  // Setup link interceptors
+  useEffect(() => {
+    const handler = (event: MouseEvent) => {
+      event.preventDefault();
+      const target = event.currentTarget as HTMLAnchorElement;
+      handleAnimatedNavigation(HBGTL, target.href);
+    };
+
+    return setupLinkInterceptors(handler);
+  }, [handleAnimatedNavigation, setupLinkInterceptors]);
+
   return (
-    <section className="relative flex h-[100dvh] w-full items-end justify-end">
+    <section className="relative h-[100dvh] w-full origin-center">
       <svg
         ref={svgReference}
-        className={cn("absolute top-[0] left-[0] lg:bottom-[-10rem] lg:left-[0]", "h-full w-full")}
+        className={cn("absolute top-[0] left-[0] origin-top-right lg:bottom-[-10rem] lg:left-[0]", "h-full w-full")}
         viewBox="0 0 450 450"
         preserveAspectRatio="xMinYMin meet"
       >
