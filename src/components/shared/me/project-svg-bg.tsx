@@ -1,12 +1,13 @@
 "use client";
 
 import { useProjects } from "@/context/global-context";
+import { useRouteAnimation } from "@/hooks/use-animation";
 import { useResponsiveLayout } from "@/hooks/use-media-query";
-import { initProjectBGAnimation } from "@/lib/animation/pages/project/background";
+import { initProjectBGAnimation, PBGTL } from "@/lib/animation/pages/project/background";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { PJ1 } from "./paths/pj-1";
 import { PJ2 } from "./paths/pj-2";
@@ -18,6 +19,7 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
   const pathname = usePathname();
   const { projects } = useProjects();
   const { isMobile } = useResponsiveLayout();
+  const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
 
   useGSAP(
     () => {
@@ -28,6 +30,17 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
       scope: svgReference,
     },
   );
+
+  // Setup link interceptors
+  useEffect(() => {
+    const handler = (event: MouseEvent) => {
+      event.preventDefault();
+      const target = event.currentTarget as HTMLAnchorElement;
+      handleAnimatedNavigation(PBGTL, target.href);
+    };
+
+    return setupLinkInterceptors(handler);
+  }, [handleAnimatedNavigation, setupLinkInterceptors]);
 
   // Hide the SVG completely on mobile
   if (isMobile) {

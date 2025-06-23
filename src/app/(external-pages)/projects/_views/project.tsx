@@ -2,23 +2,31 @@
 
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import { cleanupRevealAnimations, initRevealAnimations } from "@/lib/animation/pages/project/project";
+import { useRouteAnimation } from "@/hooks/use-animation";
+import { PTL, runProjectsAnimation } from "@/lib/animation/pages/project/project";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
-
-// Initialize animations when projects change
-const initialize = async () => {
-  await initRevealAnimations();
-};
+import { useEffect } from "react";
 
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
+  const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
+
   useGSAP(() => {
-    initialize();
-    return () => {
-      cleanupRevealAnimations();
+    runProjectsAnimation(projects);
+    PTL.play();
+  }, []);
+
+  // Setup link interceptors
+  useEffect(() => {
+    const handler = (event: MouseEvent) => {
+      event.preventDefault();
+      const target = event.currentTarget as HTMLAnchorElement;
+      handleAnimatedNavigation(PTL, target.href);
     };
-  }, [projects]);
+
+    return setupLinkInterceptors(handler);
+  }, [handleAnimatedNavigation, setupLinkInterceptors]);
 
   if (!projects?.length) {
     return (
@@ -33,9 +41,9 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   return (
     <section className="mt-[10%] space-y-4 p-0">
       <section className="max-w-(--breakpoint-md) space-y-1 px-2">
-        <h1 className="text-primary">Showcase</h1>
-        <p className="project-text font-head text-2xl text-black/70">
-          Here you will find some project that made it from development to production.
+        <h1 className="text-primary ptl-header">Showcase</h1>
+        <p className="project-text font-head ptl-header text-2xl text-black/70">
+          Here you will find some projects that made it from development to production.
         </p>
       </section>
 
@@ -61,10 +69,9 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                             {project.category}
                           </span>
                           <span className="bg-muted-foreground reveal-title h-1 w-1 rounded-full" />
-                          {/* <span className="text-muted-foreground reveal-title text-sm font-medium">{project.date}</span> */}
                         </div>
                       </div>
-
+                      {/* project button */}
                       <div className="project-buttons flex gap-2">
                         {project.github && (
                           <a
@@ -92,7 +99,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
 
                     {/* Status & Tech Stack */}
                     <div className="reveal-text flex flex-wrap items-center gap-4">
-                      <div className="flex items-center gap-2">
+                      <div className="tech-stack flex items-center gap-2">
                         <span className="relative flex h-3 w-3">
                           <span
                             className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${
@@ -126,11 +133,12 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       </div>
                     </div>
 
-                    {/* Desktop Preview - Hidden on mobile */}
+                    {/* Desktop Preview */}
                     <div
                       className={cn(
-                        "group reveal-image relative hidden overflow-hidden rounded-lg border border-black/20 shadow-lg backdrop-blur-3xl transition-all hover:shadow-xl lg:block",
+                        "reveal-image desktop group relative hidden overflow-hidden rounded-lg border border-black/20 shadow-lg backdrop-blur-3xl transition-all hover:shadow-xl",
                         "hover:grayscale-0",
+                        "lg:block",
                       )}
                     >
                       <div className="aspect-video w-full overflow-hidden">
@@ -154,20 +162,23 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                     </div>
 
                     {/* Mobile Preview */}
-                    <div className="project-image reveal-image lg:hidden">
-                      <div className="relative overflow-hidden rounded-lg border border-black/20 shadow-md backdrop-blur-3xl">
-                        <div className="aspect-[9/16] w-full overflow-hidden">
-                          <BlurImage
-                            src={project.imageDesktop1}
-                            alt={`${project.name} mobile screenshot`}
-                            width={720}
-                            height={1280}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                        <div className="p-4">
-                          <p className="text-muted-foreground text-center text-sm">Swipe for more screenshots →</p>
-                        </div>
+                    <div
+                      className={cn(
+                        "reveal-image mobile project-image relative overflow-hidden rounded-lg border border-black/20 shadow-md backdrop-blur-3xl",
+                        "lg:hidden",
+                      )}
+                    >
+                      <div className="aspect-[9/16] w-full overflow-hidden">
+                        <BlurImage
+                          src={project.imageDesktop1}
+                          alt={`${project.name} mobile screenshot`}
+                          width={720}
+                          height={1280}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <div className="p-4">
+                        <p className="text-muted-foreground text-center text-sm">Swipe for more screenshots →</p>
                       </div>
                     </div>
 
