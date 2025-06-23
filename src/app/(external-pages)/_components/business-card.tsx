@@ -1,12 +1,33 @@
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
+import { useRouteAnimation } from "@/hooks/use-animation";
+import { AboutTL, runAboutAnimation } from "@/lib/animation/pages/about/about";
 import TrueFocus from "@/lib/animation/TrueFocus/TrueFocus";
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export const BusinessCard = () => {
+  const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
+
+  useGSAP(() => {
+    runAboutAnimation();
+    AboutTL.play();
+  }, []);
+
+  // Setup link interceptors
+  useEffect(() => {
+    const handler = (event: MouseEvent) => {
+      event.preventDefault();
+      const target = event.currentTarget as HTMLAnchorElement;
+      handleAnimatedNavigation(AboutTL, target.href);
+    };
+
+    return setupLinkInterceptors(handler);
+  }, [handleAnimatedNavigation, setupLinkInterceptors]);
   return (
     <section className="my-[5rem]">
       <Wrapper className="overflow-hidden p-0">

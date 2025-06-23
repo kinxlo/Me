@@ -147,7 +147,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                           alt={`${project.name} screenshot`}
                           width={1280}
                           height={720}
-                          className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+                          className="h-full w-full object-cover grayscale-70 transition-all duration-500 group-hover:scale-105"
                         />
                       </div>
                       <Link
@@ -174,7 +174,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                           alt={`${project.name} mobile screenshot`}
                           width={720}
                           height={1280}
-                          className="h-full w-full object-cover"
+                          className="h-full w-full object-cover grayscale-70"
                         />
                       </div>
                       <div className="p-4">

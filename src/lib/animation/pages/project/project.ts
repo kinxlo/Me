@@ -45,10 +45,11 @@ export const runProjectsAnimation = (projects: Project[]) => {
 
   // Header animation
   PTL.to(".ptl-header", {
-    y: 0,
+    y: 80,
     opacity: 1,
     duration: 1.2,
-    ease: "back.out(2)",
+    stagger: 0.15,
+    ease: "back.out(1.7)",
   });
 
   // Project animations
