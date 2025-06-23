@@ -4,6 +4,7 @@ import { logoVariants } from "@/lib/tools/constants";
 // Create master timeline
 export const HBGTL = gsap.timeline({
   paused: true,
+  // defaults: { duration: 0.2 },
 });
 
 export const initHomeBGAnimation = (
@@ -34,9 +35,8 @@ export const initHomeBGAnimation = (
       if (targetPath) {
         // MorphSVG animation
         HBGTL.to(pathElement, {
+          delay: 1,
           duration: 1.5,
-          opacity: 1,
-          visibility: "visible",
           morphSVG: {
             shape: targetPath.d,
             type: "rotational",
@@ -62,6 +62,7 @@ export const initHomeBGAnimation = (
 
     currentIndex = nextIndex;
   };
+
   const intervalId = setInterval(animateToNextVariant, 4000);
   return () => clearInterval(intervalId);
 };

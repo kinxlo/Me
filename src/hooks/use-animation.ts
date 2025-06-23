@@ -1,3 +1,5 @@
+/* eslint-disable unused-imports/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -8,22 +10,14 @@ export function useRouteAnimation() {
   const isAnimating = useRef(false);
 
   const handleAnimatedNavigation = useCallback(
-    (timeline: gsap.core.Timeline, bgTimeline: gsap.core.Timeline, targetUrl: string) => {
+    (timeline: gsap.core.Timeline, targetUrl: string, bgTimeline?: gsap.core.Timeline | null) => {
       if (isAnimating.current) return;
       isAnimating.current = true;
 
       timeline.reverse().then(() => {
-        bgTimeline
-          .to(".home-bg", {
-            opacity: 0,
-            visibility: "hidden",
-            duration: 1,
-            x: 1000,
-          })
-          .then(() => {
-            router.push(targetUrl);
-            isAnimating.current = false;
-          });
+        // bgTimeline.kill();
+        router.push(targetUrl);
+        isAnimating.current = false;
       });
     },
     [router],

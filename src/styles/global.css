@@ -386,14 +386,18 @@
   }
 }
 
-/* .page-transition-wrapper {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  opacity: 0;
-} */
-
 .animated-element {
   opacity: 0;
   visibility: hidden;
+}
+
+/* Smooth image loading */
+.reveal-image {
+  transform-style: preserve-3d;
+  /* backface-visibility: hidden; */
+}
+
+/* Performance optimizations */
+.gsap-optimize {
+  will-change: transform, opacity;
 }

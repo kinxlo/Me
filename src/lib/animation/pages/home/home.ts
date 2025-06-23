@@ -1,22 +1,18 @@
 import gsap from "@/lib/animation/gsap/init";
 
+import { HBGTL } from "./background";
+
 export const HTL = gsap.timeline({
   paused: true,
-  defaults: { duration: 1.5 },
+  defaults: { duration: 0.2 },
 });
 
 export const runHomeAnimation = () => {
-  // HTL.fromTo(
-  //   ".gsap-social-button",
-  //   {
-  //     y: 50,
-  //   },
-  //   {
-  //     y: 0,
-  //     opacity: 1,
-  //     visibility: "visible",
-  //   },
-  // );
+  HTL.to(".htl-page", {
+    opacity: 1,
+    visibility: "visible",
+    // duration: 0.5,
+  });
   // Main tiHTLe animation
   HTL.from(".title-word", {
     y: 80,
@@ -32,7 +28,7 @@ export const runHomeAnimation = () => {
     {
       x: 100,
       opacity: 0,
-      duration: 0.8,
+      // duration: 0.8,
     },
     "-=0.8",
   );
@@ -43,7 +39,7 @@ export const runHomeAnimation = () => {
     {
       x: -40,
       opacity: 0,
-      duration: 0.8,
+      // duration: 0.8,
     },
     "-=0.6",
   );
@@ -53,7 +49,7 @@ export const runHomeAnimation = () => {
     {
       x: 40,
       opacity: 0,
-      duration: 0.8,
+      // duration: 0.8,
     },
     "-=0.5",
   );
@@ -65,7 +61,7 @@ export const runHomeAnimation = () => {
       y: 30,
       opacity: 0,
       scale: 0.8,
-      duration: 0.6,
+      // duration: 0.6,
       stagger: 0.1,
       ease: "back.out(1.7)",
     },
@@ -78,22 +74,13 @@ export const runHomeAnimation = () => {
     {
       y: 20,
       opacity: 0,
-      duration: 0.6,
+      // duration: 0.6,
       stagger: 0.1,
     },
     "-=0.3",
   );
 
-  // Continuous subHTLe animation for social buttons
-  HTL.to(
-    ".social-button",
-    {
-      y: -3,
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    },
-    "+=1",
-  );
+  HTL.eventCallback("onComplete", () => {
+    HBGTL.play();
+  });
 };

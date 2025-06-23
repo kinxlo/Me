@@ -16,7 +16,8 @@ export const Hero = () => {
             <span className="title-word">Ifijeh</span>
           </h1>
           <h1 className="text-primary show flex w-full items-end overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
-            <span className="title-word">Kingsley</span>.<span className="title-word">Solomon.</span>
+            <span className="title-word">Kingsley.</span>
+            <span className="title-word">Solomon.</span>
           </h1>
 
           <div className="rotating-text-container flex items-baseline gap-2 overflow-hidden">

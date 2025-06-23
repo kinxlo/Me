@@ -15,9 +15,6 @@ export default function Page() {
   useGSAP(() => {
     runHomeAnimation();
     HTL.play();
-    HTL.eventCallback("onStart", () => {
-      HBGTL.play();
-    });
   }, []);
 
   // Setup link interceptors
@@ -25,14 +22,14 @@ export default function Page() {
     const handler = (event: MouseEvent) => {
       event.preventDefault();
       const target = event.currentTarget as HTMLAnchorElement;
-      handleAnimatedNavigation(HTL, HBGTL, target.href);
+      handleAnimatedNavigation(HTL, target.href, HBGTL);
     };
 
     return setupLinkInterceptors(handler);
   }, [handleAnimatedNavigation, setupLinkInterceptors]);
 
   return (
-    <section className={`space-y-[1rem] lg:space-y-[5rem]`}>
+    <section className={`animated-element htl-page space-y-[1rem] lg:space-y-[5rem]`}>
       <Hero />
     </section>
   );
