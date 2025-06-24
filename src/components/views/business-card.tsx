@@ -1,62 +1,70 @@
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
-import { useRouteAnimation } from "@/hooks/use-animation";
-import { AboutTL, runAboutAnimation } from "@/lib/animation/pages/about/about";
+import { useGlobalContext } from "@/context/global-context";
+import { runAboutAnimation, runAboutExitAnimation } from "@/lib/animation/pages/about/about";
+import RotatingText from "@/lib/animation/RotatingText/RotatingText";
 import TrueFocus from "@/lib/animation/TrueFocus/TrueFocus";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useRef } from "react";
 
 export const BusinessCard = () => {
-  const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
+  const aboutPage = useRef(null);
+  const { setTimeline } = useGlobalContext();
 
-  useGSAP(() => {
-    runAboutAnimation();
-    AboutTL.play();
-  }, []);
+  useGSAP(
+    () => {
+      runAboutAnimation().play();
+      setTimeline(runAboutExitAnimation());
+    },
+    { scope: aboutPage },
+  );
 
-  // Setup link interceptors
-  useEffect(() => {
-    const handler = (event: MouseEvent) => {
-      event.preventDefault();
-      const target = event.currentTarget as HTMLAnchorElement;
-      handleAnimatedNavigation(AboutTL, target.href);
-    };
-
-    return setupLinkInterceptors(handler);
-  }, [handleAnimatedNavigation, setupLinkInterceptors]);
   return (
-    <section className="my-[5rem]">
-      <Wrapper className="overflow-hidden p-0">
+    <section ref={aboutPage} className="my-[5rem]">
+      <Wrapper className="animated-element overflow-hidden p-0">
         <Wrapper className="my-2 p-0">
           <section
             className={cn(
-              "business-card group relative flex min-h-[30rem] flex-col justify-center gap-8 rounded-none",
+              "business-card group relative flex min-h-[30rem] flex-col justify-end gap-8 rounded-none",
               "transition-all duration-300",
             )}
           >
             {/* Header Section - Will animate with .about-txt class */}
-            <div className="space-y-6">
-              <h3 className="text-primary text-3xl underline lg:text-4xl">Ifijeh Kingsley Solomon</h3>
-              <p className="justify max-w-[60%] text-base text-black/70 xl:max-w-[50%]">
-                Lead Frontend dev at{" "}
-                <Link
-                  target="_blank"
-                  href="https://techstudioacademy.com"
-                  className="text-success font-head hover:text-success/80 hover:underline"
-                >
-                  TSA <ArrowUpRight className="inline h-4 w-4" />
-                </Link>
-                , with an interest in Backend engineering, and System architecture.
-              </p>
+            <div className="flex flex-col space-y-6">
+              <h1 className="text-primary overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
+                <span className="title-word underline">The</span>
+                {/* <span className="title-word underline">Philosopher</span> */}
+                <RotatingText
+                  texts={["Philosopher", "Chemist", "Philosopher"]}
+                  mainClassName="font-head title-word underline"
+                  staggerFrom={"last"}
+                  staggerDuration={0.025}
+                  splitLevelClassName="overflow-hidden pb-0.5"
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                  rotationInterval={5000}
+                />
+              </h1>
+              {/* <h3 className="text-primary title-word text-3xl underline lg:text-4xl"></h3> */}
             </div>
+            <p className="justify max-w-[60%] text-base text-black/70 xl:max-w-[50%]">
+              <span className={`title-word`}>Lead Frontend dev at </span>
+              <Link
+                target="_blank"
+                href="https://techstudioacademy.com"
+                className="text-success font-head hover:text-success/80 hover:underline"
+              >
+                TSA <ArrowUpRight className="inline h-4 w-4" />
+              </Link>
+              <span className={`title-word`}>, with an interest in Backend engineering, and System architecture.</span>
+            </p>
 
             {/* Experience - Will animate with section-3 class */}
             <div className="section-3 space-y-4">
-              <div className="flex items-baseline gap-3">
+              <div className="true-focus flex items-baseline gap-3">
                 <TrueFocus
                   sentence="~IV Years Experience"
                   manualMode={false}
@@ -75,7 +83,7 @@ export const BusinessCard = () => {
             </div>
 
             {/* Highlights Grid - Will animate with section-5 class */}
-            <div className="section-5 grid gap-6 md:grid-cols-2">
+            <div className="section-5 grid gap-6 md:grid-cols-1">
               {[
                 {
                   icon: <CheckCircle className="text-success mt-1" size={20} />,
