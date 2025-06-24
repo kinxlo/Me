@@ -49,7 +49,7 @@ const DesktopNav = () => {
 
 export const Navbar = () => {
   return (
-    <section className="z-[999]">
+    <section className="sticky top-4 z-[999]">
       <MobileNav />
       <DesktopNav />
     </section>

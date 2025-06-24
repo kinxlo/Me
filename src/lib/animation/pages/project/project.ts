@@ -23,6 +23,11 @@ export const runProjectsEntranceAnimation = (projects: Project[]) => {
     transformOrigin: "center center",
   });
 
+  projectTimeline.to(".animated-element", {
+    opacity: 1,
+    visibility: "visible",
+  });
+
   // Header animation
   projectTimeline.to(".ptl-header", {
     y: 80,

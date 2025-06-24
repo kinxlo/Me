@@ -7,11 +7,16 @@ export const PBGTL = gsap.timeline({
   defaults: { ease: "power3.out" },
 });
 
-export const initProjectBGAnimation = (svgReference: SVGSVGElement | null, projects: Project[]) => {
+export const runProjectsBGEntranceAnimation = (svgReference: SVGSVGElement | null, projects: Project[]) => {
   if (!svgReference) return;
 
   // Clear previous animations
   for (const trigger of ScrollTrigger.getAll()) trigger.kill();
+
+  // PBGTL.to(".animated-element", {
+  //   opacity: 1,
+  //   visibility: "visible",
+  // });
 
   PBGTL.to("#pj-1", {
     duration: 1,
@@ -49,4 +54,6 @@ export const initProjectBGAnimation = (svgReference: SVGSVGElement | null, proje
       },
     });
   }
+
+  return PBGTL;
 };

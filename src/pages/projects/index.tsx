@@ -1,23 +1,13 @@
 // src/app/projects/page.tsx
 "use client";
 
+import { ProjectSVGBG } from "@/components/shared/me/project-svg-bg";
 import { ProjectsClient } from "@/components/views/project";
 import { useGlobalContext } from "@/context/global-context";
-import gsap from "@/lib/animation/gsap/init";
-import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { cn } from "@/lib/utils";
 
 export default function Projects() {
   const { projects, loading, error } = useGlobalContext();
-  const projectPage = useRef(null);
-  const { timeline } = useGlobalContext();
-  useGSAP(
-    () => {
-      gsap.fromTo(projectPage.current, { opacity: 0 }, { opacity: 1 });
-      timeline.add(gsap.to(projectPage.current, { opacity: 0 }));
-    },
-    { scope: projectPage },
-  );
 
   if (loading) {
     return (
@@ -32,8 +22,16 @@ export default function Projects() {
   }
 
   return (
-    <main ref={projectPage}>
+    <section>
+      <section className={`fixed right-0 bottom-0 z-0 h-[100vh] w-[100%] overflow-hidden lg:w-[50%]`}>
+        <ProjectSVGBG
+          className={cn(
+            `absolute right-0 translate-x-[25%] translate-y-[35%] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
+            "translate-0 scale-[1] lg:block lg:translate-0",
+          )}
+        />
+      </section>
       <ProjectsClient projects={projects} />
-    </main>
+    </section>
   );
 }
