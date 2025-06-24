@@ -13,10 +13,10 @@ export const runProjectsBGEntranceAnimation = (svgReference: SVGSVGElement | nul
   // Clear previous animations
   for (const trigger of ScrollTrigger.getAll()) trigger.kill();
 
-  PBGTL.to(".animated-element", {
-    opacity: 1,
-    visibility: "visible",
-  });
+  // PBGTL.to(".animated-element", {
+  //   opacity: 1,
+  //   visibility: "visible",
+  // });
 
   PBGTL.to("#pj-1", {
     duration: 1,
