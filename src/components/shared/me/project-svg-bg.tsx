@@ -1,6 +1,6 @@
 "use client";
 
-import { useProjects } from "@/context/global-context";
+import { useGlobalContext } from "@/context/global-context";
 import { useRouteAnimation } from "@/hooks/use-animation";
 import { useResponsiveLayout } from "@/hooks/use-media-query";
 import { initProjectBGAnimation, PBGTL } from "@/lib/animation/pages/project/background";
@@ -17,7 +17,7 @@ import { PJ4 } from "./paths/pj-4";
 export const ProjectSVGBG = ({ className }: { className?: string }) => {
   const svgReference = useRef<SVGSVGElement>(null);
   const pathname = usePathname();
-  const { projects } = useProjects();
+  const { projects } = useGlobalContext();
   const { isMobile } = useResponsiveLayout();
   const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
 

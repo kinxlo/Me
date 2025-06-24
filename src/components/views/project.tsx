@@ -2,31 +2,24 @@
 
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
-import { useRouteAnimation } from "@/hooks/use-animation";
-import { PTL, runProjectsAnimation } from "@/lib/animation/pages/project/project";
+import { useGlobalContext } from "@/context/global-context";
+import { runProjectsEntranceAnimation, runProjectsExitAnimation } from "@/lib/animation/pages/project/project";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useRef } from "react";
 
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
-  const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
+  const projectPage = useRef(null);
+  const { setTimeline } = useGlobalContext();
 
-  useGSAP(() => {
-    runProjectsAnimation(projects);
-    PTL.play();
-  }, []);
-
-  // Setup link interceptors
-  useEffect(() => {
-    const handler = (event: MouseEvent) => {
-      event.preventDefault();
-      const target = event.currentTarget as HTMLAnchorElement;
-      handleAnimatedNavigation(PTL, target.href);
-    };
-
-    return setupLinkInterceptors(handler);
-  }, [handleAnimatedNavigation, setupLinkInterceptors]);
+  useGSAP(
+    () => {
+      runProjectsEntranceAnimation(projects).play();
+      setTimeline(runProjectsExitAnimation(projects));
+    },
+    { scope: projectPage },
+  );
 
   if (!projects?.length) {
     return (
@@ -39,7 +32,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   }
 
   return (
-    <section className="mt-[10%] space-y-4 p-0">
+    <section ref={projectPage} className="space-y-4 p-0">
       <section className="max-w-(--breakpoint-md) space-y-1 px-2">
         <h1 className="text-primary ptl-header">Showcase</h1>
         <p className="project-text font-head ptl-header text-2xl text-black/70">

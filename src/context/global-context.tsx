@@ -2,6 +2,7 @@
 "use client";
 
 import { getProjects } from "@/action/project.action";
+import gsap from "@/lib/animation/gsap/init";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 type ProjectsContextType = {
@@ -9,14 +10,19 @@ type ProjectsContextType = {
   loading: boolean;
   error: string | null;
   refreshProjects: () => Promise<void>;
+  timeline: gsap.core.Timeline;
+  setTimeline: React.Dispatch<React.SetStateAction<gsap.core.Timeline>>;
 };
 
-const GlobalContext = createContext<ProjectsContextType | undefined>(undefined);
+export const GlobalContext = createContext<ProjectsContextType | undefined>(undefined);
 
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [timeline, setTimeline] = useState(() => {
+    return gsap.timeline({ paused: true });
+  });
 
   const fetchProjects = async () => {
     try {
@@ -42,6 +48,8 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         loading,
         error,
         refreshProjects: fetchProjects,
+        timeline,
+        setTimeline,
       }}
     >
       {children}
@@ -49,7 +57,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useProjects = () => {
+export const useGlobalContext = () => {
   const context = useContext(GlobalContext);
   if (context === undefined) {
     throw new Error("useProjects must be used within a GlobalProvider");
