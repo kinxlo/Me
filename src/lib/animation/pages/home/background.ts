@@ -40,7 +40,6 @@ export const runHomeBGEntranceAnimation = (
       if (targetPath) {
         // MorphSVG animation
         HBGTL.to(pathElement, {
-          delay: 0.5,
           duration: 1.5,
           morphSVG: {
             shape: targetPath.d,
