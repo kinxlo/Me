@@ -1,9 +1,4 @@
-// src/lib/animation/pages/project/background.ts
 import gsap from "@/lib/animation/gsap/init";
-import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
 
 export const runProjectsBGEntranceAnimation = (svgReference: SVGSVGElement | null, projects: Project[]) => {
   if (!svgReference || !projects?.length) return;

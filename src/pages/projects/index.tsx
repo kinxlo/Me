@@ -26,7 +26,7 @@ export default function Projects() {
       <section className={`fixed right-0 bottom-0 z-0 h-[100vh] w-full overflow-hidden lg:w-[50%]`}>
         <ProjectSVGBG
           className={cn(
-            `absolute right-0 translate-x-[25%] translate-y-[35%] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
+            `absolute right-0 translate-x-0 translate-y-0 opacity-20 md:translate-y-[25%] lg:translate-x-0 lg:translate-y-0`,
             "scale-[1] lg:block",
           )}
         />

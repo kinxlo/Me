@@ -3,7 +3,7 @@ import { Hero } from "@/components/views/hero";
 
 export default function Page() {
   return (
-    <main className={`space-y-[1rem] lg:space-y-[5rem]`}>
+    <main className={`mt-[5rem] lg:mt-0`}>
       <HomeSVGBG />
       <Hero />
     </main>

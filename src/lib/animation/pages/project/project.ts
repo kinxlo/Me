@@ -109,7 +109,7 @@ export const runProjectsExitAnimation = (projects: Project[]) => {
   const exitTimeline = gsap.timeline({ paused: true });
 
   // Animate out in reverse order
-  for (const [index, project] of projects.reverse().entries()) {
+  for (const [index, project] of projects.entries()) {
     const section = `#project-${project.id}`;
     const delay = index * 0.1;
 

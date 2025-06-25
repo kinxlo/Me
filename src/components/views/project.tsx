@@ -143,6 +143,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                           "reveal-image desktop group relative hidden overflow-hidden rounded-lg border border-black/20 shadow-lg backdrop-blur-3xl transition-all hover:shadow-xl",
                           "hover:grayscale-0",
                           "lg:block",
+                          "mt-[4rem] ml-[1rem] !rotate-3",
                         )}
                       >
                         <div className="aspect-video w-full overflow-hidden">
@@ -170,14 +171,15 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                         className={cn(
                           "reveal-image mobile project-image relative overflow-hidden rounded-lg border border-black/20 shadow-md backdrop-blur-3xl",
                           "lg:hidden",
+                          "!scale-80 !rotate-2",
                         )}
                       >
-                        <div className="aspect-[9/16] w-full overflow-hidden">
+                        <div className="aspect-[8/16] w-full overflow-hidden">
                           <BlurImage
                             src={project.imageDesktop1}
                             alt={`${project.name} mobile screenshot`}
-                            width={720}
-                            height={1280}
+                            width={520}
+                            height={980}
                             className="h-full w-full object-cover grayscale-70"
                           />
                         </div>
