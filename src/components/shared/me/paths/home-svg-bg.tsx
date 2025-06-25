@@ -56,7 +56,7 @@ export const HomeSVGBG = () => {
         className={cn("animated-element", getSVGPositioning())}
         width="100%"
         height="100%"
-        viewBox="85 0 400 400"
+        viewBox="85 -30 400 400"
         // viewBox="85 -55 400 400"
         preserveAspectRatio="xMinYMin meet"
       >
