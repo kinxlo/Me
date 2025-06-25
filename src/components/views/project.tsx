@@ -1,3 +1,4 @@
+// src/components/views/project.tsx
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
@@ -6,19 +7,27 @@ import { useGlobalContext } from "@/context/global-context";
 import { runProjectsEntranceAnimation, runProjectsExitAnimation } from "@/lib/animation/pages/project/project";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { useRef } from "react";
 
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
-  const projectPage = useRef(null);
+  const projectPage = useRef<HTMLDivElement>(null);
   const { setTimeline } = useGlobalContext();
 
   useGSAP(
     () => {
-      runProjectsEntranceAnimation(projects).play();
+      const entrance = runProjectsEntranceAnimation(projects);
+      entrance.play();
       setTimeline(runProjectsExitAnimation(projects));
+
+      // Cleanup on unmount
+      return () => {
+        entrance.kill();
+        for (const trigger of ScrollTrigger.getAll()) trigger.kill();
+      };
     },
-    { scope: projectPage },
+    { scope: projectPage, dependencies: [projects] },
   );
 
   if (!projects?.length) {
@@ -32,8 +41,8 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   }
 
   return (
-    <section ref={projectPage}>
-      <section className="animated-element space-y-4 p-0">
+    <section ref={projectPage} className="relative z-10">
+      <section className="animated-element space-y-4 p-0 opacity-0">
         <section className="max-w-(--breakpoint-md) space-y-1 px-2">
           <h1 className="text-primary ptl-header">Showcase</h1>
           <p className="project-text font-head ptl-header text-2xl text-black/70">
@@ -48,6 +57,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                 key={project.id}
                 id={`project-${project.id}`}
                 className={`project-section cc-border reveal-section overflow-hidden p-0`}
+                data-project-id={project.id}
               >
                 <Wrapper className="my-2 p-0">
                   <section className="group relative flex min-h-[30rem] max-w-(--breakpoint-md) flex-col items-center justify-center gap-8 rounded-none transition-all duration-300">

@@ -19,7 +19,10 @@ const MobileNav = () => {
   return (
     <section ref={containerReference} className={`md:hidden`}>
       {mobileMenuOpen && <MobileMenuBackdrop onClick={onClose} />}
-      <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
+      <div>
+        <NavLogo />
+        <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
+      </div>
       <nav
         className={cn(
           "font-head fixed top-1/4 left-1/4 min-h-fit transition-all duration-300",
@@ -36,7 +39,7 @@ const MobileNav = () => {
 
 const DesktopNav = () => {
   return (
-    <section className={`mt-4 hidden items-start justify-between lg:flex`}>
+    <section className={`hidden items-start justify-between lg:flex`}>
       <div className="font-head" role="navigation">
         <NavItems isMobile={false} onItemClick={() => {}} />
       </div>
@@ -49,7 +52,7 @@ const DesktopNav = () => {
 
 export const Navbar = () => {
   return (
-    <section className="sticky top-4 z-[999]">
+    <section className="sticky top-0 z-[999] p-4">
       <MobileNav />
       <DesktopNav />
     </section>

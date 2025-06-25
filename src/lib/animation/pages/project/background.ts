@@ -1,59 +1,61 @@
+// src/lib/animation/pages/project/background.ts
 import gsap from "@/lib/animation/gsap/init";
+import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Create master timeline
-export const PBGTL = gsap.timeline({
-  paused: false,
-  defaults: { ease: "power3.out" },
-});
+gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
 
 export const runProjectsBGEntranceAnimation = (svgReference: SVGSVGElement | null, projects: Project[]) => {
-  if (!svgReference) return;
+  if (!svgReference || !projects?.length) return;
 
-  // Clear previous animations
+  // Clear previous triggers
   for (const trigger of ScrollTrigger.getAll()) trigger.kill();
 
-  // PBGTL.to(".animated-element", {
-  //   opacity: 1,
-  //   visibility: "visible",
-  // });
+  // Initial setup
+  gsap.set("#pj-1", { opacity: 1 });
+  gsap.set(["#pj-2", "#pj-3", "#pj-4"], { opacity: 0 });
 
-  PBGTL.to("#pj-1", {
-    duration: 1,
-    delay: 1,
-    morphSVG: "#pj-1",
-    ease: "power2.inOut",
+  const masterTimeline = gsap.timeline({
+    defaults: { duration: 1.2, ease: "power2.inOut" },
   });
 
-  // Setup scroll triggers for each project
+  // Create scroll triggers for each project
   for (const [index, project] of projects.entries()) {
-    const projectSection = document.querySelector(`#project-${project.id}`);
-    if (!projectSection) continue;
+    const projectId = index + 1;
+    const section = document.querySelector(`#project-${project.id}`);
+
+    if (!section) continue;
 
     ScrollTrigger.create({
-      trigger: projectSection,
+      trigger: section,
       start: "top center",
       end: "bottom center",
-      onEnter: () => {
-        PBGTL.to("#pj-1", {
-          duration: 0.8,
-          delay: 1,
-          morphSVG: `#pj-${index + 1}`,
-          ease: "power2.inOut",
-          overwrite: "auto",
-        });
-      },
-      onEnterBack: () => {
-        PBGTL.to("#pj-1", {
-          duration: 0.8,
-          delay: 1,
-          morphSVG: `#pj-${index + 1}`,
-          ease: "power2.inOut",
-          overwrite: "auto",
-        });
-      },
+      onEnter: () => animateSVG(projectId),
+      onEnterBack: () => animateSVG(projectId),
+      onLeave: () => animateSVG(projectId + 1 > projects.length ? 1 : projectId + 1),
+      onLeaveBack: () => animateSVG(projectId - 1 < 1 ? 1 : projectId - 1),
     });
   }
 
-  return PBGTL;
+  function animateSVG(targetId: number) {
+    masterTimeline.to("#pj-1", {
+      morphSVG: `#pj-${targetId}`,
+      duration: 1.2,
+      ease: "sine.inOut",
+      overwrite: true,
+    });
+
+    // Smooth opacity transition
+    masterTimeline.to(
+      ["#pj-1", "#pj-2", "#pj-3", "#pj-4"],
+      {
+        opacity: (index) => (index + 1 === targetId ? 1 : 0),
+        duration: 0.6,
+        ease: "power2.inOut",
+      },
+      "<",
+    );
+  }
+
+  return masterTimeline;
 };

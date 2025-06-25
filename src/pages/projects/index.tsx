@@ -22,12 +22,12 @@ export default function Projects() {
   }
 
   return (
-    <section>
-      <section className={`fixed right-0 bottom-0 z-0 h-[100vh] w-[100%] overflow-hidden lg:w-[50%]`}>
+    <section className="relative">
+      <section className={`fixed right-0 bottom-0 z-0 h-[100vh] w-full overflow-hidden lg:w-[50%]`}>
         <ProjectSVGBG
           className={cn(
             `absolute right-0 translate-x-[25%] translate-y-[35%] opacity-20 md:translate-y-[25%] lg:translate-x-[20%] lg:translate-y-[20%]`,
-            "translate-0 scale-[1] lg:block lg:translate-0",
+            "scale-[1] lg:block",
           )}
         />
       </section>

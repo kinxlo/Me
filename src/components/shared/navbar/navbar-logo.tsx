@@ -22,7 +22,7 @@ export const NavLogo = () => {
   // };
 
   return (
-    <div className="font-sea rounded-full border-2 border-gray-800 bg-black/10 px-2.5 text-xl font-medium text-gray-800 backdrop-blur-3xl">
+    <div className="font-sea w-fit rounded-full border-2 border-gray-800 bg-black/10 px-2.5 text-xl font-medium text-gray-800 backdrop-blur-3xl">
       I19N
     </div>
   );

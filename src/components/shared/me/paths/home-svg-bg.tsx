@@ -35,7 +35,7 @@ export const HomeSVGBG = () => {
   const getSVGPositioning = () => {
     switch (currentLayout) {
       case "mobile": {
-        return "fixed bottom-[-10rem] left-[-10rem] w-fit md:hidden";
+        return "fixed border border-primary md:hidden";
       }
       case "tablet": {
         return "fixed right-[-10rem] bottom-[-10rem] w-fit xl:hidden";
@@ -56,7 +56,8 @@ export const HomeSVGBG = () => {
         className={cn("animated-element", getSVGPositioning())}
         width="100%"
         height="100%"
-        viewBox="85 -55 500 500"
+        viewBox="85 0 400 400"
+        // viewBox="85 -55 500 500"
         preserveAspectRatio="xMinYMin meet"
       >
         {logoVariants[0].paths.map((path, index) => (
