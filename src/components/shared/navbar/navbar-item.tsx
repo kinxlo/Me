@@ -14,9 +14,18 @@ type NavItemProperties = {
   isMobile?: boolean;
   onClick?: () => void;
   isExternal?: boolean;
+  className: string;
 };
 
-export const NavItem = ({ content, path, variant, isActive, isMobile = false, onClick }: NavItemProperties) => {
+export const NavItem = ({
+  content,
+  path,
+  variant,
+  isActive,
+  isMobile = false,
+  onClick,
+  className,
+}: NavItemProperties) => {
   const navItemReference = useRef<HTMLButtonElement>(null);
 
   return (
@@ -25,10 +34,11 @@ export const NavItem = ({ content, path, variant, isActive, isMobile = false, on
       href={path}
       variant={variant}
       className={cn(
-        "font-head relative transition-all duration-300 hover:translate-x-[1rem] hover:opacity-100 md:text-2xl",
+        "font-head hover:text-primary-400 relative block w-full py-3 duration-300 hover:translate-x-[1rem] hover:opacity-100 md:text-2xl",
         "text-black hover:text-black/50",
         isActive && "!text-primary font-bold underline underline-offset-4",
         isMobile && "text-4xl text-white",
+        className,
       )}
       onClick={() => {
         if (isMobile && onClick) {

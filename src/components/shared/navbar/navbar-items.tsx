@@ -1,6 +1,6 @@
 "use client";
 
-// import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
+import { useResponsiveLayout } from "@/hooks/use-media-query";
 import { NAV_ITEMS } from "@/lib/tools/constants";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
@@ -10,22 +10,20 @@ import { NavItem } from "./navbar-item";
 type NavItemsProperties = {
   isMobile?: boolean;
   onItemClick?: () => void;
+  className?: string;
+  itemClassName?: string;
 };
 
-export const NavItems = ({ isMobile = false, onItemClick }: NavItemsProperties) => {
+export const NavItems = ({ onItemClick, className, itemClassName }: NavItemsProperties) => {
+  const { isMobile } = useResponsiveLayout();
   const pathname = usePathname();
 
   return (
-    <div
-      className={cn(
-        `flex flex-col items-start justify-center gap-8 md:gap-2 lg:items-start`,
-        // `md:flex-row`,
-        // pathname.includes(`/project`) && `md:flex-row`,
-      )}
-    >
+    <ul className={cn("flex flex-col lg:items-start", className)}>
       {NAV_ITEMS.map((item, index) => (
         <NavItem
           key={index}
+          className={cn(itemClassName)}
           content={item.content}
           path={item.path}
           variant={item.variant}
@@ -39,7 +37,6 @@ export const NavItems = ({ isMobile = false, onItemClick }: NavItemsProperties) 
           isExternal={item.isExternal}
         />
       ))}
-      {/* <ModeToggle /> */}
-    </div>
+    </ul>
   );
 };
