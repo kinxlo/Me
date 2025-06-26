@@ -3,7 +3,7 @@
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { useGlobalContext } from "@/context/global-context";
 import { runAboutAnimation, runAboutExitAnimation } from "@/lib/animation/pages/about/about";
-import RotatingText from "@/lib/animation/RotatingText/RotatingText";
+// import RotatingText from "@/lib/animation/RotatingText/RotatingText";
 import TrueFocus from "@/lib/animation/TrueFocus/TrueFocus";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
@@ -36,9 +36,8 @@ export const BusinessCard = () => {
             {/* Header Section - Will animate with .about-txt class */}
             <div className="flex flex-col space-y-6">
               <h1 className="text-primary overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
-                <span className="title-word underline">The</span>
-                {/* <span className="title-word underline">Philosopher</span> */}
-                <RotatingText
+                <span className="title-word underline">Who am I ?</span>
+                {/* <RotatingText
                   texts={["Philosopher", "Chemist", "Philosopher"]}
                   mainClassName="font-head title-word underline"
                   staggerFrom={"last"}
@@ -46,7 +45,7 @@ export const BusinessCard = () => {
                   splitLevelClassName="overflow-hidden pb-0.5"
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                   rotationInterval={5000}
-                />
+                /> */}
               </h1>
               {/* <h3 className="text-primary title-word text-3xl underline lg:text-4xl"></h3> */}
             </div>
