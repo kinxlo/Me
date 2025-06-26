@@ -64,7 +64,9 @@
 
 "use client";
 
+import { useGlobalContext } from "@/context/global-context";
 import { useResponsiveLayout } from "@/hooks/use-media-query";
+import { runAboutAnimation, runAboutExitAnimation } from "@/lib/animation/pages/about/about";
 import { initAboutBGAnimation } from "@/lib/animation/pages/about/background";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
@@ -77,15 +79,17 @@ export const AboutSVGBG = () => {
   const pathReference = useRef<SVGPathElement>(null);
   const { isMobile, isTablet } = useResponsiveLayout();
   const [isInitialized, setIsInitialized] = useState(false);
+  const { setTimeline } = useGlobalContext();
 
   useGSAP(() => {
     if (!svgReference.current || !pathReference.current) return;
-
-    const cleanup = initAboutBGAnimation(svgReference.current, pathReference.current, isMobile, isTablet, () =>
+    const timeline = initAboutBGAnimation(svgReference.current, pathReference.current, isMobile, isTablet, () =>
       setIsInitialized(true),
     );
-
-    return cleanup;
+    timeline.eventCallback(`onComplete`, () => {
+      runAboutAnimation().play();
+      setTimeline(runAboutExitAnimation());
+    });
   }, [isMobile, isTablet]);
 
   return (

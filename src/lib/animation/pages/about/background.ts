@@ -24,8 +24,8 @@ export const initAboutBGAnimation = (
   const fillOpacity = isMobile ? 0.05 : isTablet ? 0.05 : 0.3;
 
   // Set animation durations based on device
-  const drawDuration = isMobile ? 8 : isTablet ? 9 : 10;
-  const fillDuration = isMobile ? 1.5 : isTablet ? 1.75 : 0.5;
+  const drawDuration = isMobile ? 2 : isTablet ? 2 : 2;
+  const fillDuration = isMobile ? 0.5 : isTablet ? 0.5 : 0.5;
 
   // Apply responsive classes
   const classesToRemove = [
@@ -82,30 +82,32 @@ export const initAboutBGAnimation = (
     );
 
   // Create hover timeline if needed
-  let hoverTL: gsap.core.Timeline | null = null;
-  const handleMouseEnter = () => hoverTL?.play();
-  const handleMouseLeave = () => hoverTL?.reverse();
+  // let hoverTL: gsap.core.Timeline | null = null;
+  // const handleMouseEnter = () => hoverTL?.play();
+  // const handleMouseLeave = () => hoverTL?.reverse();
 
-  if (!isMobile) {
-    hoverTL = gsap.timeline({ paused: true });
-    const hoverScale = isTablet ? 1.03 : 1.05;
-    hoverTL.to(pathElement, { scale: hoverScale, duration: 0.3 });
+  // if (!isMobile) {
+  //   hoverTL = gsap.timeline({ paused: true });
+  //   const hoverScale = isTablet ? 1.03 : 1.05;
+  //   hoverTL.to(pathElement, { scale: hoverScale, duration: 0.3 });
 
-    pathElement.addEventListener("mouseenter", handleMouseEnter);
-    pathElement.addEventListener("mouseleave", handleMouseLeave);
-  }
+  //   pathElement.addEventListener("mouseenter", handleMouseEnter);
+  //   pathElement.addEventListener("mouseleave", handleMouseLeave);
+  // }
 
   // Call initialization callback
   onInitialized?.();
 
-  // Cleanup function
-  return () => {
-    ABGTL.clear();
-    hoverTL?.kill();
+  return ABGTL;
 
-    if (!isMobile) {
-      pathElement.removeEventListener("mouseenter", handleMouseEnter);
-      pathElement.removeEventListener("mouseleave", handleMouseLeave);
-    }
-  };
+  // Cleanup function
+  // return () => {
+  //   ABGTL.clear();
+  //   hoverTL?.kill();
+
+  //   if (!isMobile) {
+  //     pathElement.removeEventListener("mouseenter", handleMouseEnter);
+  //     pathElement.removeEventListener("mouseleave", handleMouseLeave);
+  //   }
+  // };
 };

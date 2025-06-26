@@ -12,8 +12,8 @@ export const runProjectsEntranceAnimation = (projects: Project[]) => {
   });
 
   // Initial states
-  gsap.set(".animated-element", { autoAlpha: 0 });
-  gsap.set(".ptl-header", { y: 60, opacity: 0 });
+  // gsap.set(".animated-element", { autoAlpha: 0 });
+  // gsap.set(".ptl-header", { y: 60, opacity: 0 });
   gsap.set(".project-section", { autoAlpha: 0, y: 80 });
   gsap.set(".reveal-title", { y: 40, opacity: 0 });
   gsap.set(".reveal-text", { y: 30, opacity: 0 });
@@ -23,13 +23,17 @@ export const runProjectsEntranceAnimation = (projects: Project[]) => {
 
   // Master animation
   projectTimeline
-    .to(".animated-element", { autoAlpha: 1, duration: 0.5 })
-    .fromTo(
-      ".ptl-header",
-      { y: 60, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "back.out(1.7)" },
-      "+=0.2",
-    );
+    .to(".animated-element", {
+      opacity: 1,
+      visibility: "visible",
+    })
+    .from(".title-word", {
+      y: 80,
+      opacity: 0,
+      // duration: 1.2,
+      stagger: 0.15,
+      ease: "back.out(1.7)",
+    });
 
   // Project animations
   for (const [index, project] of projects.entries()) {
