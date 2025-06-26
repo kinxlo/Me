@@ -4,7 +4,7 @@ import { Hero } from "@/components/views/hero";
 
 export default function Page() {
   return (
-    <main className={`lg:mt-0`}>
+    <main className={`mt-[5rem] lg:mt-0`}>
       <HomeSVGBG />
       <ScrollIndicator />
       <Hero />
