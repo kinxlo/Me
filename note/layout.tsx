@@ -33,16 +33,3 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     </html>
   );
 }
-
-{
-  /* <ThemeProvider
-  attribute="class"
-  defaultTheme="system"
-  enableSystem
-  disableTransitionOnChange
-  enableColorScheme
-  > */
-  {
-    /* </ThemeProvider> */
-  }
-}

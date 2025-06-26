@@ -1,56 +1,52 @@
 import gsap from "@/lib/animation/gsap/init";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export const runProjectsBGEntranceAnimation = (svgReference: SVGSVGElement | null, projects: Project[]) => {
-  if (!svgReference || !projects?.length) return;
-
-  // Clear previous triggers
-  for (const trigger of ScrollTrigger.getAll()) trigger.kill();
-
-  // Initial setup
-  gsap.set("#pj-1", { opacity: 1 });
-  gsap.set(["#pj-2", "#pj-3", "#pj-4"], { opacity: 0 });
-
-  const masterTimeline = gsap.timeline({
+export const runProjectsBGEntranceAnimation = (projects: Project[]) => {
+  const animationReference = gsap.timeline({
     defaults: { duration: 1.2, ease: "power2.inOut" },
   });
+  // Clear previous animations
+  animationReference?.current?.kill();
+  for (const t of ScrollTrigger.getAll()) t.kill();
 
-  // Create scroll triggers for each project
+  // Initial setup - make all paths visible but morph to first shape
+  gsap.set(["#pj-1", "#pj-2", "#pj-3", "#pj-4"], { opacity: 1 });
+  gsap.set("#pj-1", { morphSVG: "#pj-1" });
+
+  // Set up scroll triggers for each project
   for (const [index, project] of projects.entries()) {
-    const projectId = index + 1;
-    const section = document.querySelector(`#project-${project.id}`);
-
-    if (!section) continue;
+    const targetId = index + 1; // pj-1, pj-2, etc.
+    const projectSection = document.querySelector(`#project-${project.id}`);
+    if (!projectSection) continue;
 
     ScrollTrigger.create({
-      trigger: section,
+      trigger: projectSection,
       start: "top center",
       end: "bottom center",
-      onEnter: () => animateSVG(projectId),
-      onEnterBack: () => animateSVG(projectId),
-      onLeave: () => animateSVG(projectId + 1 > projects.length ? 1 : projectId + 1),
-      onLeaveBack: () => animateSVG(projectId - 1 < 1 ? 1 : projectId - 1),
-    });
-  }
-
-  function animateSVG(targetId: number) {
-    masterTimeline.to("#pj-1", {
-      morphSVG: `#pj-${targetId}`,
-      duration: 1.2,
-      ease: "sine.inOut",
-      overwrite: true,
-    });
-
-    // Smooth opacity transition
-    masterTimeline.to(
-      ["#pj-1", "#pj-2", "#pj-3", "#pj-4"],
-      {
-        opacity: (index) => (index + 1 === targetId ? 1 : 0),
-        duration: 0.6,
-        ease: "power2.inOut",
+      onEnter: () => {
+        gsap.to("#pj-1", {
+          morphSVG: `#pj-${targetId}`,
+          duration: 1,
+          ease: "sine.inOut",
+        });
       },
-      "<",
-    );
+      onEnterBack: () => {
+        gsap.to("#pj-1", {
+          morphSVG: `#pj-${targetId}`,
+          duration: 1,
+          ease: "sine.inOut",
+        });
+      },
+      // markers: true // Enable for debugging
+    });
   }
 
-  return masterTimeline;
+  // Initial animation to first project
+  gsap.to("#pj-1", {
+    morphSVG: "#pj-1",
+    duration: 1,
+    ease: "sine.inOut",
+  });
+
+  return animationReference;
 };

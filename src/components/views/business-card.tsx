@@ -24,7 +24,7 @@ export const BusinessCard = () => {
   );
 
   return (
-    <section ref={aboutPage} className="my-[5rem]">
+    <section ref={aboutPage} className="">
       <Wrapper className="animated-element overflow-hidden p-0">
         <Wrapper className="my-2 p-0">
           <section

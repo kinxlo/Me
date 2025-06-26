@@ -4,15 +4,18 @@ import type { AppProps } from "next/app";
 
 import "../styles/global.css";
 
+import LoadingProvider from "@/components/shared/loader/loader-provider";
 import { Navbar } from "@/components/shared/navbar";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <GlobalProvider>
-      <Navbar />
-      <Transition>
-        <Component key={router.route} {...pageProps} />;
-      </Transition>
+      <LoadingProvider>
+        <Navbar />
+        <Transition>
+          <Component key={router.route} {...pageProps} />
+        </Transition>
+      </LoadingProvider>
     </GlobalProvider>
   );
 }

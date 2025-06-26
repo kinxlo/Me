@@ -1,6 +1,5 @@
 "use client";
 
-import { ModeToggle } from "@/components/core/layout/ThemeToggle/theme-toggle";
 import { Wrapper } from "@/components/core/layout/wrapper";
 import MainButton from "@/components/shared/button";
 import { useGlobalContext } from "@/context/global-context";
@@ -196,10 +195,9 @@ export const Hero = () => {
             onMouseEnter={handleCreditHover}
             onClick={handleCreditHover}
           >
-            Credit:
+            👍 Big Ups To:
           </span>
-          <ModeToggle />
-          <p title="Your Name">&copy; YOUR_INITIALS</p>
+          <p title="Your Name">&copy; {new Date().getFullYear()}</p>
         </Wrapper>
       </section>
     </section>

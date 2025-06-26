@@ -3,6 +3,7 @@
 
 import { useGlobalContext } from "@/context/global-context";
 import { useResponsiveLayout } from "@/hooks/use-media-query";
+import { runProjectsBGEntranceAnimation } from "@/lib/animation/pages/project/background";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -24,59 +25,11 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
   const { projects } = useGlobalContext();
   const { isMobile } = useResponsiveLayout();
   const svgReference = useRef<SVGSVGElement>(null);
-  const animationReference = useRef<gsap.core.Timeline | null>(null);
 
   useGSAP(
     () => {
       if (isMobile || !projects?.length || !svgReference.current) return;
-
-      // Clear previous animations
-      animationReference.current?.kill();
-      for (const t of ScrollTrigger.getAll()) t.kill();
-
-      // Initial setup - make all paths visible but morph to first shape
-      gsap.set(["#pj-1", "#pj-2", "#pj-3", "#pj-4"], { opacity: 1 });
-      gsap.set("#pj-1", { morphSVG: "#pj-1" });
-
-      // Create master timeline
-      animationReference.current = gsap.timeline({
-        defaults: { duration: 1.2, ease: "power2.inOut" },
-      });
-
-      // Set up scroll triggers for each project
-      for (const [index, project] of projects.entries()) {
-        const targetId = index + 1; // pj-1, pj-2, etc.
-        const projectSection = document.querySelector(`#project-${project.id}`);
-        if (!projectSection) continue;
-
-        ScrollTrigger.create({
-          trigger: projectSection,
-          start: "top center",
-          end: "bottom center",
-          onEnter: () => {
-            gsap.to("#pj-1", {
-              morphSVG: `#pj-${targetId}`,
-              duration: 1,
-              ease: "sine.inOut",
-            });
-          },
-          onEnterBack: () => {
-            gsap.to("#pj-1", {
-              morphSVG: `#pj-${targetId}`,
-              duration: 1,
-              ease: "sine.inOut",
-            });
-          },
-          // markers: true // Enable for debugging
-        });
-      }
-
-      // Initial animation to first project
-      gsap.to("#pj-1", {
-        morphSVG: "#pj-1",
-        duration: 1,
-        ease: "sine.inOut",
-      });
+      runProjectsBGEntranceAnimation(projects);
     },
     { dependencies: [projects, isMobile] },
   );

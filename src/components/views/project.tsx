@@ -171,7 +171,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                         className={cn(
                           "reveal-image mobile project-image relative overflow-hidden rounded-lg border border-black/20 shadow-md backdrop-blur-3xl",
                           "lg:hidden",
-                          "!scale-80 !rotate-2",
+                          "mt-[-2rem] !scale-80 !rotate-2",
                         )}
                       >
                         <div className="aspect-[8/16] w-full overflow-hidden">
