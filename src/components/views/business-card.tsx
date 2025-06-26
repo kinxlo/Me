@@ -1,27 +1,27 @@
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
-import { useGlobalContext } from "@/context/global-context";
-import { runAboutAnimation, runAboutExitAnimation } from "@/lib/animation/pages/about/about";
+// import { useGlobalContext } from "@/context/global-context";
+// import { runAboutAnimation, runAboutExitAnimation } from "@/lib/animation/pages/about/about";
 // import RotatingText from "@/lib/animation/RotatingText/RotatingText";
 import TrueFocus from "@/lib/animation/TrueFocus/TrueFocus";
 import { cn } from "@/lib/utils";
-import { useGSAP } from "@gsap/react";
+// import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
 
 export const BusinessCard = () => {
   const aboutPage = useRef(null);
-  const { setTimeline } = useGlobalContext();
+  // const { setTimeline } = useGlobalContext();
 
-  useGSAP(
-    () => {
-      runAboutAnimation().play();
-      setTimeline(runAboutExitAnimation());
-    },
-    { scope: aboutPage },
-  );
+  // useGSAP(
+  //   () => {
+  //     runAboutAnimation().play();
+  //     setTimeline(runAboutExitAnimation());
+  //   },
+  //   { scope: aboutPage },
+  // );
 
   return (
     <section ref={aboutPage} className="">
@@ -35,9 +35,12 @@ export const BusinessCard = () => {
           >
             {/* Header Section - Will animate with .about-txt class */}
             <div className="flex flex-col space-y-6">
-              <h1 className="text-primary overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
+              <h1 className="text-primary ptl-header flex w-full items-end overflow-hidden text-4xl underline sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
+                <span className="title-word">Who Am I ?</span>
+              </h1>
+              {/* <h1 className="text-primary overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
                 <span className="title-word underline">Who am I ?</span>
-                {/* <RotatingText
+                <RotatingText
                   texts={["Philosopher", "Chemist", "Philosopher"]}
                   mainClassName="font-head title-word underline"
                   staggerFrom={"last"}
@@ -45,8 +48,8 @@ export const BusinessCard = () => {
                   splitLevelClassName="overflow-hidden pb-0.5"
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
                   rotationInterval={5000}
-                /> */}
-              </h1>
+                />
+              </h1> */}
               {/* <h3 className="text-primary title-word text-3xl underline lg:text-4xl"></h3> */}
             </div>
             <p className="justify max-w-[60%] text-base text-black/70 xl:max-w-[50%]">
@@ -124,8 +127,10 @@ export const BusinessCard = () => {
             </div>
 
             {/* Personal Touch - Will animate with section-7 class */}
-            <div className="section-7 mt-8 border-t border-black/20 pt-4">
-              <p className="font-sea text-xl text-black/70 italic">*** Off-duty: Books. Squads. Gaming. Repeat. ***</p>
+            <div className="section-7 border-primary mt-8 mb-20 border-t pt-4">
+              <p className="font-sea text-primary animate-pulse text-xl italic">
+                *** Off-duty: Books. Squads. Gaming. Repeat. ***
+              </p>
             </div>
           </section>
         </Wrapper>

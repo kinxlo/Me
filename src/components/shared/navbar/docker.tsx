@@ -11,18 +11,18 @@ const DockerNav = ({ visible }: { visible: boolean }) => {
     { icon: <VscHome className={`text-secondary`} size={16} />, label: "Home", onClick: () => router.push("/") },
     {
       icon: <VscProject className={`text-secondary`} size={16} />,
-      label: "Archive",
+      label: "Projects",
       onClick: () => router.push("/projects"),
     },
     {
       icon: <VscAccount className={`text-secondary`} size={16} />,
-      label: "Profile",
+      label: "About",
       onClick: () => router.push("/about"),
     },
     {
       icon: <VscFile className={`text-secondary`} size={16} />,
-      label: "Settings",
-      onClick: () => router.push("/resume"),
+      label: "Resume/CV",
+      onClick: () => router.push("https://drive.google.com/file/d/1-emFvqL9-gs6v7DitqyR8aLxfZmb52Fz/view?usp=sharing"),
     },
   ];
 

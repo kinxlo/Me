@@ -44,9 +44,14 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
     <section ref={projectPage} className="relative z-10">
       <section className="animated-element space-y-4 p-0 opacity-0">
         <section className="max-w-(--breakpoint-md) space-y-1 px-2">
-          <h1 className="text-primary ptl-header">Showcase</h1>
-          <p className="project-text font-head ptl-header text-2xl text-black/70">
-            Here you will find some projects that made it from development to production.
+          <h1 className="text-primary ptl-header flex w-full items-end overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
+            <span className="title-word">Showcase</span>
+          </h1>
+
+          <p className="project-text ptl-header title-word font-head overflow-hidden text-2xl text-black/70">
+            <span className={`title-word`}>
+              Here you will find some projects that made it from development to production.
+            </span>
           </p>
         </section>
 
@@ -186,10 +191,19 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                         <div className="p-4">
                           <p className="text-muted-foreground text-center text-sm">Swipe for more screenshots →</p>
                         </div>
+                        <Link
+                          href={project.url}
+                          target={`_blank`}
+                          className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
+                        >
+                          <div className="absolute right-0 bottom-0 left-0 translate-y-4 p-4 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                            <p className="font-medium text-white">Click to visit live site</p>
+                          </div>
+                        </Link>
                       </div>
 
                       {/* Contributors */}
-                      {project.contributors && project.contributors.length > 0 && (
+                      {/* {project.contributors && project.contributors.length > 0 && (
                         <div className="space-y-2">
                           <h3 className="text-muted-foreground text-sm font-medium">Contributors</h3>
                           <div className="flex flex-wrap gap-3">
@@ -209,7 +223,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                             ))}
                           </div>
                         </div>
-                      )}
+                      )} */}
                     </Wrapper>
                   </section>
                 </Wrapper>
