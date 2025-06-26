@@ -27,7 +27,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <section className="mb-20 p-4">
+      <section className="mb-5 p-4">
         {!isScrolled && <MobileNav />}
         <DesktopNav />
       </section>
