@@ -1,44 +1,65 @@
 "use client";
 
-import { useRouteAnimation } from "@/hooks/use-animation";
-import { HBGTL, initHomeBGAnimation } from "@/lib/animation/pages/home/background";
+import { useResponsiveLayout } from "@/hooks/use-media-query";
+import { runHomeBGEntranceAnimation } from "@/lib/animation/pages/home/background";
 import { logoVariants } from "@/lib/tools/constants";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const HomeSVGBG = () => {
+  const [currentLayout, setCurrentLayout] = useState<"mobile" | "tablet" | "desktop">("desktop");
+  const { isMobile, isTablet } = useResponsiveLayout();
+  const svgBG = useRef<HTMLDivElement>(null);
   const svgReference = useRef<SVGSVGElement>(null);
   const pathsReference = useRef<(SVGPathElement | null)[]>([]);
-  const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
+
+  // Update layout state based on media queries
+  useEffect(() => {
+    if (isMobile) {
+      setCurrentLayout("mobile");
+    } else if (isTablet) {
+      setCurrentLayout("tablet");
+    } else {
+      setCurrentLayout("desktop");
+    }
+  }, [isMobile, isTablet]);
 
   useGSAP(
     () => {
-      initHomeBGAnimation(svgReference.current, pathsReference);
+      runHomeBGEntranceAnimation(svgReference.current, pathsReference)?.play();
     },
-    { scope: svgReference },
+    { scope: svgBG },
   );
 
-  // Setup link interceptors
-  useEffect(() => {
-    const handler = (event: MouseEvent) => {
-      event.preventDefault();
-      const target = event.currentTarget as HTMLAnchorElement;
-      handleAnimatedNavigation(HBGTL, target.href);
-    };
-
-    return setupLinkInterceptors(handler);
-  }, [handleAnimatedNavigation, setupLinkInterceptors]);
+  const getSVGPositioning = () => {
+    switch (currentLayout) {
+      case "mobile": {
+        return "fixed md:hidden";
+      }
+      case "tablet": {
+        return "fixed right-[-10rem] bottom-[-10rem] w-fit xl:hidden";
+      }
+      case "desktop": {
+        return "fixed top-0 right-0 w-fit";
+      }
+      default: {
+        return "fixed top-0 right-0 w-fit";
+      }
+    }
+  };
 
   return (
-    <section className="relative h-[100dvh] w-full origin-center">
+    <section ref={svgBG} className="svgBG">
       <svg
         ref={svgReference}
-        className={cn("absolute top-[0] left-[0] origin-top-right lg:bottom-[-10rem] lg:left-[0]", "h-full w-full")}
-        viewBox="0 0 450 450"
+        className={cn("animated-element", getSVGPositioning())}
+        width="100%"
+        height="100%"
+        viewBox="85 -30 400 400"
+        // viewBox="85 -55 400 400"
         preserveAspectRatio="xMinYMin meet"
       >
-        {/* Initial paths - will be managed by GSAP */}
         {logoVariants[0].paths.map((path, index) => (
           <path
             key={`initial-path-${index}`}

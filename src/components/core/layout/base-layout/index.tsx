@@ -1,18 +1,12 @@
 "use client";
 
-import { runSmoothScroll } from "@/lib/animation/pages/smoth-scroll";
-import { useGSAP } from "@gsap/react";
-
-// import { usePathname } from "next/navigation";
+// import { runSmoothScroll } from "@/lib/animation/pages/smoth-scroll";
+// import { useGSAP } from "@gsap/react";
 
 export function BaseLayout({ children }: { children: React.ReactNode }) {
-  // const pathname = usePathname();
-
-  // Handle route changes
-  useGSAP(() => {
-    window.scrollTo(0, 0);
-    runSmoothScroll();
-  }, []);
+  // useGSAP(() => {
+  //   runSmoothScroll();
+  // }, []);
 
   return (
     <main className={`relative max-w-screen overflow-hidden`}>

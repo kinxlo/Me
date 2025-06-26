@@ -1,48 +1,39 @@
+// src/components/shared/me/project-svg-bg.tsx
 "use client";
 
-import { useProjects } from "@/context/global-context";
-import { useRouteAnimation } from "@/hooks/use-animation";
+import { useGlobalContext } from "@/context/global-context";
 import { useResponsiveLayout } from "@/hooks/use-media-query";
-import { initProjectBGAnimation, PBGTL } from "@/lib/animation/pages/project/background";
+import { runProjectsBGEntranceAnimation } from "@/lib/animation/pages/project/background";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
-import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
 
 import { PJ1 } from "./paths/pj-1";
 import { PJ2 } from "./paths/pj-2";
 import { PJ3 } from "./paths/pj-3";
 import { PJ4 } from "./paths/pj-4";
 
+// Register plugins once
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin);
+}
+
 export const ProjectSVGBG = ({ className }: { className?: string }) => {
-  const svgReference = useRef<SVGSVGElement>(null);
-  const pathname = usePathname();
-  const { projects } = useProjects();
+  const { projects } = useGlobalContext();
   const { isMobile } = useResponsiveLayout();
-  const { handleAnimatedNavigation, setupLinkInterceptors } = useRouteAnimation();
+  const svgReference = useRef<SVGSVGElement>(null);
 
   useGSAP(
     () => {
-      initProjectBGAnimation(svgReference.current, projects);
+      if (isMobile || !projects?.length || !svgReference.current) return;
+      runProjectsBGEntranceAnimation(projects);
     },
-    {
-      dependencies: [pathname, projects, isMobile],
-      scope: svgReference,
-    },
+    { dependencies: [projects, isMobile] },
   );
 
-  // Setup link interceptors
-  useEffect(() => {
-    const handler = (event: MouseEvent) => {
-      event.preventDefault();
-      const target = event.currentTarget as HTMLAnchorElement;
-      handleAnimatedNavigation(PBGTL, target.href);
-    };
-
-    return setupLinkInterceptors(handler);
-  }, [handleAnimatedNavigation, setupLinkInterceptors]);
-
-  // Hide the SVG completely on mobile
   if (isMobile) {
     return null;
   }
@@ -53,13 +44,16 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
       width="100%"
       height="100%"
       viewBox="0 0 1100 1576"
-      className={cn(className)}
+      className={cn(className, "svg-morph-container")}
       preserveAspectRatio="xMidYMid meet"
     >
-      <PJ1 />
-      <PJ2 />
-      <PJ3 />
-      <PJ4 />
+      {/* Ensure all paths have the same structure and point count */}
+      <g id="morph-group">
+        <PJ1 />
+        <PJ2 />
+        <PJ3 />
+        <PJ4 />
+      </g>
     </svg>
   );
 };

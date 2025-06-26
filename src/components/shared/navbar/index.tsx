@@ -1,57 +1,92 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { useRef, useState } from "react";
+import { useResponsiveLayout } from "@/hooks/use-media-query";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import { MobileMenuBackdrop } from "./mobile-backdrop";
-import { MobileMenuButton } from "./mobile-menu-button";
-import { NavItems } from "./navbar-items";
-import { NavLogo } from "./navbar-logo";
+import { DesktopNav } from "./desktop-nav";
+import DockerNav from "./docker";
+import { MobileNav } from "./mobile-nav";
 
-const MobileNav = () => {
-  const containerReference = useRef<HTMLElement>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const isOpen = mobileMenuOpen;
-  const onClose = () => setMobileMenuOpen(false);
-  const toggleMenu = () => setMobileMenuOpen((previous) => !previous);
-
-  return (
-    <section ref={containerReference} className={`md:hidden`}>
-      {mobileMenuOpen && <MobileMenuBackdrop onClick={onClose} />}
-      <MobileMenuButton isOpen={isOpen} onClick={toggleMenu} />
-      <nav
-        className={cn(
-          "font-head fixed top-1/4 left-1/4 min-h-fit transition-all duration-300",
-          isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
-          "z-[999]",
-        )}
-        role="navigation"
-      >
-        <NavItems isMobile={true} onItemClick={onClose} />
-      </nav>
-    </section>
-  );
-};
-
-const DesktopNav = () => {
-  return (
-    <section className={`mt-4 hidden items-start justify-between lg:flex`}>
-      <div className="font-head" role="navigation">
-        <NavItems isMobile={false} onItemClick={() => {}} />
-      </div>
-      <div className={``}>
-        <NavLogo />
-      </div>
-    </section>
-  );
-};
+// import { MobileNav } from "./mobile-nav";
 
 export const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { isMobile } = useResponsiveLayout();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isMobile]);
+
   return (
-    <section className="z-[999]">
-      <MobileNav />
-      <DesktopNav />
-    </section>
+    <>
+      <section className="p-4">
+        {!isScrolled && <MobileNav />}
+        <DesktopNav />
+      </section>
+      <DockerNav visible={isScrolled} />
+    </>
+  );
+};
+
+export const ScrollIndicator = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 5) {
+        setHasScrolled(true);
+        setIsVisible(false);
+      } else {
+        setHasScrolled(false);
+      }
+    };
+
+    // Hide after 5 seconds if not scrolled
+    const timer = setTimeout(() => {
+      if (!hasScrolled) setIsVisible(false);
+    }, 20_000);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
+  }, [hasScrolled]);
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="fixed top-[4rem] left-1/2 z-50 -translate-x-1/2 transform"
+        >
+          <div className="flex flex-col items-center">
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.5,
+                ease: "easeInOut",
+              }}
+            >
+              <ChevronDown className="h-6 w-6 text-gray-800" />
+            </motion.div>
+            <p className="mt-1 text-sm text-gray-800">Scroll to explore</p>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

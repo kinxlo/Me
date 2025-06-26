@@ -1,27 +1,21 @@
 import gsap from "@/lib/animation/gsap/init";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Create master timeline
-export const PBGTL = gsap.timeline({
-  paused: false,
-  defaults: { ease: "power3.out" },
-});
-
-export const initProjectBGAnimation = (svgReference: SVGSVGElement | null, projects: Project[]) => {
-  if (!svgReference) return;
-
-  // Clear previous animations
-  for (const trigger of ScrollTrigger.getAll()) trigger.kill();
-
-  PBGTL.to("#pj-1", {
-    duration: 1,
-    delay: 1,
-    morphSVG: "#pj-1",
-    ease: "power2.inOut",
+export const runProjectsBGEntranceAnimation = (projects: Project[]) => {
+  const animationReference = gsap.timeline({
+    defaults: { duration: 1.2, ease: "power2.inOut" },
   });
+  // Clear previous animations
+  animationReference?.current?.kill();
+  for (const t of ScrollTrigger.getAll()) t.kill();
 
-  // Setup scroll triggers for each project
+  // Initial setup - make all paths visible but morph to first shape
+  gsap.set(["#pj-1", "#pj-2", "#pj-3", "#pj-4"], { opacity: 1 });
+  gsap.set("#pj-1", { morphSVG: "#pj-1" });
+
+  // Set up scroll triggers for each project
   for (const [index, project] of projects.entries()) {
+    const targetId = index + 1; // pj-1, pj-2, etc.
     const projectSection = document.querySelector(`#project-${project.id}`);
     if (!projectSection) continue;
 
@@ -30,23 +24,29 @@ export const initProjectBGAnimation = (svgReference: SVGSVGElement | null, proje
       start: "top center",
       end: "bottom center",
       onEnter: () => {
-        PBGTL.to("#pj-1", {
-          duration: 0.8,
-          delay: 1,
-          morphSVG: `#pj-${index + 1}`,
-          ease: "power2.inOut",
-          overwrite: "auto",
+        gsap.to("#pj-1", {
+          morphSVG: `#pj-${targetId}`,
+          duration: 1,
+          ease: "sine.inOut",
         });
       },
       onEnterBack: () => {
-        PBGTL.to("#pj-1", {
-          duration: 0.8,
-          delay: 1,
-          morphSVG: `#pj-${index + 1}`,
-          ease: "power2.inOut",
-          overwrite: "auto",
+        gsap.to("#pj-1", {
+          morphSVG: `#pj-${targetId}`,
+          duration: 1,
+          ease: "sine.inOut",
         });
       },
+      // markers: true // Enable for debugging
     });
   }
+
+  // Initial animation to first project
+  gsap.to("#pj-1", {
+    morphSVG: "#pj-1",
+    duration: 1,
+    ease: "sine.inOut",
+  });
+
+  return animationReference;
 };
