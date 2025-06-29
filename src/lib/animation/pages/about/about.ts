@@ -19,10 +19,14 @@ export const runAboutAnimation = () => {
   };
 
   if (elements.animatedElement) {
-    AboutTL.to(elements.animatedElement, {
-      opacity: 1,
-      visibility: "visible",
-    });
+    AboutTL.fromTo(
+      elements.animatedElement,
+      { opacity: 0, visibility: "hidden" },
+      {
+        opacity: 1,
+        visibility: "visible",
+      },
+    );
   }
 
   if (elements.businessCard) {
