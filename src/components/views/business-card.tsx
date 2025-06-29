@@ -1,31 +1,18 @@
 "use client";
 
 import { Wrapper } from "@/components/core/layout/wrapper";
-// import { useGlobalContext } from "@/context/global-context";
-// import { runAboutAnimation, runAboutExitAnimation } from "@/lib/animation/pages/about/about";
-// import RotatingText from "@/lib/animation/RotatingText/RotatingText";
 import TrueFocus from "@/lib/animation/TrueFocus/TrueFocus";
 import { cn } from "@/lib/utils";
-// import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
 
 export const BusinessCard = () => {
   const aboutPage = useRef(null);
-  // const { setTimeline } = useGlobalContext();
-
-  // useGSAP(
-  //   () => {
-  //     runAboutAnimation().play();
-  //     setTimeline(runAboutExitAnimation());
-  //   },
-  //   { scope: aboutPage },
-  // );
 
   return (
-    <section ref={aboutPage} className="">
-      <Wrapper className="animated-element overflow-hidden p-0">
+    <section className="animated-element relative z-10" ref={aboutPage}>
+      <Wrapper className="overflow-hidden p-0">
         <Wrapper className="my-2 p-0">
           <section
             className={cn(
@@ -38,19 +25,6 @@ export const BusinessCard = () => {
               <h1 className="text-primary ptl-header flex w-full items-end overflow-hidden text-4xl underline sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
                 <span className="title-word">Who Am I ?</span>
               </h1>
-              {/* <h1 className="text-primary overflow-hidden text-4xl sm:text-7xl md:text-8xl lg:text-9xl xl:mb-[-0.5rem]">
-                <span className="title-word underline">Who am I ?</span>
-                <RotatingText
-                  texts={["Philosopher", "Chemist", "Philosopher"]}
-                  mainClassName="font-head title-word underline"
-                  staggerFrom={"last"}
-                  staggerDuration={0.025}
-                  splitLevelClassName="overflow-hidden pb-0.5"
-                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                  rotationInterval={5000}
-                />
-              </h1> */}
-              {/* <h3 className="text-primary title-word text-3xl underline lg:text-4xl"></h3> */}
             </div>
             <p className="justify max-w-[60%] text-base text-black/70 xl:max-w-[50%]">
               <span className={`title-word`}>Lead Frontend dev at </span>
@@ -75,8 +49,6 @@ export const BusinessCard = () => {
                   animationDuration={1}
                   pauseBetweenAnimations={1}
                 />
-                {/* <h3 className="font-head text-2xl font-black text-black">~4 Years</h3> */}
-                {/* <span className="font-head text-black/60">Experience</span> */}
               </div>
               <p className="justify max-w-[60%] text-base text-black/70 xl:max-w-[50%]">
                 I build interfaces that balance aesthetic and function, delivering smooth experiences across all
@@ -91,28 +63,28 @@ export const BusinessCard = () => {
                   icon: <CheckCircle className="text-success mt-1" size={20} />,
                   title: "Accessibility-first",
                   desc: "WCAG compliant interfaces that work for everyone",
-                  bgColor: "bg-blue-100", // Opaque background
+                  bgColor: "bg-blue-100",
                   borderColor: "border-blue-200",
                 },
                 {
                   icon: <CheckCircle className="text-success mt-1" size={20} />,
                   title: "Fullstack Mindset",
                   desc: "Frontend expertise with backend/system awareness",
-                  bgColor: "bg-teal-100", // Opaque background
+                  bgColor: "bg-teal-100",
                   borderColor: "border-teal-200",
                 },
                 {
                   icon: <CheckCircle className="text-success mt-1" size={20} />,
                   title: "Mentorship",
                   desc: "Guiding juniors while learning from seniors",
-                  bgColor: "bg-pink-100", // Opaque background
+                  bgColor: "bg-pink-100",
                   borderColor: "border-pink-200",
                 },
                 {
                   icon: <CheckCircle className="text-success mt-1" size={20} />,
                   title: "Open Source",
                   desc: "Contributing to community-driven projects",
-                  bgColor: "bg-amber-100", // Opaque background
+                  bgColor: "bg-amber-100",
                   borderColor: "border-amber-200",
                 },
               ].map((item, index) => (

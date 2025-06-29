@@ -1,5 +1,7 @@
 import gsap from "@/lib/animation/gsap/init";
 
+import { runAboutAnimation } from "./about";
+
 // Create master timeline (exported for external control)
 export const ABGTL = gsap.timeline({
   paused: false,
@@ -77,37 +79,15 @@ export const initAboutBGAnimation = (
         fill: `rgba(0, 0, 0, ${fillOpacity})`,
         duration: fillDuration,
         ease: "power1.out",
+        onComplete: () => {
+          runAboutAnimation().play();
+        },
       },
       ">",
     );
-
-  // Create hover timeline if needed
-  // let hoverTL: gsap.core.Timeline | null = null;
-  // const handleMouseEnter = () => hoverTL?.play();
-  // const handleMouseLeave = () => hoverTL?.reverse();
-
-  // if (!isMobile) {
-  //   hoverTL = gsap.timeline({ paused: true });
-  //   const hoverScale = isTablet ? 1.03 : 1.05;
-  //   hoverTL.to(pathElement, { scale: hoverScale, duration: 0.3 });
-
-  //   pathElement.addEventListener("mouseenter", handleMouseEnter);
-  //   pathElement.addEventListener("mouseleave", handleMouseLeave);
-  // }
 
   // Call initialization callback
   onInitialized?.();
 
   return ABGTL;
-
-  // Cleanup function
-  // return () => {
-  //   ABGTL.clear();
-  //   hoverTL?.kill();
-
-  //   if (!isMobile) {
-  //     pathElement.removeEventListener("mouseenter", handleMouseEnter);
-  //     pathElement.removeEventListener("mouseleave", handleMouseLeave);
-  //   }
-  // };
 };
