@@ -53,7 +53,7 @@ export const NAV_ITEMS = [
   },
   {
     content: "Résumé",
-    path: "https://drive.google.com/file/d/1-emFvqL9-gs6v7DitqyR8aLxfZmb52Fz/view?usp=sharing",
+    path: "https://drive.google.com/file/d/1ZaaWw_ADMTNDV5EJfY55tV9Ih6hgndTt/view?usp=sharing",
     variant: "link" as const,
     isExternal: true,
   },

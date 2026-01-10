@@ -4,22 +4,37 @@
 import { Wrapper } from "@/components/core/layout/wrapper";
 import { BlurImage } from "@/components/core/miscellaneous/blur-image";
 import { useGlobalContext } from "@/context/global-context";
+import { useResponsiveLayout } from "@/hooks/use-media-query";
 import { runProjectsEntranceAnimation, runProjectsExitAnimation } from "@/lib/animation/pages/project/project";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
   const projectPage = useRef<HTMLDivElement>(null);
   const { setTimeline } = useGlobalContext();
+  const { isMobile } = useResponsiveLayout();
+
+  const displayProjects = useMemo(() => {
+    if (isMobile && projects.length > 0) {
+      // On mobile, move Skishop (last item) to first position
+      const reordered = [...projects];
+      const skishop = reordered.pop(); // Remove last item
+      if (skishop) {
+        reordered.unshift(skishop); // Add to beginning
+      }
+      return reordered;
+    }
+    return projects;
+  }, [projects, isMobile]);
 
   useGSAP(
     () => {
-      const entrance = runProjectsEntranceAnimation(projects);
+      const entrance = runProjectsEntranceAnimation(displayProjects);
       entrance.play();
-      setTimeline(runProjectsExitAnimation(projects));
+      setTimeline(runProjectsExitAnimation(displayProjects));
 
       // Cleanup on unmount
       return () => {
@@ -27,7 +42,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
         for (const trigger of ScrollTrigger.getAll()) trigger.kill();
       };
     },
-    { scope: projectPage, dependencies: [projects] },
+    { scope: projectPage, dependencies: [displayProjects] },
   );
 
   if (!projects?.length) {
@@ -57,7 +72,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
 
         <section className="my-[5rem]">
           <section className="space-y-[5rem] lg:space-y-[10rem]">
-            {projects.map((project) => (
+            {displayProjects.map((project, index) => (
               <Wrapper
                 key={project.id}
                 id={`project-${project.id}`}
@@ -71,7 +86,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                         <div>
                           <p className="project-title reveal-title font-head text-primary text-2xl font-bold">
-                            {project.id}. {project.name}
+                            {index + 1}. {project.name}
                           </p>
                           <div className="mt-1 flex items-center gap-2">
                             <span className="text-muted-foreground reveal-title text-sm font-medium">
@@ -157,7 +172,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                             alt={`${project.name} screenshot`}
                             width={1280}
                             height={720}
-                            className="h-full w-full object-cover grayscale-70 transition-all duration-500 group-hover:scale-105"
+                            className="h-full w-full object-cover object-top grayscale-70 transition-all duration-500 group-hover:scale-105"
                           />
                         </div>
                         <Link
@@ -185,7 +200,7 @@ export const ProjectsClient = ({ projects }: { projects: Project[] }) => {
                             alt={`${project.name} mobile screenshot`}
                             width={520}
                             height={980}
-                            className="h-full w-full object-cover grayscale-70"
+                            className="h-full w-full object-cover object-top grayscale-70"
                           />
                         </div>
                         <div className="p-4">
