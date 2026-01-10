@@ -94,5 +94,29 @@
         "img": "https://res.cloudinary.com/kingsleysolomon/image/upload/v1662471346/portfolio/WhatsApp_Image_2021-03-31_at_5.27.13_PM_nbmhus.jpg"
       }
     ]
+  },
+  {
+    "id": "5",
+    "name": "Skishop",
+    "language": ["Next.js", "TypeScript", "Tailwind", "SCSS", "Nest.js", "Express.js"],
+    "status": "Production",
+    "colorCode": ["#61dbfb50"],
+    "values": [99, 11, 70.5],
+    "imageDesktop1": "/images/sk-screen-1.png",
+    "imageDesktop2": "/images/sk-screen-2.png",
+    "imageDesktop3": "/images/sk-screen-7.png",
+    "url": "https://skishopltd.com/",
+    "github": null,
+    "logo": "/images/skicom-mini.svg",
+    "desc": "Shop Smart and Save More with Ski-Shop. Your one-stop marketplace for everything you need",
+    "tools": null,
+    "date": "2025-09-10",
+    "category": "E-commerce",
+    "contributors": [
+      {
+        "name": "kingsley solomon",
+        "img": "https://res.cloudinary.com/kingsleysolomon/image/upload/v1662471346/portfolio/WhatsApp_Image_2021-03-31_at_5.27.13_PM_nbmhus.jpg"
+      }
+    ]
   }
 ]

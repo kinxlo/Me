@@ -15,6 +15,7 @@ import { PJ1 } from "./paths/pj-1";
 import { PJ2 } from "./paths/pj-2";
 import { PJ3 } from "./paths/pj-3";
 import { PJ4 } from "./paths/pj-4";
+import { PJ5 } from "./paths/pj-5";
 
 // Register plugins once
 if (typeof window !== "undefined") {
@@ -53,6 +54,7 @@ export const ProjectSVGBG = ({ className }: { className?: string }) => {
         <PJ2 />
         <PJ3 />
         <PJ4 />
+        <PJ5 />
       </g>
     </svg>
   );
